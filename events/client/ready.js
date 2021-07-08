@@ -3,11 +3,12 @@
 const moment = require('moment')
 const chalk = require('chalk');
 module.exports = async bot => {
+
   
   const { MessageEmbed, WebhookClient } = require("discord.js")
   let ReadEmbed = new MessageEmbed()
   .setColor('GREEN')
-  .setDescription(`[ CONNECTION ESTABLISHED ] - Client was restarted and is now UP and running.`)
+  .setDescription(`[ CONNECTION ESTABLISHED ] - Shard **#${bot.shardId}** has successfully connected.`)
   .setFooter(moment(Date.now()).format('dddd, MMMM Do'))
   .setTimestamp()
   const webhookClient = new WebhookClient(
@@ -17,15 +18,11 @@ module.exports = async bot => {
 
   webhookClient.send({
     username: "ToD Client Logging",
-    avatarURL: "https://images-ext-2.discordapp.net/external/Zj62aTTOdl2xgGsOhGAF8uxunbM3NROYkh6cNl6l6O4/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/752306970467237970/97998fd845941d3cb7ba4c27499cd36b.webp?width=338&height=338",
+    avatarURL: bot.user.avatarURL({format: 'png'}),
     embeds: [ReadEmbed]
-  });
+  })
 
 
-
-  setInterval(() => {
-console.log('Spacer ================================================')
-}, 20000)
 
   console.log(`
     
@@ -43,9 +40,11 @@ Signed into ${bot.user.tag}
 
     
     
-
+  process.on('unhandledRejection', (error) => {
+    return;
+})
   //====================================================================
- 
+
     setInterval(() => {
       var rnd = Math.floor(Math.random() * 2);
       switch (rnd) {
@@ -66,7 +65,7 @@ Signed into ${bot.user.tag}
             break
       }
     }, 6500)
-  
+    
   //=================================== GUILD ADD/REMOVE =============================================
 
 

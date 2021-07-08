@@ -19,7 +19,7 @@ message.channel.startTyping()
           .setDescription(`Your requested waifu.`)
           .setFooter(`Requested by: ${message.author.tag} | Powered by ${waifuAPI}`, message.author.displayAvatarURL({ size: 32 }))
     message.channel.send(waifu)
-    message.channel.stopTyping()
+    message.channel.stopTyping(true)
 
 }
 }

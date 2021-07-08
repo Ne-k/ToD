@@ -14,7 +14,7 @@ module.exports = {
         .addField('Reason:', "Abusing the suggest command and sending in (what I think) is a troll submission.", true)
         .addField('Blacklisted by:', 'Nek#2937', true)
         
-        try {
+ 
 
           fetch("https://nekos.life/api/v2/fact").then((res) => res.json()).then(async (data) => {
 
@@ -28,14 +28,7 @@ module.exports = {
   
         })
     
-    } catch(e) {
-      let errorembed = new Discord.MessageEmbed()
-      .setTitle('Command Error. . .')
-      .setColor('RED')
-      .setDescription(`Looks like an error occurred for the command \`FACT\` || Error: ${e}`)
-      bot.channels.cache.get('824333133477314570').send(errorembed)
-      message.channel.send(`Looks like an error occurred, please use the \`BUGREPORT\` command and send this error message: \`${e.message}\``);
-  }
+
         
         
 }

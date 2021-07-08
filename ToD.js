@@ -1,22 +1,18 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection } = require('discord.js');
-const Discord = require('discord.js')
-const client = new Client({ disableMentions: 'everyone' });
-const fs = require("fs");
-const db = require('quick.db');
-const chalk = require('chalk')
-
-const path = require('path')
+const { Client, Collection, MessageEmbed } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone' }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk'); const mongoose = require("mongoose"); const path = require('path'); require('discord-buttons')(client); require("dotenv").config();
 //============================================================================================================================================================================================================
-
-require("dotenv").config();
 client.db = db
+
+client.tod = require('./ToD.json')
+client.messageembed = MessageEmbed
+client.database = require("./Database/sql.js");
+client.default = require('./DefaultConfig.json')
+client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
 client.commands = new Collection();
 client.aliases = new Collection();
 
 //============================================================================================================================================================================================================
-
 
 
 //============================================================================================INITIALIZING====================================================================================================
@@ -50,14 +46,14 @@ modules.forEach((module) => {
 
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
-const config = require('./config_prefix')
+const config = require('./DefaultConfig.json')
 client.on('message', async message => {
 
   let prefix;
   try {
       let fetched = await db.fetch(`prefix_${message.guild.id}`);
       if (fetched == null) {
-          prefix = config.PREFIX
+          prefix = client.default.prefix
       } else {
           prefix = fetched
           
@@ -67,22 +63,46 @@ client.on('message', async message => {
       console.log(e)
 };
 try {
-        if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
+    let nsfwstatus = client.db.fetch(`nsfwEnabled_${message.guild.id}`)
+if(nsfwstatus == null) {
+    nsfwstatus = false
+    
+}
+const AsciiTable = require('ascii-table')
+const table = new AsciiTable()
+.setHeading('Options:', 'Enabled:')
+.setAlign(0, AsciiTable.CENTER)
+.setAlign(1, AsciiTable.CENTER)
+table.addRow('NSFW truths/dares', nsfwstatus)
+
+    if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
           let pingembed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
-      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
+      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.\n\n__Config__:\n \`\`\`\n${table.toString()}\`\`\``)
       .setColor('#2f3136')
           return message.channel.send(pingembed)
           .then(msg => {
-            msg.delete({ timeout: 10200 })
+            msg.delete({ timeout: 10000 })
           })
           }
           
     } catch (err) {
         return message.channel.send(err)
     };
-    client.snipe = new Map()
     
+   
+});
+
+
+//===================================Statcord random shit ========================================================================================================================================================================
+
+client.snipe = new Map()
+
+
+client.on("messageDelete", async(message,channel) => {
+
+
+
     if(message.author.bot) return;
     if(!message.guild) return;
     client.snipe.set(message.channel.id, {
@@ -92,21 +112,29 @@ try {
         image:message.attachments.first() ? message.attachments.first().proxyURL : null,
         date:message.createdTimestamp,
     })  
+    })
+    const Statcord = require("statcord.js");
+    Statcord.ShardingClient.post(client);
     
-});
-
-
-//===================================Statcord random shit ========================================================================================================================================================================
-
-
-
-
-
-
-
-
-    
-
+    mongoose.connect(process.env.MONGOSTRING, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false, poolSize: 5, connectTimeoutMS: 10000, family: 4 })
 //=================================================================================================================================
 
 client.login(process.env.Token);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

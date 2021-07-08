@@ -1,16 +1,26 @@
 module.exports = {
     config: {
         name: "reboot",
+        aliases: ["restart"]
         
     },
     run: async (bot, message, args) => {
         
-        if (message.author.id != '750510159289254008') return message.channel.send("The command you are trying to use is not available.");   
+        if (!bot.default.developers.includes(message.author.id)) {
+            let userAccess = new Discord.MessageEmbed()
+            .setTitle("Reboot")
+            .setDescription("Sorry, the `Reboot` command can only be executed by the Developer.")
+            .setColor("#cdf785");
+            message.channel.send(userAccess)
+        }
+        if (bot.default.developers.includes(message.author.id)) { 
         const { MessageEmbed, WebhookClient } = require('discord.js')
         const { exec } = require("child_process");
+        bot.shard.broadcastEval(`this.user.setStatus('idle')`)
         bot.user.setActivity(`Rebooting. . .`, {
             type: 'LISTENING'
           });
+          
           
           const moment = require('moment')
           let manualRebootEmbed = new MessageEmbed()
@@ -51,7 +61,7 @@ module.exports = {
 
 
         });
-       
+    }
     }
     
 }

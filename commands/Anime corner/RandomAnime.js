@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const anime = require("./Kitsu");
 require('../../modules/data')();
 
 module.exports = {
@@ -17,7 +16,9 @@ module.exports = {
 		//console.log(animeData.error == null);
 	}
 	while(animeData.error != null);
-
+	
+	
+	message.channel.send(ReactionRolesEmbed)
 	if(animeData.error == null) {
 		//console.log(animeData);
 		//console.log(animeData.title); 

@@ -1,8 +1,8 @@
 
 const Discord = require('discord.js')
-
+require('discord-buttons')
 const fetch = require('node-fetch')
-
+const {MessageButton } = require('discord-buttons')
 
 module.exports = {
     config: {
@@ -10,37 +10,169 @@ module.exports = {
         usage: "dare",
         description: "Sends a dare question from the game Truth or dare.",
     },
-    run: async (bot, message, args) => {
-        let blacklistEmbed = new Discord.MessageEmbed()
-        .setTitle('You have been blacklisted!')
-        .setColor('#2f3136')
-        .setDescription("You have been **blacklisted** from ToD's **Main Features**. To appeal and get unblacklisted, join the [support server](https://discord.gg/PVC35NbeTD) and dm **Nek**.")
-        .addField('Reason:', "Abusing the suggest command and sending in (what I think) is a troll submission.", true)
-        .addField('Blacklisted by:', 'Nek#2937', true)
-        if(message.author.id === '661312195224666114') return message.channel.send(blacklistEmbed)
-        if (message.channel.type == "dm") return message.channel.send("<a:No:776584754031493173> | This command command is disabled for DMs, please use this within a server!");
+    run: async (client, message, args) => {
+try {
+    await fetch("https://summonjs.net/api/random-dare").then((res) => res.json()).then(async (data) => {
+                    //get random number between 0 and the length of the array
+                    random_footer = ["To add more dare responses, run the suggest command and input the dare you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+                    let result = Math.floor((Math.random() * random_footer.length));
+            //get random number between 0 and the length of the array
+    
+    
+            
+            let embed = new Discord.MessageEmbed()
+            .setColor('#eaecf3')
+            .setTitle("Dare")
+            .setFooter(random_footer[result])
+            .setDescription(data.dare)
+            let btn1 = new MessageButton()
+            .setStyle('blurple') 
+            .setLabel('Information') 
+            .setID('ToD_Information') 
+            let btn2 = new MessageButton()
+            .setStyle('blurple') 
+            .setLabel('Rules') 
+            .setID('ToD_Rules') 
+            
+            /*
+            let btn3 = new MessageButton()
+            .setLabel('🔄')
+            .setStyle('red')
+            .setID('Reload')
+          */
+           
+          
+         client.on('clickButton', async (button) => {
+            if (button.id === 'ToD_Information') {
+                await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+                
+            }
+            if (button.id === 'ToD_Rules') {
+                await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                
+            }
+            /*
+            if (button.id === 'Reload') {
+                await m.delete()
+              return button.channel.send(new Discord.MessageEmbed().setColor('#eaecf3').setTitle("Dare").setFooter(random_footer[result]).setDescription(data.dare))
+              
+          }
+          */
+        }) 
+    message.channel.send({ buttons: [btn1, btn2], embed: embed })
+    
+            })
+       
+    } catch (e) {
+        console.log(e)
+        let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        let result = Math.floor((Math.random() * random_footer.length));
+        
+      
+       
+        let btn42 = new MessageButton()
+        .setStyle('blurple') 
+        .setLabel('Information') 
+        .setID('ToD_Information') 
+        let btn45 = new MessageButton()
+        .setStyle('blurple') 
+        .setLabel('Rules') 
+        .setID('ToD_Rules') 
+        /*
+        let reloadbtn = new MessageButton()
+        .setStyle('green') 
+        .setLabel('🔄') 
+        .setID('Reload') 
+        
+        */
+    
+        const { getColorFromURL } = require('color-thief-node');
 
-        try {
-            fetch("https://summonjs.xyz/api/random-dare").then((res) => res.json()).then(async (data) => {
-                //get random number between 0 and the length of the array
-                random_footer = ["To add more dare responses, run the suggest command and input the dare you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
-                let result = Math.floor((Math.random() * random_footer.length));
-        //get random number between 0 and the length of the array
-        let embed = new Discord.MessageEmbed()
-        .setColor('#eaecf3')
-        .setTitle("Dare")
-        .setFooter(random_footer[result])
-        .setDescription(data.dare)
-        message.channel.send(embed)
+
+    const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'png'}))
+
+    // Main
+        return message.channel.send({buttons: [btn42, btn45], embed: new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Dare").setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)])}).then(m => {
+            let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+            let result = Math.floor((Math.random() * random_footer.length));
+
+            client.on('clickButton', async (button) => {
+                
+                if (button.id === 'ToD_Information') {
+                    await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+                    
+                }
+                if (button.id === 'ToD_Rules') {
+                    await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                    
+                }
+                /*
+                // 1st Reload
+                if (button.id === 'Reload') {
+                    await m.delete()
+                    message.channel.startTyping()
+                    const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'png'}))
+                    let information = new MessageButton()
+        .setStyle('blurple') 
+        .setLabel('Information') 
+        .setID('ToD_Information') 
+        let rules = new MessageButton()
+        .setStyle('blurple') 
+        .setLabel('Rules') 
+        .setID('ToD_Rules')
+        let reloadbtn = new MessageButton()
+        .setStyle('green') 
+        .setLabel('🔄') 
+        .setID('Reload') 
+                  message.channel.send({ buttons: [information, rules, reloadbtn],embed: new Discord.MessageEmbed().setColor(dominantColor).setTitle("Dare").setFooter(random_footer[result]).setDescription(client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)])}).then(m => {
+                    client.on('clickButton', async (button) => {
+                        if (button.id === 'ToD_Information') {
+                            await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+                            
+                        }
+                        if (button.id === 'ToD_Rules') {
+                            await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                            
+                        }
+                        // 2nd Reload
+                        if (button.id === 'Reload') {
+                            await m.delete()
+                            message.channel.startTyping()
+                            const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'png'}))
+                            let information = new MessageButton()
+                .setStyle('blurple') 
+                .setLabel('Information') 
+                .setID('ToD_Information') 
+                let rules = new MessageButton()
+                .setStyle('blurple') 
+                .setLabel('Rules') 
+                .setID('ToD_Rules')
+                
+                          message.channel.send({ buttons: [information, rules],embed: new Discord.MessageEmbed().setColor(dominantColor).setTitle("Dare").setFooter(random_footer[result]).setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)])})
+                          client.on('clickButton', async (button) => {
+                            if (button.id === 'ToD_Information') {
+                                await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+                                
+                            }
+                            if (button.id === 'ToD_Rules') {
+                                await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                                
+                            }
+                        })
+                       
+                          
+                      }
+
+                    })
+                  })
+                  
+                 
+                  
+              }
+              */
+              
+            })
         })
-    } catch(e) {
-        let errorembed = new Discord.MessageEmbed()
-        .setTitle('Command Error. . .')
-        .setColor('RED')
-        .setDescription(`Looks like an error occurred for the command \`DARE\` || Error: ${e}`)
-        bot.channels.cache.get('824333133477314570').send(errorembed)
-        message.channel.send(`Looks like an error occurred, please use the \`BUGREPORT\` command and send this error message: \`${e.message}\``);
     }
-
     }
 }

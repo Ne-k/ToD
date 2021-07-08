@@ -2,6 +2,7 @@
 const stringTools = (new (require('string-toolkit')))
 const { inspect } = require('util');
 const Discord = require('discord.js')
+
 let hrDiff = process.hrtime(process.hrtime());
 module.exports = {
     config: {
@@ -15,11 +16,14 @@ module.exports = {
     run: async (client, message, args) => {
       let print = console.log
       let ToD = client
-      let embed2 = new Discord.MessageEmbed()
-      .setTitle("eval")
-      .setDescription("Sorry, the `eval` command can only be executed by the Developer.")
-      .setColor("#cdf785");
-      if(message.author.id !== '750510159289254008') return message.channel.send(embed2);
+      if (!client.default.developers.includes(message.author.id)) {
+        let userAccess = new Discord.MessageEmbed()
+        .setTitle("eval")
+        .setDescription("Sorry, the `eval` command can only be executed by the Developer.")
+        .setColor("#cdf785");
+        message.channel.send(userAccess)
+    }
+    if (client.default.developers.includes(message.author.id)) {
 
 
 
@@ -30,7 +34,7 @@ module.exports = {
     let result = Math.floor((Math.random() * CC.length));
     let code = args.join(" ").replace("```js", "").replace("```", "")
     
-    if(!args.join(' ')) message.channel.send("Idiot, I can't evaluate air.")
+    if(!args.join(' ')) return message.channel.send("Idiot, I can't evaluate air.")
 
     try {
       let evaled = eval(code);
@@ -131,5 +135,6 @@ module.exports = {
         }
       });
     }
+  }
   }
 };

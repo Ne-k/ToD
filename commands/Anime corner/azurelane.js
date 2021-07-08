@@ -19,3 +19,6 @@ message.channel.send(fluxAzureEmbed)
 
     }
 }
+
+
+

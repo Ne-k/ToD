@@ -6,7 +6,6 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         const Discord = require('discord.js')
-        const config = require('../../config')
         const fetch = require('node-fetch');
         fetch(`https://gallery.fluxpoint.dev/api/sfw/nekopara`, { headers: { 'Authorization': process.env.Fluxpoint_API_Key} }).then(res => res.json()).then(data => {
 let fluxAzureEmbed = new Discord.MessageEmbed()

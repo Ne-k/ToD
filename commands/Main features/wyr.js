@@ -1,6 +1,4 @@
-const questions = require('./Would-you-rather.json');
-const { MessageEmbed  } = require("discord.js");
-const Discord = require('discord.js');
+
 
 
 module.exports = {
@@ -10,40 +8,17 @@ module.exports = {
         description: "**W**ould **Y**ou **R**ather questions.",
     },
     run: async (bot, message, args) => {
-        let blacklistEmbed = new MessageEmbed()
-        .setTitle('You have been blacklisted!')
-        .setColor('#2f3136')
-        .setDescription("You have been **blacklisted** from ToD's **Main Features**. To appeal and get unblacklisted, join the [support server](https://discord.gg/PVC35NbeTD) and dm **Nek**.")
-        .addField('Reason:', "Abusing the suggest command and sending in (what I think) is a troll submission.", true)
-        .addField('Blacklisted by:', 'Nek#2937', true)
-        if(message.author.id === '661312195224666114') return message.channel.send(blacklistEmbed)
-try {
+        const wyr = require('wyr');
 
-var messagetext =  questions[Math.floor(Math.random() * questions.length)]
-let CC = ["#7c6efa", "#7476f8", "#6b7ef6", "#6385f3", "#5b8df1", "#5295ef", "#4a9ded", "#42a5eb", "#39ace8", "#31b4e6"];
-let result = Math.floor((Math.random() * CC.length));
-    var question = messagetext.split("Would you rather ")[1]
+// wyr is a function and returns a promise with a object containing your questions
+wyr().then((response) => {  // or .then(console.log) hehe
+message.channel.send({embed: new bot.messageembed().setColor('BLUE').setAuthor(`Let us play Would You rather!`, message.author.avatarURL({dynamic: true})).setDescription(`Would you rather:\n\n<:image_20210516_090228:843518773708324884> - \`${response.blue.question}\`\nor\n<:image_20210516_090221:843518746052001793> - \`${response.red.question}\``)})
+.then(msg => {
+    msg.react('<:image_20210516_090228:843518773708324884>')
+    msg.react('<:image_20210516_090221:843518746052001793>')
+    
+})
 
-    reply = {
-        embed: {
-            color: CC[result],
-            "description": `__Would you rather__: \n\n ${question}`,
-            "footer": `To add more wyr responses, run the \`suggest\` command and input the dare you want to add.`
-           
-        },
-
-    }
-    console.log(question)
-    wyrmessage = await message.channel.send(reply);
-  
-} catch(e) {
-    let errorembed = new Discord.MessageEmbed()
-    .setTitle('Command Error. . .')
-    .setColor('RED')
-    .setDescription(`Looks like an error occurred for the command \`WYR\` || Error: ${e}`)
-    console.log(e)
-    bot.channels.cache.get('824333133477314570').send(errorembed)
-    message.channel.send(`Looks like an error occurred. This has been reported to the developer and will soon be fixed.`);
-}
+})
     }
 }

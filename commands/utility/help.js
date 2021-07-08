@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js')
 const fs = require("fs")
 const { Menu } = require('discord.js-menu')
-const PREFIX = process.env.Prefix
+
 const db = require('quick.db')
 const { stripIndents } = require("common-tags");
 
@@ -9,208 +9,48 @@ module.exports = {
 config: {
     name: "help",
     description: "Help Menu",
+    aliases: ["h"],
     example: "1) help\n2) help util\n3) help anime\n4)help",
 },
 run: async (bot, message, args) => {
+    
     let prefix;
     if (message.author.bot || message.channel.type === "dm") return;
         try {
             let fetched = await db.fetch(`prefix_${message.guild.id}`);
             if (fetched == null) {
-                prefix = process.env.Prefix
+                prefix = bot.default.prefix
             } else {
                 prefix = fetched
             }
         } catch (e) {
             console.log(e)
     };
-
 try {
-    let noperms = new MessageEmbed()
-    .setTitle('Permissions error:')
-    .setColor('RED')
-    .setDescription(`I do not have the permission [ \`MANAGE_MESSAGES\` ] to continue with this command.\nAs an alternative, please select a category to see its available commands. Usage: \`${PREFIX}help <category>\``)
-    .addField('__Categories__:', `\`main\`\n\`anime\`\n\`info\`\n\`util\``)
-    let hasPerms = message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES") || message.guild.me.permissions.has("MANAGE_MESSAGES")
-    if(!args[0]) {
-    if(!hasPerms) message.channel.send(noperms)
-    }
-    if(hasPerms) {
-
+    
         if(message.content.toLowerCase() === `${prefix}help`){
-    let helpMenu = new Menu(message.channel, message.author.id, [
-        // Each object in this array is a unique page.
-        {
-            name: 'main',
-            content: new MessageEmbed({
-                title: '- Help Menu -',
-                color: 'RANDOM',
-                footer: {
-                    text: `Page 1/5 • ${bot.commands.size} total commands.`,
-                    icon_url: bot.user.avatarURL({ size: 32 }),
-                },
-                description: `Welcome to ToD's help menu, use the reactions below to navigate around the help embeds.\nIf none show up, than I do not have the permission [ \`ADD_REACTIONS\` ]\nAs an alternative, please select a category to see its available commands. Usage: \`${PREFIX}help <category>\``,
-                fields: [
-                    {
-                        name: '__Categories__:',
-                        value: "`main`\n`anime`\n`info`\n`util`",
-                        incline: true
-                    },
-              
-                ]
-            }),
-            reactions: {
-                '⏪': 'first',
-                '◀': 'previous',
-                '🗑️': 'delete',
-                '▶': 'next',
-                '⏩': 'last'
-            }
-        },
-        {
-            name: 'second',
-            content: new MessageEmbed({
-                title: '**__꒰Main Features꒱:__**',
-                color: '#cd8381',
-                footer: {
-                    text: `Page 2/5 • ${bot.commands.size} total commands.`,
-                    icon_url: message.author.displayAvatarURL({ size: 32 }),
-                },
-                description: `__\`${prefix}help <command_name>\` for more information__`,
-                fields: [
-                    {
-                        name: '** **',
-                        value: `1) \`truth\`\n2) \`dare\`\n3) \`fact\`\n4) \`topic\`\n5) \`why\`\n6) \`wyr\``,
-                        inline: true,
-                    },
-                ]
-            }),
-            reactions: {
-                '⏪': 'first',
-                '◀': 'previous',
-                '🗑️': 'delete',
-                '▶': 'next',
-                '⏩': 'last'
-            }
-        },
-        {
-            name: 'third',
-            content: new MessageEmbed({
-                title: '**__꒰Anime Corner꒱:__**',
-                color: '#cd8381',
-                footer: {
-                    text: `Page 3/5 • ${bot.commands.size} total commands.`,
-                    icon_url: message.author.displayAvatarURL({ size: 32 }),
-                },
-                description: `__\`${prefix}help <command_name>\` for more information__`,
-                fields: [
-                    {
-                        name: '** **',
-                        value: `1) \`azurlane\`\n2) \`aniquote\`\n3 \`booru\`\n4) \`foxes\`\n5) \`kitsu\`\n6) \`kitsune\`\n7) \`mangasearch\`\n8) \`megumin\`\n9) \`nagisa\`\n10)\`neko\``,
-                        inline: true,
-                    },
-                    {
-                        name: '\u200b',
-                        value: '\u200b',
-                        inline: true,
-                    },
-                    {
-                        name: '** **',
-                        value: `11) \`nekopara\`\n12) \`nep\`\n13) \`ram\`\n14) \`random-anime\`\n15) \`rem\`\n16) \`sfwanime\`\n17) \`awallpaper\`\n18) \`shinobu\`\n19) \`waifu\`\n20) \`aniwallpaper\``,
-                        inline: true,
-                    },
-                ]
-            }),
-            reactions: {
-                '⏪': 'first',
-                '◀': 'previous',
-                '🗑️': 'delete',
-                '▶': 'next',
-                '⏩': 'last'
-            }
-        },
-       
-        {
-            name: '4th',
-            content: new MessageEmbed({
-                title: '**__꒰Utility꒱(6):__**',
-                color: 'RANDOM',
-                footer: {
-                    text: `Page 4/5 • ${bot.commands.size} total commands.`,
-                    icon_url: message.author.displayAvatarURL({ size: 32 }),
-                },
-                description: `__\`${prefix}help <command_name>\` for more information__`,
-                fields: [
-                    {
-                        name: '** **',
-                        value: `1) \`ascii\`\n2) \`avatar\`\n3) \`help\`\n4) \`prefix\`\n5) \`snipe\`\n6)\`userinfo\``,
-                        inline: true,
-                    },
-                    {
-                        name: '\u200b',
-                        value: '\u200b',
-                        inline: true,
-                    },
-                ]
-            }),
-            reactions: {
-                '⏪': 'first',
-                '◀': 'previous',
-                '🗑️': 'delete',
-                '▶': 'next',
-                '⏩': 'last'
-            }
-        },
-        {
-            name: '6th',
-            content: new MessageEmbed({
-                title: '**__꒰Bot Information꒱(9):__**',
-                color: 'RANDOM',
-                footer: {
-                    text: `Page 5/5 • ${bot.commands.size} total commands.`,
-                    icon_url: message.author.displayAvatarURL({ size: 32 }),
-                },
-                description:`__\`${prefix}help <command_name>\` for more information__`,
-                fields: [
-                    {
-                        name: '** **',
-                        value: `1) \`botinfo\`\n2) \`bugreport\`\n3) \`hex\`\n4) \`invite\`\n5) \`affiliates\`\n6) \`ping\`\n7) \`policy\`\n8) \`suggest\`\n9) \`uptime\`\n10) \`vbvoted\``,
-                        inline: true,
-                    },
-                    {
-                        name: '\u200b',
-                        value: '\u200b',
-                        inline: true,
-                    },
-                ]
-            }),
-            reactions: {
-                '⏪': 'first',
-                '◀': 'previous',
-                '🗑️': 'delete',
-                '▶': 'next',
-                '⏩': 'last'
-            }
-        },
+            const { getColorFromURL } = require('color-thief-node');
 
-        // The last parameter is the number of milliseconds you want the menu to collect reactions for each page before it stops to save resources
-        // The timer is reset when a user interacts with the menu.
-        // This is optional, and defaults to 180000 (3 minutes).
-    ], 300000)
-    // Run Menu.start() when you're ready to send the menu in chat.
-    // Once sent, the menu will automatically handle everything else.
-    helpMenu.start()
-}
 
-}
+    const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'png'}))
+            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`<:Pink_Dash:843518578749865994> Run \`${prefix}help <category name>\` for the list of commands in the category.\n\n<:Orange_dash:843518612747976714> **__categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\``).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
+        }
+        if(args[0].toLowerCase() === "all") {
+            const { getColorFromURL } = require('color-thief-node');
+
+
+            const dominantColor1 = await getColorFromURL(message.author.avatarURL({format: 'png'}))
+
+            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor1).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`*Execute the command \`${prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`nagisa\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`nep\`\, \`random-anime\`\, \`rem\`\, \`sfwanime\`\, \`shinobu\`\, \`waifu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`avatar\`\, \`help\`\, \`prefix\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\, \`uptime\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`topic\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`horny\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\``).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
+        }
 if(args[0].toLowerCase() === "anime") {
 
     let embed = new MessageEmbed()
         .setTitle('**[ ANIME CORNER ]**')
         .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
         .setColor("#7975a8") // Set the color
-        .addField(`** **`,`1) \`azurlane\`\n2) \`aniquote\`\n3 \`booru\`\n4) \`foxes\`\n5) \`kitsu\`\n6) \`kitsune\`\n7) \`mangasearch\`\n8) \`megumin\`\n9) \`nagisa\`\n10)\`neko\``, true)
-        .addField('** **', `11) \`nekopara\`\n12) \`nep\`\n13) \`ram\`\n14) \`random-anime\`\n15) \`rem\`\n16) \`sfwanime\`\n17) \`awallpaper\`\n18) \`shinobu\`\n19) \`waifu\`\n20) \`aniwallpaper\``, true)
+        .addField(`** **`,`- \`aniquote\`\n- \`anisearch\`\n- \`azurlane\`\n-  \`awoo\`\n- \`booru\`\n- \`foxes\`\n- \`kitsune\`\n- \`megumin\`\n- \`nagisa\`\n- \`neko\``, true)
+        .addField('** **', `- \`nekopara\`\n- \`okami\`\n- \`nep\`\n- \`random-anime\`\n- \`rem\`\n- \`sfwanime\`\n- \`shinobu\`\n- \`waifu\`\n- \`waifugen\``, true)
 return message.channel.send(embed)
 }
 
@@ -220,16 +60,16 @@ else if(args[0].toLowerCase() === "util") {
     .setTitle('**[ UTILITY ]**')
     .setColor("#cbbdd7") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-    .addField('** **', `1) \`ascii\`\n2) \`avatar\`\n3) \`help\`\n4) \`prefix\`\n5) \`serverinfo\`\n6) \`snipe\`\n7)\`userinfo\``)
+    .addField('** **', `- \`avatar\`\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
     return message.channel.send(embed1)
 }
 
-else if(args[0].toLowerCase() === "info") {
+else if(args[0].toLowerCase() === "misc") {
     var embed1 = new MessageEmbed()
-    .setTitle('**[ INFORMATION ]**')
+    .setTitle('**[ MISCELLANEOUS ]**')
     .setColor("#815498") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`,)
-    .addField('** **', `1) \`botinfo\`\n2) \`bugreport\`\n3) \`hex\`\n4) \`invite\`\n5) \`affiliates\`\n6) \`ping\`\n7) \`policy\`\n8) \`suggest\`\n9) \`uptime\`\n10) \`voted\``)
+    .addField('** **', `- \`botinfo\`\n- \`invite\`\n- \`ping\`\n- \`policy\`\n- \`suggest\`\n- \`uptime\``)
     return message.channel.send(embed1)
 }
 else if(args[0].toLowerCase() === "main") {
@@ -237,15 +77,16 @@ else if(args[0].toLowerCase() === "main") {
     .setTitle('**[ MAIN ]**')
     .setColor("#7975a8") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-    .addField('** **', `1) \`truth\`\n2) \`dare\`\n3) \`fact\`\n4) \`topic\`\n5) \`why\`\n6) \`wyr\``)
+    .addField('** **', `- \`truth\`\n- \`dare\`\n- \`fact\`\n- \`topic\`\n- \`why\`\n- \`wyr\``)
     return message.channel.send(embed1)
 }
-else if(args[0].toLowerCase() === "owner") {
+else if(args[0].toLowerCase() === "roleplay") {
     var embed1 = new MessageEmbed()
-    .setTitle('**[ owner ]**')
-    .setColor("RANDOM") // Set the color
+    .setTitle('**[ AFFECTIONS // ROLEPLAY ]**')
+    .setColor("#7975a8") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-    .addField('** **', `1) \`avatarreset\`\n2) \`eval\`\n3) \`exec\`\n4) \`reboot\`\n5) \`shutdown\``)
+    .addField('** **', `- \`bite\`\n- \`blush\`\n- \`bonk\`\n- \`cry\`\n- \`cuddle\`\n- \`dance\`\n- \`feed\`\n- \`glomp\`\n- \`happy\`\n- \`horny\`\n- \`hug\`\n-\`kiss\``,true )
+    .addField('** **', `- \`lick\`\n- \`nom\`\n- \`pat\`\n- \`poke\`\n- \`pout\`\n- \`punch\`\n- \`slap\`\n- \`smile\`\n- \`smug\`\n- \`tickle\`\n- \`wag\`\n- \`stare\`\n- \`wave\`\n- \`wink\``, true)
     return message.channel.send(embed1)
 }
 else {
@@ -254,17 +95,20 @@ else {
     .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL())
     .setThumbnail(bot.user.displayAvatarURL())
     let CC = ["#815498", "#f1cdc8", "#eaecf3", "#dcadae", "#cbbdd7", "#a7a2d0"];
+    if(!message.content.startsWith(prefix))  {
+        return;
+    }
     let result = Math.floor((Math.random() * CC.length));
     let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
-    if (!command) return message.channel.send(embed.setTitle("**Invalid Command!**").setDescription(`**Do \`${prefix}help\` For the List Of the Commands!**`))
+    if (!command) {
+        message.channel.send({embed: new bot.messageembed().setDescription(`\`${args[0]}\` is not a valid command. Use the command \`${prefix}help\` to see all of the commands.`).setColor('RED')})
+    }
     command = command.config
-
     let SHembed = new MessageEmbed()
             .setColor(CC[result])
             .setAuthor(`ToD Command Help Panel:`, bot.user.avatarURL())
             .setThumbnail(bot.user.avatarURL())
             .setDescription(`\n\n**Command:** \`${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}\`\n**Description:** \`${command.description || "No Description provided."}\`\n**Usage:** \`${command.usage ? `\`${command.usage}\`` : "No Usage"}\`\n**Examples:** \`${command.example ? `\`${command.example}\`` : "No Examples Found"}\`\n**Aliases:** \`${command.aliases ? command.aliases.join(" , ") : "None."}\``)
-            .setFooter(message.guild.name, message.guild.iconURL())
 return message.channel.send(SHembed)
     
 }
