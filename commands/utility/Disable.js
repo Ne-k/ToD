@@ -47,7 +47,7 @@ if(args[0].toLowerCase() === 'nsfw') {
     if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) === true) {
         client.db.delete(`nsfwEnabled_${message.guild.id}`)
         client.db.delete(`nsfwEnabledBy_${message.author.tag}_${message.guild.id}`)
-        return message.channel.send('I have **disabled** `nsfw` truths and dares on this server.')
+        return message.channel.send({embed: new client.messageembed().setColor('GREEN').setDescription('I have **disabled** NSFW truths and dares.')})
     }
    
 }

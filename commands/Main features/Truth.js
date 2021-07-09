@@ -17,6 +17,18 @@ try {
     
     
 if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == true) {
+    let btn1 = new MessageButton()
+.setStyle('blurple') 
+.setLabel('Information') 
+.setID('ToD_Information') 
+let btn2 = new MessageButton()
+.setStyle('blurple') 
+.setLabel('Rules') 
+.setID('ToD_Rules') 
+
+
+
+
     fetch("https://summonjs.net/api/random-truth").then((res) => res.json()).then(async (data) => {
     let embed = new Discord.MessageEmbed()
     .setColor('#eaecf3')
@@ -24,7 +36,17 @@ if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == true) {
     
     .setDescription(Math.random() > 0.6 ? client.tod.nsfwTruth[Math.floor(Math.random() * client.tod.nsfwTruth.length)] : data.truth)
 
-return message.channel.send(embed)
+    client.on('clickButton', async (button) => {
+        if (button.id === 'ToD_Information') {
+            await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+            
+        }
+        if (button.id === 'ToD_Rules') {
+            await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+            
+        }
+      });
+      return message.channel.send({buttons: [btn1, btn2], embed: embed})
 })
 }
 

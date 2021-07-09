@@ -77,7 +77,7 @@ module.exports = {
 
       let pages = embeds.length;
       embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`);
-      const queueEmbed = await message.channel.send(embeds[currentPage]);
+      const queueEmbed = await message.channel.send({embed: embeds[currentPage]});
 
       await Promise.all(reactions.map(r => queueEmbed.react(r)));
       const filter = (reaction, user) => reactions.includes(reaction.emoji.name) && message.author.id === user.id;
@@ -91,7 +91,7 @@ module.exports = {
               currentPage++;
               if(currentPage == pages) currentPage = 0;
               if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-              queueEmbed.edit(embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`));
+              queueEmbed.edit({embed: embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`)});
               break;
             case "⏹️":
               collector.stop();
@@ -109,7 +109,7 @@ module.exports = {
               --currentPage;
               if(currentPage == -1) currentPage = pages-1;
               if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-              queueEmbed.edit(embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`));
+              queueEmbed.edit({embed: embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`)});
               break;
               
               case "🔵":
@@ -117,7 +117,7 @@ module.exports = {
                 --currentPage;
                 if(currentPage == -1) currentPage = pages-1;
                 if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-                queueEmbed.edit(embeds[currentPage].setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', `The Developer Has Closed The Evaluation.`)}`));
+                queueEmbed.edit({embed: embeds[currentPage].setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', `The Developer Has Closed The Evaluation.`)}`)});
                 break;
 
             case "🔴":

@@ -41,7 +41,7 @@ try {
 
             const dominantColor1 = await getColorFromURL(message.author.avatarURL({format: 'png'}))
 
-            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor1).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`*Execute the command \`${prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`nagisa\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`nep\`\, \`random-anime\`\, \`rem\`\, \`sfwanime\`\, \`shinobu\`\, \`waifu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`avatar\`\, \`help\`\, \`prefix\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\, \`uptime\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`topic\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`horny\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\``).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
+            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor1).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`*Execute the command \`${prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`nagisa\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`nep\`\, \`random-anime\`\, \`rem\`\, \`sfwanime\`\, \`shinobu\`\, \`waifu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`avatar\`\, \`disable\`, \`enable\`, \`help\`\, \`prefix\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\, \`uptime\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`topic\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`horny\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\``).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
         }
 if(args[0].toLowerCase() === "anime") {
 
@@ -60,7 +60,7 @@ else if(args[0].toLowerCase() === "util") {
     .setTitle('**[ UTILITY ]**')
     .setColor("#cbbdd7") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-    .addField('** **', `- \`avatar\`\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
+    .addField('** **', `- \`avatar\`\n- \`disable\`\n- enable\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
     return message.channel.send(embed1)
 }
 
