@@ -1,7 +1,8 @@
 const { ShardingManager } = require('discord.js');
 const logger = require('./modules/logger')
+require('dotenv').config()
 const Statcord = require('statcord.js')
-const manager = new ShardingManager('./ToD.js', { token: 'NzUyMzA2OTcwNDY3MjM3OTcw.X1Vudg.I0VJK0h42QpF8C7B20iersjdB98', autoSpawn: true, respawn: true});
+const manager = new ShardingManager('./ToD.js', { token: process.env.Token, autoSpawn: true, respawn: true});
 const chalk = require('chalk')
 // Create statcord sharding client
 const statcord = new Statcord.ShardingClient({
