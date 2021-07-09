@@ -33,7 +33,7 @@ try {
 
 
     const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'png'}))
-            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`<:Pink_Dash:843518578749865994> Run \`${prefix}help <category name>\` for the list of commands in the category.\n\n<:Orange_dash:843518612747976714> **__categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\``).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
+            return message.channel.send({embed: new bot.messageembed().setColor(dominantColor).setAuthor('Help Command Panel:', bot.user.avatarURL({format: 'png'})).setDescription(`<:Pink_Dash:843518578749865994> Run \`${prefix}help <category name>\` for the list of commands in the category.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n__**Links**__:\n**[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`).setFooter(bot.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))})
         }
         if(args[0].toLowerCase() === "all") {
             const { getColorFromURL } = require('color-thief-node');
