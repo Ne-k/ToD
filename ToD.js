@@ -116,7 +116,7 @@ client.on("messageDelete", async(message,channel) => {
     const Statcord = require("statcord.js");
     Statcord.ShardingClient.post(client);
     
-    mongoose.connect(process.env.MONGOSTRING, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false, poolSize: 5, connectTimeoutMS: 10000, family: 4 })
+  
 //=================================================================================================================================
 
 client.login(process.env.Token);
