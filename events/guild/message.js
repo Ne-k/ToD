@@ -84,7 +84,7 @@ try {
         
                 var commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
                  if (commandfile){
-                    let timeout = ms('0');
+                    let timeout = ms('4000');
                     
         if (Timeout.has(`${command.name}${message.author.id}`)) {
             return message.channel.send(new MessageEmbed().setDescription(`Hey ` + "(・`ω´・)" +  ` Wooks wike you awe on a coowdown fow anyothew **${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: true })}**, twy again watew >w< <a:GuraNekoWiggle:845453998622638130>`).setColor("RANDOM"))
