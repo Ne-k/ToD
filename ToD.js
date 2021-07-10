@@ -74,7 +74,7 @@ const table = new AsciiTable()
 .setAlign(0, AsciiTable.CENTER)
 .setAlign(1, AsciiTable.CENTER)
 table.addRow('NSFW truths/dares', nsfwstatus)
-
+/*
     if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
           let pingembed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
@@ -85,6 +85,7 @@ table.addRow('NSFW truths/dares', nsfwstatus)
             msg.delete({ timeout: 10000 })
           })
           }
+*/
           
     } catch (err) {
         return message.channel.send(err)
