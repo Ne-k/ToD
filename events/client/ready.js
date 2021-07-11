@@ -50,14 +50,14 @@ Signed into ${bot.user.tag}
       switch (rnd) {
         case 1:
           {
-            bot.user.setActivity(`NOTICE: Sharding issues present, currently being investigated ...`, {
+            bot.user.setActivity(`t;help | connected to ${bot.options.shardCount} shards`, {
               type: 'WATCHING'
             });
           }
           break
           default:
             {
-              bot.user.setActivity(`NOTICE: Sharding issues present, currently being investigated... `, {
+              bot.user.setActivity(`t;help | Truth Or Dare`, {
                 type: 'PLAYING'
               });
             }
