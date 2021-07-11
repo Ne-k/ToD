@@ -72,7 +72,7 @@ Signed into ${bot.user.tag}
 const Discord = require('discord.js')
 
   
-  //removed from a server
+  
   
 
   
