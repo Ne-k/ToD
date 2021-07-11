@@ -6,7 +6,7 @@ const manager = new ShardingManager('./ToD.js', { token: process.env.Token, auto
 const chalk = require('chalk')
 
 // Spawn shards, statcord works with both auto and a set amount of shards
-manager.spawn('3', 10000, 30000);
+manager.spawn(3, 10000, 30000);
 
 // Normal shardCreate event
 manager.on("shardCreate", (shard) => {
