@@ -43,7 +43,7 @@ module.exports = {
         .setDescription('Now rebooting, be back in a couple minutes. . .')
         message.channel.send(RebootingEmbed)
         
-        exec("npx pm2 restart all", (error, stdout, stderr) => {
+        exec("pm2 restart ToD", (error, stdout, stderr) => {
             if (error) {
                 let ErrorEmbed = new MessageEmbed()
                 .setColor('RED')
