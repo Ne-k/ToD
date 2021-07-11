@@ -48,7 +48,7 @@ if(args[0].toLowerCase() === "anime") {
     let embed = new MessageEmbed()
         .setTitle('**[ ANIME CORNER ]**')
         .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-        .setColor("#7975a8") // Set the color
+        .setColor("#7975a8") 
         .addField(`** **`,`- \`aniquote\`\n- \`anisearch\`\n- \`azurlane\`\n-  \`awoo\`\n- \`booru\`\n- \`foxes\`\n- \`kitsune\`\n- \`megumin\`\n- \`nagisa\`\n- \`neko\``, true)
         .addField('** **', `- \`nekopara\`\n- \`okami\`\n- \`nep\`\n- \`random-anime\`\n- \`rem\`\n- \`sfwanime\`\n- \`shinobu\`\n- \`waifu\`\n- \`waifugen\``, true)
 return message.channel.send(embed)
@@ -58,7 +58,7 @@ return message.channel.send(embed)
 else if(args[0].toLowerCase() === "util") {
     var embed1 = new MessageEmbed()
     .setTitle('**[ UTILITY ]**')
-    .setColor("#cbbdd7") // Set the color
+    .setColor("#cbbdd7") 
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
     .addField('** **', `- \`avatar\`\n- \`disable\`\n- enable\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
     return message.channel.send(embed1)
@@ -67,7 +67,7 @@ else if(args[0].toLowerCase() === "util") {
 else if(args[0].toLowerCase() === "misc") {
     var embed1 = new MessageEmbed()
     .setTitle('**[ MISCELLANEOUS ]**')
-    .setColor("#815498") // Set the color
+    .setColor("#815498") 
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`,)
     .addField('** **', `- \`botinfo\`\n- \`invite\`\n- \`ping\`\n- \`policy\`\n- \`suggest\`\n- \`uptime\``)
     return message.channel.send(embed1)
@@ -75,7 +75,7 @@ else if(args[0].toLowerCase() === "misc") {
 else if(args[0].toLowerCase() === "main") {
     var embed1 = new MessageEmbed()
     .setTitle('**[ MAIN ]**')
-    .setColor("#7975a8") // Set the color
+    .setColor("#7975a8") 
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
     .addField('** **', `- \`truth\`\n- \`dare\`\n- \`fact\`\n- \`topic\`\n- \`why\`\n- \`wyr\``)
     return message.channel.send(embed1)
@@ -83,7 +83,7 @@ else if(args[0].toLowerCase() === "main") {
 else if(args[0].toLowerCase() === "roleplay") {
     var embed1 = new MessageEmbed()
     .setTitle('**[ AFFECTIONS // ROLEPLAY ]**')
-    .setColor("#7975a8") // Set the color
+    .setColor("#7975a8") 
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
     .addField('** **', `- \`bite\`\n- \`blush\`\n- \`bonk\`\n- \`cry\`\n- \`cuddle\`\n- \`dance\`\n- \`feed\`\n- \`glomp\`\n- \`happy\`\n- \`horny\`\n- \`hug\`\n-\`kiss\``,true )
     .addField('** **', `- \`lick\`\n- \`nom\`\n- \`pat\`\n- \`poke\`\n- \`pout\`\n- \`punch\`\n- \`slap\`\n- \`smile\`\n- \`smug\`\n- \`tickle\`\n- \`wag\`\n- \`stare\`\n- \`wave\`\n- \`wink\``, true)

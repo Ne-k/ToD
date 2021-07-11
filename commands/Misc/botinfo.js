@@ -19,7 +19,7 @@ module.exports = {
 
     if (message.channel.type == "dm") return message.channel.send("❌ | This command command is disabled for DMs, please use this within a server!");
 
-    let bicon = bot.user.displayAvatarURL; //bot avatar
+    let bicon = bot.user.displayAvatarURL(); 
 
     const fetch = require('node-fetch')
     const Discord = require('discord.js')
@@ -47,7 +47,7 @@ module.exports = {
           let result = Math.floor((Math.random() * footerthing.length));
           let botembed = new MessageEmbed()
           .setDescription("Bot Information", true)
-          .setColor('#ed95df')   //hex color randomizer
+          .setColor('#ed95df')  
           .setThumbnail(bot.user.displayAvatarURL)
           .setDescription('Hello! I am ToD, a unique, constantly evolving bot.')
           .setTitle("ToD (Truth or dare)", true)
@@ -67,13 +67,13 @@ module.exports = {
 
           let button = new MessageButton()
          
-          .setLabel('Invite') //default: NO_LABEL_PROVIDED
+          .setLabel('Invite') 
           .setStyle("url")
           .setURL('https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=470150368')
           
           let button1 = new MessageButton()
          
-          .setLabel('Semi-accurate stats') //default: NO_LABEL_PROVIDED
+          .setLabel('Semi-accurate stats') 
           .setStyle("url")
           .setURL('https://statcord.com/bot/752306970467237970')
           

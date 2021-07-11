@@ -98,12 +98,9 @@ if (button.id === 'deny') {
 })
 
 
-       // the user can type the command ... your command code goes here :)
-
-    // Adds the user to the set so that they can't talk for a minute
+ 
     talkedRecently.add(message.author.id);
     setTimeout(() => {
-      // Removes the user from the set after a minute
       talkedRecently.delete(message.author.id);
     }, 60000);
 }

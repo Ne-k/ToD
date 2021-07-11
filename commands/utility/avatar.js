@@ -27,7 +27,7 @@ if(!user.user.avatarURL()) return message.reply(`:x: ${user.user.tag} profile ph
 let embed = new Discord.MessageEmbed()
 .setColor("RANDOM")
 .setDescription(`__**Image Files**__: [PNG](${user.user.avatarURL({format: "png"})}) **|** [JPG](${user.user.avatarURL({format: "jpg"})}) **|** [WEBP](${user.user.avatarURL({format: "webp"})}) **|** [GIF](${user.user.avatarURL({dynamic: true, format: "gif"})})\n__**Image Sizes**__: [16](${user.user.avatarURL({dynamic: true, size: 16})}) **|** [32](${user.user.avatarURL({dynamic: true, size: 32})}) **|** [64](${user.user.avatarURL({dynamic: true, size: 64})}) **|** [128](${user.user.avatarURL({dynmaic: true, size: 128})}) **|** [512](${user.user.avatarURL({dynamic: true, size: 1024})}) **|** [2038](${user.user.avatarURL({dynamic: true, size: 2048})}) **|** [4096](${user.user.avatarURL({dynamic: true, size: 4096})})`)
-.setImage(user.user.avatarURL({dynamic: true})+"?size=2048") //Size :D
+.setImage(user.user.avatarURL({dynamic: true})+"?size=2048") 
 .setTimestamp()
 .setAuthor(user.user.tag,user.user.avatarURL())
 
