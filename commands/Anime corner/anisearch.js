@@ -1,8 +1,7 @@
-const fetch = require("node-fetch");
 const { MessageEmbed } = require("discord.js");
 const chalk = require('chalk')
 const  {MessageButton, MessageActionRow} = require('discord-buttons')
-const AsciiTable = require('ascii-table')
+
 module.exports = {
     config: {
         name: "anisearch",

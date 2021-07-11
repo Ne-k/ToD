@@ -10,7 +10,7 @@ module.exports = {
 const { body } = await superagent
 .get("http://asuna.ga/api/wholesome_foxes"); 
 
-
+      // Kitsune command
       const embed = new Discord.MessageEmbed()
       .setTitle(`~ Wholesome foxes ~`) 
       .setColor('#3399FF')

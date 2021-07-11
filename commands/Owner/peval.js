@@ -46,7 +46,7 @@ module.exports = {
 	} else {
 				evaled = eval(code)
 			}
-
+    
       let isPromise = false;
       if (evaled && evaled instanceof Promise) { isPromise = true; evaled = await evaled; }
       if (typeof evaled !== "string") evaled = inspect(evaled, { depth: 0 });
