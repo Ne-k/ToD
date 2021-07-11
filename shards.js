@@ -2,7 +2,7 @@ const { ShardingManager } = require('discord.js');
 const logger = require('./modules/logger')
 require('dotenv').config()
 const Statcord = require('statcord.js')
-const manager = new ShardingManager('./ToD.js', { token: process.env.Token, totalShards: `3`, respawn: true});
+const manager = new ShardingManager('./ToD.js', { token: process.env.Token, totalShards: 3, respawn: true});
 const chalk = require('chalk')
 
 manager.on("shardCreate", (shard) => {
