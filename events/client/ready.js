@@ -50,7 +50,7 @@ Signed into ${bot.user.tag}
       switch (rnd) {
         case 1:
           {
-            bot.user.setActivity(`t;help | connected to ${bot.options.shardCount} shards`, {
+            bot.user.setActivity(`NOTICE: Sharding issues present, currently being fixed...`, {
               type: 'WATCHING'
             });
           }
