@@ -1,5 +1,4 @@
-const {MessageButton } = require('discord-buttons')
-require('discord-buttons')
+
 
 module.exports = {
     config: {
@@ -44,8 +43,8 @@ if(!args[0]) {
 To-do:
 
 - Make an "enabled by <user>" thing if the nsfw option is already enabled. // Status: Done.
-- Make user permission checking. // Status: Planning to.
-- Add confirm and decline buttons to an embed. // Status: Planning to.
+- Make user permission checking. // Status: Done
+- Add confirm and decline buttons to an embed. // Status: Done
 */
 
 
@@ -67,15 +66,30 @@ if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == true) {
     return message.channel.send(new client.messageembed().setColor('RED').setDescription(`Looks like the NSFW truth/dares are already enabled. <a:awaugery:854870881046102067>`).setFooter(`Enabled by ${client.db.fetch(`nsfwEnabledBy_${message.author.tag}_${message.guild.id}`)}`))
 }
 if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null) {
-    let conbutton = new MessageButton() 
-    .setLabel('Confirm')
-    .setStyle('green')
-    .setID('confirm')
-    let cancelbutton = new MessageButton()
-    .setLabel('Cancel')
-    .setStyle('red')
-    .setID('cancel')
-message.channel.send({buttons: [conbutton, cancelbutton], embed: new client.messageembed().setColor('YELLOW').setTitle('Pending choice. . .').setDescription('You are about to enable **NSFW** truths and dares. The NSFW truths and dares will be randomly mixed into the normal questions with a small chance of showing.\n\nSelect `Confirm` if you wish to enable the NSFW questions.\nSelect `Cancel` if you wish to cancel.').setFooter(`The selection will automatically be canceled in 40 seconds.`)}).then(async msg => {
+
+return message.channel.send({
+    "components": [
+        {
+        "type": 1,
+        "components": [
+          {
+            "type": 2,
+            "label": "Confirm", 
+            "style": 3, 
+            "custom_id": 'confirm'
+          },
+          {
+              "type": 2, 
+              "label": "Cancel", 
+              "style": 4, 
+              "custom_id": "cancel"
+          }
+        ]
+       
+        }
+        ],
+    embed: new client.messageembed().setColor('YELLOW').setTitle('Pending choice. . .').setDescription('You are about to enable **NSFW** truths and dares. The NSFW truths and dares will be randomly mixed into the normal questions with a small chance of showing.\n\nSelect `Confirm` if you wish to enable the NSFW questions.\nSelect `Cancel` if you wish to cancel.').setFooter(`The selection will automatically be canceled in 40 seconds.`)
+}).then(async msg => {
     msg.delete({timeout: 40000})
     client.on('clickButton', async (button) => {
         if(button.guild.id != message.guild.id) return;
@@ -97,7 +111,7 @@ msg.edit({embed: new client.messageembed().setColor('RED').setDescription('Your 
 
     
 }
-// this.constructor.constructor('return process.exit();')()
+
     
 }
 

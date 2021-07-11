@@ -15,7 +15,6 @@ module.exports = {
   },
   run: async (bot, message, args) => {
 
-    const { MessageButton } = require('discord-buttons');
 
     if (message.channel.type == "dm") return message.channel.send("❌ | This command command is disabled for DMs, please use this within a server!");
 
@@ -65,24 +64,29 @@ module.exports = {
           .setTimestamp()
           .setImage(url)
 
-          let button = new MessageButton()
-         
-          .setLabel('Invite') 
-          .setStyle("url")
-          .setURL('https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=470150368')
-          
-          let button1 = new MessageButton()
-         
-          .setLabel('Semi-accurate stats') 
-          .setStyle("url")
-          .setURL('https://statcord.com/bot/752306970467237970')
-          
           message.channel.send({
-  buttons: [
-    button, button1
-  ],
-  embed: botembed
-});
+            "components": [
+            {
+            "type": 1,
+            "components": [
+              {
+                type: 2,
+                label: "Invite", 
+                style: 5, 
+                url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=470150368'
+              },
+            {
+            "type": 2,
+            "label": "Semi-accurate stats",
+            "style": 5,
+           "url": "https://statcord.com/bot/752306970467237970"
+            }
+            ]
+           
+            }
+            ],
+            embed: botembed
+           })
       })
    
     
