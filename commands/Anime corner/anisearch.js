@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const chalk = require('chalk')
-const  {MessageButton, MessageActionRow} = require('discord-buttons')
+
 
 module.exports = {
     config: {
@@ -30,53 +30,72 @@ module.exports = {
        .then(async (data) => { 
         try {
           
-            let search1 = new MessageButton()
-            .setStyle('blurple') 
-            .setLabel('1') 
-            .setID('search1Event') 
-            
-let search2 = new MessageButton()
-.setLabel('2')
-.setStyle('blurple')
-.setID('Search2')
-let search3 = new MessageButton()
-.setLabel('3')
-.setStyle('blurple')
-.setID('Search3')
-let search4 = new MessageButton()
-.setLabel('4')
-.setStyle('blurple')
-.setID('Search4')
-let search5 = new MessageButton()
-.setLabel('5')
-.setStyle('blurple')
-.setID('Search5')
-let search6 = new MessageButton()
-.setLabel('6')
-.setStyle('blurple')
-.setID('Search6')
-let cancelbutton = new MessageButton()
-.setLabel('Cancel')
-.setStyle('red')
-.setID('cancel')
-
-let buttonRow = new MessageActionRow()
-.addComponent(search1)
-.addComponent(search2)
-.addComponent(search3)
-.addComponent(search4)
-.addComponent(search5)
-let buttonrow2 = new MessageActionRow()
-.addComponent(search6)
-.addComponent(cancelbutton)
 
        await msg.delete()
-       return message.channel.send({components: [buttonRow, buttonrow2], embed: new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')}).then(thing => {
+       
+       return message.channel.send({
+        components: [{
+          "type": 1, components: [
+              {
+                  "type": 2,
+          "label": '1️⃣', 
+          "style": 1, 
+          "custom_id": 'search1'
+              },
+              {
+                "type": 2,
+          "label": '2️⃣', 
+          "style": 1, 
+          "custom_id": 'Search2'
+              },
+              {
+                "type": 2,
+          "label": '3️⃣', 
+          "style": 1, 
+          "custom_id": 'Search3'
+                
+              },
+              {
+                "type": 2,
+          "label": '4️⃣', 
+          "style": 1, 
+          "custom_id": 'Search4'
+          
+              },
+              {
+                "type": 2,
+          "label": '5️⃣', 
+          "style": 1, 
+          "custom_id": 'Search5'
+          
+              },
+          ]},
+       {
+           type: 1, components: [
+            {
+              "type": 2,
+        "label": '6️⃣', 
+        "style": 1, 
+        "custom_id": 'Search6'
+        
+            },
+            {
+              "type": 2,
+        "label": 'Cancel', 
+        "style": 4, 
+        "custom_id": 'cancel'
+        
+            },
+           ]
+          }],
+         embed: new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')
+        }).then(thing => {
          thing.delete({timeout: 40000})
             client.on('clickButton', async (button) => {
              if(button.guild.id != message.guild.id) return;
-              if(button.clicker.user.id == message.author.id) { 
-                if(button.id == 'search1Event') {
+              if(button.clicker.user.id == message.author.id) {
+
+                if(button.id == 'search1') {
                   
                   await thing.delete()
                   message.channel.startTyping()
@@ -106,6 +125,7 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
+  
              message.channel.stopTyping(true)
              return button.channel.send(embed)
               
