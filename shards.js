@@ -1,48 +1,128 @@
-const { ShardingManager } = require('discord.js');
-const logger = require('./modules/logger')
-require('dotenv').config()
-const Statcord = require('statcord.js')
-const manager = new ShardingManager('./ToD.js', { token: process.env.Token, totalShards: 3, respawn: true});
-const chalk = require('chalk')
-// Create statcord sharding client
-const statcord = new Statcord.ShardingClient({
-    key: "statcord.com-iFfsaDeC8KtKtUrlxgHk", //Beta: statcord.com-iFfsaDeC8KtKtUrlxgHk | ToD: statcord.com-iFfsaDeC8KtKtUrlxgHk
-    manager,
-    postCpuStatistics: true, /* Whether to post CPU statistics or not, defaults to true */
-    postMemStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    postNetworkStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    autopost: true /* Whether to auto post or not, defaults to true */
+//====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
+const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
+//============================================================================================================================================================================================================
+client.db = db
+
+client.tod = require('./ToD.json')
+client.messageembed = MessageEmbed
+client.database = require("./Database/sql.js");
+client.default = require('./DefaultConfig.json')
+client.logger = require('./modules/logger')
+//====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
+client.commands = new Collection();
+client.aliases = new Collection();
+
+//============================================================================================================================================================================================================
+
+
+//============================================================================================INITIALIZING====================================================================================================
+["aliases", "commands"].forEach(x => client[x] = new Collection());
+["console", "command", "event"].forEach(x => require(`./handler/${x}`)(client));
+
+client.categories = fs.readdirSync("./commands/");
+
+["command"].forEach(handler => {
+    require(`./handler/${handler}`)(client);
 });
 
-/* Register custom fields handlers (these are optional, you are not required to use this function)
-* These functions are automatically run when posting
-*/
-// Handler for custom value 1
-statcord.registerCustomFieldHandler(1, async (manager) => {
-    // Get and return your data as a string
+
+let errors = [];
+const modules = fs.readdirSync("commands").filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
+modules.forEach((module) => {
+		
+	console.log(chalk.underline.green(`L͟o͟a͟d͟i͟n͟g͟ M͟o͟d͟u͟l͟e͟:` + chalk.yellowBright` ${module}`));
+	const CMDFiles = fs
+		.readdirSync(path.resolve(`commands/${module}`))
+		.filter((file) => !fs.statSync(path.resolve("commands", module, file)).isDirectory())
+		.filter((file) => {
+			return file.endsWith(".js");
+		
+        });
+    })
+
+
+
+//============================================================================================================================================================================================================
+
+
+//=========================================================================================MENTION SETTINGS===========================================================================================
+
+client.on('messageCreate', async message => {
+  let prefix;
+  try {
+      let fetched = await db.fetch(`prefix_${message.guild.id}`);
+      if (fetched == null) {
+          prefix = client.default.prefix
+      } else {
+          prefix = fetched
+          
+      }
+  
+      } catch (e) {
+      console.log(e)
+};
+try {
+
+    if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
+          let pingembed = new Discord.MessageEmbed()
+      .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
+      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
+      .setColor('#2f3136')
+          return message.channel.send(pingembed)
+          .then(msg => {
+            msg.delete({ timeout: 5000 })
+          })
+          }
+          
+    } catch (err) {
+        return message.channel.send(err)
+    };
+    
+   
 });
 
-// Handler for custom value 2
-statcord.registerCustomFieldHandler(2, async (manager) => {
-    // Get and return your data as a string
-});
 
-// Spawn shards, statcord works with both auto and a set amount of shards
-manager.spawn(undefined, undefined, -1)
+//===================================Statcord random shit ========================================================================================================================================================================
 
-// Normal shardCreate event
-manager.on("shardCreate", (shard) => {
-    console.log(console.log(chalk.greenBright(`✅ - Launched shard #${shard.id}\n───────────────────────────────`)));
-});
+client.snipe = new Map()
 
-statcord.on("autopost-start", () => {
-    // Emitted when statcord autopost starts
-    logger('Autopost Started', 'StatcordSuccess')
-});
 
-statcord.on("post", status => {
-    // status = false if the post was successful
-    // status = "Error message" or status = Error if there was an error
-    if (!status) logger("Successful post", 'StatcordSuccess');
-    else logger(status, 'StatcordError');
-})
+client.on("messageDelete", async(message,channel) => {
+
+
+
+    if(message.author.bot) return;
+    if(!message.guild) return;
+    client.snipe.set(message.channel.id, {
+        msg:message.content,
+        user:message.author.tag,
+        profilephoto:message.author.displayAvatarURL(),
+        image:message.attachments.first() ? message.attachments.first().proxyURL : null,
+        date:message.createdTimestamp,
+    })  
+    })
+    const Statcord = require("statcord.js");
+    Statcord.ShardingClient.post(client);
+    
+  
+//=================================================================================================================================
+
+client.login(process.env.Token);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

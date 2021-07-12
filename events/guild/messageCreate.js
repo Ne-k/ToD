@@ -105,7 +105,7 @@ try {
                  }
                  
                  if(dis === "enabled"){
-                    Statcord.ShardingClient.postCommand(command, message.author.id, bot);
+                    // Statcord.ShardingClient.postCommand(command, message.author.id, bot);
 
                      let commandPing = Date.now() - message.createdTimestamp
                      bot.logger(`${message.author.tag}` + ` |`.red + ` (${message.author.id}) executed the command ` + (`${commandfile.config.name}`.underline.cyan) + ` at ${cmdExecuted}.` + ` Message Ping: ${commandPing.toLocaleString()}ms` , "command")
@@ -120,9 +120,10 @@ try {
 
         })
         
-       // First, this must be at the top level of your code, **NOT** in any event!
+
 
     } catch (e) {
         console.log(e)
     }
+
 }

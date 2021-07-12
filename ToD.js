@@ -47,7 +47,7 @@ modules.forEach((module) => {
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
 const config = require('./DefaultConfig.json')
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
   let prefix;
   try {
