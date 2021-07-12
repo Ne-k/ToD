@@ -1,6 +1,6 @@
 const { ShardingManager } = require('discord.js');
 require('dotenv').config()
-const manager = new ShardingManager('./ToD', { 
+const manager = new ShardingManager('./ToD.js', { 
 token: process.env.Token, 
 autoSpawn: true, 
 respawn: true,
