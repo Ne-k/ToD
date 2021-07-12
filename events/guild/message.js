@@ -8,6 +8,7 @@ const games = new Map()
 const Discord = require('discord.js')
 const { Collection, MessageEmbed } = require("discord.js");
 const ms = require("ms");
+const Statcord = require('statcord.js')
 const Timeout = new Collection();
 
 module.exports = async (bot, message) => {
@@ -104,6 +105,8 @@ try {
                  }
                  
                  if(dis === "enabled"){
+                    Statcord.ShardingClient.postCommand(command, message.author.id, bot);
+
                      let commandPing = Date.now() - message.createdTimestamp
                      bot.logger(`${message.author.tag}` + ` |`.red + ` (${message.author.id}) executed the command ` + (`${commandfile.config.name}`.underline.cyan) + ` at ${cmdExecuted}.` + ` Message Ping: ${commandPing.toLocaleString()}ms` , "command")
                 
