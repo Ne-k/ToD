@@ -1,5 +1,5 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection, MessageEmbed } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone' }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk'); const mongoose = require("mongoose"); const path = require('path'); require('discord-buttons')(client); require("dotenv").config();
+const { Client, Collection, MessageEmbed } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone' }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
 //============================================================================================================================================================================================================
 client.db = db
 
@@ -63,29 +63,17 @@ client.on('message', async message => {
       console.log(e)
 };
 try {
-    let nsfwstatus = client.db.fetch(`nsfwEnabled_${message.guild.id}`)
-if(nsfwstatus == null) {
-    nsfwstatus = false
-    
-}
-const AsciiTable = require('ascii-table')
-const table = new AsciiTable()
-.setHeading('Options:', 'Enabled:')
-.setAlign(0, AsciiTable.CENTER)
-.setAlign(1, AsciiTable.CENTER)
-table.addRow('NSFW truths/dares', nsfwstatus)
-/*
+
     if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
           let pingembed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
-      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.\n\n__Config__:\n \`\`\`\n${table.toString()}\`\`\``)
+      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
       .setColor('#2f3136')
           return message.channel.send(pingembed)
           .then(msg => {
-            msg.delete({ timeout: 10000 })
+            msg.delete({ timeout: 5000 })
           })
           }
-*/
           
     } catch (err) {
         return message.channel.send(err)

@@ -91,8 +91,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
            
             }
             ],
-            
-            embed: new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Dare").setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)])
+        embed: new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Dare").setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)])
     }).then(m => {
         let random_footer = ["To add more dare responses, run the suggest command and input the dare you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
         let result = Math.floor((Math.random() * random_footer.length));
