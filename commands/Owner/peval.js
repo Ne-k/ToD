@@ -34,7 +34,7 @@ module.exports = {
     let result = Math.floor((Math.random() * CC.length));
     let code = args.join(" ").replace("```js", "").replace("```", "")
     
-    if(!args.join(' ')) return message.channel.send("Idiot, I can't evaluate air.")
+    if(!args.join(' ')) return message.channel.send({content: "Idiot, I can't evaluate air."})
 
     try {
       let evaled = eval(code);
@@ -58,6 +58,7 @@ module.exports = {
         .addField('Type of', dscformat('css', `${typeof evaled}${isPromise ? ' (Originally Promise)' : ''}`)));
       pagify(evalEmbeds, { xReact: true });
     } catch (err) {
+      console.log(err)
       const embed = new Discord.MessageEmbed()
       .setDescription(`:inbox_tray: **Input** :inbox_tray: ${dscformat('js',args.join(" ") )}\n:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', err)}`)
       .addField('Time', ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ''}${hrDiff[1] / 1000000}\`\`\` `)
@@ -77,7 +78,7 @@ module.exports = {
 
       let pages = embeds.length;
       embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`);
-      const queueEmbed = await message.channel.send({embed: embeds[currentPage]});
+      const queueEmbed = await message.channel.send({embeds: [embeds[currentPage]]});
 
       await Promise.all(reactions.map(r => queueEmbed.react(r)));
       const filter = (reaction, user) => reactions.includes(reaction.emoji.name) && message.author.id === user.id;
@@ -91,7 +92,7 @@ module.exports = {
               currentPage++;
               if(currentPage == pages) currentPage = 0;
               if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-              queueEmbed.edit({embed: embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`)});
+              queueEmbed.edit({embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`)});
               break;
             case "⏹️":
               collector.stop();
@@ -109,7 +110,7 @@ module.exports = {
               --currentPage;
               if(currentPage == -1) currentPage = pages-1;
               if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-              queueEmbed.edit({embed: embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`)});
+              queueEmbed.edit({embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`)});
               break;
               
               case "🔵":
@@ -117,21 +118,21 @@ module.exports = {
                 --currentPage;
                 if(currentPage == -1) currentPage = pages-1;
                 if(message.guild.me.permissions.has('MANAGE_MESSAGES')) reaction.users.remove(user.id);
-                queueEmbed.edit({embed: embeds[currentPage].setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', `The Developer Has Closed The Evaluation.`)}`)});
+                queueEmbed.edit({embeds: [embeds[currentPage]].setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', `The Developer Has Closed The Evaluation.`)}`)});
                 break;
 
             case "🔴":
               if(!reactions.includes("🔴")) return;
               collector.stop();
               queueEmbed.delete();
-              await message.channel.send('a').then(m => { 
-                m.edit('f')
-                m.delete()
+              await message.channel.send({content: 'a'}).then(m => { 
+                m.edit({content: 'f'})
+                client.setTimeout(() => message.delete(), 0);
               })
               break;
           }
         } catch (err) {
-          console.log(err.message);
+          console.log(err);
         }
       });
     }

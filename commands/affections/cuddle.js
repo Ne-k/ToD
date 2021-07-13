@@ -40,7 +40,7 @@ module.exports = {
         .setAuthor(`${message.author.username} is cuddling with ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
         .setColor('RANDOM')
         .setDescription(quotes)
-    message.channel.send(waifu)
+    message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
 
     }

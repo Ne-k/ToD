@@ -31,7 +31,7 @@ fetch(`https://purrbot.site/api/img/sfw/tickle/gif`).then(res => res.json()).the
     .setAuthor(`${message.author.username} tickled ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
     .setDescription(quotes)
     .setColor('RANDOM')
-message.channel.send(waifu)
+    message.channel.send({embeds: [waifu]})
 
 
 })

@@ -24,7 +24,7 @@ let quotes = args.join(" ");
         .setDescription(quotes)
         .setColor('RANDOM')
     
-    return message.channel.send(waifu)
+    return  message.channel.send({embeds: [waifu]})
     })
     }
 }

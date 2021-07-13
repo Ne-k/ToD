@@ -42,7 +42,7 @@ try {
                    
                     }
                     ],
-                  embed: embed
+                  embeds: [embed]
                 }).then(msg => {
                     client.on('clickButton', async (button) => {
                         if (button.id === 'ToD_Information') {
