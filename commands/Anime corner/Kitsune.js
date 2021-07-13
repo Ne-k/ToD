@@ -16,7 +16,7 @@ const { body } = await superagent
       .setColor('#3399FF')
       .setFooter(`Requested by: ${message.author.tag} | Powered by a http://asuna.ga/`, message.author.displayAvatarURL({ size: 32 }))
       .setImage(body.url) 
-      message.channel.send({embed})
+      message.channel.send({embeds: [embed]})
 
 
 }

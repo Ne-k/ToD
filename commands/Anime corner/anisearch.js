@@ -32,7 +32,7 @@ module.exports = {
           
 
        
-       
+          client.setTimeout(() => msg.delete(), 0)
        return message.channel.send({
         components: [{
           "type": 1, components: [
@@ -90,15 +90,15 @@ module.exports = {
           }],
          embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')]
         }).then(thing => {
-          client.setTimeout(() => message.delete(), 40000)
-          
+          client.setTimeout(() => thing.delete(), 40000)
+
             client.on('clickButton', async (button) => {
              if(button.guild.id != message.guild.id) return;
               if(button.clicker.user.id == message.author.id) {
 
-                if(button.id == 'search1') {
+                if(button.id == 'Testing') {
                   
-                  thing.delete()
+                  client.setTimeout(() => message.delete(), 0);
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[0].name)
                   

@@ -104,7 +104,7 @@ if(animeData.image_url != null)
 			animeEmbed.addField("Ending(s)", endings);
 		}
 
-         message.channel.send(animeEmbed);
+		message.channel.send({embeds: [animeEmbed]})
    
     
 

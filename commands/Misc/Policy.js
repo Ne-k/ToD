@@ -13,7 +13,7 @@ module.exports = {
             .setColor('RANDOM')
             .setTitle("Tod's private policy:")
             .setDescription('The entire private policy has been moved to this [github repo](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#private-policy).')
-message.channel.send(Sembed);
+message.channel.send({embeds: [Sembed]});
 
 }
             

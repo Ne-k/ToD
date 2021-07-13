@@ -85,7 +85,7 @@ module.exports = {
            
             }
             ],
-            embed: botembed
+            embeds: [botembed]
            })
       })
    

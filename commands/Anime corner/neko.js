@@ -16,7 +16,7 @@ module.exports = {
           .setColor('RANDOM')
          .setFooter(`Requested by ${message.author.tag} | Powered by kaedee.xyz`)
           .setImage(data.path) 
-          return message.channel.send({embed})
+          return message.channel.send({embeds: [embed]})
     
       
 

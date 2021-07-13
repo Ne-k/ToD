@@ -90,7 +90,7 @@ try {
         if (Timeout.has(`${command.name}${message.author.id}`)) {
             return message.channel.send({embeds: [new MessageEmbed().setDescription(`Hey ` + "(・`ω´・)" +  ` Wooks wike you awe on a coowdown fow anyothew **${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: true })}**, twy again watew >w< <a:GuraNekoWiggle:845453998622638130>`).setColor("RANDOM")]})
             .then(msg => {
-                msg.delete({ timeout: 7000 })
+                bot.setTimeout(() => msg.delete(), 7000);
               })
         }
         Timeout.set(`${command.name}${message.author.id}`, Date.now() + timeout);
