@@ -1,9 +1,8 @@
 const { MessageEmbed } = require('discord.js')
-const fs = require("fs")
-const { Menu } = require('discord.js-menu')
+
 
 const db = require('quick.db')
-const { stripIndents } = require("common-tags");
+
 
 module.exports = {
 config: {

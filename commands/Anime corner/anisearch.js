@@ -90,15 +90,19 @@ module.exports = {
           }],
          embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')]
         }).then(thing => {
+        
           client.setTimeout(() => thing.delete(), 40000)
 
-            client.on('clickButton', async (button) => {
-             if(button.guild.id != message.guild.id) return;
-              if(button.clicker.user.id == message.author.id) {
+// Event Shit
 
-                if(button.id == 'Testing') {
+            client.on('interactionCreate', async (interaction) => {
+
+             if(interaction.guildId != message.guild.id) return;
+              if(interaction.user.id == message.author.id) {
+
+                if(interaction.customId == 'search1') {
                   
-                  client.setTimeout(() => message.delete(), 0);
+                  client.setTimeout(() => thing.delete(), 0);
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[0].name)
                   
@@ -128,13 +132,16 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
   
              message.channel.stopTyping(true)
-             return button.channel.send({embeds: [embed]})
-              
+             return message.channel.send({embeds: [embed]})
+
      })
      
               }
-              if(button.id == 'Search2') {
-                  await thing.delete()
+              
+              
+              
+              if(interaction.customId == 'Search2') {
+                  await client.setTimeout(() => thing.delete(), 0);
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[1].name)
                   
@@ -163,12 +170,12 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              return button.channel.send({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
               
      })
               }
-              if(button.id == 'Search3') {
-                  await thing.delete()
+              if(interaction.customId == 'Search3') {
+                  await client.setTimeout(() => thing.delete(), 0);
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[2].name)
                   
@@ -197,11 +204,11 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping()
-              return button.channel.send({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
              
      })
               }
-              if(button.id == 'Search4') {
+              if(interaction.customId == 'Search4') {
                   await thing.delete()
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[3].name)
@@ -231,12 +238,12 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              return button.channel.send({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
               
      })
               }
               
-              if(button.id == 'Search5') {
+              if(interaction.customId == 'Search5') {
                   await thing.delete()
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[4].name)
@@ -266,11 +273,11 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              return button.channel.send({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
               
      })
               }
-              if(button.id == 'Search6') {
+              if(interaction.customId == 'Search6') {
                   await thing.delete()
                   message.channel.startTyping()
                   malScraper.getInfoFromName(data[5].name)
@@ -301,24 +308,23 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              return button.channel.send({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
               
      })
               }
-              if(button.id == 'cancel') {
+              if(interaction.customId == 'cancel') {
                   await thing.delete()
-message.channel.startTyping()
-message.channel.stopTyping(true)
-                  return button.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)]})
+
+                  return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)]})
                   
               }
-              message.channel.stopTyping(true)
+             
               }
             
                
-message.channel.stopTyping(true)
+
             })
-            message.channel.stopTyping(true)
+           
         })
        
     
