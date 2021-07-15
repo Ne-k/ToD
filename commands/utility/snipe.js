@@ -20,7 +20,7 @@ module.exports = {
         .setTimestamp(snip.date)
         if(snip.image) embed.setImage(snip.image)
     
-        return message.channel.send(embed)
+        return message.channel.send({embeds: [embed]})
 
         
     }

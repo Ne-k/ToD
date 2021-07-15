@@ -21,7 +21,7 @@ let option = args.join(" ");
             .setTitle('Invalid permissions.')
             .setDescription("You do not have the required permission(s) to change the guild's prefix. - \`MANAGE_GUILD\`")
             .setColor('RED')
-                     return message.channel.send(errorembed)
+                     return message.channel.send({embeds: [errorembed]})
                    }
                  
                  if(!option) {
@@ -33,7 +33,7 @@ let option = args.join(" ");
                      .setTitle('Guild prefix:')
                      .setDescription(`My prefix for \`${message.guild.name} is \`${prefix}\` - Type \`${prefix}help\` for the list of commands. My **default** (global) prefix is \`t;\``)
                      .setColor('GREEN')
-                   message.channel.send(nooption);
+                   message.channel.send({embeds: [nooption]});
                  }
      
                  if(option.toLowerCase() === "reset") {
@@ -42,7 +42,7 @@ let option = args.join(" ");
                      .setTitle('Reset prefix.')
                      .setDescription(`Successfully reseted the prefix back to the global/default prefix: \`t;\`.`)
                      .setColor('GREEN')
-                     return await message.channel.send(prefixisreset)
+                     return await message.channel.send({embeds: [prefixisreset]})
                  }
                  
                  if(args[1]) {
@@ -50,7 +50,7 @@ let option = args.join(" ");
                      .setTitle('Error.')
                      .setDescription(`You can not set prefix a double argument`)
                      .setColor('RED')
-                   return message.channel.send(moreoneargs)
+                   return message.channel.send({embeds: [moreoneargs]})
                  }
                  
                  if(args[0].length > 20) {
@@ -58,7 +58,7 @@ let option = args.join(" ");
                      .setTitle('Error.')
                      .setDescription(`You can not send prefix more than 20 characters`)
                      .setColor('RED')
-                   return message.channel.send(moreoneargs)
+                   return message.channel.send({embeds: [moreoneargs]})
                  }
                  
                  if(args.join("") === PREFIX) {
@@ -67,7 +67,7 @@ let option = args.join(" ");
                      .setTitle('Success!')
                      .setDescription(`I have reset the prefix back to: \`t;\``)
                      .setColor('GREEN')
-                  return await message.channel.send(resetprefixembed)
+                  return await message.channel.send({embeds: [resetprefixembed]})
                  }
                  
                  db.set(`prefix_${message.guild.id}`, args[0])
@@ -75,7 +75,7 @@ let option = args.join(" ");
                      .setTitle('Success!')
                      .setDescription(`I have set the guild prefix to: \`${args[0]}\` Enjoy! `)
                      .setColor('GREEN')
-               await message.channel.send(resetprefixembed)
+               await message.channel.send({embeds: [resetprefixembed]})
                  
 
         }

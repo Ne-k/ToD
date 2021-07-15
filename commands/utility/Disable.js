@@ -36,7 +36,7 @@ try {
     }
 
 if(args[0].toLowerCase() === 'nsfw') {
-    if(!message.member.hasPermission("MANAGE_GUILD")) {
+    if(!message.member.permissions.has("MANAGE_GUILD")) {
         return message.channel.send(new client.messageembed().setColor('RED').setDescription('Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to disable a option. <:Bonk:853033417112682574>'))
     }
 
