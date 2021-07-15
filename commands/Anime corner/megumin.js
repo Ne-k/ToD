@@ -18,7 +18,7 @@ message.channel.startTyping()
         meguminembed.setImage(url)
         .setColor('RANDOM')
         .setFooter(`Requested by: ${message.author.tag} | Powered by ${waifuAPI}`, message.author.displayAvatarURL({ size: 32 }))
-    message.channel.send(meguminembed)
+        message.channel.send({embeds: [meguminembed]})
     message.channel.stopTyping(true)
 
 }

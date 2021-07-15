@@ -36,7 +36,7 @@ run: async (bot, message, args) => {
                             .setDescription(`[Image URL](${image.common.file_url})`)
                             .setFooter(`Requested by: ${message.author.tag} | Powered by SafeBooru`, message.author.displayAvatarURL({ size: 32 }))
                             .setColor('RANDOM');
-                        return message.channel.send({ embed });
+                        return message.channel.send({embeds: [embed]})
                     }
                 })
             }

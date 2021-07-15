@@ -46,9 +46,11 @@ message.channel.send({
    
     }
     ],
+  embeds: [new MessageEmbed().setColor('YELLOW').setAuthor(`Pending. . .`, message.author.avatarURL({dynamic: true})).setDescription(`You are about to send "\`${reportedbug}\`" to the support server as a suggestion. \n\nBy clicking **agree** you acknowledge ToD's **[Private Policy](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#private-policy)** and any outcome of your suggestion (such as [getting blacklisted](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#blacklist-faq) if your suggestion turns out to be a troll suggestion, or an abuse to the bot.) *Note: NSFW truths and dares are accepted*.\n\nIf you wish to cancel your suggestion, click **deny**.`).setFooter('This user interface will be deleted in 30 seconds if no choice is made.')]}).then(async m => {
+    client.setTimeout(() => m.delete(), 30000);
+
   embed: new MessageEmbed().setColor('RED').setAuthor(`Error.`, message.author.avatarURL({dynamic: true})).setDescription(`This command is currently being reworked and will be back and working soon. For now, you're welcome to join the support support serevr and send your suggestion in <#824333080596054026> .`)}).then(async m => {
 m.delete({timeout: 30000})
-
 /*
 bot.on('clickButton', async (button) => {
 if (button.id === 'agree') {
@@ -89,12 +91,12 @@ return button.channel.send({
    
     }
     ],
-  embed: finalembed})
+  embeds: [finalembed]})
   
 }
 if (button.id === 'deny') {
   m.delete()
-  return button.channel.send({embed: new MessageEmbed().setColor('RED').setDescription('Successfully canceled your suggestion! <:Ranko_Pog:851883973403344947>')}).then(msg => msg.delete({timeout: 5000}))
+  return button.channel.send({embed: new MessageEmbed().setColor('RED').setDescription('Successfully canceled your suggestion! <:Ranko_Pog:851883973403344947>')}).then(msg => client.setTimeout(() => message.delete(), 5000))
   
 }
 })

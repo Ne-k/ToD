@@ -16,7 +16,7 @@ module.exports = {
 .setTitle(`~ Okami ~`) 
 .setFooter(`Requested by: ${message.author.tag} | Powered by *Purr*.`, message.author.displayAvatarURL({ size: 32 }))
 .setImage(body.link) 
-message.channel.send({embed})
+message.channel.send({embeds: [embed]})
 
    
 

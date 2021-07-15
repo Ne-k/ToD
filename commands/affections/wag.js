@@ -21,7 +21,7 @@ module.exports = {
         
         .setDescription(quotes)
         .setColor('RANDOM')
-    message.channel.send(waifu)
+        message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
 
     }

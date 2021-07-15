@@ -26,7 +26,7 @@ module.exports = {
         .setTitle("Topic")
         .setFooter('To add more dare responses, run the suggest command and input the dare you want to add.')
         .setDescription(replies[result])
-        return message.channel.send(embed)
+        return message.channel.send({embeds: [embed]})
 
 
 

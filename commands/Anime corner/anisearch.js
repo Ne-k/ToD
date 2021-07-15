@@ -17,7 +17,7 @@ module.exports = {
     }
 
 
-      let msg = await message.channel.send("<a:Loading:854800971854643240> Fetching The Info....")
+      let msg = await message.channel.send({content: "<a:Loading:854800971854643240> Fetching The Info...."})
     
 
     
@@ -31,8 +31,8 @@ module.exports = {
         try {
           
 
-       await msg.delete()
        
+          client.setTimeout(() => msg.delete(), 0)
        return message.channel.send({
         components: [{
           "type": 1, components: [
@@ -88,17 +88,21 @@ module.exports = {
             },
            ]
           }],
-         embed: new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')
+         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')]
         }).then(thing => {
-         thing.delete({timeout: 40000})
-            client.on('clickButton', async (button) => {
-             if(button.guild.id != message.guild.id) return;
-              if(button.clicker.user.id == message.author.id) {
+        
+          client.setTimeout(() => thing.delete(), 40000)
 
-                if(button.id == 'search1') {
-                  
-                  await thing.delete()
-                  message.channel.startTyping()
+// Event Shit
+
+            client.on('interactionCreate', async (interaction) => {
+
+             if(interaction.guildId != message.guild.id) return;
+              if(interaction.user.id !== message.author.id) {
+                return interaction.reply({content: `You aren't allowed to click this button!`, ephemeral: true})
+
+              }
+                if(interaction.customId == 'search1') {
                   malScraper.getInfoFromName(data[0].name)
                   
      .then(async (s1) => { 
@@ -125,16 +129,19 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-  
-             message.channel.stopTyping(true)
-             return button.channel.send(embed)
-              
+
+             
+             return thing.edit({embeds: [embed]})
+
      })
      
               }
-              if(button.id == 'Search2') {
-                  await thing.delete()
-                  message.channel.startTyping()
+              
+              
+              
+              if(interaction.customId == 'Search2') {
+                
+                  
                   malScraper.getInfoFromName(data[1].name)
                   
      .then(async (s1) => { 
@@ -161,14 +168,13 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             message.channel.stopTyping(true)
-              return button.channel.send(embed)
+             
+              return thing.edit({embeds: [embed]})
               
      })
               }
-              if(button.id == 'Search3') {
-                  await thing.delete()
-                  message.channel.startTyping()
+              if(interaction.customId == 'Search3') {
+                  
                   malScraper.getInfoFromName(data[2].name)
                   
      .then(async (s1) => { 
@@ -195,14 +201,13 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             message.channel.stopTyping()
-              return button.channel.send(embed)
+          
+              thing.edit({embeds: [embed]})
              
      })
               }
-              if(button.id == 'Search4') {
-                  await thing.delete()
-                  message.channel.startTyping()
+              if(interaction.customId == 'Search4') {
+                 
                   malScraper.getInfoFromName(data[3].name)
                   
      .then(async (s1) => { 
@@ -229,15 +234,14 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             message.channel.stopTyping(true)
-              return button.channel.send(embed)
+             
+              return thing.edit({embeds: [embed]})
               
      })
               }
               
-              if(button.id == 'Search5') {
-                  await thing.delete()
-                  message.channel.startTyping()
+              if(interaction.customId == 'Search5') {
+                 
                   malScraper.getInfoFromName(data[4].name)
                   
      .then(async (s1) => { 
@@ -264,14 +268,13 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             message.channel.stopTyping(true)
-              return button.channel.send(embed)
+             
+              return thing.edit({embeds: [embed]})
               
      })
               }
-              if(button.id == 'Search6') {
-                  await thing.delete()
-                  message.channel.startTyping()
+              if(interaction.customId == 'Search6') {
+                  
                   malScraper.getInfoFromName(data[5].name)
                   
      .then(async (s1) => { 
@@ -299,25 +302,23 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             message.channel.stopTyping(true)
-              return button.channel.send(embed)
+              return thing.edit({embeds: [embed]})
               
      })
               }
-              if(button.id == 'cancel') {
+              if(interaction.customId == 'cancel') {
                   await thing.delete()
-message.channel.startTyping()
-message.channel.stopTyping(true)
-                  return button.channel.send({embed: new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)})
+
+                  return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)]})
                   
               }
-              message.channel.stopTyping(true)
-              }
+             
+              
             
                
-message.channel.stopTyping(true)
+
             })
-            message.channel.stopTyping(true)
+           
         })
        
     
@@ -325,7 +326,7 @@ message.channel.stopTyping(true)
       } catch (err) {
         msg.delete();
         console.log(chalk.redBright(`[MAL COMMAND ERROR]`) + ` - ${err}`)
-         return message.channel.send(`Unable to find \`${args.join(" ")}\` on MyAnimeList, this is most likely an error.`);
+         return message.channel.send({content: `Unable to find \`${args.join(" ")}\` on MyAnimeList, this is most likely an error.`});
          
        }                      
 

@@ -34,7 +34,7 @@ module.exports = {
         .setDescription(quotes)
         .setImage(url)
         .setColor('RANDOM')
-    message.channel.send(waifu)
+    message.channel.send({embeds: [waifu]})
   
     
     }

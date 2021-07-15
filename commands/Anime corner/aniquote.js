@@ -21,17 +21,17 @@ const { searchAnime } = require('node-kitsu');
 
     const image = res?.[0]?.attributes?.coverImage?.original || null;
     message.reactions.removeAll()
-    return message.channel.send(
-      
+    return message.channel.send({
+      embeds: [
       new MessageEmbed()
       .setColor(`GREY`)
       .addField(`*Quoted from ${anime}*`,`${quote}\n\n-*${name}*`)
       .setImage(image)
       .setTimestamp()
-    
+    ]
       
       
-    );
+  });
   
 
 

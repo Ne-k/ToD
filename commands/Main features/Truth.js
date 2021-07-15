@@ -42,15 +42,15 @@ try {
                    
                     }
                     ],
-                  embed: embed
+                  embeds: [embed]
                 }).then(msg => {
-                    client.on('clickButton', async (button) => {
-                        if (button.id === 'ToD_Information') {
-                            await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+                    client.on('interactionCreate', async (interaction) => {
+                        if (interaction.customId === 'ToD_Information') {
+                            await interaction.reply({content: "What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", ephemeral: true})
                             
                         }
-                        if (button.id === 'ToD_Rules') {
-                            await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                        if (interaction.customId === 'ToD_Rules') {
+                            await interaction.reply({content: `Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, ephemeral: true})
                             
                         }
                       });
@@ -60,7 +60,7 @@ try {
         
         if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null) {
 
-        let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", 'Tip: Use the ENABLE command for NSFW truth questions. ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
         let result = Math.floor((Math.random() * random_footer.length));
        
         
@@ -92,23 +92,21 @@ try {
                
                 }
                 ],
-            embed: new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Truth").setDescription(client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)])
+            embeds: [new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Truth").setDescription(client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)])]
         }).then(m => {
-            let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+            let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", 'Tip: Use the ENABLE command for NSFW truth questions. ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
             let result = Math.floor((Math.random() * random_footer.length));
     
-            client.on('clickButton', async (button) => {
-               
-                if (button.id === 'ToD_Information') {
-                    await button.reply.send("What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", true)
+            client.on('interactionCreate', async (interaction) => {
+                if (interaction.customId === 'ToD_Information') {
+                    await interaction.reply({content: "What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", ephemeral: true})
                     
                 }
-                if (button.id === 'ToD_Rules') {
-                    await button.reply.send(`Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, true)
+                if (interaction.customId === 'ToD_Rules') {
+                    await interaction.reply({content: `Players must either undertake the dare or answer the question truthfully. The answers must be unrelated to the game. After having the piece of paper read to them, players are not allowed to change their minds about picking "truth" or "dare." "Passing" is an option, but it comes with a penalty. A true pass earns a free dare. If you pass on a dare, you receive a free truth. In a current version of the game, the player is asked, 'Truth, Dare, Kiss, or Swear?' __But the rules can differ depending on who plays it and because this is Discord so you won't be able to do most things.__.`, ephemeral: true})
                     
                 }
-               
-            })
+              });
             
         })
     }

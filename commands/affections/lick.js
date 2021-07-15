@@ -33,6 +33,6 @@ module.exports = {
         .setColor('RANDOM')
         
     message.channel.stopTyping(true)
-    return message.channel.send(waifuembed2)
+    return  message.channel.send({embeds: [waifuembed2]})
     }
 }

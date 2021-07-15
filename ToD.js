@@ -1,5 +1,5 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection, MessageEmbed } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone' }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
+const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
 //============================================================================================================================================================================================================
 client.db = db
 
@@ -47,7 +47,7 @@ modules.forEach((module) => {
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
 const config = require('./DefaultConfig.json')
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
   let prefix;
   try {

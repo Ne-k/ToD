@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const waifuAPI = 'https://api.kaedee.xyz'
+const waifuAPI = 'https://waifu.pics/api'
 const Discord = require('discord.js')
 
 
@@ -34,7 +34,7 @@ module.exports = {
         
         .setDescription(quotes)
         .setColor('RANDOM')
-    message.channel.send(waifu)
+        message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
 
     
