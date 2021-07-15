@@ -60,7 +60,7 @@ try {
         
         if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null) {
 
-        let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", 'Tip: Use the ENABLE command for NSFW truth questions. ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
         let result = Math.floor((Math.random() * random_footer.length));
        
         
@@ -94,7 +94,7 @@ try {
                 ],
             embeds: [new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Truth").setDescription(client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)])]
         }).then(m => {
-            let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+            let random_footer = ["To add more truth responses, run the suggest command and input the truth you want to add.", 'Tip: Use the ENABLE command for NSFW truth questions. ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
             let result = Math.floor((Math.random() * random_footer.length));
     
             client.on('interactionCreate', async (interaction) => {

@@ -59,7 +59,7 @@ module.exports = {
     
     
     if(client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null) {
-        let random_footer = ["To add more dare responses, run the suggest command and input the  you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        let random_footer = ["To add more dare responses, run the suggest command and input the you want to add.", 'Tip: Use the ENABLE command for NSFW dare questions.',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
     let result = Math.floor((Math.random() * random_footer.length));
    
     
@@ -93,7 +93,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
             ],
         embeds: [new Discord.MessageEmbed().setFooter(random_footer[result]).setColor(dominantColor).setTitle("Dare").setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)])]
     }).then(m => {
-        let random_footer = ["To add more dare responses, run the suggest command and input the dare you want to add.", ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+        let random_footer = ["To add more dare responses, run the suggest command and input the dare you want to add.", 'Tip: Use the ENABLE command for NSFW dare questions. ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
         let result = Math.floor((Math.random() * random_footer.length));
 
         client.on('interactionCreate', async (interaction) => {

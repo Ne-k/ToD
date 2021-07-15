@@ -7,7 +7,7 @@ module.exports = {
         example: "1) enable nsfw\n2) enable",
     },
     run: async (client, message, args) => {
-const {MessageEmbed} = require('discord.js')
+const {MessageEmbed, Permissions} = require('discord.js')
         let prefix;
         if (message.author.bot || message.channel.type === "dm") return;
         try {
@@ -52,7 +52,7 @@ const {MessageEmbed} = require('discord.js')
 
 
             if (args[0].toLowerCase() === 'nsfw') {
-                if (!message.member.permissions.has("MANAGE_GUILD")) {
+                if (!message.member.permissions.has(Permissions.MANAGE_GUILD)) {
                     return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription('Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>')]})
                 }
 
@@ -98,16 +98,21 @@ const {MessageEmbed} = require('discord.js')
                         client.on('interactionCreate', async (interaction) => {
                             
                          
+             if(interaction.guildId != message.guild.id) return;
+             if(interaction.user.id == message.author.id) {
 
-                                if (interaction.custom_id == 'confirm') {
-                                    client.db.set(`nsfwEnabledBy_${message.author.tag}_${message.guild.id}`, message.author.tag)
-                                    client.db.set(`nsfwEnabled_${message.guild.id}`, true)
-    
-                                    msg.edit({ embeds: [new client.messageembed().setColor('GREEN').setDescription('I have **enabled** `nsfw` truths and dares, you can disable this in the future by using the `disable` command.')]})
-                                }
-                                if (interaction.id == 'cancel') {
-                                    msg.edit({ embeds: [new client.messageembed().setColor('RED').setDescription('Your selection has been canceled!')]})
-                                }
+               if(interaction.customId == 'confirm') {
+                   client.db.set(`nsfwEnabled_${message.guild.id}`, true)
+                   msg.edit({embeds: [new MessageEmbed().setColor('GREEN').setDescription('I have successfully enabled NSFW truths and dares.').setFooter('This message will automatically delete in 30 seconds')]})
+                   .then(msg => client.setTimeout(() => msg.delete(), 30000))
+               }
+               if(interaction.customId == 'cancel') {
+                   
+                 msg.edit({embeds: [new MessageEmbed().setColor('DARK_NAVY').setDescription('Your selection has been canceled!').setFooter('This message will automatically delete in 30 seconds')]})
+                 .then(My_cock => client.setTimeout(() => My_cock.delete(), 30000))
+               }
+            }
+
                             
                            
                         })
