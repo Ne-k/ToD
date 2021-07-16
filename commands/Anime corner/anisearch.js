@@ -88,10 +88,9 @@ module.exports = {
             },
            ]
           }],
-         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('The selection will automatically be canceled in 40 seconds.')]
+         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``)]
         }).then(thing => {
         
-          client.setTimeout(() => thing.delete(), 40000)
 
 // Event Shit
 
