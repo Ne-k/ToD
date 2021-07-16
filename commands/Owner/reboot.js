@@ -11,7 +11,7 @@ module.exports = {
             .setTitle("Reboot")
             .setDescription("Sorry, the `Reboot` command can only be executed by the Developer.")
             .setColor("#cdf785");
-            message.channel.send(userAccess)
+            message.channel.send({emebds: [userAccess]})
         }
         if (bot.default.developers.includes(message.author.id)) { 
         const { MessageEmbed, WebhookClient } = require('discord.js')
@@ -41,21 +41,21 @@ module.exports = {
         let RebootingEmbed = new MessageEmbed()
         .setColor('GREEN')
         .setDescription('Now rebooting, be back in a couple minutes. . .')
-        message.channel.send(RebootingEmbed)
+        message.channel.send({embeds: [RebootingEmbed]})
         
         exec("pm2 restart ToD", (error, stdout, stderr) => {
             if (error) {
                 let ErrorEmbed = new MessageEmbed()
                 .setColor('RED')
                 .setDescription(`Looks like I encountered an error when rooboting: \`${error}\` `)
-                message.channel.send(ErrorEmbed)
+                message.channel.send({emebds: [ErrorEmbed]})
                 return;
             }
             if (stderr) {
                 let stderrEmbed = new MessageEmbed()
                 .setColor('YELLOW')
                 .setDescription(`stderr: ${stderr}`)
-                message.channel.send(stderrEmbed)
+                message.channel.send({embeds: [stderrEmbed]})
                 return;
             }
 

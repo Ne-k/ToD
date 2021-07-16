@@ -17,7 +17,7 @@ let blacklistTarget = args.join(' ')
 
 
 client.database.run(`INSERT INTO blacklist (userID, moderator, reason) VALUES (?, ?, ?)`, blacklistTarget, message.author.tag, 'Forced blacklist, see the blacklist logs for more information.', async(err) => {
-message.channel.send(`User was force blacklisted.`)
+message.channel.send({content: `User was force blacklisted.`})
 let blacklistlogembed = new Discord.MessageEmbed()
 .setColor('RANDOM')
 .setTitle('Blacklist Logs:')

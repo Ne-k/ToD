@@ -23,7 +23,7 @@ module.exports = {
                 let invalidInput = new Discord.MessageEmbed()
                     .setDescription(`Please provide the correct arguments!`)
                     .setColor('RED')
-                if (!args[0]) return message.channel.send(invalidInput)
+                if (!args[0]) return message.channel.send({embeds: [invalidInput]})
     
                 const blacklistTarget = message.guild.member(message.mentions.users.first()) || message.guild.members.cache.get(args[0]);
                 let blacklistReason = args.slice(1).join(" ");
@@ -32,7 +32,7 @@ module.exports = {
                 let targetNotFound = new Discord.MessageEmbed()
                     .setDescription(`Please provide a valid user!`)
                     .setColor('RED')
-                if (!blacklistTarget) return message.channel.send(targetNotFound)
+                if (!blacklistTarget) return message.channel.send({embeds: [targetNotFound]})
     
                 await client.database.get(`SELECT * FROM blacklist WHERE userID = ?`, blacklistTarget.id, async(err, r) => {
                     if (err) return console.log(err);
@@ -40,13 +40,13 @@ module.exports = {
                     let userExist = new Discord.MessageEmbed()
                         .setDescription(`That user is already blacklisted!`)
                         .setColor('RED')
-                    if (r) return message.channel.send(userExist)
+                    if (r) return message.channel.send({embeds: [userExist]})
 
                 if(blacklistTarget.id === '750510159289254008') {
-                    return message.channel.send("I am not able to blacklist a developer.")
+                    return message.channel.send({content: "I am not able to blacklist a developer."})
                 }
                 if(blacklistTarget.id === '622890595614195722') {
-                    return message.channel.send("I am not able to blacklist a developer.")
+                    return message.channel.send({content: "I am not able to blacklist a developer."})
                 }
     
                     await client.database.run(`INSERT INTO blacklist (userID, moderator, reason) VALUES (?, ?, ?)`, blacklistTarget.id, message.author.tag, blacklistReason, async(err) => {
@@ -79,7 +79,7 @@ module.exports = {
                         let blacklistedUser = new Discord.MessageEmbed()
                             .setDescription(`\`${blacklistTarget.user.username}\` was **blacklisted** for the reason: \`${blacklistReason}\``)
                             .setColor('GREEN')
-                        return message.channel.send(blacklistedUser)
+                        return message.channel.send({embeds: [blacklistedUser]})
                     });
                 });
             }
