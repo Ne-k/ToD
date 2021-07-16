@@ -5,7 +5,7 @@ module.exports = async (bot, guild) => {
   let LeaveEmbed = new MessageEmbed()
     .setTitle('<:0_dnd:824333439028297758> BOT LEAVE <:0_dnd:824333439028297758>')
     .setColor('RED')
-    .addField(guild.name, `\`${guild.id}\`\nMember Count:\n\`${guild.memberCount}\``)
+    .setDescription(`**${guild.name}**\n\n\`${guild.id}\`\nMember Count:\n\`${guild.memberCount}\``)
     .setThumbnail(guild.iconURL())
     .setTimestamp()
 
