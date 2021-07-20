@@ -105,12 +105,12 @@ const {MessageEmbed, Permissions} = require('discord.js')
                 client.setTimeout(() => msg.delete(), 0);
                    client.db.set(`nsfwEnabled_${message.guild.id}`, true)
                    message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('I have successfully enabled NSFW truths and dares.').setFooter('This message will automatically delete in 30 seconds')]})
-                   .then(msg => client.setTimeout(() => msg.delete(), 30000))
+                   .then(msg => client.setTimeout(() => msg.delete(), 5000))
                }
                if(interaction.customId == 'cancel') {
                 client.setTimeout(() => msg.delete(), 0);
                  message.channel.send({embeds: [new MessageEmbed().setColor('DARK_NAVY').setDescription('Your selection has been canceled!').setFooter('This message will automatically delete in 30 seconds')]})
-                 .then(My_cock => client.setTimeout(() => My_cock.delete(), 30000))
+                 .then(My_cock => client.setTimeout(() => My_cock.delete(), 5000))
                }
             }
 

@@ -21,7 +21,7 @@ module.exports = {
         .setTitle("eval")
         .setDescription("Sorry, the `eval` command can only be executed by the Developer.")
         .setColor("#cdf785");
-        message.channel.send(userAccess)
+        message.channel.send({embeds: [userAccess]})
     }
     if (client.default.developers.includes(message.author.id)) {
 
