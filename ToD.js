@@ -103,7 +103,7 @@ client.on("messageDelete", async(message,channel) => {
     })  
     })
     const Statcord = require("statcord.js");
-   
+   Statcord.ShardingClient.post(client);
     
   
 //=================================================================================================================================
