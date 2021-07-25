@@ -32,7 +32,7 @@ module.exports = {
 		let animeEmbed = new Discord.MessageEmbed()
 		.setTitle("**Anime:\n__" + animeData.title+" ["+date.getFullYear()+"]__**")
 		.setAuthor("MyAnimeList", "https://upload.wikimedia.org/wikipedia/commons/7/7a/MyAnimeList_Logo.png")
-		.setFooter(`Requested by: ${message.author.tag} | Powered by My Anime List.`, message.author.displayAvatarURL({ size: 32 }))
+	
         .setColor("#4286f4")
 
 		//Image URL

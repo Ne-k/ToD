@@ -34,7 +34,7 @@ run: async (bot, message, args) => {
                             .setAuthor(`Safebooru ${query}`, 'https://c.catgirlsare.sexy/NrAI.png')
                             .setImage(image.common.file_url)
                             .setDescription(`[Image URL](${image.common.file_url})`)
-                            .setFooter(`Requested by: ${message.author.tag} | Powered by SafeBooru`, message.author.displayAvatarURL({ size: 32 }))
+                        
                             .setColor('RANDOM');
                         return message.channel.send({embeds: [embed]})
                     }

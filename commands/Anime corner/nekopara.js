@@ -12,7 +12,6 @@ let fluxAzureEmbed = new Discord.MessageEmbed()
 .setTitle('Nekopara')
 .setColor('#CACACA')
 .setImage(data.file)
-.setFooter(`Requested by: ${message.author.tag} | Powered by Fluxpoint.dev`, message.author.displayAvatarURL({ size: 32 }))
 message.channel.send({embeds: [fluxAzureEmbed]})
         })
 

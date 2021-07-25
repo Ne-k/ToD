@@ -14,7 +14,7 @@ const { body } = await superagent
       const embed = new Discord.MessageEmbed()
       .setTitle(`~ Wholesome foxes ~`) 
       .setColor('#3399FF')
-      .setFooter(`Requested by: ${message.author.tag} | Powered by a http://asuna.ga/`, message.author.displayAvatarURL({ size: 32 }))
+     
       .setImage(body.url) 
       message.channel.send({embeds: [embed]})
 

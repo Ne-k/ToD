@@ -14,7 +14,6 @@ module.exports = {
 
           const embed = new Discord.MessageEmbed()
           .setColor('RANDOM')
-         .setFooter(`Requested by ${message.author.tag} | Powered by kaedee.xyz`)
           .setImage(data.path) 
           return message.channel.send({embeds: [embed]})
     

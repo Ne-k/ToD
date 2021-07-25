@@ -13,7 +13,6 @@ let fluxAzureEmbed = new Discord.MessageEmbed()
 .setAuthor('AzurLane', 'https://static.wikia.nocookie.net/omniversal-battlefield/images/a/a8/FWPae6p.png/revision/latest?cb=20200116082838')
 .setColor('#CACACA')
 .setImage(data.file)
-.setFooter(`Requested by: ${message.author.tag} | Powered by Fluxpoint.dev`, message.author.displayAvatarURL({ size: 32 }))
 message.channel.send({embeds: [fluxAzureEmbed]})
         })
 

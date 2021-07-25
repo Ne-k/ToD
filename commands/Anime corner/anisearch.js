@@ -112,6 +112,10 @@ if(s1.trailer === undefined) {
 s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 }
 
+if(!s1.broadcast) {
+  s1.broadcast = '<Unknown>'
+}
+
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -121,7 +125,7 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -303,7 +307,6 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
              .addField('Aired:', `\`${s1.aired}\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
-             
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)

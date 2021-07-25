@@ -17,7 +17,7 @@ message.channel.startTyping()
         waifu.setImage(url)
         .setColor('RANDOM')
           .setDescription(`Your requested waifu.`)
-          .setFooter(`Requested by: ${message.author.tag} | Powered by ${waifuAPI}`, message.author.displayAvatarURL({ size: 32 }))
+         
           message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
 

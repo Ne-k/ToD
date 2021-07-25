@@ -20,7 +20,6 @@ module.exports = {
     
         waifu.setImage(url)
         .setDescription('Awoo?')
-        .setFooter(`Requested by: ${message.author.tag} | Powered by waifu.pics`, message.author.displayAvatarURL({ size: 32 }))
         .setColor('RANDOM')
     message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
