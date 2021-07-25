@@ -88,9 +88,9 @@ module.exports = {
             },
            ]
           }],
-         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``)]
+         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('Selection will be deleted in 30 seconds.')]
         }).then(thing => {
-        
+          client.setTimeout(() => thing.delete(), 30000)
 
 // Event Shit
 
@@ -102,6 +102,8 @@ module.exports = {
 
               }
                 if(interaction.customId == 'search1') {
+                  client.setTimeout(() => thing.delete(), 0)
+                  message.channel.startTyping()
                   malScraper.getInfoFromName(data[0].name)
                   
      .then(async (s1) => { 
@@ -129,8 +131,8 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
-             
-             return thing.edit({embeds: [embed]})
+             message.channel.stopTyping(true)
+             return message.channel.send({embeds: [embed]})
 
      })
      
@@ -139,11 +141,12 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
               
               
               if(interaction.customId == 'Search2') {
-                
-                  
+                client.setTimeout(() => thing.delete(), 0)
+                message.channel.startTyping()
                   malScraper.getInfoFromName(data[1].name)
                   
      .then(async (s1) => { 
+     
       const { getColorFromURL } = require('color-thief-node');
 
       if(s1.trailer === undefined) {
@@ -167,13 +170,14 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             
-              return thing.edit({embeds: [embed]})
+             essage.channel.stopTyping(true)
+              return message.channel.send({embeds: [embed]})
               
      })
               }
               if(interaction.customId == 'Search3') {
-                  
+                client.setTimeout(() => thing.delete(), 0)
+                message.channel.startTyping()
                   malScraper.getInfoFromName(data[2].name)
                   
      .then(async (s1) => { 
@@ -182,6 +186,7 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       if(s1.trailer === undefined) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
+     
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -200,13 +205,14 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-          
-              thing.edit({embeds: [embed]})
+             message.channel.stopTyping(true)
+              message.channel.startTyping({embeds: [embed]})
              
      })
               }
               if(interaction.customId == 'Search4') {
-                 
+                client.setTimeout(() => thing.delete(), 0)
+                message.channel.startTyping()
                   malScraper.getInfoFromName(data[3].name)
                   
      .then(async (s1) => { 
@@ -215,6 +221,8 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       if(s1.trailer === undefined) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
+
+
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -233,14 +241,15 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             
-              return thing.edit({embeds: [embed]})
+             message.channel.stopTyping(true)
+              return message.channel.stop({embeds: [embed]})
               
      })
               }
               
               if(interaction.customId == 'Search5') {
-                 
+                client.setTimeout(() => thing.delete(), 0)
+                message.channel.startTyping()
                   malScraper.getInfoFromName(data[4].name)
                   
      .then(async (s1) => { 
@@ -267,13 +276,14 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             
-              return thing.edit({embeds: [embed]})
+             message.channel.startTyping(true)
+              return message.channel.send({embeds: [embed]})
               
      })
               }
               if(interaction.customId == 'Search6') {
-                  
+                client.setTimeout(() => thing.delete(), 0)
+                message.channel.startTyping()
                   malScraper.getInfoFromName(data[5].name)
                   
      .then(async (s1) => { 
@@ -301,12 +311,15 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-              return thing.edit({embeds: [embed]})
+
+             message.channel.stopTyping(true)
+
+              return message.channel.send({embeds: [embed]})
               
      })
               }
               if(interaction.customId == 'cancel') {
-                  await thing.delete()
+                  await client.setTimeout(() => thing.delete(), 0)
 
                   return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)]})
                   
