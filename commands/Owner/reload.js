@@ -34,17 +34,14 @@ try {
             delete require.cache[require.resolve(`../Main Features/${commandName}.js`)];
             directory = "Main Features"
         } catch {
-            try {
-                delete require.cache[require.resolve(`../Main Features/${commandName}.js`)];
-                directory = "Main Features"
-            } catch {
+           
         try {
             delete require.cache[require.resolve(`../Misc/${commandName}.js`)];
             directory = "Misc"
         } catch {
             try {
                 delete require.cache[require.resolve(`../Owner/${commandName}.js`)];
-                directory = "owner"
+                directory = "Owner"
             } catch {
             try {
                 delete require.cache[require.resolve(`../utility/${commandName}.js`)];
@@ -54,17 +51,18 @@ try {
             }
         }
     }
-    }
+    
 }
 }
 }
 
 client.commands.delete(commandName);
-const pull = require(`../${directory}/${commandName}.js`);
+const pull = require(`../${directory}/${commandName}`);
 client.commands.set(commandName, pull);
 return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription(`Successfully reloaded \`${args[0]}\` <a:Konata_Hype:855509096625995816>`).setColor('GREEN')]});
 } catch(e) {
-    console.log(e)
+console.log(e)
+    return message.channel.send({embeds: [new Discord.MessageEmbed().setColor('DARK_RED').setDescription(`Looks like I'm having issues restarting the command. Check the console for more information.`)]})
 }
         }
     }

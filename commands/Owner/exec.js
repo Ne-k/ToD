@@ -30,7 +30,7 @@ module.exports = {
                           .setColor('RED')
                           .setFooter('Smooth brain, you failed.')
                           if (err) return message.channel.send(commanderror);
-                          message.channel.send({content: `${codeblock}${stdout}${codeblock}`});
+                          message.channel.send({content: `${codeblock}diff\n${stdout}${codeblock}`});
                       });
           } catch (err) {
               let errorEmbed = new Discord.MessageEmbed()
