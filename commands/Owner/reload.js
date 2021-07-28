@@ -32,8 +32,8 @@ try {
         directory = "Anime Corner"
     } catch {
         try {
-            delete require.cache[require.resolve(`../Main Features/${commandName}.js`)];
-            directory = "Main Features"
+            delete require.cache[require.resolve(`../Main features/${commandName}.js`)];
+            directory = "Main features"
         } catch {
            
         try {
