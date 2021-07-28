@@ -5,6 +5,7 @@ module.exports = {
         
     },
     run: async (client, message, args) => {
+        let hrDiff = process.hrtime(process.hrtime());
         const Discord = require('discord.js')
         if (!client.default.developers.includes(message.author.id)) {
             let userAccess = new Discord.MessageEmbed()
@@ -59,7 +60,7 @@ try {
 client.commands.delete(commandName);
 const pull = require(`../${directory}/${commandName}`);
 client.commands.set(commandName, pull);
-return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription(`Successfully reloaded \`${args[0]}\` <a:Konata_Hype:855509096625995816>`).setColor('GREEN')]});
+return message.channel.send({embeds: [new Discord.MessageEmbed().setDescription(`Successfully reloaded \`${args[0]}\`, took **${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ''}${hrDiff[1] / 1000000} seconds** to reload the command. <a:Konata_Hype:855509096625995816>`).setColor('GREEN')]});
 } catch(e) {
 console.log(e)
     return message.channel.send({embeds: [new Discord.MessageEmbed().setColor('DARK_RED').setDescription(`Looks like I'm having issues restarting the command. Check the console for more information.`)]})
