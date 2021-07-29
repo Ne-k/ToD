@@ -12,6 +12,11 @@ module.exports = {
     },
     
   run: async (client, message, args) => {
+
+
+return message.channel.send({content: `The anime search command is currently disabled due to being broken, it'll be rewritten and added back in the future. `})
+
+/*
     if(!args.length) {
       return message.channel.send("Please give me a valid anime name on MAL.")
     }
@@ -354,7 +359,7 @@ if(!s1.broadcast) {
 
      
   
-     
+     */
     
        
                        
