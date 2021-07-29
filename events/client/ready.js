@@ -40,9 +40,6 @@ Signed into ${bot.user.tag}
 
     
     
-  process.on('unhandledRejection', (error) => {
-    return;
-})
   //====================================================================
 
     setInterval(() => {

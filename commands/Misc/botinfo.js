@@ -40,10 +40,12 @@ module.exports = {
    Promise.all(promises)
       .then(results => {
 
+
+
           const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
           const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
 
-          let footerthing = ["made in the USA", "made in the USA", "made in the USA", "made in the USA", "made in the USA", "made in the USA", "made in the USA", "made in the USA", "made in the USA", "made by asian bored as hell"]
+        
           let result = Math.floor((Math.random() * footerthing.length));
           let botembed = new MessageEmbed()
           .setDescription("Bot Information", true)
@@ -51,11 +53,10 @@ module.exports = {
           .setThumbnail(bot.user.displayAvatarURL)
           .setDescription('Hello! I am ToD, a unique, constantly evolving bot.')
           .setTitle("ToD (Truth or dare)", true)
-          .setFooter(`Made with ❤️ ${footerthing[result]}`)
           .addField("<:image_20210516_090539:843519573272690738>  Developer", "\`\`\`Nek#2937\`\`\`",true)
           .addField(`🖼️ Icon "artist"`, `\`\`\`a y o o ୨୧˚₊#0887\`\`\``, true)
           .addField("--------------------------------------------------------------------------------", `** **`)
-          .addField(`• Shard ${message.guild.shardID} Uptime`, `\`\`\`${duration}\`\`\``, true)
+          .addField(`• Shard ${message.guild.shard.id} Uptime`, `\`\`\`${duration}\`\`\``, true)
           .addField('• Total Shards', `\`\`\`${bot.options.shardCount}\`\`\``, true)
           .addField("⚙️ Watching", `\`\`\`${totalGuilds.toLocaleString()} Guild(s), and ${totalMembers.toLocaleString()} users!\`\`\` ` )
           .addField("• Mem Usage", `\`\`\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB\`\`\` `)
