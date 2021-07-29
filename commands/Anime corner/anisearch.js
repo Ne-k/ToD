@@ -90,6 +90,7 @@ module.exports = {
           }],
          embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the button corresponding to your query.').setDescription(`\`\`\`1. ${data[0].name}\n\n2. ${data[1].name}\n\n3. ${data[2].name}\n\n4. ${data[3].name}\n\n5. ${data[4].name}\n\n6. ${data[5].name}\`\`\``).setFooter('Selection will be deleted in 30 seconds.')]
         }).then(thing => {
+
           client.setTimeout(() => thing.delete(), 30000)
 
 // Event Shit
@@ -174,7 +175,7 @@ if(!s1.broadcast) {
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
-             essage.channel.stopTyping(true)
+             message.channel.stopTyping(true)
               return message.channel.send({embeds: [embed]})
               
      })
@@ -210,7 +211,7 @@ if(!s1.broadcast) {
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              message.channel.startTyping({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
              
      })
               }
@@ -246,7 +247,7 @@ if(!s1.broadcast) {
              .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              message.channel.stopTyping(true)
-              return message.channel.stop({embeds: [embed]})
+              return message.channel.send({embeds: [embed]})
               
      })
               }
