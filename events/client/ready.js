@@ -42,6 +42,8 @@ Signed into ${bot.user.tag}
     
   //====================================================================
 
+bot.user.setActivity(`All custom prefixes has been reset!`, {type: 'PLAYING'})
+  /*
     setInterval(() => {
       var rnd = Math.floor(Math.random() * 2);
       switch (rnd) {
@@ -62,7 +64,7 @@ Signed into ${bot.user.tag}
             break
       }
     }, 6500)
-    
+    */
   //=================================== GUILD ADD/REMOVE =============================================
 
 
