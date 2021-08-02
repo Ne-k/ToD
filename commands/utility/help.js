@@ -59,7 +59,7 @@ else if(args[0].toLowerCase() === "util") {
     .setTitle('**[ UTILITY ]**')
     .setColor("#cbbdd7") // Set the color
     .setDescription(`__\`${prefix}help <command_name>\` for more information__`)
-    .addField('** **', `- \`avatar\`\n- \`disable\`\n- enable\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
+    .addField('** **', `- \`disable\`\n- enable\n- \`help\`\n- \`prefix\`\n- \`snipe\``)
     return message.channel.send({embeds: [embed1]})
 }
 

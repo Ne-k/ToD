@@ -496,36 +496,7 @@ if(interaction.values[0] == 'Home') {
               
     
             require('node-fetch')(`https://japi.rest/mywaifulist/v1/current/best`, { headers: { 'Authorization': process.env.japi_API_key}}).then(res => res.json()).then(d => {
-                /* d.data.map((t, i) => `**${`#${i}` + 1}** - ${t.name}`).join('\n') */
-    
-                /*
-     "components": [
-                        {
-                        "type": 1,
-                        "components": [
-                          {
-                            "type": 2,
-                            emoji: {
-                                name:"⬅️", id: null
-                            },  
-                            "style": 1, 
-                            "custom_id": '1'
-                          },
-                          {
-                              "type": 2, 
-                              emoji: {
-                                name:"➡️", id: null
-                            }, 
-                              "style": 1, 
-                              "custom_id": "1"
-                          }
-                        ]
-                       
-                        }
-                        ],
-    
-    
-                */
+                
     
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed().setTitle('Seasonal best waifus ranking').setFooter('This message will be deleted in 6 minutes.').setColor('RANDOM').setDescription(d.data.map((t, i) => `**#${i + 1}** - ${t.name}`).join('\n'))],
@@ -686,30 +657,7 @@ if(interaction.values[0] == 'Home') {
                         }
                     ]
     
-                    /*
-    
                     
-                                        
-                                        {
-                                            
-                                            "label": `${d.data[1].name}`,
-                                            "value": "1",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[2].name}`,
-                                            "value": "2",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[3].name}`,
-                                            "value": "3",
-                                            "description": "Sneak n stab",
-                                            
-                                        },
-                                        */
                    
                 }).then(msg => {
                    
@@ -947,36 +895,7 @@ if(interaction.values[0] == 'Home') {
               
     
             require('node-fetch')(`https://japi.rest/mywaifulist/v1/best`, { headers: { 'Authorization': process.env.japi_API_key}}).then(res => res.json()).then(d => {
-                /* d.data.map((t, i) => `**${`#${i}` + 1}** - ${t.name}`).join('\n') */
-    
-                /*
-     "components": [
-                        {
-                        "type": 1,
-                        "components": [
-                          {
-                            "type": 2,
-                            emoji: {
-                                name:"⬅️", id: null
-                            },  
-                            "style": 1, 
-                            "custom_id": '1'
-                          },
-                          {
-                              "type": 2, 
-                              emoji: {
-                                name:"➡️", id: null
-                            }, 
-                              "style": 1, 
-                              "custom_id": "1"
-                          }
-                        ]
-                       
-                        }
-                        ],
-    
-    
-                */
+                
     
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed().setTitle('Top tier waifus ranking').setColor('RANDOM').setFooter('This message wull be deleted in 6 minutes.').setDescription(d.data.map((t, i) => `**#${i + 1}** - ${t.name}`).join('\n'))],
@@ -1137,30 +1056,7 @@ if(interaction.values[0] == 'Home') {
                         }
                     ]
     
-                    /*
-    
                     
-                                        
-                                        {
-                                            
-                                            "label": `${d.data[1].name}`,
-                                            "value": "1",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[2].name}`,
-                                            "value": "2",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[3].name}`,
-                                            "value": "3",
-                                            "description": "Sneak n stab",
-                                            
-                                        },
-                                        */
                    
                 }).then(msg => {
                    
@@ -1400,36 +1296,7 @@ if(interaction.values[0] == 'Home') {
               
     
             require('node-fetch')(`https://japi.rest/mywaifulist/v1/trash`, { headers: { 'Authorization': process.env.japi_API_key}}).then(res => res.json()).then(d => {
-                /* d.data.map((t, i) => `**${`#${i}` + 1}** - ${t.name}`).join('\n') */
-    
-                /*
-     "components": [
-                        {
-                        "type": 1,
-                        "components": [
-                          {
-                            "type": 2,
-                            emoji: {
-                                name:"⬅️", id: null
-                            },  
-                            "style": 1, 
-                            "custom_id": '1'
-                          },
-                          {
-                              "type": 2, 
-                              emoji: {
-                                name:"➡️", id: null
-                            }, 
-                              "style": 1, 
-                              "custom_id": "1"
-                          }
-                        ]
-                       
-                        }
-                        ],
-    
-    
-                */
+                
     
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed().setTitle('Top trash waifu ranking').setColor('RANDOM').setFooter('This message wull be deleted in 6 minutes.').setDescription(d.data.map((t, i) => `**#${i + 1}** - ${t.name}`).join('\n'))],
@@ -1590,30 +1457,7 @@ if(interaction.values[0] == 'Home') {
                         }
                     ]
     
-                    /*
-    
                     
-                                        
-                                        {
-                                            
-                                            "label": `${d.data[1].name}`,
-                                            "value": "1",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[2].name}`,
-                                            "value": "2",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[3].name}`,
-                                            "value": "3",
-                                            "description": "Sneak n stab",
-                                            
-                                        },
-                                        */
                    
                 }).then(msg => {
                    
@@ -1851,36 +1695,7 @@ if(interaction.values[0] == 'Home') {
               
         
             require('node-fetch')(`https://japi.rest/mywaifulist/v1/current/popular`, { headers: { 'Authorization': process.env.japi_API_key}}).then(res => res.json()).then(d => {
-                /* d.data.map((t, i) => `**${`#${i}` + 1}** - ${t.name}`).join('\n') */
-        
-                /*
-        "components": [
-                        {
-                        "type": 1,
-                        "components": [
-                          {
-                            "type": 2,
-                            emoji: {
-                                name:"⬅️", id: null
-                            },  
-                            "style": 1, 
-                            "custom_id": '1'
-                          },
-                          {
-                              "type": 2, 
-                              emoji: {
-                                name:"➡️", id: null
-                            }, 
-                              "style": 1, 
-                              "custom_id": "1"
-                          }
-                        ]
-                       
-                        }
-                        ],
-        
-        
-                */
+                
         
                 return message.channel.send({
                     embeds: [new Discord.MessageEmbed().setTitle('Seasonal most popular waifu ranking').setColor('RANDOM').setFooter('This message wull be deleted in 6 minutes.').setDescription(d.data.map((t, i) => `**#${i + 1}** - ${t.name}`).join('\n'))],
@@ -2011,30 +1826,7 @@ if(interaction.values[0] == 'Home') {
                         }
                     ]
         
-                    /*
-        
                     
-                                        
-                                        {
-                                            
-                                            "label": `${d.data[1].name}`,
-                                            "value": "1",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[2].name}`,
-                                            "value": "2",
-                                            "description": "Sneak n stab",
-                                        
-                                        },
-                                        {
-                                            "label": `${d.data[3].name}`,
-                                            "value": "3",
-                                            "description": "Sneak n stab",
-                                            
-                                        },
-                                        */
                    
                 }).then(msg => {
                    
