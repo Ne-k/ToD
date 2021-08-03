@@ -265,6 +265,8 @@ if(args.join(" ") == 'random') {
                 client.setTimeout(() => msg.delete(), 360000)
 
                 client.on('interactionCreate', async (interaction) => {
+                    
+                    interaction.deferUpdate()
                     if(interaction.guildId != message.guild.id) return;
                     if(interaction.user.id !== message.author.id) {
                       return interaction.reply({content: `You aren't allowed to click this selection!`, ephemeral: true})
@@ -664,6 +666,7 @@ if(interaction.values[0] == 'Home') {
                     client.setTimeout(() => msg.delete(), 360000)
     
                     client.on('interactionCreate', async (interaction) => {
+                        interaction.deferUpdate()
                         if(interaction.guildId != message.guild.id) return;
                         if(interaction.user.id !== message.author.id) {
                           return interaction.reply({content: `You aren't allowed to click this selection!`, ephemeral: true})
@@ -1063,6 +1066,7 @@ if(interaction.values[0] == 'Home') {
                     client.setTimeout(() => msg.delete(), 360000)
     
                     client.on('interactionCreate', async (interaction) => {
+                        interaction.deferUpdate()
                         if(interaction.guildId != message.guild.id) return;
                         if(interaction.user.id !== message.author.id) {
                           return interaction.reply({content: `You aren't allowed to click this selection!`, ephemeral: true})
@@ -1464,6 +1468,7 @@ if(interaction.values[0] == 'Home') {
                     client.setTimeout(() => msg.delete(), 360000)
     
                     client.on('interactionCreate', async (interaction) => {
+                        interaction.deferUpdate()
                         if(interaction.guildId != message.guild.id) return;
                         if(interaction.user.id !== message.author.id) {
                           return interaction.reply({content: `You aren't allowed to click this selection!`, ephemeral: true})
@@ -1833,6 +1838,7 @@ if(interaction.values[0] == 'Home') {
                     client.setTimeout(() => msg.delete(), 360000)
         
                     client.on('interactionCreate', async (interaction) => {
+                        interaction.deferUpdate()
                         if(interaction.guildId != message.guild.id) return;
                         if(interaction.user.id !== message.author.id) {
                           return interaction.reply({content: `You aren't allowed to click this selection!`, ephemeral: true})

@@ -5,6 +5,7 @@ module.exports = {
       name: "aniquote",
       description: "Generates a random anime quote. ",
       usage: "aniquote",
+      
   },
   run: async (bot, message, args) => {
 

@@ -37,7 +37,7 @@ module.exports = {
        
           client.setTimeout(() => msg.delete(), 0)
        return message.channel.send({
-        embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the option corresponding to your query.').setDescription(`\`\`\`` + data.map((t, i) => `#${i + 1} - ${t.name}`).join('\n') + `\`\`\``).setFooter('Selection will be deleted in 5 seconds.')],
+        embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the option corresponding to your query.').setDescription(`\`\`\`` + data.map((t, i) => `#${i + 1} - ${t.name}`).join('\n') + `\`\`\``).setFooter('Selection will be deleted in 5 minutes.')],
         "components": [
           {
               "type": 1,
@@ -140,10 +140,12 @@ module.exports = {
 // Event Shit
 
             client.on('interactionCreate', async (interaction) => {
-
+interaction.deferUpdate()
              if(interaction.guildId != message.guild.id) return;
               if(interaction.user.id !== message.author.id) return;
 
+
+              
                 if(interaction.values[0] == 0) {
                   
                   
@@ -156,7 +158,7 @@ s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 }
 
 if(!s1.broadcast) {
-  s1.broadcast = '<Unknown>'
+  s1.broadcast = '?'
 }
 
       const dominantColor = await getColorFromURL(s1.picture)
@@ -199,6 +201,11 @@ if(!s1.broadcast) {
       if(s1.trailer === undefined) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
+
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
+
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -208,7 +215,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -234,6 +241,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
      
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -243,7 +253,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -269,7 +279,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
-
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -279,7 +291,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -305,6 +317,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -314,7 +329,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -339,6 +354,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -348,7 +366,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -376,6 +394,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -385,7 +406,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -413,6 +434,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -422,7 +446,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -449,6 +473,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -458,7 +485,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)
@@ -485,6 +512,9 @@ if(!s1.broadcast) {
         s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
       }
 
+      if(!s1.broadcast) {
+        s1.broadcast = '?'
+      }
       const dominantColor = await getColorFromURL(s1.picture)
               let embed = new MessageEmbed()
               .setTitle(s1.title)
@@ -494,7 +524,7 @@ if(!s1.broadcast) {
               .setImage(s1.picture)
               .addField('Alternative Titles:', `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
               .addField('Total Episodes:', `\`${s1.episodes} episodes (${s1.duration})\``, true)
-             .addField('Aired:', `\`${s1.aired}\``, true)
+             .addField('Aired:', `\`${s1.aired} (Broadcasted every ${s1.broadcast})\``, true)
              .addField(`Rating:`, `\`${s1.rating}\``, true)
              .addField(`Anime Status:`, `\`${s1.status}\``, true)
              .addField('Genres:', `\`${s1.genres.join(`, `)}\``, true)

@@ -104,8 +104,8 @@ client.on("messageDelete", async(message,channel) => {
     })
     const Statcord = require("statcord.js");
   
-    
-  
+
+   
 //=================================================================================================================================
 
 client.login(process.env.Token);
