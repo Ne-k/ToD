@@ -4,7 +4,9 @@ const moment = require('moment')
 const chalk = require('chalk');
 module.exports = async bot => {
 
-  
+  process.on('unhandledRejection', (error) => {
+    return;
+})
   const { MessageEmbed, WebhookClient } = require("discord.js")
   let ReadEmbed = new MessageEmbed()
   .setColor('GREEN')
