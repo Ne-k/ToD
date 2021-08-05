@@ -8,15 +8,15 @@ module.exports = {
       description: "**W**ould **Y**ou **R**ather questions.",
   },
   run: async (bot, message, args) => {
-      const wyr = require('wyr');
-wyr().then((response) => { 
-message.channel.send({embeds: [new bot.messageembed().setColor('BLUE').setAuthor(`Let us play Would You rather!`, message.author.avatarURL({dynamic: true})).setDescription(`Would you rather:\n\n<:image_20210516_090228:843518773708324884> - \`${response.blue.question}\`\nor\n<:image_20210516_090221:843518746052001793> - \`${response.red.question}\``)]})
-.then(msg => {
-  msg.react('<:image_20210516_090228:843518773708324884>')
-  msg.react('<:image_20210516_090221:843518746052001793>')
-  
-})
+    fetch("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
 
-})
+     
+      
+      let factEmbed = new Discord.MessageEmbed()
+.setColor('#eaecf3')
+.setTitle("Why")
+.setDescription(data.why)
+return message.channel.send({embeds: [factEmbed]})
+  })
   }
 }
