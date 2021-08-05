@@ -14,7 +14,7 @@ module.exports = {
 
             let Sembed = new MessageEmbed()
                 .setColor('RANDOM')
-                .setDescription('**[Click here to invite ToD bot](https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=380096)**\n\n<:Purple_dash:843518550966796309> [Top.gg](https://top.gg/bot/752306970467237970) **|** <:Orange_dash:843518612747976714> [Development Server](https://discord.gg/PVC35NbeTD) **|** <:Red_dash:843518522209992724> [Statistics Page](https://statcord.com/bot/752306970467237970)')
+                .setDescription('**[Click here to invite ToD bot](https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968)**\n\n<:Purple_dash:843518550966796309> [Top.gg](https://top.gg/bot/752306970467237970) **|** <:Orange_dash:843518612747976714> [Development Server](https://discord.gg/PVC35NbeTD) **|** <:Red_dash:843518522209992724> [Statistics Page](https://statcord.com/bot/752306970467237970)')
                 .setImage(link)
                 return message.channel.send({
                     "components": [
@@ -25,7 +25,7 @@ module.exports = {
                             type: 2,
                             label: "Invite ToD", 
                             style: 5, 
-                            url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=470150368'
+                            url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968'
                           }
                         ]
                        
