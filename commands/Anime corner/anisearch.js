@@ -177,7 +177,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score} (${s1.scoreStats})\``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              
