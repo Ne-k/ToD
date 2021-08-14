@@ -35,7 +35,7 @@ module.exports = {
           
 
        
-          client.setTimeout(() => msg.delete(), 0)
+          setTimeout(() => msg.delete(), );
        return message.channel.send({
         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Select the option corresponding to your query.').setDescription(`\`\`\`` + data.map((t, i) => `#${i + 1} - ${t.name}`).join('\n') + `\`\`\``).setFooter('Selection will be deleted in 5 minutes.')],
         "components": [
@@ -134,8 +134,8 @@ module.exports = {
       
         
         }).then(thing => {
-
-          client.setTimeout(() => msg.delete(), 300000)
+          setTimeout(() => msg.delete(), 300000);
+          
 
 // Event Shit
 
@@ -541,7 +541,7 @@ if(!s1.broadcast) {
      })
               }
               if(interaction.customId == 'cancel') {
-                  await client.setTimeout(() => thing.delete(), 0)
+                  await  setTimeout(() => thing.delete(), 0);
 
                   return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Your search "\`${args.join(" ")}\`" has been cancelled!`)]})
                   
