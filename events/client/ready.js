@@ -44,7 +44,6 @@ Signed into ${bot.user.tag}
     
   //====================================================================
 
-bot.user.setActivity(`t;help | truth or dare`, {type: 'PLAYING'})
   /*
     setInterval(() => {
       var rnd = Math.floor(Math.random() * 2);

@@ -46,7 +46,10 @@ modules.forEach((module) => {
 
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
-const config = require('./DefaultConfig.json')
+client.on('ready', async () => {
+    client.user.setActivity(`t;help | truth or dare`, {type: 'PLAYING'})
+})
+
 client.on('messageCreate', async message => {
 
   let prefix;
@@ -69,10 +72,10 @@ try {
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
       .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
       .setColor('#2f3136')
-          return message.channel.send(pingembed)
-          .then(msg => {
-            msg.delete({ timeout: 5000 })
+          return message.channel.send({embeds: [pingembed]}).then(msg => {
+            setTimeout(() => msg.delete(), 5000);
           })
+         
           }
           
     } catch (err) {
