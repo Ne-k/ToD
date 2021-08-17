@@ -1,5 +1,5 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
+const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const moment = require('moment'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db'); const chalk = require('chalk');const path = require('path');require("dotenv").config();
 //============================================================================================================================================================================================================
 client.db = db
 
@@ -44,10 +44,104 @@ modules.forEach((module) => {
 
 //============================================================================================================================================================================================================
 
-
-//=========================================================================================MENTION SETTINGS===========================================================================================
 client.on('ready', async () => {
     client.user.setActivity(`t;help | truth or dare`, {type: 'PLAYING'})
+
+
+
+
+
+/* --------------------------------------- SLASH COMMANDS --------------------------------------- */
+
+
+
+client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
+    console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`)
+    
+  })
+    /*
+  })
+  
+  setInterval(() => {
+      var rnd = Math.floor(Math.random() * 2);
+      switch (rnd) {
+        case 1:
+          {
+            client.user.setActivity(`Slash commands`, {
+              type: 'WATCHING'
+            });
+          }
+          break
+          default:
+            {
+              client.user.setActivity(`Truth Or Dare`, {
+                type: 'PLAYING'
+              });
+            }
+           
+            break
+      }
+    }, 6500)
+*/
+// client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
+  const commandFiles = fs.readdirSync(`./slash`).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+      const command = require(`./slash/${file}`);
+      
+      
+      if (command.global == true) {
+
+        
+
+          client.api.applications(client.user.id).commands.post({ data: {
+              name: command.name,
+              description: command.description,
+              options: command.commandOptions,
+              
+          }})
+      }
+
+      client.shard.broadcastEval(client => client.guilds.cache.size)
+      .then(results => {
+        // results.reduce((prev, val) => prev + val, 0).toLocaleString()
+        client.commands.set(command.name, command);
+        console.log(`Posting: `.yellow + `[ ${command.name} from ${file} (${command.global ? "global" : "guild"}) ]`)
+      })
+  
+      
+  }
+  console.log("")
+  
+ 
+  let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
+  cmdArrGlobal.forEach(element => {
+      console.log("Successfully Loaded: ".green + `[ ` + element.name + " (" + element.id + ")" + ` ]`)
+  });
+  console.log("")
+});
+
+client.ws.on('INTERACTION_CREATE', async interaction => {
+  if (!client.commands.has(interaction.data.name)) return;
+  let cmdExecuted = moment().format('LLL')
+  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
+  try {
+    client.on('interactionCreate', async (int) => {
+      client.commands.get(interaction.data.name).execute(interaction, int, client);
+    })
+  } catch (error) {
+      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
+      console.log(`${error.stack}\n`)
+      client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+          type: 4,
+          data: {
+                  content: `Sorry, there was an error executing that command!`
+              }
+          }
+      })
+  }
+  
+
+
 })
 
 client.on('messageCreate', async message => {
