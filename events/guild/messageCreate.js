@@ -18,7 +18,7 @@ module.exports = async (bot, message) => {
 
   
 
-
+/*
     let prefix;
     let fetched = await db.fetch(`prefix_${message.guild.id}`);
 
@@ -27,6 +27,8 @@ module.exports = async (bot, message) => {
     } else {
         prefix = fetched
     }
+    */
+   let prefix = bot.default.prefix
     if(!message.content.toLowerCase().startsWith(prefix)) return;
 
     let cmdExecuted = moment().format('LLL')

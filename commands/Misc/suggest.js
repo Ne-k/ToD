@@ -73,10 +73,8 @@ let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
 .addField("__Suggested in:__", `${messageguild}\n \`${message.guild.id}\` `)
 .setTimestamp()
 .setColor("#cbbdd7")
-const webhookClient = new WebhookClient(
-  process.env.SUGGEST_LOGGING_ID,
-  process.env.SUGGEST_LOGGING_WEBHOOK
-);
+
+const webhookClient = new WebhookClient(`878104339477037067`, '3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io')
 webhookClient.send({
   username: "ToD Suggestions",
   avatarURL: client.user.avatarURL(),

@@ -17,7 +17,7 @@ const { url } = await fetch(`${waifuAPI}/sfw/shinobu`).then(res => res.json())
 embed.setImage(url)
 .setColor('RANDOM')
 .setDescription('Shinobu')
-mmessage.channel.send({embeds: [embed]})
+message.channel.send({embeds: [embed]})
 message.channel.stopTyping(true)
 
 }

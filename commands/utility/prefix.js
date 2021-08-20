@@ -13,74 +13,9 @@ module.exports = {
     },
 
     run: async (client, message, args) => {
-      try {
-      const { PREFIX } = client.default.prefix
-let option = args.join(" ");
 
-if (!message.member.permissions.has(Permissions.MANAGE_GUILD)) {
-            let errorembed = new MessageEmbed()
-            .setTitle('Invalid permissions.')
-            .setDescription("You do not have the required permission(s) to change the guild's prefix. - \`MANAGE_GUILD\`")
-            .setColor('RED')
-                     return message.channel.send({embeds: [errorembed]})
-                   }
-                 
-                 if(!option) {
-                  
-                     prefix = db.fetch(`prefix_${message.guild.id}`)
-                     
-                     if (!prefix) prefix = PREFIX;
-                     let nooption = new MessageEmbed()
-                     .setTitle('Guild prefix:')
-                     .setDescription(`My prefix for \`${message.guild.name} is \`${prefix}\` - Type \`${prefix}help\` for the list of commands. My **default** (global) prefix is \`t;\``)
-                     .setColor('GREEN')
-                   message.channel.send({embeds: [nooption]});
-                 }
-     
-                 if(option.toLowerCase() === "reset") {
-                     db.delete(`prefix_${message.guild.id}`)
-                     let prefixisreset = new MessageEmbed()
-                     .setTitle('Reset prefix.')
-                     .setDescription(`Successfully reseted the prefix back to the global/default prefix: \`${client.default.prefix}\`.`)
-                     .setColor('GREEN')
-                     return await message.channel.send({embeds: [prefixisreset]})
-                 }
-                 
-                 if(args[1]) {
-                   let moreoneargs = new MessageEmbed()
-                     .setTitle('Error.')
-                     .setDescription(`You can not set prefix a double argument`)
-                     .setColor('RED')
-                   return message.channel.send({embeds: [moreoneargs]})
-                 }
-                 
-                 if(args[0].length > 20) {
-                   let moreoneargs = new MessageEmbed()
-                     .setTitle('Error.')
-                     .setDescription(`You can not send prefix more than 20 characters`)
-                     .setColor('RED')
-                   return message.channel.send({embeds: [moreoneargs]})
-                 }
-                 
-                 if(args.join("") === PREFIX) {
-                   db.delete(`prefix_${message.guild.id}`)
-                   let resetprefixembed = new MessageEmbed()
-                     .setTitle('Success!')
-                     .setDescription(`I have reset the prefix back to: \`t;\``)
-                     .setColor('GREEN')
-                  return await message.channel.send({embeds: [resetprefixembed]})
-                 }
-                 
-                 db.set(`prefix_${message.guild.id}`, args[0])
-                 let resetprefixembed = new MessageEmbed()
-                     .setTitle('Success!')
-                     .setDescription(`I have set the guild prefix to: \`${args[0]}\` Enjoy! `)
-                     .setColor('GREEN')
-               await message.channel.send({embeds: [resetprefixembed]})
-                 
-                } catch(e) {
-                  console.log(e)
-                }
-        }
+      return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Sadly, this command is disabled due to discord planning to remove message content privileges for verified bots. In a couple months, the \`t;\` prefix will be replaced with a mention prefix and will have slash commands (soon). More information about this can be found at https://support-dev.discord.com/hc/en-us/articles/4404772028055 . `)]})
+
+    }
         
     }

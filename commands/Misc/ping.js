@@ -38,7 +38,7 @@ module.exports = {
             m.edit({content: `🏓Pong!`})
             let Sembed = new MessageEmbed()
             .setColor('GREEN')
-            .setDescription(`**Shard ${message.guild.shardID}**:\n\n${botping > 500 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} Message ping: \`${botping.toLocaleString()}ms\`\n${bot.ws.ping > 500 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} Websocket ping: \`${bot.ws.ping}ms\`\n${tps > 10000000 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} [TPS](https://faq.haileybot.com/#tps): \`${tps.toLocaleString()}\``)
+            .setDescription(`**Shard ${message.guild.shard.id}**:\n\n${botping > 500 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} Message ping: \`${botping.toLocaleString()}ms\`\n${bot.ws.ping > 500 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} Websocket ping: \`${bot.ws.ping}ms\`\n${tps > 10000000 ? "<:image_20210516_090128:843518522209992724>" : "<:image_20210516_090142:843518578749865994>"} [TPS](https://faq.haileybot.com/#tps): \`${tps.toLocaleString()}\``)
             .addField('** **', `\`\`\`---------------------------${table.toString()}\`\`\``)
             m.edit({embeds: [Sembed]})
         });
