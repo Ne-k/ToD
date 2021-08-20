@@ -5,7 +5,7 @@ const chalk = require('chalk');
 module.exports = async bot => {
 
   process.on('unhandledRejection', (error) => {
-    return;
+    return console.log(error)
 })
   const { MessageEmbed, WebhookClient } = require("discord.js")
   let ReadEmbed = new MessageEmbed()

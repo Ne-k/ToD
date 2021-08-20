@@ -22,7 +22,7 @@ module.exports = {
         .setAuthor(`${message.author.username} feels flushed`, message.author.avatarURL({dynamic: true}))
         .setColor('RANDOM')
         .setDescription(quotes)
-    message.channel.send({embeds: [waifu]})
+    return message.channel.send({embeds: [waifu]})
     message.channel.stopTyping(true)
 
     }
