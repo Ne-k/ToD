@@ -13,6 +13,7 @@ client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
 client.commands = new Collection();
 client.aliases = new Collection();
+client.command = new Collection();
 
 //============================================================================================================================================================================================================
 
@@ -126,7 +127,7 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
       client.shard.broadcastEval(client => client.guilds.cache.size)
       .then(results => {
         // results.reduce((prev, val) => prev + val, 0).toLocaleString()
-        client.commands.set(command.slash.name, command);
+        client.command.set(command.slash.name, command);
         console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
       })
   
@@ -143,12 +144,12 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.commands.has(interaction.data.name)) return;
+  if (!client.command.has(interaction.data.name)) return;
   let cmdExecuted = moment().format('LLL')
   client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
   try {
     client.on('interactionCreate', async (int) => {
-      client.commands.get(interaction.data.name).execute(interaction, int, client);
+      client.command.get(interaction.data.name).execute(interaction, int, client);
     })
   } catch (error) {
       console.log(`Error from command ${interaction.data.name} : ${error.message}`);
