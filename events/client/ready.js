@@ -8,17 +8,7 @@ module.exports = async bot => {
     return console.log(error)
 })
   const { MessageEmbed, WebhookClient } = require("discord.js")
-  let ReadEmbed = new MessageEmbed()
-  .setColor('GREEN')
-  .setDescription(`[ CONNECTION ESTABLISHED ] - Shard **#${bot.shardId}** has successfully connected.`)
-  .setFooter(moment(Date.now()).format('dddd, MMMM Do'))
-  .setTimestamp()
-  const webhookClient = new WebhookClient(`${process.env.CLIENT_LOGGING_ID}`, `${process.env.CLIENT_LOGGING_WEBHOOK}` )
-  webhookClient.send({
-    username: "ToD Client Logging",
-    avatarURL: bot.user.avatarURL({format: 'png'}),
-    embeds: [ReadEmbed]
-  })
+
 
 
 
