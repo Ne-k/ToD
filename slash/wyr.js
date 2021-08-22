@@ -2,10 +2,13 @@ const Discord = require('discord.js')
 const fetch = require('node-fetch')
 
 module.exports = {
+	slash: {
+
 	name: 'wyr',
 	description: 'Would You Rather questions.',
 	commandOptions: null,
 	global: true,
+	},
 	async execute(interaction, int, client) {
 
         const wyr = require('wyr');

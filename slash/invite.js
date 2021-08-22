@@ -1,8 +1,12 @@
 module.exports = {
+  slash: {
+
     name: 'invite',
     description: 'Get my invite link.',
     commandOptions: null,
     global: true,
+  
+  },
     async execute(interaction, int, client) {
 
         const { MessageEmbed } = require('discord.js')

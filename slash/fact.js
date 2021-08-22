@@ -1,8 +1,12 @@
 module.exports = {
+	slash: {
+		
 	name: 'fact',
 	description: 'Sends a random fact',
 	commandOptions: null,
 	global: true,
+	
+	},
 	async execute(interaction, int, client) {
 		const Discord = require("discord.js");
 		const fetch = require('node-fetch')

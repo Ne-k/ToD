@@ -1,10 +1,14 @@
 const Discord = require('discord.js')
 const fetch = require('node-fetch')
 module.exports = {
+  slash: {
+
 	name: 'truth',
 	description: 'Sends a truth question from the game Truth or dare.',
 	commandOptions: null,
     global: true,
+  
+  },
 	execute(interaction, int, client) {
 		fetch("https://casey.gg/api/random-truth").then((res) => res.json()).then(async (data) => {
             let embed = new Discord.MessageEmbed()

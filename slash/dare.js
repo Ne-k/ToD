@@ -2,10 +2,12 @@ const Discord = require('discord.js')
 const fetch = require('node-fetch')
 
 module.exports = {
-	name: 'dare',
-	description: 'Sends a dare question from the game Truth or dare.',
-	commandOptions: null,
-	global: true,
+  slash: {
+    name: 'dare',
+    description: 'Sends a dare question from the game Truth or dare.',
+    commandOptions: null,
+    global: true,
+  },
 	async execute(interaction, int, client) {
 
         fetch("https://casey.gg/api/random-dare").then((res) => res.json()).then(async (data) => {

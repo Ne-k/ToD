@@ -116,9 +116,9 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
         
 
           client.api.applications(client.user.id).commands.post({ data: {
-              name: command.name,
-              description: command.description,
-              options: command.commandOptions,
+              name: command.slash.name,
+              description: command.slash.description,
+              options: command.slash.commandOptions,
               
           }})
       }
@@ -126,8 +126,8 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
       client.shard.broadcastEval(client => client.guilds.cache.size)
       .then(results => {
         // results.reduce((prev, val) => prev + val, 0).toLocaleString()
-        client.commands.set(command.name, command);
-        console.log(`Posting: `.yellow + `[ ${command.name} from ${file} (${command.global ? "global" : "guild"}) ]`)
+        client.commands.set(command.slash.name, command);
+        console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
       })
   
       
@@ -143,15 +143,15 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.commands.has(interaction.data.name)) return;
+  if (!client.commands.has(interaction.data.slash.name)) return;
   let cmdExecuted = moment().format('LLL')
-  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
+  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.slash.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
   try {
     client.on('interactionCreate', async (int) => {
-      client.commands.get(interaction.data.name).execute(interaction, int, client);
+      client.commands.get(interaction.data.slash.name).execute(interaction, int, client);
     })
   } catch (error) {
-      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
+      console.log(`Error from command ${interaction.data.slash.name} : ${error.message}`);
       console.log(`${error.stack}\n`)
       client.api.interactions(interaction.id, interaction.token).callback.post({data: {
           type: 4,
@@ -227,4 +227,3 @@ client.on("messageDelete", async(message,channel) => {
 //=================================================================================================================================
 
 client.login(process.env.Token);
-
