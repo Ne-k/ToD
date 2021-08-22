@@ -140,11 +140,12 @@ module.exports = {
 // Event Shit
 
             client.on('interactionCreate', async (interaction) => {
-interaction.deferUpdate()
+              
+              
              if(interaction.guildId != message.guild.id) return;
               if(interaction.user.id !== message.author.id) return;
 
-
+              interaction.deferUpdate()
               
                 if(interaction.values[0] == 0) {
                   
@@ -222,7 +223,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score} (${s1.scoreStats})\``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              
               return thing.edit({embeds: [embed]})
@@ -260,7 +261,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score} (${s1.scoreStats})\``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              
               return thing.edit({embeds: [embed]})
@@ -298,7 +299,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score} (${s1.scoreStats})\``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              
               return thing.edit({embeds: [embed]})
@@ -336,7 +337,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score} (${s1.scoreStats})\``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
              
               return thing.edit({embeds: [embed]})
@@ -373,7 +374,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              
@@ -413,7 +414,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              
@@ -453,7 +454,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              
@@ -492,7 +493,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              
@@ -531,7 +532,7 @@ if(!s1.broadcast) {
              .addField('Score on MAL:', `\`${s1.score}/10 (${s1.scoreStats}) | \``, true)
              .addField('Ranked:', `\`${s1.ranked}\``, true)
              .addField('Anime Popularity:', `\`${s1.popularity}\``, true)
-             .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
+             .addField('Characters:', "`" + s1.characters.map(ani => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
              .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
 
              

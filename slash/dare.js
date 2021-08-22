@@ -15,10 +15,10 @@ module.exports = {
             .setDescription(data.dare)
 	
        
-
-		client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+		client.api(interaction.id, interaction.token).callback.post({data: {
 			type: 4,
 			data: {
+                embeds: [embed],
                 "components": [
                     {
                     "type": 1,
@@ -38,8 +38,7 @@ module.exports = {
                     ]
                    
                     }
-                    ],
-					embeds: [embed]
+                    ]
 				}
 			}
 		})
