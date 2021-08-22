@@ -32,7 +32,7 @@ let errors = [];
 const modules = fs.readdirSync("commands").filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
 modules.forEach((module) => {
 		
-	console.log(chalk.underline.green(`L͟o͟a͟d͟i͟n͟g͟ M͟o͟d͟u͟l͟e͟:` + chalk.yellowBright` ${module}`));
+	console.log(`Loading:`.green + ` [ ${module} ]`);
 	const CMDFiles = fs
 		.readdirSync(path.resolve(`commands/${module}`))
 		.filter((file) => !fs.statSync(path.resolve("commands", module, file)).isDirectory())
