@@ -8,7 +8,8 @@ const games = new Map()
 const Discord = require('discord.js')
 const { Collection, MessageEmbed } = require("discord.js");
 const ms = require("ms");
-const Statcord = require('statcord.js')
+const Statcord = require('statcord.js');
+const { enabled } = require('colors');
 const Timeout = new Collection();
 
 module.exports = async (bot, message) => {
@@ -103,7 +104,7 @@ try {
                  let  dis = db.fetch(`${commandfile.config.name}_${message.channel.id}_${message.guild.id}`)
                  
                  if(!dis){
-                     dis = "enabled";
+                     db.set(`${commandfile.config.name}_${message.channel.id}_${message.guild.id}`, `enabled`)
                  }
                  
                  if(dis === "enabled"){
