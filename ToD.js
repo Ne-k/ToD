@@ -143,15 +143,15 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.commands.has(interaction.data.slash.name)) return;
+  if (!client.commands.has(interaction.data.name)) return;
   let cmdExecuted = moment().format('LLL')
-  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.slash.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
+  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
   try {
     client.on('interactionCreate', async (int) => {
-      client.commands.get(interaction.data.slash.name).execute(interaction, int, client);
+      client.commands.get(interaction.data.name).execute(interaction, int, client);
     })
   } catch (error) {
-      console.log(`Error from command ${interaction.data.slash.name} : ${error.message}`);
+      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
       console.log(`${error.stack}\n`)
       client.api.interactions(interaction.id, interaction.token).callback.post({data: {
           type: 4,

@@ -17,9 +17,7 @@ module.exports = {
             .setDescription(data.dare)
 	
        
-		client.api(interaction.id, interaction.token).callback.post({data: {
-			type: 4,
-			data: {
+		int.reply({
                 embeds: [embed],
                 "components": [
                     {
@@ -41,8 +39,7 @@ module.exports = {
                    
                     }
                     ]
-				}
-			}
+                  
 		})
 
     client.on('interactionCreate', async (int) => {
