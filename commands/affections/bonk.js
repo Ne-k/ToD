@@ -33,7 +33,8 @@ module.exports = {
       .setAuthor(`${message.author.username} has bonked ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
       .setDescription(quotes)
       .setColor('RANDOM')
-  message.channel.send({embeds: [waifu]})
-message.channel.stopTyping(true)
+      message.channel.stopTyping(true)
+  return message.channel.send({embeds: [waifu]})
+
     }
 }

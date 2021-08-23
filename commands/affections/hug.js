@@ -34,8 +34,8 @@ let quotes = args.slice(1).join(" ");
         
         .setDescription(quotes)
         .setColor('RANDOM')
-        message.channel.send({embeds: [waifu]})
-    message.channel.stopTyping(true)
+        message.channel.stopTyping(true)
+        return message.channel.send({embeds: [waifu]})
 
     }
 }

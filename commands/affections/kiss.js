@@ -35,8 +35,9 @@ module.exports = {
         .setDescription(quotes)
         .setColor('RANDOM')
         .setFooter(ishorny[hornyresult])
-        message.channel.send({embeds: [waifu]})
-    message.channel.stopTyping(true)
+        message.channel.stopTyping(true)
+        return message.channel.send({embeds: [waifu]})
+   
     
     }
 }

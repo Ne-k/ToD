@@ -31,8 +31,8 @@ message.channel.startTyping()
     .setAuthor(`${message.author.username} fed ${user.user.tag} food`, message.author.avatarURL({dynamic: true}))
     .setDescription(quotes)
     .setColor('RANDOM')
-    message.channel.send({embeds: [waifu]})
-message.channel.stopTyping(true)
+    message.channel.stopTyping(true)
+    return message.channel.send({embeds: [waifu]})
 
 })
 
