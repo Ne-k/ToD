@@ -87,7 +87,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
                 "type": 2,
                 "label": "Information", 
                 "style": 5, 
-                "ur": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
                 //"custom_id": 'ToD_Information'
               },
               {
@@ -146,7 +146,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
                 "type": 2,
                 "label": "Information", 
                 "style": 5, 
-                "ur": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
                 //"custom_id": 'ToD_Information'
               },
               {
