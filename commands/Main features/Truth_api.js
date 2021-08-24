@@ -48,7 +48,7 @@ try {
                     embeds: [embed] 
                 }).then(m => {
                     client.on('interactionCreate', async (interaction) => {
-                        interaction.deferUpdate()
+                        
                         if (interaction.customId === 'ToD_Information') {
                             await interaction.reply({content: "What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", ephemeral: true})
                             
@@ -107,7 +107,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
         let result = Math.floor((Math.random() * random_footer.length));
 
         client.on('interactionCreate', async (interaction) => {
-            interaction.deferUpdate()
+            
             if (interaction.customId === 'ToD_Information') {
                 await interaction.reply({content: "What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", ephemeral: true})
                 
@@ -165,7 +165,7 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
         
 
         client.on('interactionCreate', async (interaction) => {
-            interaction.deferUpdate()
+            
             if (interaction.customId === 'ToD_Information') {
                 await interaction.reply({content: "What exactly is Truth or Dare?\n\nTruth or Dare is one of the greatest party games for taking casual get-togethers to the next level. It brings even the most boring events to life and adds a fun, personal, and intimate touch to social engagements with friends. It is, without a doubt, the iconic party game for any party or sleepover! What's the best thing about Truth or Dare? The opportunity to get to know the other = players on a more intimate level. And, of course, dare them to make a total fool of themselves. So don't wait any longer and begin this entertaining game to put your friends or family to the test! All you need is our app, which contains hundreds of amusing, personal, and adventurous questions and challenges.", ephemeral: true})
                 
