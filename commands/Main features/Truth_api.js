@@ -30,14 +30,16 @@ try {
                           {
                             "type": 2,
                             "label": "Information", 
-                            "style": 1, 
-                            "custom_id": 'ToD_Information'
+                            "style": 5, 
+                            "ur": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                            //"custom_id": 'ToD_Information'
                           },
                           {
                               "type": 2, 
                               "label": "Rules", 
-                              "style": 1, 
-                              "custom_id": "ToD_Rules"
+                              "style": 5, 
+                              "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                              // "custom_id": "ToD_Rules"
                           }
                         ]
                        
@@ -84,14 +86,16 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
               {
                 "type": 2,
                 "label": "Information", 
-                "style": 1, 
-                "custom_id": 'ToD_Information'
+                "style": 5, 
+                "ur": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                //"custom_id": 'ToD_Information'
               },
               {
                   "type": 2, 
                   "label": "Rules", 
-                  "style": 1, 
-                  "custom_id": "ToD_Rules"
+                  "style": 5, 
+                  "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                  // "custom_id": "ToD_Rules"
               }
             ]
            
@@ -141,14 +145,16 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
               {
                 "type": 2,
                 "label": "Information", 
-                "style": 1, 
-                "custom_id": 'ToD_Information'
+                "style": 5, 
+                "ur": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                //"custom_id": 'ToD_Information'
               },
               {
                   "type": 2, 
                   "label": "Rules", 
-                  "style": 1, 
-                  "custom_id": "ToD_Rules"
+                  "style": 5, 
+                  "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                  // "custom_id": "ToD_Rules"
               }
             ]
            
