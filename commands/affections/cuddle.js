@@ -31,7 +31,7 @@ module.exports = {
         }
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         
@@ -40,7 +40,7 @@ module.exports = {
         .setAuthor(`${message.author.username} is cuddling with ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
         .setColor('RANDOM')
         .setDescription(quotes)
-        message.channel.stopTyping(true)
+        
     return message.channel.send({embeds: [waifu]})
     }
 }

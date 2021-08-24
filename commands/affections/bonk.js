@@ -25,7 +25,7 @@ module.exports = {
 
        
       const waifu = new Discord.MessageEmbed()
-  message.channel.startTyping()
+  
       const { url } = await fetch(`${waifuAPI}/sfw/bonk`).then(res => res.json())
       let quotes = args.slice(1).join(" ");
       
@@ -33,7 +33,7 @@ module.exports = {
       .setAuthor(`${message.author.username} has bonked ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
       .setDescription(quotes)
       .setColor('RANDOM')
-      message.channel.stopTyping(true)
+      
   return message.channel.send({embeds: [waifu]})
 
     }

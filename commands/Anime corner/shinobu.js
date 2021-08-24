@@ -18,7 +18,7 @@ embed.setImage(url)
 .setColor('RANDOM')
 .setDescription('Shinobu')
 message.channel.send({embeds: [embed]})
-message.channel.stopTyping(true)
+
 
 }
 }

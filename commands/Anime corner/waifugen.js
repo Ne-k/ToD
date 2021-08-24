@@ -5,7 +5,7 @@ module.exports = {
         description: "Waifu generator using waifu labs/",
     },
     run: async (bot, message, args) => {
-   message.channel.startTyping()
+   
         const waifulabs = require('waifulabs');
         const waifus = await waifulabs.generateWaifus();
         const waifu = waifus[0];
@@ -16,6 +16,6 @@ module.exports = {
 
         message.channel.send({ content: 'Waifu made using waifulabs.com',files: ["../ToD/ToD-waifu.png"]})
 
-message.channel.stopTyping(true)
+
     }
 }

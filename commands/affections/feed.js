@@ -24,14 +24,14 @@ fetch(`https://purrbot.site/api/img/sfw/feed/gif`).then(res => res.json()).then(
 
      
     const waifu = new Discord.MessageEmbed()
-message.channel.startTyping()
+
     let quotes = args.slice(1).join(" ");
     
     waifu.setImage(data.link)
     .setAuthor(`${message.author.username} fed ${user.user.tag} food`, message.author.avatarURL({dynamic: true}))
     .setDescription(quotes)
     .setColor('RANDOM')
-    message.channel.stopTyping(true)
+    
     return message.channel.send({embeds: [waifu]})
 
 })

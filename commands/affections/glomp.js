@@ -24,7 +24,7 @@ module.exports = {
         }
 
  let quotes = args.slice(1).join(" ");
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/glomp`).then(res => res.json())
@@ -34,7 +34,7 @@ module.exports = {
        
         .setDescription(quotes)
         .setColor('RANDOM')
-        message.channel.stopTyping(true)
+        
         return message.channel.send({embeds: [waifu]})
 
     }

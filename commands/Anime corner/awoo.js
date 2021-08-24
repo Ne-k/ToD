@@ -13,7 +13,7 @@ module.exports = {
 
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/awoo`).then(res => res.json())
@@ -22,7 +22,7 @@ module.exports = {
         .setDescription('Awoo?')
         .setColor('RANDOM')
     message.channel.send({embeds: [waifu]})
-    message.channel.stopTyping(true)
+    
 
     }
 }

@@ -10,7 +10,7 @@ module.exports = {
     const fetch = require('node-fetch')
     const waifuAPI = 'https://waifu.pics/api'
     const Discord = require('discord.js')
-message.channel.startTyping()  
+  
         const meguminembed = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/megumin`).then(res => res.json())
@@ -19,7 +19,7 @@ message.channel.startTyping()
         .setColor('RANDOM')
         .setDescription(`Megumin`)
         message.channel.send({embeds: [meguminembed]})
-    message.channel.stopTyping(true)
+    
 
 }
 }

@@ -21,7 +21,7 @@ module.exports = {
         if(!user) {
             return message.channel.send('Please input a (valid) user to lick them <:Megumin_Blush:843537370107215913>')
         }
-        message.channel.startTyping()  
+          
         const waifuembed2 = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/lick`).then(res => res.json())
@@ -32,7 +32,7 @@ module.exports = {
         .setDescription(quotes)
         .setColor('RANDOM')
         
-    message.channel.stopTyping(true)
+    
     return  message.channel.send({embeds: [waifuembed2]})
     }
 }

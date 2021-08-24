@@ -13,7 +13,7 @@ module.exports = {
 
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/cry`).then(res => res.json())
@@ -23,7 +23,7 @@ module.exports = {
         .setAuthor(`${message.author.username} is crying. . .`, message.author.avatarURL({dynamic: true}))
         .setColor('RANDOM')
         .setDescription(quotes)
-        message.channel.stopTyping(true)
+        
     return message.channel.send({embeds: [waifu]})
     
 

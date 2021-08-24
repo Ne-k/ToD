@@ -20,9 +20,9 @@ module.exports = {
 
 
 if(args.join(" ") == 'random') {
-    message.channel.startTyping()  
+      
     require('node-fetch')(`https://casey.gg/api/mwl?type=randomwaifu`, { headers: { 'token': process.env.mwl_API_key}}).then(res => res.json()).then(d => {
-        message.channel.stopTyping(true)
+        
         return message.channel.send({embeds: [new Discord.MessageEmbed().setImage(d.data.display_picture).setTitle(d.data.name).setURL(d.data.url).setDescription(d.data.description).addField("Alternate Name:", `${d.data.original_name === null ? `No information found.` : `${d.data.original_name}`}`, true).setColor('GOLD').setFooter(`❤️ ${d.data.likes} likes | 🗑️ ${d.data.trash} dislikes`)]})
     })
     }

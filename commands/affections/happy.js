@@ -12,7 +12,7 @@ module.exports = {
     run: async (bot, message, args) => {
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/happy`).then(res => res.json())
@@ -22,7 +22,7 @@ module.exports = {
         
         .setDescription(quotes)
         .setColor('RANDOM')
-        message.channel.stopTyping(true)
+        
        return message.channel.send({embeds: [waifu]})
 
     }

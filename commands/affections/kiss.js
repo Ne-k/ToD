@@ -22,7 +22,7 @@ module.exports = {
             return message.channel.send('Please input a (valid) user to kiss them <:Megumin_Blush:843537370107215913>')
         }
 
-        message.channel.startTyping()  
+          
         let ishorny = ["Aww that's cute.", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ," " ," ", " "]
         let hornyresult = Math.floor((Math.random() * ishorny.length));
         const waifu = new Discord.MessageEmbed()
@@ -35,7 +35,7 @@ module.exports = {
         .setDescription(quotes)
         .setColor('RANDOM')
         .setFooter(ishorny[hornyresult])
-        message.channel.stopTyping(true)
+        
         return message.channel.send({embeds: [waifu]})
    
     

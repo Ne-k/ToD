@@ -12,7 +12,7 @@ module.exports = {
     run: async (bot, message, args) => {
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/blush`).then(res => res.json())
@@ -22,7 +22,7 @@ module.exports = {
         .setAuthor(`${message.author.username} feels flushed`, message.author.avatarURL({dynamic: true}))
         .setColor('RANDOM')
         .setDescription(quotes)
-        message.channel.stopTyping()
+
     return message.channel.send({embeds: [waifu]})
 
     }

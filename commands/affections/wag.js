@@ -11,7 +11,7 @@ module.exports = {
     run: async (bot, message, args) => {
 
 
-        message.channel.startTyping()  
+          
         const waifu = new Discord.MessageEmbed()
     
         const { link } = await fetch(`https://purrbot.site/api/img/sfw/tail/gif`).then(res => res.json())
@@ -21,7 +21,7 @@ module.exports = {
         
         .setDescription(quotes)
         .setColor('RANDOM')
-        message.channel.stopTyping(true)
+        
         return message.channel.send({embeds: [waifu]})
 
     }
