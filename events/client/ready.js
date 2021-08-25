@@ -10,7 +10,12 @@ module.exports = async bot => {
   const { MessageEmbed, WebhookClient } = require("discord.js")
 
 
-
+  const webhookClient = new WebhookClient({id: process.env.CLIENT_LOGGING_ID, token: process.env.CLIENT_LOGGING_WEBHOOK})
+  webhookClient.send({
+    username: "Status",
+    avatarURL: bot.user.avatarURL(),
+    embeds: [new MessageEmbed().setColor('GREEN').setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`).setTimestamp().setFooter(moment(Date.now()).format('LLL'))]
+  });
 
   console.log(`
     
