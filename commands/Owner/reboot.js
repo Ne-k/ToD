@@ -16,7 +16,7 @@ module.exports = {
         if (bot.default.developers.includes(message.author.id)) { 
         const { MessageEmbed, WebhookClient } = require('discord.js')
         const { exec } = require("child_process");
-        bot.shard.broadcastEval(`this.user.setStatus('idle')`)
+        bot.shard.broadcastEval(client => client.user.setStatus('idle'))
         bot.user.setActivity(`Rebooting. . .`, {
             type: 'LISTENING'
           });
