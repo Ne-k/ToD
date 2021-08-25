@@ -63,6 +63,7 @@ message.channel.send({
 
     client.on('interactionCreate', async (interaction) => {
 if (interaction.customId === 'agree') {
+  interaction.deferUpdate()
 await setTimeout(() => m.delete(), 0);
 let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
 .setTitle("<:image_20210516_090215:843518719506645003> New Suggestion! <:image_20210516_090215:843518719506645003>")
