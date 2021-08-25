@@ -73,7 +73,7 @@ let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
 .setTimestamp()
 .setColor("#cbbdd7")
 
-const webhookClient = new WebhookClient(`878104339477037067`, '3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io')
+const webhookClient = new WebhookClient({id: `878104339477037067`, token: '3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io'})
 webhookClient.send({
   username: "ToD Suggestions",
   avatarURL: client.user.avatarURL(),
