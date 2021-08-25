@@ -94,7 +94,7 @@ const {MessageEmbed, Permissions} = require('discord.js')
                         ],
                         embeds: [new MessageEmbed().setColor('YELLOW').setTitle('Pending choice. . .').setDescription('You are about to enable **NSFW** truths and dares. The NSFW truths and dares will be randomly mixed into the normal questions with a small chance of showing.\n\nSelect `Confirm` if you wish to enable the NSFW questions.\nSelect `Cancel` if you wish to cancel.').setFooter(`The selection will automatically be canceled in 40 seconds.`)]
                     }).then(async msg => {
-                        client.setTimeout(() => msg.delete(), 40000);
+                        setTimeout(() => msg.delete(), 40000);
                         client.on('interactionCreate', async (interaction) => {
                             
                          
@@ -102,15 +102,15 @@ const {MessageEmbed, Permissions} = require('discord.js')
              if(interaction.user.id == message.author.id) {
 
                if(interaction.customId == 'confirm') {
-                client.setTimeout(() => msg.delete(), 0);
+                setTimeout(() => msg.delete(), 0);
                    client.db.set(`nsfwEnabled_${message.guild.id}`, true)
                    message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('I have successfully enabled NSFW truths and dares.').setFooter('This message will automatically delete in 30 seconds')]})
-                   .then(msg => client.setTimeout(() => msg.delete(), 5000))
+                   .then(msg => setTimeout(() => msg.delete(), 5000))
                }
                if(interaction.customId == 'cancel') {
-                client.setTimeout(() => msg.delete(), 0);
+                setTimeout(() => msg.delete(), 0);
                  message.channel.send({embeds: [new MessageEmbed().setColor('DARK_NAVY').setDescription('Your selection has been canceled!').setFooter('This message will automatically delete in 30 seconds')]})
-                 .then(My_cock => client.setTimeout(() => My_cock.delete(), 5000))
+                 .then(My_cock => setTimeout(() => My_cock.delete(), 5000))
                }
             }
 
