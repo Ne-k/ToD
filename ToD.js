@@ -23,7 +23,7 @@ class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 // increase the limit
-myEmitter.setMaxListeners(11);
+myEmitter.setMaxListeners(30);
 
   myEmitter.on('event', _ => console.log('Emiter event'));
 

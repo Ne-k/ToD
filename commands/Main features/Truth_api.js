@@ -31,14 +31,14 @@ try {
                             "type": 2,
                             "label": "Information", 
                             "style": 5, 
-                            "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                            "url": 'https://anime.services/u/​​‌‌​‌​‌​‌‌​​​‌‌​​‌‌​​‌‌​​‌‌‌​​​​​‌‌​​​‌​‌‌​‌‌​‌​‌​​​‌‌‌​‌‌‌​​‌​'
                             //"custom_id": 'ToD_Information'
                           },
                           {
                               "type": 2, 
                               "label": "Rules", 
                               "style": 5, 
-                              "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                              "url": 'https://waifus.shop/u/​‌‌‌​​‌​​‌‌​‌‌​‌​‌‌​​‌‌​​‌‌​‌‌​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌​​‌‌‌'
                               // "custom_id": "ToD_Rules"
                           }
                         ]
@@ -87,14 +87,14 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
                 "type": 2,
                 "label": "Information", 
                 "style": 5, 
-                "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                "url": 'https://anime.services/u/​​‌‌​‌​‌​‌‌​​​‌‌​​‌‌​​‌‌​​‌‌‌​​​​​‌‌​​​‌​‌‌​‌‌​‌​‌​​​‌‌‌​‌‌‌​​‌​'
                 //"custom_id": 'ToD_Information'
               },
               {
                   "type": 2, 
                   "label": "Rules", 
                   "style": 5, 
-                  "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                  "url": 'https://waifus.shop/u/​‌‌‌​​‌​​‌‌​‌‌​‌​‌‌​​‌‌​​‌‌​‌‌​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌​​‌‌‌'
                   // "custom_id": "ToD_Rules"
               }
             ]
@@ -146,14 +146,14 @@ const dominantColor = await getColorFromURL(message.author.avatarURL({format: 'p
                 "type": 2,
                 "label": "Information", 
                 "style": 5, 
-                "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Information.md'
+                "url": 'https://anime.services/u/​​‌‌​‌​‌​‌‌​​​‌‌​​‌‌​​‌‌​​‌‌‌​​​​​‌‌​​​‌​‌‌​‌‌​‌​‌​​​‌‌‌​‌‌‌​​‌​'
                 //"custom_id": 'ToD_Information'
               },
               {
                   "type": 2, 
                   "label": "Rules", 
                   "style": 5, 
-                  "url": 'https://github.com/Ne-k/ToD-Docs/blob/main/Truth%20Or%20dare/Rules.md'
+                  "url": 'https://waifus.shop/u/​‌‌‌​​‌​​‌‌​‌‌​‌​‌‌​​‌‌​​‌‌​‌‌​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌‌​​​‌​‌‌​​‌‌‌'
                   // "custom_id": "ToD_Rules"
               }
             ]
