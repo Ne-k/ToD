@@ -1,4 +1,4 @@
-
+require('colors')
 require('dotenv').config()
 const moment = require('moment')
 const chalk = require('chalk');
@@ -87,16 +87,16 @@ return Promise.all(promises)
 const BOATS = require('boats.js');
    const Boats = new BOATS('2NFEeaWliuz7JFTjl1nELbQWxoDMgO3FbuJtcAiPFwYZEUmziciJY9ycj1Uek1x8DVA2ZaDyTamQzzMwKCpvfAkkSGIcNtjJ9BNqmSkjBPF5im07gzCd4jak4zCepd7umcKp1FWjU6pemcfbBmMcok0Nspx');
    Boats.postStats(totalGuilds, '752306970467237970').then(() => {
-          console.log('[ DBOATS ] Successfully updated server count.')
+          console.log('[ DBOATS ] '.blue + 'Successfully updated server count.')
    }).catch((err) => {
-    console.log(chalk.redBright(`[ BOATS ERROR ] `) + `${err}`)
+    return console.log(`[ BOATS ERROR ] `.red + `${err}`)
    });
    
    
    Boats.getBot('752306970467237970').then(bot => {
    }).catch((err) => {
-    console.log(chalk.redBright(`[ DBOATS ERROR ] `) + `${err}`)
-    console.log(chalk.green(`[ DBOATS ] `) + `${bot}`)
+    console.log((`[ DBOATS ERROR ] `.red) + `${err}`)
+    console.log(`[ DBOATS ] `.blue + `${bot}`)
    });
 //===============================================================================================================================================================
 //=============================TOP.GG==================================================================================================================================
@@ -107,12 +107,14 @@ const Topgg = require('@top-gg/sdk')
 const api = new Topgg.Api('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc1MjMwNjk3MDQ2NzIzNzk3MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA1MDY2NzUzfQ.TpGhII-9wHjglilYMega0jtcfzRUIBS9SloKEfJ5-sA')
 
 setInterval(() => {
-  console.log(chalk.greenBright('[ TOP.GG ]') + ` Top.gg stats have been posted.`)
-api.postStats({
+  api.postStats({
   serverCount: totalGuilds,
   shardcount: bot.options.shardCount
-
 })
+  return console.log('[ TOP.GG ]'.blue + ` Top.gg stats have been posted.`)
+
+
+
 
 }, 1800000) // post every 30 minutes
 //===============================================================================================================================================================
