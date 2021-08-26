@@ -17,6 +17,18 @@ client.command = new Collection();
 
 //============================================================================================================================================================================================================
 
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+// increase the limit
+myEmitter.setMaxListeners(11);
+
+  myEmitter.on('event', _ => console.log('Emiter event'));
+
+
+myEmitter.emit('event');
 
 //============================================================================================INITIALIZING====================================================================================================
 ["aliases", "commands"].forEach(x => client[x] = new Collection());
