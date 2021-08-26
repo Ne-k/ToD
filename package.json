@@ -15,7 +15,6 @@
     "ascii-table": "0.0.9",
     "boats.js": "^2.5.1",
     "booru": "^2.4.0",
-    "chalk": "^4.1.0",
     "child_process": "^1.0.2",
     "color-thief-node": "^1.0.4",
     "color-thief-updated": "^1.0.1",

@@ -1,12 +1,11 @@
 const Logger = require("../modules/logger");
-const chalk = require("chalk");
 const sql = require("sqlite3");
 const database = new sql.Database("./tod.sqlite");
 
 try {
 
     Logger(`Checking Database`, "database")
-    Logger(chalk.green(`Initialized`), "database")
+    Logger(`Initialized`, "database")
 
     const databaseInit = new Date();
     const tables = {
@@ -28,7 +27,7 @@ try {
         database.run(`CREATE TABLE ${table} (${tables[table].join(", ")})`, () => {
             const readyTime = new Date();
             const TimeTookToLoad = Math.floor((readyTime - databaseInit) / 1000);
-            Logger(`Database Took` + chalk.blueBright(` ${TimeTookToLoad}`) + ` second(s) to load table` + chalk.green(` ${table}`), "database")
+            Logger(`Database Took` + ` ${TimeTookToLoad}` + ` second(s) to load table` + ` ${table}`, "database")
         });
     }
 

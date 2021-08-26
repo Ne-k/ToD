@@ -1,7 +1,6 @@
 require('colors')
 require('dotenv').config()
 const moment = require('moment')
-const chalk = require('chalk');
 module.exports = async bot => {
 
   process.on('unhandledRejection', (error) => {
