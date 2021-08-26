@@ -87,16 +87,15 @@ return Promise.all(promises)
 const BOATS = require('boats.js');
    const Boats = new BOATS('2NFEeaWliuz7JFTjl1nELbQWxoDMgO3FbuJtcAiPFwYZEUmziciJY9ycj1Uek1x8DVA2ZaDyTamQzzMwKCpvfAkkSGIcNtjJ9BNqmSkjBPF5im07gzCd4jak4zCepd7umcKp1FWjU6pemcfbBmMcok0Nspx');
    Boats.postStats(totalGuilds, '752306970467237970').then(() => {
-          console.log('[ DBOATS ] '.blue + 'Successfully updated server count.')
+          console.log('Dboats: '.blue + '[ Successfully updated server count. ]')
    }).catch((err) => {
-    return console.log(`[ BOATS ERROR ] `.red + `${err}`)
+    return console.log(`Dboats Error `.red + `${err}`)
    });
    
    
    Boats.getBot('752306970467237970').then(bot => {
    }).catch((err) => {
-    console.log((`[ DBOATS ERROR ] `.red) + `${err}`)
-    console.log(`[ DBOATS ] `.blue + `${bot}`)
+    console.log((`Dboats Error `.red) + `${err}`)
    });
 //===============================================================================================================================================================
 //=============================TOP.GG==================================================================================================================================
@@ -111,7 +110,7 @@ setInterval(() => {
   serverCount: totalGuilds,
   shardcount: bot.options.shardCount
 })
-  return console.log('[ TOP.GG ]'.blue + ` Top.gg stats have been posted.`)
+  return console.log('Top.gg: '.blue + `[ Top.gg stats have been posted. ]`)
 
 
 

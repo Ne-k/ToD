@@ -111,7 +111,7 @@ try {
 
                      let commandPing = Date.now() - message.createdTimestamp
                      bot.logger(`${message.author.tag}` + ` |`.red + ` (${message.author.id}) executed the command ` + (`${commandfile.config.name}`.underline.cyan) + ` at ${cmdExecuted}.` + ` Message Ping: ${commandPing.toLocaleString()}ms` , "command")
-                
+                     Statcord.ShardingClient.postCommand(command, message.author.id, bot);
                     commandfile.run(bot, message, args, ops)
                     
                     
