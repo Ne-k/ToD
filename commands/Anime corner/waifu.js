@@ -12,7 +12,7 @@ module.exports = {
     run: async (client, message, args) => {
         if(!args.join(" ")) {
            
-        message.channel.send({embeds: [new Discord.MessageEmbed().setColor('RED').setDescription('Please select an argument:\nUsage: \`waifu <argument>\`\n\n\n__Arguments__:\n\`best\` - Shows seasonal **best** waifus.\n\`popular\` - Sends a list of **popular** waifus (alltime).\n\`random\` - Sends **random** waifus.\n\`spopular\` - Sends the **seasonal most** popular waifus.\n\`top\` - Sends **top tier** waifus.\n\`trash\` - Sends the top **trash** waifus.')]})
+        message.channel.send({embeds: [new Discord.MessageEmbed().setColor('RED').setTitle('This command is disabled due to being broken.').setDescription('~~Please select an argument:\nUsage: \`waifu <argument>\`\n\n\n__Arguments__:\n\`best\` - Shows seasonal **best** waifus.\n\`popular\` - Sends a list of **popular** waifus (alltime).\n\`random\` - Sends **random** waifus.\n\`spopular\` - Sends the **seasonal most** popular waifus.\n\`top\` - Sends **top tier** waifus.\n\`trash\` - Sends the top **trash** waifus.~~')]})
    
         }
 

@@ -18,7 +18,6 @@ module.exports = {
 
     if (message.channel.type == "dm") return message.channel.send("❌ | This command command is disabled for DMs, please use this within a server!");
 
-    let bicon = bot.user.displayAvatarURL(); 
 
     const fetch = require('node-fetch')
     const Discord = require('discord.js')
@@ -46,7 +45,6 @@ module.exports = {
           const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
 
         
-          let result = Math.floor((Math.random() * footerthing.length));
           let botembed = new MessageEmbed()
           .setDescription("Bot Information", true)
           .setColor('#ed95df')  
@@ -75,14 +73,8 @@ module.exports = {
                 type: 2,
                 label: "Invite", 
                 style: 5, 
-                url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot&permissions=470150368'
+                url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968'
               },
-            {
-            "type": 2,
-            "label": "Semi-accurate stats",
-            "style": 5,
-           "url": "https://statcord.com/bot/752306970467237970"
-            }
             ]
            
             }
