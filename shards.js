@@ -12,25 +12,4 @@ manager.on("shardCreate", (shard) => {
 });
 
 
-const statcord = new Statcord.ShardingClient({
-    key: "statcord.com-iFfsaDeC8KtKtUrlxgHk",
-    manager,
-    postCpuStatistics: true, /* Whether to post CPU statistics or not, defaults to true */
-    postMemStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    postNetworkStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    autopost: true /* Whether to auto post or not, defaults to true */
-});
-
-statcord.on("autopost-start", () => {
-    // Emitted when statcord autopost starts
-    console.log(`Statcord: `.green + "[ Started autopost ]");
-});
-
-statcord.on("post", status => {
-    // status = false if the post was successful
-    // status = "Error message" or status = Error if there was an error
-    if (!status) console.log(`Statcord: `.green + "[ Successful post ]");
-    else console.error(status);
-});
-
 manager.spawn({ amount: 'auto', delay: undefined, timeout: -1 });
