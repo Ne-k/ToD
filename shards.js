@@ -28,7 +28,7 @@ manager.on("shardCreate", (shard) => {
 
 
 manager.spawn({ amount: 'auto', delay: undefined, timeout: -1 });
-
+/*
 statcord.on("autopost-start", () => {
     // Emitted when statcord autopost starts
     console.log(`Statcord: `.yellow + "[ Started autopost ]");
@@ -40,3 +40,4 @@ statcord.on("post", status => {
     if (!status) console.log(`Statcord: `.yellow + "[ Successful post ]");
     else console.error(status);
 });
+*/

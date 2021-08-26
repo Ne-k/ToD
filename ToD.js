@@ -50,7 +50,7 @@ modules.forEach((module) => {
 //=========================================================================================MENTION SETTINGS===========================================================================================
 client.on('ready', async () => {
 
-  require('statcord.js').ShardingClient.post(client)
+  // require('statcord.js').ShardingClient.post(client)
 
     setInterval(() => {
         var rnd = Math.floor(Math.random() * 2);
