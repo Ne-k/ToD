@@ -20,7 +20,7 @@ client.slashcmds = new Collection();
 
 //============================================================================================INITIALIZING====================================================================================================
 ["aliases", "commands"].forEach(x => client[x] = new Collection());
-["console", "command", "event"].forEach(x => require(`./handler/${x}`)(client));
+["console", "command", "event"].forEach(x => require(`./handler/${x}`)(client))
 
 client.categories = fs.readdirSync("./commands/");
 
