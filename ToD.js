@@ -1,232 +1,112 @@
-//====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db');const path = require('path');require("dotenv").config();
-//============================================================================================================================================================================================================
+const Discord = require("discord.js"); const { Intents } = require('discord.js')
+require('colors')
+const fs = require("fs");
+const mongoose = require('mongoose')
+const path = require("path");
+const chalk = require("chalk");
+const { message } = require("statuses");
+const db = require('quick.db');
 const moment = require('moment')
-client.db = db
+const { Collection, MessageEmbed } = require("discord.js");
+const ms = require("ms");
+const Statcord = require('statcord.js')
+const Timeout = new Collection();
+const client = new Discord.Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  partials: ["MESSAGE", "CHANNEL", "REACTION", "USER", "GUILD_MEMBER"],
+  ws: { properties: { $browser: "Discord iOS" } },
+  fetchAllMembers: true
+});
 
-client.tod = require('./ToD.json')
-client.messageembed = MessageEmbed
-client.database = require("./Database/sql.js");
-client.default = require('./DefaultConfig.json')
-client.logger = require('./modules/logger')
-//====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
-client.commands = new Collection();
+mongoose.connect(process.env.MONGOSTRING, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+mongoose.connection.once("connected", () => {
+	console.log("Connected to Database");
+  client.login(process.env.TOKEN);
+});
+global.client = client
 client.aliases = new Collection();
-client.command = new Collection();
-
-//============================================================================================================================================================================================================
-
-
-//============================================================================================INITIALIZING====================================================================================================
-["aliases", "commands"].forEach(x => client[x] = new Collection());
-["console", "command", "event"].forEach(x => require(`./handler/${x}`)(client));
-
-client.categories = fs.readdirSync("./commands/");
-
-["command"].forEach(handler => {
-    require(`./handler/${handler}`)(client);
-});
-
-
+client.logger = require('./modules/logger')
+client.default = require('./DefaultConfig.json')
+client.commands = new Discord.Collection();
+client.slashcmds = new Discord.Collection();
 let errors = [];
-const modules = fs.readdirSync("commands").filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
+
+const modules = fs.readdirSync("Commands").filter((file) => fs.statSync(path.join("Commands", file)).isDirectory());
+
 modules.forEach((module) => {
-		
-	console.log(`Loading:`.green + ` [ ${module} ]`);
-	const CMDFiles = fs
-		.readdirSync(path.resolve(`commands/${module}`))
-		.filter((file) => !fs.statSync(path.resolve("commands", module, file)).isDirectory())
-		.filter((file) => {
-			return file.endsWith(".js");
-		
-        });
-    })
+  console.log(chalk.green(`Loading Module: ${module}`));
 
-
-
-//============================================================================================================================================================================================================
-
-
-//=========================================================================================MENTION SETTINGS===========================================================================================
-client.on('ready', async () => {
-
-  // require('statcord.js').ShardingClient.post(client)
-
-    setInterval(() => {
-        var rnd = Math.floor(Math.random() * 2);
-        switch (rnd) {
-          case 1:
-            {
-              client.user.setActivity(`t;help | Truth or Dare`, {
-                type: 'PLAYING'
-              });
-            }
-            break
-            default:
-              {
-                client.user.setActivity(`t;help | Custom prefixes have been removed.`, {
-                  type: 'WATCHING'
-                });
-              }
-             
-              break
-        }
-      }, 6500)
-
-
-    
-
-/* --------------------------------------- SLASH COMMANDS --------------------------------------- */
-
-
-
-client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
-    console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`)
-    
-  })
-    /*
-  })
-  
-  setInterval(() => {
-      var rnd = Math.floor(Math.random() * 2);
-      switch (rnd) {
-        case 1:
-          {
-            client.user.setActivity(`Slash commands`, {
-              type: 'WATCHING'
-            });
-          }
-          break
-          default:
-            {
-              client.user.setActivity(`Truth Or Dare`, {
-                type: 'PLAYING'
-              });
-            }
-           
-            break
-      }
-    }, 6500)
-*/
-// client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-  const commandFiles = fs.readdirSync(`./slash`).filter(file => file.endsWith('.js'));
-  for (const file of commandFiles) {
-      const command = require(`./slash/${file}`);
-      
-      
-      if (command.global == true) {
-
-        
-
-          client.api.applications(client.user.id).commands.post({ data: {
-              name: command.slash.name,
-              description: command.slash.description,
-              options: command.slash.commandOptions,
-              
-          }})
-      }
-
-      client.shard.broadcastEval(client => client.guilds.cache.size)
-      .then(results => {
-        // results.reduce((prev, val) => prev + val, 0).toLocaleString()
-        client.command.set(command.slash.name, command);
-        console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
-      })
-  
-      
-  }
-  console.log("")
-  
- 
-  let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
-  cmdArrGlobal.forEach(element => {
-      console.log("Successfully Loaded: ".green + `[ ` + element.name + " (" + element.id + ")" + ` ]`)
+  const CMDFiles = fs
+    .readdirSync(path.resolve(`Commands/${module}`))
+    .filter((file) => !fs.statSync(path.resolve("Commands", module, file)).isDirectory())
+    .filter((file) => {
+      return file.endsWith(".js");
+    });
+  console.log(chalk.blueBright(`╭────────────────────┬──╮`));
+  CMDFiles.forEach((CMD) => {
+    try {
+      const command = require(`./Commands/${module}/${CMD}`);
+      const FittedCMDName = `${command.config.name}`.padEnd(20);
+      console.log(chalk.blueBright(`│${FittedCMDName}│✅│\n├────────────────────┼──┤`));
+      command.module = module;
+      client.slashcmds.set(command.config.name, command);
+    } catch (error) {
+      const FittedCMDName = `${CMD}`.padEnd(20);
+      console.log(chalk.blueBright(`│${FittedCMDName}│❌│\n├────────────────────┼──┤`));
+      errors.push(error);
+    }
   });
-  console.log("")
+  console.log(chalk.blueBright(`╰────────────────────┴──╯`));
 });
+if (errors.length > 0) {
+  console.log(errors);
+  errors.forEach((err) => {
+    console.log(chalk.red(err));
+  });
+}
 
-client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.command.has(interaction.data.name)) return;
-  let cmdExecuted = moment().format('LLL')
-  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
-  try {
-    client.on('interactionCreate', async (int) => {
-      client.command.get(interaction.data.name).execute(interaction, int, client);
+fs.readdir("./Events", (err, files) => {
+  if (err) return console.log(chalk.red(err));
+  console.log(chalk.green("Events Handler"));
+  console.log(chalk.blueBright(`╭────────────────────┬──╮`));
+  files.forEach((file) => {
+    if (!file.endsWith(".js")) return;
+    const evt = require(`./Events/${file}`);
+    let evtName = file.split(".")[0];
+    const FittedEVTName = `${evtName}`.padEnd(20);
+    console.log(chalk.blueBright(`│${FittedEVTName}│✅│`));
+    client.on(evtName, evt.bind(null, client));
+  });
+  console.log(chalk.blueBright(`╰────────────────────┴──╯`));
+});
+client.once('ready', () => {
+
+  let cmdFiles = fs.readdirSync(`./slash`).filter(file => file.endsWith('.js'))
+  cmdFiles.map(async file => {
+    
+    const command = require(`./slash/${file}`);
+    if (command.global == true) {
+      client.api.applications().commands.post({ data: {
+        name: command.slash.name,
+        description: command.slash.description,
+        options: command.slash.commandOptions,
+      }})
+    }
+    client.shard.broadcastEval(client => client.guilds.cache.size).then(async results => {
+      // results.reduce((prev, val) => prev + val, 0).toLocaleString()
+      client.slashcmds.set(command.slash.name, command);
+      console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
     })
-  } catch (error) {
-      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
-      console.log(`${error.stack}\n`)
-      client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-          type: 4,
-          data: {
-                  content: `Sorry, there was an error executing that command!`
-              }
-          }
-      })
-  }
-
-
+    let globCmds = await client.api.applications(client.user.id).commands.get()
+    globCmds.map(element => {
+      return console.log("Successfully Loaded: ".green + `[ ` + element.name + " (" + element.id + ")" + ` ]`)
+    });
+  })
 })
 
-client.on('messageCreate', async message => {
-
-  let prefix;
-  try {
-      let fetched = await db.fetch(`prefix_${message.guild.id}`);
-      if (fetched == null) {
-          prefix = client.default.prefix
-      } else {
-          prefix = fetched
-          
-      }
-  
-      } catch (e) {
-      console.log(e)
-};
-try {
-
-    if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
-          let pingembed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
-      .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
-      .setColor('#2f3136')
-          return message.channel.send({embeds: [pingembed]}).then(msg => {
-            setTimeout(() => msg.delete(), 5000);
-          })
-         
-          }
-          
-    } catch (err) {
-        return message.channel.send(err)
-    };
-    
-   
-});
-
-
-//===================================Statcord random shit ========================================================================================================================================================================
-
-client.snipe = new Map()
-
-
-client.on("messageDelete", async(message,channel) => {
 
 
 
-    if(message.author.bot) return;
-    if(!message.guild) return;
-    client.snipe.set(message.channel.id, {
-        msg:message.content,
-        user:message.author.tag,
-        profilephoto:message.author.displayAvatarURL(),
-        image:message.attachments.first() ? message.attachments.first().proxyURL : null,
-        date:message.createdTimestamp,
-    })  
-    })
-    
-  
-
-     
-//=================================================================================================================================
-
-client.login(process.env.Token);
