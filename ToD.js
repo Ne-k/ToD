@@ -1,6 +1,9 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
 const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db');const path = require('path');require("dotenv").config();
 //============================================================================================================================================================================================================
+
+const mongoose = require('mongoose')
+
 const moment = require('moment')
 client.db = db
 
@@ -12,7 +15,7 @@ client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
 client.commands = new Collection();
 client.aliases = new Collection();
-client.command = new Collection();
+client.slashcmds = new Collection();
 
 //============================================================================================================================================================================================================
 
@@ -25,6 +28,15 @@ client.categories = fs.readdirSync("./commands/");
 
 ["command"].forEach(handler => {
     require(`./handler/${handler}`)(client);
+});
+
+mongoose.connect(process.env.MONGOSTRING, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+mongoose.connection.once("connected", () => {
+	console.log("Connected to Database");
+  client.login(process.env.Token);
 });
 
 
@@ -229,4 +241,3 @@ client.on("messageDelete", async(message,channel) => {
      
 //=================================================================================================================================
 
-client.login(process.env.Token);
