@@ -1,3 +1,35 @@
+
+//====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
+const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); const Discord = require('discord.js'); const client = new Client({ disableMentions: 'everyone', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); const fs = require("fs"); const db = require('quick.db');const path = require('path');require("dotenv").config();
+//============================================================================================================================================================================================================
+
+const mongoose = require('mongoose')
+
+const moment = require('moment')
+client.db = db
+
+client.tod = require('./ToD.json')
+client.messageembed = MessageEmbed
+client.database = require("./Database/sql.js");
+client.default = require('./DefaultConfig.json')
+client.logger = require('./modules/logger')
+//====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
+client.commands = new Collection();
+client.aliases = new Collection();
+client.slashcmds = new Collection();
+
+//============================================================================================================================================================================================================
+
+
+//============================================================================================INITIALIZING====================================================================================================
+["aliases", "commands"].forEach(x => client[x] = new Collection());
+["console", "command", "event"].forEach(x => require(`./handler/${x}`)(client));
+
+client.categories = fs.readdirSync("./commands/");
+
+["command"].forEach(handler => {
+    require(`./handler/${handler}`)(client);
+=======
 const Discord = require("discord.js"); const { Intents } = require('discord.js')
 require('colors')
 const fs = require("fs");
@@ -24,6 +56,12 @@ mongoose.connect(process.env.MONGOSTRING, {
 });
 mongoose.connection.once("connected", () => {
 	console.log("Connected to Database");
+
+  client.login(process.env.Token);
+});
+
+
+=======
   client.login(process.env.TOKEN);
 });
 global.client = client
@@ -32,6 +70,7 @@ client.logger = require('./modules/logger')
 client.default = require('./DefaultConfig.json')
 client.commands = new Discord.Collection();
 client.slashcmds = new Discord.Collection();
+
 let errors = [];
 
 const modules = fs.readdirSync("Commands").filter((file) => fs.statSync(path.join("Commands", file)).isDirectory());
