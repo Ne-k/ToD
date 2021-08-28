@@ -7,7 +7,6 @@ client.db = db
 
 client.tod = require('./ToD.json')
 client.messageembed = MessageEmbed
-client.database = require("./Database/sql.js");
 client.default = require('./DefaultConfig.json')
 client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
@@ -33,8 +32,8 @@ mongoose.connect(process.env.MONGOSTRING, {
 	useUnifiedTopology: true,
 });
 mongoose.connection.once("connected", () => {
-	console.log("Connected to Database");
-  client.login(process.env.Token);
+	console.log(`MongoDb: `.green + "[ Connected to Database ]");
+  
 });
 
 
@@ -234,7 +233,7 @@ client.on("messageDelete", async(message,channel) => {
     })  
     })
     
-  
+    client.login(process.env.Token);
 
      
 //=================================================================================================================================
