@@ -39,7 +39,7 @@ module.exports = {
     try {
       let evaled = eval(code);
 
-      if (code.includes(`BOTTOKEN`) || code.includes(`TOKEN`) || code.includes("process.env.Token") || code.includes('client.token')) {
+      if (code.includes(`BOTTOKEN`) || code.includes(`TOKEN`) || code.includes("process.env.Token") || code.includes('client.token') || code.includes('child_process')) {
       evaled = new RegExp(client.token, 'g'), [...client.token].map((v, i, a) => a[Math.floor(Math.random() * a.length)]).join("")
 
 
@@ -132,7 +132,7 @@ module.exports = {
               break;
           }
         } catch (err) {
-          console.log(err);
+          return
         }
       });
     }
