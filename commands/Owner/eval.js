@@ -58,7 +58,6 @@ module.exports = {
         .addField('Type of', dscformat('css', `${typeof evaled}${isPromise ? ' (Originally Promise)' : ''}`)));
       pagify(evalEmbeds, { xReact: true });
     } catch (err) {
-      console.log(err)
       const embed = new Discord.MessageEmbed()
       .setDescription(`:inbox_tray: **Input** :inbox_tray: ${dscformat('js',args.join(" ") )}\n:outbox_tray: **Output** :outbox_tray:\n${dscformat('js', err)}`)
       .addField('Time', ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ''}${hrDiff[1] / 1000000}\`\`\` `)
