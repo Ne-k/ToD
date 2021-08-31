@@ -8,7 +8,7 @@ module.exports = {
       description: `Random "why" questions.`,
   },
   run: async (bot, message, args) => {
-    fetch("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
+    require('node-fetch')("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
 
      
       
