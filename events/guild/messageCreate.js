@@ -13,7 +13,7 @@ module.exports = async (bot, message) => {
   
 
 
-   let prefix = bot.default.prefix
+   let prefix = process.env.prefix
     if(!message.content.toLowerCase().startsWith(prefix)) return;
 
     let cmdExecuted = moment().format('LLL')

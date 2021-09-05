@@ -2,12 +2,10 @@ const Discord = require('discord.js')
 const fetch = require('node-fetch')
 module.exports = {
   slash: {
-
 	name: 'truth',
 	description: 'Sends a truth question from the game Truth or dare.',
 	commandOptions: null,
-    global: true,
-  
+  global: true,
   },
 	execute(interaction, int, client) {
 		fetch("https://casey.gg/api/random-truth").then((res) => res.json()).then(async (data) => {
@@ -17,9 +15,9 @@ module.exports = {
             .setDescription(data.truth)
 	
         
-		client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+		client.api.interactions(interaction.id, interaction.token).callback.post({slash: {
 			type: 4,
-			data: {
+			slash: {
                 "components": [
                     {
                     "type": 1,

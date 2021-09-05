@@ -4,15 +4,13 @@ const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); con
 const moment = require('moment')
 const mongoose = require('mongoose')
 client.db = db
-
+client.slash = new Collection()
 client.tod = require('./ToD.json')
 client.messageembed = MessageEmbed
-client.default = require('./DefaultConfig.json')
 client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
-client.commands = new Collection();
 client.aliases = new Collection();
-client.command = new Collection();
+
 
 //============================================================================================================================================================================================================
 
@@ -138,7 +136,7 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
       client.shard.broadcastEval(client => client.guilds.cache.size)
       .then(results => {
         // results.reduce((prev, val) => prev + val, 0).toLocaleString()
-        client.command.set(command.slash.name, command);
+        client.slash.set(command.slash.name, command);
         console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
       })
   
@@ -155,12 +153,12 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.command.has(interaction.data.name)) return;
+  if (!client.slash.has(interaction.data.name)) return;
   let cmdExecuted = moment().format('LLL')
   client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
   try {
     client.on('interactionCreate', async (int) => {
-      client.command.get(interaction.data.name).execute(interaction, int, client);
+      client.slash.get(interaction.data.name).execute(interaction, int, client);
     })
   } catch (error) {
       console.log(`Error from command ${interaction.data.name} : ${error.message}`);
@@ -179,19 +177,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
 
 client.on('messageCreate', async message => {
 
-  let prefix;
-  try {
-      let fetched = await db.fetch(`prefix_${message.guild.id}`);
-      if (fetched == null) {
-          prefix = client.default.prefix
-      } else {
-          prefix = fetched
-          
-      }
-  
-      } catch (e) {
-      console.log(e)
-};
+  let prefix = process.env.prefix
 try {
 
     if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {

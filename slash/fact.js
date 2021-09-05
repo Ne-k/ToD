@@ -1,11 +1,9 @@
 module.exports = {
 	slash: {
-		
 	name: 'fact',
 	description: 'Sends a random fact',
 	commandOptions: null,
 	global: true,
-	
 	},
 	async execute(interaction, int, client) {
 		const Discord = require("discord.js");
@@ -19,9 +17,9 @@ module.exports = {
         .setColor('#eaecf3')
         .setTitle("Fact")
         .setDescription(data.fact)
-		client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+		client.api.interactions(interaction.id, interaction.token).callback.post({slash: {
 			type: 4,
-			data: {
+			slash: {
     					embeds: [factEmbed]
 				}
 			}

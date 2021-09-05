@@ -16,14 +16,14 @@ module.exports = {
     run: async (client, message, args) => {
       let print = console.log
       let ToD = client
-      if (!client.default.developers.includes(message.author.id)) {
+      if (!process.env.developers.includes(message.author.id)) {
         let userAccess = new Discord.MessageEmbed()
         .setTitle("eval")
         .setDescription("Sorry, the `eval` command can only be executed by the Developer.")
         .setColor("#cdf785");
         message.channel.send({embeds: [userAccess]})
     }
-    if (client.default.developers.includes(message.author.id)) {
+    if (process.env.developers.includes(message.author.id)) {
 
 
 

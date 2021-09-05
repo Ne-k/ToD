@@ -6,14 +6,14 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         
-        if (!bot.default.developers.includes(message.author.id)) {
+        if (!process.env.developers.includes(message.author.id)) {
             let userAccess = new Discord.MessageEmbed()
             .setTitle("Reboot")
             .setDescription("Sorry, the `Reboot` command can only be executed by the Developer.")
             .setColor("#cdf785");
             return message.channel.send({emebds: [userAccess]})
         }
-        if (bot.default.developers.includes(message.author.id)) { 
+        if (process.env.developers.includes(message.author.id)) { 
         const { MessageEmbed, WebhookClient } = require('discord.js')
         const { exec } = require("child_process");
         bot.shard.broadcastEval(client => client.user.setStatus('idle'))
