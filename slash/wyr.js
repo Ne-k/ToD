@@ -6,8 +6,8 @@ module.exports = {
 	name: 'wyr',
 	description: 'Would You Rather questions.',
 	commandOptions: null,
+},
 	global: true,
-	},
 	async execute(interaction, int, client) {
 
         const wyr = require('wyr');

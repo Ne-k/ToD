@@ -6,10 +6,11 @@
             c: 'Anime',
             description: 'Randomly creates a waifu from waifulabs.com',
             commandOptions: null,
+        },
             global: true,
-            },
-            async execute(interaction, int) {
 
+            async execute(interaction, int) {
+                if (!int.isCommand()) return;
                 const waifulabs = require('waifulabs');
                 const waifus = await waifulabs.generateWaifus();
                 const waifu = waifus[0];

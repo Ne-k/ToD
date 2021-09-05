@@ -116,63 +116,48 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
     }, 6500)
 */
 // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-  const commandFiles = fs.readdirSync(`./slash`).filter(file => file.endsWith('.js'));
-  for (const file of commandFiles) {
-      const command = require(`./slash/${file}`);
-      
-      
-      if (command.global == true) {
+const cFiles = fs.readdirSync('./slash/').filter(file => file.endsWith('.js'));
+for (const file of cFiles) {
+    const command = require(`./slash/${file}`);
 
+    if (command.global === true) {
+            client.api.applications(client.user.id).commands.post({
+                data: {
+                    name: command.slash.name,
+                    description: command.slash.description,
+                    options: command.slashcommandOptions,
+                }
+            })
+            console.log(`Posting: [ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
         
-
-          client.api.applications(client.user.id).commands.post({ data: {
-              name: command.slash.name,
-              description: command.slash.description,
-              options: command.slash.commandOptions,
-              
-          }})
-      }
-
-      client.shard.broadcastEval(client => client.guilds.cache.size)
-      .then(results => {
-        // results.reduce((prev, val) => prev + val, 0).toLocaleString()
         client.slash.set(command.slash.name, command);
-        console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
-      })
-  
-      
-  }
-  console.log("")
-  
- 
-  let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
-  cmdArrGlobal.forEach(element => {
-      console.log("Successfully Loaded: ".green + `[ ` + element.name + " (" + element.id + ")" + ` ]`)
-  });
-  console.log("")
+    }
+}
+let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
+cmdArrGlobal.forEach(element => {
+    console.log(`Successfully Loaded: [ ${element.name} (${element.id}) ]`)
+});
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.slash.has(interaction.data.name)) return;
-  let cmdExecuted = moment().format('LLL')
-  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
-  try {
-    client.on('interactionCreate', async (int) => {
-      client.slash.get(interaction.data.name).execute(interaction, int, client);
+  
+if (!client.slash.has(interaction.data.name)) return;
+try {
+    client.on('interactionCreate', async(int) => {
+        client.slash.get(interaction.data.name).execute(interaction, int);
     })
-  } catch (error) {
-      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
-      console.log(`${error.stack}\n`)
-      client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-          type: 4,
-          data: {
-                  content: `Sorry, there was an error executing that command!`
-              }
-          }
-      })
-  }
-
-
+} catch (error) {
+    console.log(`Error Occured => ${interaction.data.name} : ${error.message}`)
+    console.log(error.stack)
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+            type: 4,
+            data: {
+                content: `Sorry, there was an error executing that command!`
+            }
+        }
+    })
+}
 })
 
 client.on('messageCreate', async message => {

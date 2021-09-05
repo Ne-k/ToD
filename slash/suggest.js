@@ -17,7 +17,7 @@ module.exports = {
 	global: true,
 	async execute(interaction, int, client) {
 
-       
+
             
             let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
             .setTitle("<:image_20210516_090215:843518719506645003> New Suggestion! <:image_20210516_090215:843518719506645003>")

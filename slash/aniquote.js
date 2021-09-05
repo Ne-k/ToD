@@ -3,9 +3,11 @@ module.exports = {
 	name: 'aniquote',
 	description: 'Sends a random quote from a anime.',
 	commandOptions: null,
+},
 	global: true,
-    },
+ 
 	async execute(interaction, int) {
+        if (!int.isCommand()) return;
         const { MessageEmbed } = require('discord.js');
 
         const { randomQuote } = require('animequotes');

@@ -3,21 +3,21 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     slash: {
         name: 'anisearch',
-        c: 'Anime', 
           description: 'Searches an anime title on MyAnimeList',
           commandOptions: [
-              {
-                  type: 3,
-                  name: "query",
-                  description: "Your query to search on MyAnimeList",
-                  required: true
-              }
-          ],
-          global: true,
+            {
+                type: 3,
+                name: "query",
+                description: "Your search query.",
+                required: true
+            }
+        ],
     },
+          global: true,
+
 	
 	async execute(interaction, int, client) {
-
+        if (!int.isCommand()) return;
         const malScraper = require('mal-scraper')
     
         try {
@@ -51,28 +51,24 @@ module.exports = {
                     .addField('Characters:', "`" + s1.characters.map(ani => ani.name).join(` | `) + "`", true)
                     .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true)
                 
-                    client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-                        type: 4,
-                        data: {
-                "components": [
-                    {
-                    "type": 1,
-                    "components": [
-                      {
-                        "type": 2,
-                        "label": "MyAnimeList page", 
-                        "style": 5, 
-                        "url": `${s1.url}`
-                      },
-        
-                    ]
-                   
-                    }
-                    ],
-                embeds: [embed],
-                        }
-                    }
-            })
+                    int.reply({
+                        "components": [
+                            {
+                            "type": 1,
+                            "components": [
+                              {
+                                "type": 2,
+                                "label": "MyAnimeList page", 
+                                "style": 5, 
+                                "url": `${s1.url}`
+                              },
+                
+                            ]
+                           
+                            }
+                            ],
+                        embeds: [embed],
+                    })
         })
 
         } catch(e) {

@@ -6,10 +6,11 @@ module.exports = {
     name: 'dare',
     description: 'Sends a dare question from the game Truth or dare.',
     commandOptions: null,
-    global: true,
   },
-	async execute(interaction, int, client) {
+    global: true,
 
+	async execute(interaction, int, client) {
+    if (!int.isCommand()) return;
         fetch("https://casey.gg/api/random-dare").then((res) => res.json()).then(async (data) => {
             let embed = new Discord.MessageEmbed()
             .setColor('#eaecf3')

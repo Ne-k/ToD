@@ -11,7 +11,7 @@ module.exports = {
       let channelsnipe = message.mentions.channels.first() || bot.guilds.cache.get(message.guild.id).channels.cache.get(args[0]) || message.guild.channels.cache.find(c => c.name.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.channel.id;
       let snip = bot.snipe.get(channelsnipe)
 
-      if(!snip) return message.channel.send("<:0_dnd:824333439028297758> No deleted messages found.")
+      if(!snip) return message.channel.send("🔴 No deleted messages found.")
   
         let embed = new Discord.MessageEmbed()
         .setColor("#eaecf3")

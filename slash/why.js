@@ -6,8 +6,9 @@ module.exports = {
 	name: 'why',
 	description: 'Random "why" questions.',
 	commandOptions: null,
+},
 	global: true,
-    },
+
 	async execute(interaction, int, client) {
         fetch("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
 
