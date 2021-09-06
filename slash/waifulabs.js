@@ -21,7 +21,7 @@
                 
                 return await int.reply({
                     content: 'Waifu made using waifulabs.com',
-                    files: ['/root/root/ToD/waifu']
+                    files: ['/root/root/ToD/waifu.png']
                   })
 
             }
