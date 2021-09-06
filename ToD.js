@@ -128,14 +128,14 @@ for (const file of cFiles) {
                     options: command.slashcommandOptions,
                 }
             })
-            console.log(`Posting: [ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
+            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
         
         client.slash.set(command.slash.name, command);
     }
 }
 let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
 cmdArrGlobal.forEach(element => {
-    console.log(`Successfully Loaded: [ ${element.name} (${element.id}) ]`)
+    console.log(`Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`)
 });
 });
 
