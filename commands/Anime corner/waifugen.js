@@ -12,7 +12,7 @@ module.exports = {
         const imageData = waifu.image;
         const image = Buffer.from(imageData, 'base64');
         const fs = require('fs');
-        fs.writeFile('ToD-waifu.png', image, console.error)
+        fs.writeFile('waifu.png', image, console.error)
 
         message.channel.send({ content: 'Waifu made using waifulabs.com',files: ["../ToD/ToD-waifu.png"]})
 

@@ -17,11 +17,11 @@
                 const imageData = waifu.image;
                 const image = Buffer.from(imageData, 'base64');
                 const fs = require('fs');
-                fs.writeFile('random-gen-waifu.png', image, console.error)
+                fs.writeFile('waifu.png', image, console.error)
                 
                 return await int.reply({
                     content: 'Waifu made using waifulabs.com',
-                    files: ['../Slash/random-gen-waifu.png']
+                    files: ['/root/root/ToD/waifu']
                   })
 
             }
