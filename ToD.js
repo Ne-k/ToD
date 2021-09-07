@@ -120,7 +120,7 @@ const cFiles = fs.readdirSync('./slash/').filter(file => file.endsWith('.js'));
 for (const file of cFiles) {
     const command = require(`./slash/${file}`);
 
-    if (command.global === true) {
+    if (command.global == true) {
             client.api.applications(client.user.id).commands.post({
                 data: {
                     name: command.slash.name,
@@ -128,7 +128,7 @@ for (const file of cFiles) {
                     options: command.slashcommandOptions,
                 }
             })
-            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
+            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.global ? "global" : "guild"}) ]`)
         
         client.slash.set(command.slash.name, command);
     }
