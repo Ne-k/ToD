@@ -71,7 +71,7 @@ client.on('ready', async () => {
             break
             default:
               {
-                client.user.setActivity(`t;help | Custom prefixes have been removed.`, {
+                client.user.setActivity(`t;help | Slash Commands`, {
                   type: 'WATCHING'
                 });
               }
