@@ -32,14 +32,6 @@ const {MessageEmbed, Permissions} = require('discord.js')
                 return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Please select an option below to enable.\nUsage: \`${prefix}enable <options>\`\n\n\`\`\`\n${table.toString()}\`\`\``)]})
             }
 
-            /*
-            To-do:
-            
-            - Make an "enabled by <user>" thing if the nsfw option is already enabled. // Status: Done.
-            - Make user permission checking. // Status: Done
-            - Add confirm and decline buttons to an embed. // Status: Done
-            */
-
 
 
             if (args[0].toLowerCase() === 'nsfw') {
