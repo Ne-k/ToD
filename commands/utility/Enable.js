@@ -8,18 +8,9 @@ module.exports = {
     },
     run: async (client, message, args) => {
 const {MessageEmbed, Permissions} = require('discord.js')
-        let prefix;
+      
         if (message.author.bot || message.channel.type === "dm") return;
-        try {
-            let fetched = await client.db.fetch(`prefix_${message.guild.id}`);
-            if (fetched == null) {
-                prefix = client.default.prefix
-            } else {
-                prefix = fetched
-            }
-        } catch (e) {
-            console.log(e)
-        };
+        let prefix = process.env.prefix
 
 
         try {
