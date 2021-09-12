@@ -22,11 +22,15 @@ module.exports = {
             
             
         
-            
+            let animeembed = new MessageEmbed()
+                    .setColor(`GREY`)
+                    .addField(`*Quoted from ${anime}*`,`${quote}\n\n- *${name}*`)
+                    .setImage(image)
+                    .setTimestamp()
         
             const image = res?.[0]?.attributes?.coverImage?.original || null;
             
-            return  int.reply({
+            return int.reply({
                 "components": [
                     {
                     "type": 1,
@@ -42,13 +46,7 @@ module.exports = {
                    
                     }
                     ],
-                embeds: [
-                    new MessageEmbed()
-                    .setColor(`GREY`)
-                    .addField(`*Quoted from ${anime}*`,`${quote}\n\n- *${name}*`)
-                    .setImage(image)
-                    .setTimestamp()
-                  ]
+                embeds: [animeembed]
             
             })
           
