@@ -61,7 +61,7 @@ client.on('ready', async () => {
 
     setInterval(() => {
         var rnd = Math.floor(Math.random() * 2);
-        switch (rnd) {
+        switch (rnd) { 
           case 1:
             {
               client.user.setActivity(`t;help | Truth or Dare`, {
