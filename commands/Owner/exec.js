@@ -23,15 +23,18 @@ module.exports = {
           try {
 
       
-                  childProcess.exec(args.join(' '), {},
-                      (err, stdout, stderr) => {
-                          let commanderror = new Discord.MessageEmbed()
-                          .setDescription(`${codeblock}${err}${codeblock}`)
-                          .setColor('RED')
-                          .setFooter('Smooth brain, you failed.')
-                          if (err) return message.channel.send(commanderror);
-                          message.channel.send({content: `${codeblock}diff\n${stdout}${codeblock}`});
-                      });
+            childProcess.exec('git pull', {},
+            (err, stdout, stderr) => {
+                if (err) return message.channel.send({embeds: [
+                    new MessageEmbed()
+                    .setDescription(`${codeblock}${err}${codeblock}`)
+                    .setColor('RED')
+                    .setFooter('Smooth brain, you failed.')
+                ]});
+
+                message.channel.send({content: `${codeblock}diff\n${stdout}${codeblock}`});
+            })
+            
           } catch (err) {
               let errorEmbed = new Discord.MessageEmbed()
                   .setDescription(
