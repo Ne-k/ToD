@@ -13,7 +13,7 @@ config: {
 },
 run: async (client, message, args) => {
     
-    let prefix = client.default.prefix
+    let prefix = process.env.preifx
 try {
     
         if(!args[0]){
@@ -137,11 +137,12 @@ try {
         embeds: [new client.messageembed().setColor('RANDOM').setAuthor('Help Command Panel:', client.user.avatarURL({format: 'png'})).setDescription(`<:Pink_Dash:843518578749865994> Run \`${prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\`botinfo\` | \`invite\` | \`ping\` | \`policy\` | \`suggest\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`).setFooter(client.commands.size + ` total commands.`, message.author.avatarURL({dynamic: true}))]
     })
                     }
-
+                
                     
                             })
                             
             })
+            
 
         }
 
@@ -231,7 +232,7 @@ return message.channel.send({embeds: [SHembed]})
 }
 */
 
-
+        
 }catch (err) {
     console.log(err)
 }

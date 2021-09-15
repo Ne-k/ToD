@@ -1,14 +1,13 @@
 module.exports = {
   slash: {
-
     name: 'invite',
     description: 'Get my invite link.',
     commandOptions: null,
-    global: true,
-  
   },
-    async execute(interaction, int, client) {
+    global: true,
 
+    async execute(interaction, int, client) {
+      if (!int.isCommand()) return;
         const { MessageEmbed } = require('discord.js')
         const { link } = await require('node-fetch')(`https://purrbot.site/api/img/sfw/neko/gif`).then(res => res.json())
        

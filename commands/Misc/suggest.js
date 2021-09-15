@@ -59,7 +59,7 @@ message.channel.send({
     ],
 
   embeds: [new MessageEmbed().setColor('YELLOW').setAuthor(`Pending. . .`, message.author.avatarURL({dynamic: true})).setDescription(`You are about to send "\`${reportedbug}\`" to the support server as a suggestion. \n\nBy clicking **agree** you acknowledge ToD's **[Private Policy](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#private-policy)** and any outcome of your suggestion (such as [getting blacklisted](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#blacklist-faq) if your suggestion turns out to be a troll suggestion, or an abuse to the bot.) *Note: NSFW truths and dares are accepted*.\n\nIf you wish to cancel your suggestion, click **deny**.`).setFooter('This user interface will be deleted in 30 seconds if no choice is made.')]}).then(async m => {
-    setTimeout(() => m.delete(), 30000);
+    setTimeout(() => m.delete(), 15000);
 
     client.on('interactionCreate', async (interaction) => {
 if (interaction.customId === 'agree') {
@@ -103,7 +103,9 @@ return message.channel.send({
   
 }
 if (interaction.customId === 'deny') {
-  m.delete()
+  setTimeout(() => {
+    m.delete()
+  }, 0); 
   return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription('Successfully canceled your suggestion! <:Ranko_Pog:851883973403344947>')]}).then(msg => setTimeout(() => msg.delete(), 5000))
   
 }

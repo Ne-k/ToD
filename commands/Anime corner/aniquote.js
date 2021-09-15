@@ -15,13 +15,11 @@ const { searchAnime } = require('node-kitsu');
     const { quote, anime, id, name } = randomQuote();
     const res = await searchAnime(anime,0).catch(()=>{}) || [];
    
-    message.react('<a:loading:777226808063688714>')
     
 
     
 
     const image = res?.[0]?.attributes?.coverImage?.original || null;
-    message.reactions.removeAll()
     return message.channel.send({
       embeds: [
       new MessageEmbed()

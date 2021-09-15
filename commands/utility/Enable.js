@@ -8,18 +8,9 @@ module.exports = {
     },
     run: async (client, message, args) => {
 const {MessageEmbed, Permissions} = require('discord.js')
-        let prefix;
+      
         if (message.author.bot || message.channel.type === "dm") return;
-        try {
-            let fetched = await client.db.fetch(`prefix_${message.guild.id}`);
-            if (fetched == null) {
-                prefix = client.default.prefix
-            } else {
-                prefix = fetched
-            }
-        } catch (e) {
-            console.log(e)
-        };
+        let prefix = process.env.prefix
 
 
         try {
@@ -41,18 +32,10 @@ const {MessageEmbed, Permissions} = require('discord.js')
                 return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription(`Please select an option below to enable.\nUsage: \`${prefix}enable <options>\`\n\n\`\`\`\n${table.toString()}\`\`\``)]})
             }
 
-            /*
-            To-do:
-            
-            - Make an "enabled by <user>" thing if the nsfw option is already enabled. // Status: Done.
-            - Make user permission checking. // Status: Done
-            - Add confirm and decline buttons to an embed. // Status: Done
-            */
-
 
 
             if (args[0].toLowerCase() === 'nsfw') {
-                if (!message.member.permissions.has(32)) {
+                if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
                     return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription('Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>')]})
                 }
 

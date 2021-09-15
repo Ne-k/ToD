@@ -1,14 +1,14 @@
 
-
+const Discord = require('discord.js')
 
 module.exports = {
   config: {
-      name: "wyr",
-      usage: "wyr",
-      description: "**W**ould **Y**ou **R**ather questions.",
+      name: "why",
+      usage: "why",
+      description: `Random "why" questions.`,
   },
   run: async (bot, message, args) => {
-    fetch("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
+    require('node-fetch')("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
 
      
       

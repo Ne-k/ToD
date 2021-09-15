@@ -1,13 +1,13 @@
 module.exports = {
 	slash: {
-		
 	name: 'fact',
 	description: 'Sends a random fact',
 	commandOptions: null,
+},
 	global: true,
-	
-	},
+
 	async execute(interaction, int, client) {
+		if (!int.isCommand()) return;
 		const Discord = require("discord.js");
 		const fetch = require('node-fetch')
 
@@ -19,12 +19,8 @@ module.exports = {
         .setColor('#eaecf3')
         .setTitle("Fact")
         .setDescription(data.fact)
-		client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-			type: 4,
-			data: {
-    					embeds: [factEmbed]
-				}
-			}
+		int.reply({
+			embeds: [factEmbed]
 		})
 
 	})

@@ -3,13 +3,12 @@ const fetch = require('node-fetch')
 
 module.exports = {
     slash: {
-
 	name: 'why',
 	description: 'Random "why" questions.',
 	commandOptions: null,
+},
 	global: true,
 
-    },
 	async execute(interaction, int, client) {
         fetch("https://nekos.life/api/v2/why").then((res) => res.json()).then(async (data) => {
 
@@ -20,9 +19,9 @@ module.exports = {
 .setTitle("Why")
 .setDescription(data.why)
 
-client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+client.api.interactions(interaction.id, interaction.token).callback.post({slash: {
     type: 4,
-    data: {
+    slash: {
                 embeds: [factEmbed]
         }
     }

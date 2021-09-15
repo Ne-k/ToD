@@ -4,15 +4,13 @@ const { Client, Collection, MessageEmbed, Intents } = require('discord.js'); con
 const moment = require('moment')
 const mongoose = require('mongoose')
 client.db = db
-
+client.slash = new Collection()
 client.tod = require('./ToD.json')
 client.messageembed = MessageEmbed
-client.default = require('./DefaultConfig.json')
 client.logger = require('./modules/logger')
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
-client.commands = new Collection();
 client.aliases = new Collection();
-client.command = new Collection();
+
 
 //============================================================================================================================================================================================================
 
@@ -65,7 +63,7 @@ client.on('ready', async () => {
 
     setInterval(() => {
         var rnd = Math.floor(Math.random() * 2);
-        switch (rnd) {
+        switch (rnd) { 
           case 1:
             {
               client.user.setActivity(`t;help | Truth or Dare`, {
@@ -75,7 +73,7 @@ client.on('ready', async () => {
             break
             default:
               {
-                client.user.setActivity(`t;help | Custom prefixes have been removed.`, {
+                client.user.setActivity(`t;help | Slash Commands`, {
                   type: 'WATCHING'
                 });
               }
@@ -120,80 +118,53 @@ client.shard.broadcastEval(bot => bot.guilds.cache.size).then(res => {
     }, 6500)
 */
 // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-  const commandFiles = fs.readdirSync(`./slash`).filter(file => file.endsWith('.js'));
-  for (const file of commandFiles) {
-      const command = require(`./slash/${file}`);
-      
-      
-      if (command.global == true) {
+const cFiles = fs.readdirSync('./slash/').filter(file => file.endsWith('.js'));
+for (const file of cFiles) {
+    const command = require(`./slash/${file}`);
 
+    if (command.global == true) {
+            client.api.applications(client.user.id).commands.post({
+                data: {
+                    name: command.slash.name,
+                    description: command.slash.description,
+                    options: command.slashcommandOptions,
+                }
+            })
+            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.global ? "global" : "guild"}) ]`)
         
-
-          client.api.applications(client.user.id).commands.post({ data: {
-              name: command.slash.name,
-              description: command.slash.description,
-              options: command.slash.commandOptions,
-              
-          }})
-      }
-
-      client.shard.broadcastEval(client => client.guilds.cache.size)
-      .then(results => {
-        // results.reduce((prev, val) => prev + val, 0).toLocaleString()
-        client.command.set(command.slash.name, command);
-        console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.slash.global ? "global" : "guild"}) ]`)
-      })
-  
-      
-  }
-  console.log("")
-  
- 
-  let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
-  cmdArrGlobal.forEach(element => {
-      console.log("Successfully Loaded: ".green + `[ ` + element.name + " (" + element.id + ")" + ` ]`)
-  });
-  console.log("")
+        client.slash.set(command.slash.name, command);
+    }
+}
+let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
+cmdArrGlobal.forEach(element => {
+    console.log(`Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`)
+});
 });
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  if (!client.command.has(interaction.data.name)) return;
-  let cmdExecuted = moment().format('LLL')
-  client.logger(`${interaction.member.user.username}#${interaction.member.user.discriminator}` + ` |`.red + ` (${interaction.member.user.id}) executed ` + `slash `.red + `command ` + (`${interaction.data.name.toUpperCase()}`.underline.cyan) + ` at ${cmdExecuted}.` , "command")
-  try {
-    client.on('interactionCreate', async (int) => {
-      client.command.get(interaction.data.name).execute(interaction, int, client);
+  
+if (!client.slash.has(interaction.data.name)) return;
+try {
+    client.on('interactionCreate', async(int) => {
+        client.slash.get(interaction.data.name).execute(interaction, int);
     })
-  } catch (error) {
-      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
-      console.log(`${error.stack}\n`)
-      client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-          type: 4,
-          data: {
-                  content: `Sorry, there was an error executing that command!`
-              }
-          }
-      })
-  }
-
-
+} catch (error) {
+    console.log(`Error Occured => ${interaction.data.name} : ${error.message}`)
+    console.log(error.stack)
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+            type: 4,
+            data: {
+                content: `Sorry, there was an error executing that command!`
+            }
+        }
+    })
+}
 })
 
 client.on('messageCreate', async message => {
 
-  let prefix;
-  try {
-      let fetched = await db.fetch(`prefix_${message.guild.id}`);
-      if (fetched == null) {
-          prefix = client.default.prefix
-      } else {
-          prefix = fetched
-          
-      }
-  
-      } catch (e) {
-      console.log(e)
-};
+  let prefix = process.env.prefix
 try {
 
     if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
