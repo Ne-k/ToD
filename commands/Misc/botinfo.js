@@ -1,7 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const os = require('os')
-
-const moment = require("moment") 
 const arr = [1, 2, 3, 4, 5, 6, 9, 7, 8, 9, 10];
 arr.reverse();
 const used = process.memoryUsage().heapUsed / 1024 / 1024;
