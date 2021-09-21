@@ -206,7 +206,7 @@ client.on("messageDelete", async(message,channel) => {
     })  
     })
     
-    client.login(process.env.Token);
+    client.login(process.env.token);
 
      
 //=================================================================================================================================
