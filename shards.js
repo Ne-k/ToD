@@ -5,7 +5,7 @@ require('dotenv').config()
 
 
 const manager = new ShardingManager('./ToD.js', { 
-token: process.env.Token, 
+token: process.env.token, 
 autoSpawn: true, 
 respawn: true,
 });
