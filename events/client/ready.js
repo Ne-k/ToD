@@ -4,7 +4,7 @@ const moment = require('moment')
 module.exports = async bot => {
 
   process.on('unhandledRejection', (error) => {
-    console.log(error)
+    return; 
 })
   const { MessageEmbed, WebhookClient } = require("discord.js")
 
