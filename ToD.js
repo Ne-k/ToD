@@ -57,8 +57,6 @@ modules.forEach((module) => {
 //=========================================================================================MENTION SETTINGS===========================================================================================
 client.on('ready', async () => {
 
-  client.shard.broadcastEval(bot => bot.user.setStatus('dnd'))
-
   // require('statcord.js').ShardingClient.post(client)
 
     setInterval(() => {
@@ -206,7 +204,7 @@ client.on("messageDelete", async(message,channel) => {
     })  
     })
     
-    client.login(process.env.Token);
+    client.login(process.env.token);
 
      
 //=================================================================================================================================
