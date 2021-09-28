@@ -161,7 +161,7 @@ try {
 })
 
 client.on('messageCreate', async message => {
-
+if(message.author.bot) return;
   let prefix = process.env.prefix
 try {
 
