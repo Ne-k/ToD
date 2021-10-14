@@ -12,7 +12,7 @@ module.exports = {
 
             let Sembed = new MessageEmbed()
                 .setColor('#7975a8')
-                .setDescription('**[Support Server Invite](https://discord.gg/PVC35NbeTD)**')
+                .setDescription('**[Support Server Invite](https://nek.wtf/support)**')
                 .setTimestamp()
                 .setThumbnail(bot.user.displayAvatarURL()) //bot avatar
 

@@ -71,7 +71,7 @@ module.exports = {
                 type: 2,
                 label: "Invite", 
                 style: 5, 
-                url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968'
+                url: 'https://nek.wtf/invite'
               },
             ]
            

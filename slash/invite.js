@@ -14,7 +14,7 @@ module.exports = {
 
         let Sembed = new MessageEmbed()
             .setColor('RANDOM')
-            .setDescription('**[Click here to invite ToD bot](https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968)**\n\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**')
+            .setDescription('**[Click here to invite ToD bot](hhttps://nek.wtf/invite)**\n\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://nek.wtf/support)**')
             .setImage(link)
 
             int.reply({
@@ -26,7 +26,7 @@ module.exports = {
                         type: 2,
                         label: "Invite ToD", 
                         style: 5, 
-                        url: 'https://discord.com/oauth2/authorize?client_id=752306970467237970&scope=bot+applications.commands&permissions=6508891968'
+                        url: 'https://nek.wtf/invite'
                       }
                     ]
                    
