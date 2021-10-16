@@ -1,5 +1,6 @@
 const { MessageEmbed, WebhookClient, Collection } = require("discord.js");
 const talkedRecently = new Set();
+const db = require('quick.db')
 module.exports = { 
     config: {
       name: "suggest",
@@ -11,7 +12,7 @@ module.exports = {
       if (talkedRecently.has(message.author.id)) {
         return message.channel.send({embeds: [new MessageEmbed().setDescription("As much as we appreciate your suggestion, please wait up to **1 minute** before using this command again, this is to prevent spam.").setColor('RANDOM')]});
 } else {
-  let reportedbug = args.join(" ").slice(0);
+  let reportedbug = db.set('suggestion', `${args.join(" ").slice(0)}`)
   let messageguild = message.guild.name;
 
   try {
@@ -124,7 +125,7 @@ if (interaction.customId === 'deny') {
     }, 60000);
 }
 
-
+db.delete('suggestion')
 
     }
     

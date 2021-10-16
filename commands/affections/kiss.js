@@ -27,7 +27,7 @@ module.exports = {
         let hornyresult = Math.floor((Math.random() * ishorny.length));
         const waifu = new Discord.MessageEmbed()
     
-        const { url } = await fetch(`${waifuAPI}/sfw/hug`).then(res => res.json())
+        const { url } = await fetch(`${waifuAPI}/sfw/kiss`).then(res => res.json())
     let quotes = args.slice(1).join(" ");
         waifu.setImage(url)
         .setAuthor(`${message.author.username} has kissed ${user.user.tag}`, message.author.avatarURL({dynamic: true}))

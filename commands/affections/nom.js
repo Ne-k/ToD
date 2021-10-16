@@ -15,7 +15,7 @@ module.exports = {
         const waifuembed2 = new Discord.MessageEmbed()
     
         const { url } = await fetch(`${waifuAPI}/sfw/nom`).then(res => res.json())
-    let quote = args.join(" ")
+    let quote = args.slice(1).join(" ");
         waifuembed2.setImage(url)
         .setAuthor(`${message.author.username} is eating. . .`, message.author.avatarURL({dynamic: true}))
         .setDescription(quote)
