@@ -1,5 +1,6 @@
 const { MessageEmbed, WebhookClient, Collection } = require("discord.js");
 const talkedRecently = new Set();
+const db = require('quick.db')
 require('dotenv').config()
 module.exports = {
     slash: {
@@ -17,11 +18,11 @@ module.exports = {
 	global: true,
 	async execute(interaction, int, client) {
 
-
+let suggestion = db.set('suggestion', `${interaction.data.options[0].value}`)
             
             let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
             .setTitle("<:image_20210516_090215:843518719506645003> New Suggestion! <:image_20210516_090215:843518719506645003>")
-            .addField("__Suggestion:__", interaction.data.options[0].value)
+            .addField("__Suggestion:__", suggestion)
             .addField("__Suggested By:__", `${interaction.member.user.username}#${interaction.member.user.discriminator}\n \`${interaction.member.user.id}\` `)
             .setTimestamp()
             .setColor("#cbbdd7")
@@ -37,7 +38,7 @@ module.exports = {
             let finalembed = new MessageEmbed()
             .setTitle('Suggestion sent!')
             .setColor('GREEN')
-            .setDescription(`Your suggestion "\`${interaction.data.options[0].value}\`" has successfully been sent to the development server to be reviewed! <:KannaPet:843534507419107338>`)
+            .setDescription(`Your suggestion "\`${suggestion}\`" has successfully been sent to the development server to be reviewed! <:KannaPet:843534507419107338>`)
             
             return client.api.interactions(interaction.id, interaction.token).callback.post({data: {
                 type: 4,
@@ -50,7 +51,7 @@ module.exports = {
                             type: 2,
                             label: "Support Server", 
                             style: 5, 
-                            url: 'https://discord.gg/PVC35NbeTD'
+                            url: 'http://nek.wtf/support'
                           },
                         ]
                        
