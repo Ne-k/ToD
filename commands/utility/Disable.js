@@ -1,3 +1,4 @@
+const { MessageEmbed, Permissions} = require('discord.js')
 module.exports = {
     config: {
         name: "disable",
@@ -6,19 +7,10 @@ module.exports = {
         example: "1) disable nsfw\n2) disable",
     },
     run: async (client, message, args) => {
-        let prefix;
-        const { MessageEmbed, Permissions} = require('discord.js')
-        if (message.author.bot || message.channel.type === "dm") return;
-            try {
-                let fetched = await client.db.fetch(`prefix_${message.guild.id}`);
-                if (fetched == null) {
-                    prefix = client.default.prefix
-                } else {
-                    prefix = fetched
-                }
-            } catch (e) {
-                console.log(e)
-        };
+        
+
+
+               let prefix = process.env.prefix
 try {
     let nsfwstatus = client.db.fetch(`nsfwEnabled_${message.guild.id}`)
     if(nsfwstatus == null) {
