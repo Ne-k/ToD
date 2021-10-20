@@ -14,7 +14,7 @@ module.exports = async (bot, message) => {
       try {
         const unix = Math.floor(new Date().getTime() / 1000);
         const links = await superagent
-.get("https://api.hyperphish.com/gimme-domains"); 
+.get(`${process.env.scamAPI}`); 
 
 const scam = links.body
     const scamRegex = !!scam.find((word) => {
