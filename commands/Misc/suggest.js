@@ -72,6 +72,7 @@ module.exports = {
               },
             ],
 
+
             embeds: [
               new MessageEmbed()
                 .setColor("YELLOW")
@@ -89,6 +90,58 @@ module.exports = {
           })
           .then(async (m) => {
             setTimeout(() => m.delete(), 15000);
+
+    client.on('interactionCreate', async (interaction) => {
+if (interaction.customId === 'agree') {
+  interaction.deferUpdate()
+await setTimeout(() => m.delete(), 0);
+let bugreportembedbecausewhythefucknotsohereistheembedname = new MessageEmbed()
+.setTitle("<:image_20210516_090215:843518719506645003> New Suggestion! <:image_20210516_090215:843518719506645003>")
+.setThumbnail(message.author.avatarURL())
+.addField("__Suggestion:__", reportedbug)
+.addField("__Suggested By:__", `${message.author.tag}\n \`${message.author.id}\` `)
+.addField("__Suggested in:__", `${messageguild}\n \`${message.guild.id}\` `)
+.setTimestamp()
+.setColor("#cbbdd7")
+
+const webhookClient = new WebhookClient({id: `878104339477037067`, token: '3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io'})
+let finalembed = new MessageEmbed()
+.setTitle('Suggestion sent!')
+.setColor('GREEN')
+.setDescription(`Your suggestion "\`${reportedbug}\`" has successfully been sent to the development server to be reviewed! <:KannaPet:843534507419107338>`)
+message.channel.send({
+  "components": [
+    {
+    "type": 1,
+    "components": [
+      {
+        type: 2,
+        label: "Support Server", 
+        style: 5, 
+        url: 'https://discord.gg/PVC35NbeTD'
+      },
+    ]
+   
+    }
+    ],
+  embeds: [finalembed]})
+  
+return webhookClient.send({
+  username: "ToD Suggestions",
+  avatarURL: client.user.avatarURL(),
+  embeds: [bugreportembedbecausewhythefucknotsohereistheembedname]
+});
+
+}
+if (interaction.customId === 'deny') {
+  setTimeout(() => {
+    m.delete()
+  }, 0); 
+  return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription('Successfully canceled your suggestion! <:Ranko_Pog:851883973403344947>')]}).then(msg => setTimeout(() => msg.delete(), 5000))
+  
+}
+})
+
 
             client.on("interactionCreate", async (interaction) => {
               if (interaction.customId === "agree") {

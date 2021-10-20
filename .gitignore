@@ -1,5 +1,4 @@
 node_modules
 .env
-DefaultConfig.json
-*.sqlite
-ToD-waifu.png
+waifu.png
+json.sqlite
