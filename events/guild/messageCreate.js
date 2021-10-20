@@ -2,11 +2,48 @@ const moment = require("moment");
 const Discord = require("discord.js");
 const { Collection, MessageEmbed } = require("discord.js");
 const ms = require("ms");
-const Statcord = require("statcord.js");
+const superagent = require('superagent'); 
+const db = require("quick.db");
 const Timeout = new Collection();
+
 
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
+
+  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+      try {
+        const unix = Math.floor(new Date().getTime() / 1000);
+        const links = await superagent
+.get("https://api.hyperphish.com/gimme-domains"); 
+
+const scam = links.body
+    const scamRegex = !!scam.find((word) => {
+            // if(message.member.roles.cache.find(r => r.id === "824332413407985775") || message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return;
+            const regex = new RegExp(`\\b${word}\\b`, 'i');
+            return regex.test(message.content);
+        })
+        if(scamRegex) {
+          setTimeout(() => {
+            message.delete()
+        }, 0);
+    
+        //const muterole = message.guild.roles.cache.find(r => r.id === <role></role>);
+        //message.member.roles.add(muterole);
+
+        const embed = new MessageEmbed()
+        .setAuthor('❌ Phishing Link Detected')
+        .setColor('RED')
+        .setThumbnail(message.author.avatarURL({ dynamic: true }))
+        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nMessage Deleted <t:${unix}:R>: ||${message.content}||`)
+        .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
+        message.channel.send({content: message.author.id, embeds: [embed]});
+        }
+      } catch(e) {
+        console.log(e)
+      }
+    
+  }
+
 
   let prefix = process.env.prefix;
   if (!message.content.toLowerCase().startsWith(prefix)) return;
@@ -18,7 +55,15 @@ module.exports = async (bot, message) => {
 
   const command = args.shift().toLowerCase();
 
+
+ 
   try {
+    
+  
+
+ 
+
+  
     let args = message.content.slice(prefix.length).trim().split(/ +/g);
     let cmd = args.shift().toLowerCase();
 
@@ -44,8 +89,8 @@ module.exports = async (bot, message) => {
                 .setColor("RANDOM"),
             ],
           })
-          .then((msg) => {
-            setTimeout(() => msg.delete(), 7000);
+          .then((message) => {
+            setTimeout(() => message.delete(), 7000);
           });
       }
       Timeout.set(`${command.name}${message.author.id}`, Date.now() + timeout);

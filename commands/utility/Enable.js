@@ -7,6 +7,7 @@ module.exports = {
     example: "1) enable nsfw\n2) enable",
   },
   run: async (client, message, args) => {
+
     const { MessageEmbed, Permissions } = require("discord.js");
 
     if (message.author.bot || message.channel.type === "dm") return;
@@ -17,7 +18,10 @@ module.exports = {
       if (nsfwstatus == null) {
         nsfwstatus = false;
       }
-
+      let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
+      if (scamstatus == null) {
+        scamstatus = false;
+      }
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
         const table = new AsciiTable()
@@ -25,6 +29,7 @@ module.exports = {
           .setAlign(0, AsciiTable.CENTER)
           .setAlign(1, AsciiTable.CENTER);
         table.addRow("NSFW", nsfwstatus);
+        table.addRow("Anti-Scam", scamstatus);
 
         return message.channel.send({
           embeds: [
@@ -36,7 +41,39 @@ module.exports = {
           ],
         });
       }
+      if (args[0].toLowerCase() === "anti-scam") {
+        if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
+          return message.channel.send({
+            embeds: [
+              new MessageEmbed()
+                .setColor("RED")
+                .setDescription(
+                  "Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>"
+                ),
+            ],
+          });
+        }
+        
 
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false) {
+          client.db.set(`antiscamEnabled_${message.guild.id}`, true)
+          return message.channel.send('Anti-scam now enabled.')
+        }
+
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+          return message.channel.send({
+            embeds: [
+              new MessageEmbed()
+                .setColor("RED")
+                .setDescription(
+                  `Looks like anti-scam is already enabled. <a:awaugery:854870881046102067>`
+                )
+            ],
+          });
+        }
+        
+        
+      }
       if (args[0].toLowerCase() === "nsfw") {
         if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
           return message.channel.send({
@@ -76,7 +113,7 @@ module.exports = {
           });
         }
 
-        if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null) {
+        if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null || client.db.fetch(`nsfwEnabled_${message.guild.id}`) == false) {
           return message.channel
             .send({
               components: [

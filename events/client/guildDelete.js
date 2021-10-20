@@ -2,6 +2,7 @@ module.exports = async (client, guild) => {
   try {
     client.db.delete(`prefix_${guild.id}`);
     client.db.delete(`nsfwEnabled_${guild.id}`);
+    client.db.delete(`antiscamEnabled_${guild.id}`)
 
     require("colors");
     console.log(
