@@ -18,7 +18,7 @@ module.exports = async (bot, message) => {
 
 const scam = links.body
     const scamRegex = !!scam.find((word) => {
-            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.FLAGS.MANAGE_GUILD) return;
+            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
             const regex = new RegExp(`\\b${word}\\b`, 'i');
             return regex.test(message.content);
         })
