@@ -1,6 +1,6 @@
 const moment = require("moment");
 const Discord = require("discord.js");
-const { Collection, MessageEmbed } = require("discord.js");
+const { Collection, MessageEmbed, Permissions } = require("discord.js");
 const ms = require("ms");
 const superagent = require('superagent'); 
 const db = require("quick.db");
@@ -18,7 +18,7 @@ module.exports = async (bot, message) => {
 
 const scam = links.body
     const scamRegex = !!scam.find((word) => {
-            // if(message.member.roles.cache.find(r => r.id === "824332413407985775") || message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return;
+            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.FLAGS.MANAGE_GUILD) return;
             const regex = new RegExp(`\\b${word}\\b`, 'i');
             return regex.test(message.content);
         })
