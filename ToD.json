@@ -1,5 +1,13 @@
 {
    "Truth":[
+      "How would you solve world hunger?",
+      "What is your favorite type of air?",
+      "What's your favorite eye color?",
+      "What's your favorite nickname someone's given you?",
+      "What is one hidden talent that you have?",
+      "Have you ever tried to speak with spirits? if so, what did they say?",
+      "What's your preferred body type romantically/sexually?",
+      "What's your favorite kind of flower?",
       "Send your best art piece?",
       "If you could travel anywhere where would you go and why?",
       "What's your guilty pleasure?",
@@ -15,13 +23,10 @@
       "Would you rather have icecream or frozen yogurt?",
       "Have you ever taken someone else's significant other from them?",
       "Would you ever be able sugar daddy/momma or sugar baby?",
-      "Would you rather have icecream or frozen yogurt?",
       "Do you like true crime?",
-      "If you could give everyone playing a specific superpower what would it be and why?",
       "What's your favorite car?",
       "What's one thing you would change about the server?",
       "What would you do if someone hit on/flirt with your partner in front of you?",
-      "If you had to ship off one of your friends to an abandoned island, who would it be?",
       "If you could be an animal what animal would you be?",
       "What's the last message you sent?",
       "Who is your best friend and why?",
@@ -459,6 +464,9 @@
       "Name your opinion on corn."
    ],
    "Dare":[
+      "Only choose dares for the rest of the game.",
+      "Call your Best friend and Ask them out on a date",
+      "Choose truths for the rest of the game",
       "You have to leave an R-rated voicemail on someones phone.",
       "Have some one pick which article of clothing to remove from you, for the duration of the game.",
       "When was the last time you sexted?",
@@ -546,6 +554,7 @@
       "Go out the front door and do a dramatic death scene, like Daffy Duck of Bugs Bunny would do.",
       "Go up to someone and scare them.",
       "Give a massage to a companion for 5 minutes.",
+      "For the rest of the game you cannot use words that contain an `E`, `I`, `O`, and a `U` in them.",
       "Sing a song in the highest octave you can.",
       "Spit on your hand and wipe it on your face.",
       "Eat a tablespoon of butter.",
@@ -918,12 +927,14 @@
          "What’s the worst lie you’ve ever told?",
          "What’s your worst substance story (getting drunk, high, etc.)?",
          "Do you have any spicy pictures or videos saved on your phone?",
+         "How wide is your asscrack?",
          "How many people have seen you naked?"
         
       ],
    
    "nsfwDare":
       [
+         
           "Fuck someone.", 
        "Send a video of you singing in the shower (without the water on!).",
        "Send a video of you showing every part of your naked body except for . . . you know whats.",
@@ -1064,6 +1075,7 @@
        "Do situps.",
        "Cut some of your hair, even if it is just a small strand.",
        "Eat a raw piece of garlic.",
+       "Be blindfolded for your next turn.",
        "Turn your pants inside out and wear them like that for the rest of the game",
        "Do the worm dance.",
        "Try to put your fist in your mouth",
