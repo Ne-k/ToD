@@ -20,10 +20,7 @@ module.exports = {
       }
       let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
       if (scamstatus == null) {
-        scamstatus = true;
-      }
-      if(scamstatus == 'disabled') {
-        scamstatus = false 
+        scamstatus = false;
       }
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
@@ -61,12 +58,12 @@ module.exports = {
           return message.channel.send({ embeds: [new MessageEmbed().setColor('RED').setDescription("I don't have the permission `MANAGE_MESSAGES` and `MANAGE_ROLES`, I need these permissions to delete detected scam links from the chats and to automaticlly mute them (soon).")]})
         }
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == 'disabled') {
-          client.db.set(`antiscamEnabled_${message.guild.id}`, null)
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false) {
+          client.db.set(`antiscamEnabled_${message.guild.id}`, true)
           return message.channel.send('Anti-scam now enabled.')
         }
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
           return message.channel.send({
             embeds: [
               new MessageEmbed()

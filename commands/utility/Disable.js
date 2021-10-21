@@ -15,10 +15,7 @@ module.exports = {
       }
       let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
       if (scamstatus == null) {
-        scamstatus = true;
-      }
-      if(scamstatus == 'disabled') {
-        scamstatus = false 
+        scamstatus = false;
       }
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
@@ -53,12 +50,12 @@ module.exports = {
           });
         }
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
-          client.db.set(`antiscamEnabled_${message.guild.id}`, 'disabled')
-          return message.channel.send('Anti-scam is now disabled.')
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+          client.db.delete(`antiscamEnabled_${message.guild.id}`)
+          return message.channel.send('Anti Scam is now disabled.')
         }
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == 'disabled') {
+        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
           return message.channel.send({
             embeds: [
               new MessageEmbed()
