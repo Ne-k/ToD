@@ -77,7 +77,7 @@ client.on("ready", async () => {
         break;
       default:
         {
-          client.user.setActivity(`t;help | Slash Commands`, {
+          client.user.setActivity(`t;help | New Anti Scam Link automod`, {
             type: "WATCHING",
           });
         }

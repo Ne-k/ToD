@@ -10,7 +10,7 @@ const Timeout = new Collection();
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
 
-  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
       try {
         const unix = Math.floor(new Date().getTime() / 1000);
         const links = await superagent
@@ -23,9 +23,13 @@ const scam = links.body
             return regex.test(message.content);
         })
         if(scamRegex) {
-          setTimeout(() => {
-            message.delete()
-        }, 0);
+          if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+            setTimeout(() => {
+              if(message.deleteable)
+              message.delete()
+          }, 0);
+          }
+          
     
         //const muterole = message.guild.roles.cache.find(r => r.id === <role></role>);
         //message.member.roles.add(muterole);
@@ -34,8 +38,8 @@ const scam = links.body
         .setAuthor('❌ Phishing Link Detected')
         .setColor('RED')
         .setThumbnail(message.author.avatarURL({ dynamic: true }))
-        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nMessage Deleted <t:${unix}:R>: ||${message.content}||`)
-        .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
+        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R> in the [message](${message.url}):\n ||${message.content}||\n\nClicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).`)
+        .setFooter('You can disable this with t;disable');
         message.channel.send({content: message.author.id, embeds: [embed]});
         }
       } catch(e) {
