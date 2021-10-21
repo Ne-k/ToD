@@ -138,6 +138,12 @@ module.exports = {
                       ) == true
                         ? "+"
                         : "-"
+                      } MANAGE_MESSAGES\n${
+                        message.guild.me.permissions.has(
+                          Permissions.FLAGS.MANAGE_MESSAGES
+                        ) == true
+                          ? "+"
+                          : "-"
                     } EMBED_LINKS\n${
                       message.guild.me.permissions.has(
                         Permissions.FLAGS.ATTACH_FILES
