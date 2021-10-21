@@ -77,7 +77,7 @@ client.on("ready", async () => {
         break;
       default:
         {
-          client.user.setActivity(`t;help | New Anti Scam Link automod`, {
+          client.user.setActivity(`t;help | Use t;enable to enable anti-scam links`, {
             type: "WATCHING",
           });
         }
