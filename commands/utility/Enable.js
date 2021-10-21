@@ -58,22 +58,25 @@ module.exports = {
           return message.channel.send({ embeds: [new MessageEmbed().setColor('RED').setDescription("I don't have the permission `MANAGE_MESSAGES` and `MANAGE_ROLES`, I need these permissions to delete detected scam links from the chats and to automaticlly mute them (soon).")]})
         }
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false) {
-          client.db.set(`antiscamEnabled_${message.guild.id}`, true)
-          return message.channel.send('Anti-scam now enabled.')
-        }
+        let role = message.mentions.roles.first() || message.guild.roles.cache.find(role => role.id === args[1])
 
-        if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
-          return message.channel.send({
-            embeds: [
-              new MessageEmbed()
-                .setColor("RED")
-                .setDescription(
-                  `Looks like anti-scam is already enabled. <a:awaugery:854870881046102067>`
-                )
-            ],
-          });
-        }
+       if(role) {
+        client.db.set(`mutedRole_${message.guild.id}`, role.id)
+       }
+
+          
+          if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false) {
+            client.db.set(`antiscamEnabled_${message.guild.id}`, true)
+            return message.channel.send(`Anti-scam now enabled.\n\nTo automatically mute users when a scam link is detected, run \`${process.env.prefix}enable anti-scam <@role / Role ID>\``)
+          }
+  
+          if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+            return message.channel.send({
+              content: 'Anti-scam now enabled.'
+            });
+          }
+        
+        
         
         
       }

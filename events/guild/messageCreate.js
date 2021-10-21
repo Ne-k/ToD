@@ -26,9 +26,11 @@ const scam = links.body
           setTimeout(() => {
             message.delete()
         }, 0);
-    
-        //const muterole = message.guild.roles.cache.find(r => r.id === <role></role>);
-        //message.member.roles.add(muterole);
+    if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
+      const muterole = bot.db.fetch(`mutedRole_${message.guild.id}`)
+      message.member.roles.add(muterole);
+    }
+        
 
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')

@@ -1,3 +1,4 @@
+const { commaListsAnd } = require("common-tags");
 const { MessageEmbed, Permissions } = require("discord.js");
 module.exports = {
   config: {
@@ -52,6 +53,7 @@ module.exports = {
 
         if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
           client.db.delete(`antiscamEnabled_${message.guild.id}`)
+          client.db.delete(`mutedRole_${message.guild.id}`)
           return message.channel.send('Anti Scam is now disabled.')
         }
 
