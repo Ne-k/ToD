@@ -70,14 +70,14 @@ client.on("ready", async () => {
     switch (rnd) {
       case 1:
         {
-          client.user.setActivity(`t;help | Truth or Dare`, {
+          client.user.setActivity(`${process.env.prefix}help | Truth or Dare`, {
             type: "PLAYING",
           });
         }
         break;
       default:
         {
-          client.user.setActivity(`t;help | Use t;enable to enable anti-scam links`, {
+          client.user.setActivity(`t;help | Use ${process.env.prefix}enable to enable anti-scam links`, {
             type: "WATCHING",
           });
         }
