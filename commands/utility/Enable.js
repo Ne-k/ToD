@@ -24,6 +24,13 @@ module.exports = {
         scamstatus = false;
       }
 
+      let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
+      if(muteRole) {
+        muteRole = true
+      } else {
+        muteRole = false
+      }
+
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
         const table = new AsciiTable()
@@ -32,6 +39,7 @@ module.exports = {
           .setAlign(1, AsciiTable.CENTER);
         table.addRow("NSFW", nsfwstatus);
         table.addRow("Anti-Scam", scamstatus);
+        table.addRow("MuteRole", muteRole);
 
         return message.channel.send({
           embeds: [
