@@ -18,10 +18,12 @@ module.exports = {
       if (nsfwstatus == null) {
         nsfwstatus = false;
       }
+
       let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
       if (scamstatus == null) {
         scamstatus = false;
       }
+
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
         const table = new AsciiTable()
@@ -41,6 +43,44 @@ module.exports = {
           ],
         });
       }
+      if (args[0].toLowerCase() === "muterole") {
+        try {
+          if(!args[1]) {
+            return message.channel.send(`Please mention a muted role or send the role ID, like for example: \`${process.env.prefix}enable muterole @muted\` or \`${process.env.prefix}enable muterole <roleId>\``)
+          }
+  
+          if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
+            return message.channel.send({
+              embeds: [
+                new MessageEmbed()
+                  .setColor("RED")
+                  .setDescription(
+                    "Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>"
+                  ),
+              ],
+            });
+          }
+
+
+
+          let role = message.mentions.roles.first() || message.guild.roles.cache.find(role => role.id === args[1])
+  if(client.db.fetch(`mutedRole_${message.guild.id}`)) {
+    return message.channel.send({content: `Looks like the muterole has already been enabled with the mute role \`${client.db.fetch(`mutedRole_${message.guild.id}`)}\``})
+  }
+  
+          if(args[1]) {
+            
+  
+            client.db.set(`mutedRole_${message.guild.id}`, role.id)
+  
+            return message.channel.send({content: 'Mute role now enabled.'})
+          }
+          
+        }catch (e) {
+          return message.channel.send('Looks like an error occurred, the mute role you provided was not valid.')
+        }
+       
+      }
       if (args[0].toLowerCase() === "anti-scam") {
         if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
           return message.channel.send({
@@ -58,21 +98,16 @@ module.exports = {
           return message.channel.send({ embeds: [new MessageEmbed().setColor('RED').setDescription("I don't have the permission `MANAGE_MESSAGES` and `MANAGE_ROLES`, I need these permissions to delete detected scam links from the chats and to automaticlly mute them (soon).")]})
         }
 
-        let role = message.mentions.roles.first() || message.guild.roles.cache.find(role => role.id === args[1])
-
-       if(role) {
-        client.db.set(`mutedRole_${message.guild.id}`, role.id)
-       }
-
+      
           
           if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false) {
             client.db.set(`antiscamEnabled_${message.guild.id}`, true)
-            return message.channel.send(`Anti-scam now enabled.\n\nTo automatically mute users when a scam link is detected, run \`${process.env.prefix}enable anti-scam <@role / Role ID>\``)
+            return message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('Anti scam is now enabled!').setFooter('To enable automute, enable the muterole option.').setThumbnail(message.author.avatarURL({dynamic: true}))]})
           }
   
           if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
             return message.channel.send({
-              content: 'Anti-scam now enabled.'
+              content: 'Uh oh, looks like Anti-Scam is already enabled.'
             });
           }
         

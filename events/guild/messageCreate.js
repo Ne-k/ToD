@@ -40,6 +40,7 @@ const scam = links.body
         .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
         message.channel.send({content: message.author.id, embeds: [embed]});
         }
+        // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
       } catch(e) {
         console.log(e)
       }

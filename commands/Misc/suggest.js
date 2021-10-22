@@ -21,6 +21,7 @@ module.exports = {
       });
     } else {
       let reportedbug = db.set("suggestion", `${args.join(" ").slice(0)}`);
+
       let messageguild = message.guild.name;
 
       try {
@@ -118,6 +119,7 @@ module.exports = {
                   token:
                     "3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io",
                 });
+                
                 let finalembed = new MessageEmbed()
                   .setTitle("Suggestion sent!")
                   .setColor("GREEN")
@@ -173,7 +175,9 @@ module.exports = {
 
       talkedRecently.add(message.author.id);
       setTimeout(() => {
+
         talkedRecently.delete(message.author.id);
+
       }, 60000);
     }
 
