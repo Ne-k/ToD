@@ -119,13 +119,15 @@ module.exports = {
                   token:
                     "3Q6qRGlq2Zc9EdjPIpI3_LiZggM7nlu5fmL7gjYTviK-05pRMOMHX1Q65iEyzOEKL4Io",
                 });
+                db.delete("suggestion");
                 
                 let finalembed = new MessageEmbed()
                   .setTitle("Suggestion sent!")
                   .setColor("GREEN")
                   .setDescription(
-                    `Your suggestion "\`${reportedbug}\`" has successfully been sent to the development server to be reviewed! <:KannaPet:843534507419107338>`
+                    `Your suggestion has successfully been sent to the development server to be reviewed! <:KannaPet:843534507419107338>`
                   );
+                  
                 message.channel.send({
                   components: [
                     {
@@ -181,6 +183,6 @@ module.exports = {
       }, 60000);
     }
 
-    db.delete("suggestion");
+    
   },
 };
