@@ -23,7 +23,7 @@ module.exports = {
         let codeblock = "```";
 
         try {
-          childProcess.exec("git pull", {}, (err, stdout, stderr) => {
+          childProcess.exec(args.join(" "), {}, (err, stdout, stderr) => {
             if (err)
               return message.channel.send({
                 embeds: [
