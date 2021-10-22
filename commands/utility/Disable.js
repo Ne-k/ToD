@@ -14,10 +14,20 @@ module.exports = {
       if (nsfwstatus == null) {
         nsfwstatus = false;
       }
+
       let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
       if (scamstatus == null) {
         scamstatus = false;
       }
+
+      let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
+      if(muteRole) {
+        muteRole = true
+      } else {
+        muteRole = false
+      }
+
+
       if (!args[0]) {
         const AsciiTable = require("ascii-table");
         const table = new AsciiTable()
@@ -26,6 +36,7 @@ module.exports = {
           .setAlign(1, AsciiTable.CENTER);
         table.addRow("NSFW", nsfwstatus);
         table.addRow("Anti-Scam", scamstatus);
+        table.addRow("MuteRole", muteRole);
 
         return message.channel.send({
           embeds: [
@@ -36,6 +47,32 @@ module.exports = {
               ),
           ],
         });
+      }
+
+      if (args[0].toLowerCase() === "muterole") {
+        if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
+          return message.channel.send({
+            embeds: [
+              new MessageEmbed()
+                .setColor("RED")
+                .setDescription(
+                  "Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>"
+                ),
+            ],
+          });
+        } else {
+          if( client.db.fetch(`mutedRole_${message.guild.id}`) == null) {
+            return message.channel.send({embeds: [
+              new MessageEmbed().setColor('RED').setDescription(`Whoops, looks like you have to enable the muterole using \n\`${process.env.prefix}enable muterole <@muted/role ID>\``)
+            ]})
+          }
+          client.db.delete(`mutedRole_${message.guild.id}`) 
+
+          return message.channel.send('Mute role now disabled.')
+        }
+
+
+
       }
 
       if (args[0].toLowerCase() === "anti-scam") {
@@ -53,7 +90,6 @@ module.exports = {
 
         if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
           client.db.delete(`antiscamEnabled_${message.guild.id}`)
-          client.db.delete(`mutedRole_${message.guild.id}`)
           return message.channel.send('Anti Scam is now disabled.')
         }
 
