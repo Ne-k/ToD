@@ -2,6 +2,7 @@ const moment = require("moment");
 const Discord = require("discord.js");
 const { Collection, MessageEmbed, Permissions } = require("discord.js");
 const ms = require("ms");
+require('colors')
 const superagent = require('superagent'); 
 const db = require("quick.db");
 const Timeout = new Collection();
@@ -39,6 +40,7 @@ const scam = links.body
         .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R> in the [message](${message.url}):\n ||${message.content}||`)
         .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
         message.channel.send({content: message.author.id, embeds: [embed]});
+        console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
         }
         // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
       } catch(e) {
