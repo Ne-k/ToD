@@ -31,7 +31,9 @@ const scam = links.body
       const muterole = bot.db.fetch(`mutedRole_${message.guild.id}`)
       message.member.roles.add(muterole);
     }
-        
+        if(message.guild.id == '439866052684283905') {
+          message.channel.send(`<@!702169463595729009>`)
+        }
 
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')

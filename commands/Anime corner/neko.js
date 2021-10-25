@@ -9,14 +9,12 @@ module.exports = {
     const Discord = require("discord.js");
     try {
       /* https://api.kaedee.xyz/v1/cdn/<anime/nsfw/sfw>/<category> */
-      fetch(`https://api.kaedee.xyz/v1/cdn/anime/neko`, {
-        headers: { Authorization: process.env.KAEDE_CDN_KEY },
-      })
+      fetch(`https://api.waifu.pics/sfw/neko`)
         .then((res) => res.json())
         .then((data) => {
           const embed = new Discord.MessageEmbed()
             .setColor("RANDOM")
-            .setImage(data.path);
+            .setImage(data.url);
           return message.channel.send({ embeds: [embed] });
         });
     } catch (e) {
