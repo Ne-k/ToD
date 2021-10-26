@@ -10,7 +10,7 @@ module.exports = {
       let userAccess = new Discord.MessageEmbed()
         .setTitle("eval")
         .setDescription(
-          "Sorry, the `eval` command can only be executed by the Developer."
+          "Sorry, the `relaod` command can only be executed by the Developer."
         )
         .setColor("#cdf785");
       message.channel.send({ embeds: [userAccess] });

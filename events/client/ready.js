@@ -5,6 +5,9 @@ module.exports = async (bot) => {
   process.on("unhandledRejection", (error) => {
     return;
   });
+
+  bot.shard.broadcastEval((client) => client.user.setStatus("online"));
+
   const { MessageEmbed, WebhookClient } = require("discord.js");
 
   const webhookClient = new WebhookClient({

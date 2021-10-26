@@ -44,7 +44,7 @@ module.exports = {
         .setDescription("Now rebooting, be back in a couple minutes. . .");
       message.channel.send({ embeds: [RebootingEmbed] });
 
-      exec("pm2 restart ToD", (error, stdout, stderr) => {
+      exec("pm2 restart " + args.join(" "), (error, stdout, stderr) => {
         if (error) {
           console.log(error || `No error`);
         }
