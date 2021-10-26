@@ -25,7 +25,9 @@ const scam = links.body
         })
         if(scamRegex) {
           setTimeout(() => {
-            message.delete()
+            if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+              message.delete()
+            } 
         }, 0);
     if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
       const muterole = bot.db.fetch(`mutedRole_${message.guild.id}`)
