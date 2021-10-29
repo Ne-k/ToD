@@ -15,9 +15,9 @@ module.exports = async (bot, message) => {
 
    
 
-      try {
+     
         const unix = Math.floor(new Date().getTime() / 1000);
-/*
+        /*
         const links = await superagent
         .get(`${process.env.scamAPI}`); 
         
@@ -37,11 +37,10 @@ module.exports = async (bot, message) => {
           },
 
       }).then(res => res.json())
-      if(data.match == false || !data.match) {
-          return;
-        }
+
 
         if(data.match || /^((s[tl][era][ear]r{0,1}[amn].{0,2}.*\.)|(affix.*\.)|(cloud(9team|team9).*\.)|(cs-.*\.)|(csgo.*\.)|(discor.*\.)|(epicg.*\.)|(esl[-tpog].*\.)|(navi.*\.)|(natus-vin.*\.)|(pubg(-|\d).*\.)|(roblox.*\.)|(rust-.*\.)|(blox.*\.)|(robux.*\.))\w*$/i.test(message.content)) {
+          
           if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
           setTimeout(() => {
             if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
@@ -67,14 +66,13 @@ module.exports = async (bot, message) => {
         console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
         return message.channel.send({content: message.author.id, embeds: [embed]});
         
+        } else {
+return
         }
         // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
 
 
        
-      } catch(e) {
-        console.log(e)
-      }
   
   }
 

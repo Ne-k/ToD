@@ -6,8 +6,7 @@ module.exports = {
   run: async (client, message, args) => {
     const { MessageEmbed, Permissions } = require("discord.js");
 
-    return message.channel
-      .send({
+    return message.channel.send({
         content: "Test",
 
         components: [
