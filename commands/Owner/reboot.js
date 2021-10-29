@@ -16,7 +16,9 @@ module.exports = {
     if (process.env.developers.includes(message.author.id)) {
       const { MessageEmbed, WebhookClient } = require("discord.js");
       const { exec } = require("child_process");
-      bot.shard.broadcastEval((client) => client.user.setStatus("idle"));
+
+      if(args[0] === "2") {
+        bot.shard.broadcastEval((client) => client.user.setStatus("idle"));
       bot.user.setActivity(`Rebooting. . .`, {
         type: "LISTENING",
       });
@@ -41,8 +43,10 @@ module.exports = {
       });
       let RebootingEmbed = new MessageEmbed()
         .setColor("GREEN")
-        .setDescription("Now rebooting, be back in a couple minutes. . .");
+        .setDescription(`Now rebooting process \`${args[0]}\``);
       message.channel.send({ embeds: [RebootingEmbed] });
+      }
+      
 
       exec("pm2 restart " + args.join(" "), (error, stdout, stderr) => {
         if (error) {

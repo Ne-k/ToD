@@ -80,6 +80,15 @@ module.exports = {
                         value: "misc",
                         description: "Show all misc commands.",
                       },
+                      {
+                        label: `Delete`,
+                        emoji: {
+                          name: "❌",
+                          id: null,
+                        },
+                        value: "delete",
+                        description: "Delete the help embed.",
+                      },
                     ],
 
                     placeholder: "Choose a category",
@@ -197,7 +206,11 @@ module.exports = {
                   ],
                 });
               }
-
+              if (interaction.values[0] == `delete`) {
+                setTimeout(() => {
+                  msg.delete();
+                }, 0);
+              }
               if (interaction.values[0] == "misc") {
                 interaction.deferUpdate();
 
@@ -220,7 +233,9 @@ module.exports = {
                 });
               }
             });
+            
           });
+          
       }
 
       /*
