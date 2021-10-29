@@ -35,7 +35,7 @@ module.exports = async (bot, message) => {
               "Content-Type": "application/json",
               "User-Agent": "Anti-phishing (Sasiko#1234 / 148619350700589056)",
           },
-          
+
       }).then(res => res.json())
       if(data.match == false || !data.match) {
           return;
@@ -56,7 +56,7 @@ module.exports = async (bot, message) => {
       }
     }
         if(message.guild.id == '439866052684283905') {
-          message.channel.send(`<@!702169463595729009>`)
+          return message.channel.send(`<@!702169463595729009>`)
         }
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')
