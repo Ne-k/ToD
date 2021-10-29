@@ -26,7 +26,7 @@
     "mal-scraper": "^2.11.3",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.12.14",
+    "mongoose": "^6.0.0",
     "node-fetch": "^2.6.1",
     "node-kitsu": "^1.1.1",
     "os": "^0.1.1",
