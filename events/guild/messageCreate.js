@@ -35,12 +35,14 @@ module.exports = async (bot, message) => {
               "Content-Type": "application/json",
               "User-Agent": "Anti-phishing (Sasiko#1234 / 148619350700589056)",
           },
+          
       }).then(res => res.json())
-      if(data.match == false) {
+      if(data.match == false || !data.match) {
           return;
         }
 
-        if(data.match == true && !message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || !message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+        if(data.match) {
+          if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
           setTimeout(() => {
             if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
               message.delete()
