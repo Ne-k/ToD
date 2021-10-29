@@ -11,9 +11,6 @@ module.exports = async (client, guild) => {
     Left guild ${guild.id}, data wipe has been successful.`.green
     );
   } catch (e) {
-    console.log(
-      `
-        Looks like there has been an error wiping the data. - ${e}`.red
-    );
+    console.log(`Looks like there has been an error wiping the data. - ${e}`.red);
   }
 };
