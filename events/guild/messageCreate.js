@@ -36,8 +36,11 @@ module.exports = async (bot, message) => {
               "User-Agent": "Anti-phishing (Sasiko#1234 / 148619350700589056)",
           },
       }).then(res => res.json())
-      
-        if(data.match && !message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || !message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+      if(data.match == false) {
+          return;
+        }
+
+        if(data.match == true && !message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || !message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
           setTimeout(() => {
             if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
               message.delete()
@@ -66,9 +69,7 @@ module.exports = async (bot, message) => {
         // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
 
 
-        if(data.match == false) {
-          return;
-        }
+       
       } catch(e) {
         console.log(e)
       }
