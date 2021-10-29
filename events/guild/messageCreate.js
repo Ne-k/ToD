@@ -17,7 +17,7 @@ module.exports = async (bot, message) => {
 
       try {
         const unix = Math.floor(new Date().getTime() / 1000);
-
+/*
         const links = await superagent
         .get(`${process.env.scamAPI}`); 
         
@@ -27,12 +27,23 @@ module.exports = async (bot, message) => {
             const regex = new RegExp(`\\b${word}\\b`, 'i');
             return regex.test(message.content);
         })
-        if(scamRegex) {
+        */
+        let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
+          method: "post",
+          body: JSON.stringify({ message: message.content}),
+          headers: {
+              "Content-Type": "application/json",
+              "User-Agent": "Anti-phishing (Sasiko#1234 / 148619350700589056)",
+          },
+      }).then(res => res.json())
+      
+        if(data.match && !message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || !message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || !message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) {
           setTimeout(() => {
             if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
               message.delete()
             } 
         }, 0);
+
     if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
       if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
       const muterole = bot.db.fetch(`mutedRole_${message.guild.id}`)
@@ -42,23 +53,26 @@ module.exports = async (bot, message) => {
         if(message.guild.id == '439866052684283905') {
           message.channel.send(`<@!702169463595729009>`)
         }
-
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')
         .setColor('RED')
         .setThumbnail(message.author.avatarURL({ dynamic: true }))
-        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R> in the [message](${message.url}):\n ||${message.content}||`)
+        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${message.content}||`)
         .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
         console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
         return message.channel.send({content: message.author.id, embeds: [embed]});
         
         }
         // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
+
+
+        if(data.match == false) {
+          return;
+        }
       } catch(e) {
         console.log(e)
       }
-    
-      
+  
   }
 
 
