@@ -2,11 +2,9 @@ require("colors");
 require("dotenv").config();
 const moment = require("moment");
 module.exports = async (bot) => {
-  process.on("unhandledRejection", (error) => {
-    return;
-  });
+  process.on("unhandledRejection", (error) => {return});
 
-  bot.shard.broadcastEval((client) => client.user.setStatus("online"));
+  await bot.shard.broadcastEval((client) => client.user.setStatus("online"));
 
   const { MessageEmbed, WebhookClient } = require("discord.js");
 
@@ -14,17 +12,15 @@ module.exports = async (bot) => {
     id: process.env.CLIENT_LOGGING_ID,
     token: process.env.CLIENT_LOGGING_WEBHOOK,
   });
-  webhookClient.send({
+  await webhookClient.send({
     username: "Status",
     avatarURL: bot.user.avatarURL(),
     embeds: [
       new MessageEmbed()
-        .setColor("GREEN")
-        .setDescription(
-          `[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`
-        )
-        .setTimestamp()
-        .setFooter(moment(Date.now()).format("LLL")),
+          .setColor("GREEN")
+          .setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`)
+          .setTimestamp()
+          .setFooter(moment(Date.now()).format("LLL")),
     ],
   });
 
@@ -79,16 +75,11 @@ Signed into ${bot.user.tag}
     bot.shard.broadcastEval((bot) => bot.guilds.cache.size),
   ];
   return Promise.all(promises).then((results) => {
-    const totalGuilds = results[0].reduce(
-      (acc, guildCount) => acc + guildCount,
-      0
-    );
+    const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 
     const fetch = require("node-fetch");
     const BOATS = require("boats.js");
-    const Boats = new BOATS(
-      "2NFEeaWliuz7JFTjl1nELbQWxoDMgO3FbuJtcAiPFwYZEUmziciJY9ycj1Uek1x8DVA2ZaDyTamQzzMwKCpvfAkkSGIcNtjJ9BNqmSkjBPF5im07gzCd4jak4zCepd7umcKp1FWjU6pemcfbBmMcok0Nspx"
-    );
+    const Boats = new BOATS("2NFEeaWliuz7JFTjl1nELbQWxoDMgO3FbuJtcAiPFwYZEUmziciJY9ycj1Uek1x8DVA2ZaDyTamQzzMwKCpvfAkkSGIcNtjJ9BNqmSkjBPF5im07gzCd4jak4zCepd7umcKp1FWjU6pemcfbBmMcok0Nspx");
     Boats.postStats(totalGuilds, "752306970467237970")
       .then(() => {
         console.log("Dboats: ".blue + "[ Successfully updated server count. ]");
