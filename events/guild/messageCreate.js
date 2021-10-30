@@ -11,7 +11,7 @@ const Timeout = new Collection();
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
 
-  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
 
    
 
@@ -39,7 +39,7 @@ module.exports = async (bot, message) => {
       }).then(res => res.json())
 
 
-        if(data.match || /^((s[tl][era][ear]r{0,1}[amn].{0,2}.*\.)|(affix.*\.)|(cloud(9team|team9).*\.)|(cs-.*\.)|(csgo.*\.)|(discor.*\.)|(epicg.*\.)|(esl[-tpog].*\.)|(navi.*\.)|(natus-vin.*\.)|(pubg(-|\d).*\.)|(roblox.*\.)|(rust-.*\.)|(blox.*\.)|(robux.*\.))\w*$/i.test(message.content)) {
+        if(data.match || /^((s[tl][era][ear]r?[amn].{0,2}.*\.)|(affix.*\.)|(cloud(9team|team9).*\.)|(cs-.*\.)|(csgo.*\.)|(discor.*\.)|(epicg.*\.)|(esl[-tpog].*\.)|(navi.*\.)|(natus-vin.*\.)|(pubg(-|\d).*\.)|(roblox.*\.)|(rust-.*\.)|(blox.*\.)|(robux.*\.))\w*$/i.test(message.content)) {
           
           if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
           setTimeout(() => {
@@ -50,11 +50,11 @@ module.exports = async (bot, message) => {
 
     if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
       if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
-      const muterole = bot.db.fetch(`mutedRole_${message.guild.id}`)
-      message.member.roles.add(muterole);
+          const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
+      message.member.roles.add(muter);
       }
     }
-        if(message.guild.id == '439866052684283905') {
+        if(message.guild.id === '439866052684283905') {
           return message.channel.send(`<@!702169463595729009>`)
         }
         const embed = new MessageEmbed()

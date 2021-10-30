@@ -66,7 +66,7 @@ client.on("ready", async () => {
   // require('statcord.js').ShardingClient.post(client)
 
   setInterval(() => {
-    var rnd = Math.floor(Math.random() * 2);
+    const rnd = Math.floor(Math.random() * 2);
     switch (rnd) {
       case 1:
         {
@@ -132,7 +132,7 @@ client.on("ready", async () => {
   for (const file of cFiles) {
     const command = require(`./slash/${file}`);
 
-    if (command.global == true) {
+    if (command.global === true) {
       client.api.applications(client.user.id).commands.post({
         data: {
           name: command.slash.name,
@@ -218,9 +218,7 @@ client.on("messageDelete", async (message, channel) => {
     msg: message.content,
     user: message.author.tag,
     profilephoto: message.author.displayAvatarURL(),
-    image: message.attachments.first()
-      ? message.attachments.first().proxyURL
-      : null,
+    image: message.attachments.first() ? message.attachments.first().proxyURL : null,
     date: message.createdTimestamp,
   });
 });
