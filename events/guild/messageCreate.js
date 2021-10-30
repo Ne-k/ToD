@@ -11,7 +11,7 @@ const Timeout = new Collection();
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
 
-  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
+  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
 
    
 
@@ -62,10 +62,8 @@ module.exports = async (bot, message) => {
         .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${message.content}||`)
         .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
         console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
-        return message.channel.send({content: message.author.id, embeds: [embed]});
+        message.channel.send({content: message.author.id, embeds: [embed]});
         
-        } else {
-return
         }
         // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
 
