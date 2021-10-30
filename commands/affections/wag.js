@@ -16,11 +16,7 @@ module.exports = {
     let quotes = args.join(" ");
     waifu
       .setImage(link)
-      .setAuthor(
-        `${message.author.username} is wagging their tail.`,
-        message.author.avatarURL({ dynamic: true })
-      )
-
+      .setAuthor(`${message.author.username} is wagging their tail.`, message.author.avatarURL({ dynamic: true }))
       .setDescription(quotes)
       .setColor("RANDOM");
 

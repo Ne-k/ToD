@@ -11,17 +11,11 @@ module.exports = {
   run: async (bot, message, args) => {
     const waifu = new Discord.MessageEmbed();
     let quotes = args.join(" ");
-    const { url } = await fetch(`${waifuAPI}/sfw/dance`).then((res) =>
-      res.json()
-    );
+    const { url } = await fetch(`${waifuAPI}/sfw/dance`).then((res) => res.json());
 
     waifu
       .setImage(url)
-      .setAuthor(
-        `${message.author.username} is dancing.`,
-        message.author.avatarURL({ dynamic: true })
-      )
-
+      .setAuthor(`${message.author.username} is dancing.`, message.author.avatarURL({ dynamic: true }))
       .setDescription(quotes)
       .setColor("RANDOM");
 

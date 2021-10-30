@@ -18,9 +18,7 @@ module.exports = {
         )
       );
     if (!user) {
-      return message.channel.send(
-        "Please input a (valid) user to lick them <:Megumin_Blush:843537370107215913>"
-      );
+      return message.channel.send("Please input a (valid) user to lick them <:Megumin_Blush:843537370107215913>");
     }
 
     const waifuembed2 = new Discord.MessageEmbed();
@@ -31,11 +29,7 @@ module.exports = {
     let quotes = args.slice(1).join(" ");
     waifuembed2
       .setImage(url)
-      .setAuthor(
-        `${message.author.username} licked ${user.user.tag}`,
-        message.author.avatarURL({ dynamic: true })
-      )
-
+      .setAuthor(`${message.author.username} licked ${user.user.tag}`, message.author.avatarURL({ dynamic: true }))
       .setDescription(quotes)
       .setColor("RANDOM");
 

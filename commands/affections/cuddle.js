@@ -10,9 +10,7 @@ module.exports = {
     usage: "cuddle @user/id",
   },
   run: async (bot, message, args) => {
-    const { url } = await fetch(`${waifuAPI}/sfw/cuddle`).then((res) =>
-      res.json()
-    );
+    const { url } = await fetch(`${waifuAPI}/sfw/cuddle`).then((res) => res.json());
     let quotes = args.slice(1).join(" ");
 
     let user =
@@ -27,10 +25,7 @@ module.exports = {
       let embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setImage(url)
-        .setAuthor(
-          `${message.author.username} wants a cuddle. . .`,
-          message.author.avatarURL({ dynamic: true })
-        );
+        .setAuthor(`${message.author.username} wants a cuddle. . .`, message.author.avatarURL({ dynamic: true }));
       return message.channel.send(embed);
     }
 

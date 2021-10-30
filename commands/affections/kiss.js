@@ -18,9 +18,7 @@ module.exports = {
         )
       );
     if (!user) {
-      return message.channel.send(
-        "Please input a (valid) user to kiss them <:Megumin_Blush:843537370107215913>"
-      );
+      return message.channel.send("Please input a (valid) user to kiss them <:Megumin_Blush:843537370107215913>");
     }
 
     let ishorny = [
@@ -42,16 +40,11 @@ module.exports = {
     let hornyresult = Math.floor(Math.random() * ishorny.length);
     const waifu = new Discord.MessageEmbed();
 
-    const { url } = await fetch(`${waifuAPI}/sfw/kiss`).then((res) =>
-      res.json()
-    );
+    const { url } = await fetch(`${waifuAPI}/sfw/kiss`).then((res) => res.json());
     let quotes = args.slice(1).join(" ");
     waifu
       .setImage(url)
-      .setAuthor(
-        `${message.author.username} has kissed ${user.user.tag}`,
-        message.author.avatarURL({ dynamic: true })
-      )
+      .setAuthor(`${message.author.username} has kissed ${user.user.tag}`, message.author.avatarURL({ dynamic: true }))
 
       .setDescription(quotes)
       .setColor("RANDOM")

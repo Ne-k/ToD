@@ -18,22 +18,15 @@ module.exports = {
         )
       );
     if (!user) {
-      return message.channel.send(
-        "Please input a (valid) user to bite with them <:Megumin_Blush:843537370107215913>"
-      );
+      return message.channel.send("Please input a (valid) user to bite with them <:Megumin_Blush:843537370107215913>");
     }
 
     let quotes = args.slice(1).join(" ");
 
-    const { url } = await fetch(`${waifuAPI}/sfw/bite`).then((res) =>
-      res.json()
-    );
+    const { url } = await fetch(`${waifuAPI}/sfw/bite`).then((res) => res.json());
 
     const waifu = new Discord.MessageEmbed()
-      .setAuthor(
-        `${message.author.username} has bitten ${user.user.tag}`,
-        message.author.avatarURL({ dynamic: true })
-      )
+      .setAuthor(`${message.author.username} has bitten ${user.user.tag}`, message.author.avatarURL({ dynamic: true }))
       .setDescription(quotes)
       .setImage(url)
       .setColor("RANDOM");

@@ -20,9 +20,7 @@ module.exports = {
             )
           );
         if (!user) {
-          return message.channel.send(
-            "Please input a (valid) user to tickle them <:Megumin_Blush:843537370107215913>"
-          );
+          return message.channel.send("Please input a (valid) user to tickle them <:Megumin_Blush:843537370107215913>");
         }
 
         const waifu = new Discord.MessageEmbed();
@@ -31,12 +29,10 @@ module.exports = {
 
         waifu
           .setImage(data.link)
-          .setAuthor(
-            `${message.author.username} tickled ${user.user.tag}`,
-            message.author.avatarURL({ dynamic: true })
-          )
+          .setAuthor(`${message.author.username} tickled ${user.user.tag}`, message.author.avatarURL({ dynamic: true }))
           .setDescription(quotes)
           .setColor("RANDOM");
+
         message.channel.send({ embeds: [waifu] });
       });
   },

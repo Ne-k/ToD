@@ -19,9 +19,7 @@ module.exports = {
         )
       );
     if (!user) {
-      return message.channel.send(
-        "Please input a (valid) user to hug them <:Megumin_Blush:843537370107215913>"
-      );
+      return message.channel.send("Please input a (valid) user to hug them <:Megumin_Blush:843537370107215913>");
     }
 
     let quotes = args.slice(1).join(" ");
@@ -34,11 +32,7 @@ module.exports = {
 
     waifu
       .setImage(url)
-      .setAuthor(
-        `${message.author.username} is hugging with ${user.user.tag}`,
-        message.author.avatarURL({ dynamic: true })
-      )
-
+      .setAuthor(`${message.author.username} is hugging with ${user.user.tag}`, message.author.avatarURL({ dynamic: true }))
       .setDescription(quotes)
       .setColor("RANDOM");
 
