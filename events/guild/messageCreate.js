@@ -54,9 +54,7 @@ module.exports = async (bot, message) => {
       message.member.roles.add(muter);
       }
     }
-        if(message.guild.id === '439866052684283905') {
-          message.channel.send(`<@!702169463595729009>`)
-        }
+
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')
         .setColor('RED')
