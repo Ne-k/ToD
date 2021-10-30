@@ -55,7 +55,7 @@ module.exports = async (bot, message) => {
       }
     }
         if(message.guild.id === '439866052684283905') {
-          return message.channel.send(`<@!702169463595729009>`)
+          message.channel.send(`<@!702169463595729009>`)
         }
         const embed = new MessageEmbed()
         .setAuthor('❌ Phishing Link Detected')
