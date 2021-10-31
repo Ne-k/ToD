@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@top-gg/sdk": "^3.0.9",
-    "animequotes": "^1.1.2",
+    "animequotes": "^2.0.0",
     "ascii-table": "0.0.9",
     "boats.js": "^2.5.1",
     "booru": "^2.4.0",
