@@ -10,13 +10,11 @@ module.exports = {
 
     fetch(`https://gallery.fluxpoint.dev/api/sfw/anime`, {
       headers: { Authorization: process.env.Fluxpoint_API_Token },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    }).then((res) => res.json()).then((data) => {
         let fluxAzureEmbed = new Discord.MessageEmbed()
           .setColor("#CACACA")
           .setImage(data.file);
-        message.channel.send({ embeds: [fluxAzureEmbed] });
+        return message.channel.send({ embeds: [fluxAzureEmbed] });
       });
   },
 };

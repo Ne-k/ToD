@@ -65,7 +65,7 @@ module.exports = {
       }
       
 
-      exec("pm2 restart " + args.join(" "), (error, stdout, stderr) => {
+     await exec("pm2 restart " + args.join(" "), (error, stdout, stderr) => {
         if (error) {
           console.log(error || `No error`);
         }
@@ -77,6 +77,6 @@ module.exports = {
     let RebootingEmbed = new MessageEmbed()
         .setColor("GREEN")
         .setDescription(`Now rebooting process \`${args[0]}\``);
-    message.channel.send({ embeds: [RebootingEmbed] });
+    return message.channel.send({ embeds: [RebootingEmbed] });
   },
 };
