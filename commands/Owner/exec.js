@@ -11,7 +11,7 @@ module.exports = {
     message.channel
       .send("<a:z_loading:824333262637367307> Executing. . .")
       .then((m) => {
-        if (message.author.id != "750510159289254008")
+        if (message.author.id !== "750510159289254008")
           return message.channel.send(
             "The command you are trying to use is not available."
           );
@@ -50,7 +50,7 @@ module.exports = {
             .setColor("RED");
           message.channel.send({ embeds: [errorEmbed] });
         }
-        m.delete();
+          setTimeout(() => m.delete(), 0);
       });
   },
 };
