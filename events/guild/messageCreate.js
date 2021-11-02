@@ -1,12 +1,21 @@
 const moment = require("moment");
-const Discord = require("discord.js");
 const { Collection, MessageEmbed, Permissions } = require("discord.js");
 const ms = require("ms");
 require('colors')
-const superagent = require('superagent'); 
 const db = require("quick.db");
 const Timeout = new Collection();
 
+/*
+        const links = await superagent
+        .get(`${process.env.scamAPI}`);
+
+        const scam = links.body
+        const scamRegex = !!scam.find((word) => {
+            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
+            const regex = new RegExp(`\\b${word}\\b`, 'i');
+            return regex.test(message.content);
+        })
+        */
 
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
@@ -17,17 +26,6 @@ module.exports = async (bot, message) => {
 
      
         const unix = Math.floor(new Date().getTime() / 1000);
-        /*
-        const links = await superagent
-        .get(`${process.env.scamAPI}`); 
-        
-        const scam = links.body
-        const scamRegex = !!scam.find((word) => {
-            if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
-            const regex = new RegExp(`\\b${word}\\b`, 'i');
-            return regex.test(message.content);
-        })
-        */
 
         let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
           method: "post",

@@ -20,10 +20,7 @@ const statcord = new Statcord.ShardingClient({
 
 require("colors");
 manager.on("shardCreate", (shard) => {
-  console.log(
-    `Sharding Manager: `.green +
-      `Launched shard #${shard.id}\n─────────────────────────────── `
-  );
+  console.log(`Sharding Manager: `.green + `Launched shard #${shard.id}\n─────────────────────────────── `);
 });
 
 manager.spawn({ amount: "auto", delay: undefined, timeout: -1 });

@@ -5,16 +5,11 @@ module.exports = {
     aliases: ["ex"],
   },
   run: async (bot, message, args) => {
-    let t0ken = [...bot.token]
-      .map((v, i, a) => a[Math.floor(Math.random() * a.length)])
-      .join("");
-    message.channel
-      .send("<a:z_loading:824333262637367307> Executing. . .")
-      .then((m) => {
+    let t0ken = [...bot.token].map((v, i, a) => a[Math.floor(Math.random() * a.length)]).join("");
+
+    message.channel.send("<a:z_loading:824333262637367307> Executing. . .").then((m) => {
         if (message.author.id !== "750510159289254008")
-          return message.channel.send(
-            "The command you are trying to use is not available."
-          );
+          return message.channel.send("The command you are trying to use is not available.");
         if (!args.join(" "))
           return message.reply("Please input a console command.");
 
@@ -23,7 +18,7 @@ module.exports = {
         let codeblock = "```";
 
         try {
-          childProcess.exec(args.join(" "), {}, (err, stdout, stderr) => {
+          childProcess.exec(args.join(" "), {}, (err, stdout) => {
             if (err)
               return message.channel.send({
                 embeds: [
@@ -34,9 +29,7 @@ module.exports = {
                 ],
               });
 
-            message.channel.send({
-              content: `${codeblock}diff\n${stdout}${codeblock}`,
-            });
+            message.channel.send({content: `${codeblock}diff\n${stdout}${codeblock}`});
           });
         } catch (err) {
           let errorEmbed = new Discord.MessageEmbed()

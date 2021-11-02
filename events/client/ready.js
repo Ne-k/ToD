@@ -12,13 +12,14 @@ module.exports = async (bot) => {
     id: process.env.CLIENT_LOGGING_ID,
     token: process.env.CLIENT_LOGGING_WEBHOOK,
   });
+  let res = await bot.shard.broadcastEval((bot) => bot.guilds.cache.size)
   await webhookClient.send({
     username: "Status",
     avatarURL: bot.user.avatarURL(),
     embeds: [
       new MessageEmbed()
           .setColor("GREEN")
-          .setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`)
+          .setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected with \n\`${res.reduce((prev, val) => prev + val, 0).toLocaleString()} servers\`.`)
           .setTimestamp()
           .setFooter(moment(Date.now()).format("LLL")),
     ],

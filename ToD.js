@@ -88,18 +88,8 @@ client.on("ready", async () => {
 
   /* --------------------------------------- SLASH COMMANDS --------------------------------------- */
 
-  client.shard
-    .broadcastEval((bot) => bot.guilds.cache.size)
-    .then((res) => {
-      console.log(
-        `Info: `.grey +
-          `[` +
-          ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`
-            .green +
-          ` servers, ` +
-          `${client.options.shardCount.toLocaleString()}`.green +
-          ` shard(s) ]\n`
-      );
+  client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
+      console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`);
     });
   /*
   })
@@ -184,19 +174,10 @@ client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
   let prefix = process.env.prefix;
   try {
-    if (
-      message.mentions.has(client.user.id) &&
-      !message.content.includes("@everyone") &&
-      !message.content.includes("@here")
-    ) {
+    if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
       let pingembed = new Discord.MessageEmbed()
-        .setAuthor(
-          message.author.tag,
-          message.author.displayAvatarURL({ size: 32 })
-        )
-        .setDescription(
-          `__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`
-        )
+        .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
+        .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
         .setColor("#2f3136");
       return message.channel.send({ embeds: [pingembed] }).then((msg) => {
         setTimeout(() => msg.delete(), 5000);
