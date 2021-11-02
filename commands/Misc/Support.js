@@ -13,8 +13,8 @@ module.exports = {
       .setColor("#7975a8")
       .setDescription("**[Support Server Invite](https://nek.wtf/support)**")
       .setTimestamp()
-      .setThumbnail(bot.user.displayAvatarURL()); //bot avatar
+      .setThumbnail(bot.user.displayAvatarURL());
 
-    message.channel.send(Sembed);
+    return message.channel.send({embeds: [Sembed]});
   },
 };
