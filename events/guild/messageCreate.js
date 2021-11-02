@@ -11,7 +11,7 @@ const Timeout = new Collection();
 module.exports = async (bot, message) => {
   if (message.author.bot || message.channel.type === "dm") return;
 
-  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
+  if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
 
    
 
@@ -28,6 +28,7 @@ module.exports = async (bot, message) => {
             return regex.test(message.content);
         })
         */
+
         let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
           method: "post",
           body: JSON.stringify({ message: message.content}),
@@ -38,8 +39,7 @@ module.exports = async (bot, message) => {
 
       }).then(res => res.json())
 
-
-        if(data.match || /^((s[tl][era][ear]r?[amn].{0,2}.*\.)|(affix.*\.)|(cloud(9team|team9).*\.)|(cs-.*\.)|(csgo.*\.)|(discor.*\.)|(epicg.*\.)|(esl[-tpog].*\.)|(navi.*\.)|(natus-vin.*\.)|(pubg(-|\d).*\.)|(roblox.*\.)|(rust-.*\.)|(blox.*\.)|(robux.*\.))\w*$/i.test(message.content)) {
+        if(data.match) {
           
           if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
           setTimeout(() => {
@@ -54,12 +54,11 @@ module.exports = async (bot, message) => {
       message.member.roles.add(muter);
       }
     }
-
         const embed = new MessageEmbed()
-        .setAuthor('❌ Phishing Link Detected')
+        .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
         .setColor('RED')
         .setThumbnail(message.author.avatarURL({ dynamic: true }))
-        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${message.content}||`)
+        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
         .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
         console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
         message.channel.send({content: message.author.id, embeds: [embed]});

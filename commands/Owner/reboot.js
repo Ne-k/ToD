@@ -1,3 +1,4 @@
+const {MessageEmbed} = require("discord.js");
 module.exports = {
   config: {
     name: "reboot",
@@ -36,15 +37,11 @@ module.exports = {
         token: process.env.CLIENT_LOGGING_WEBHOOK,
       });
 
-      webhookClient.send({
+      await webhookClient.send({
         username: "ToD Client Logging",
         avatarURL: bot.user.avatarURL(),
         embeds: [manualRebootEmbed],
       });
-      let RebootingEmbed = new MessageEmbed()
-        .setColor("GREEN")
-        .setDescription(`Now rebooting process \`${args[0]}\``);
-      message.channel.send({ embeds: [RebootingEmbed] });
       }
       
 
@@ -57,5 +54,9 @@ module.exports = {
         }
       });
     }
+    let RebootingEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .setDescription(`Now rebooting process \`${args[0]}\``);
+    message.channel.send({ embeds: [RebootingEmbed] });
   },
 };
