@@ -9,7 +9,7 @@ module.exports = {
     const fetch = require("node-fetch");
 
     fetch(`https://gallery.fluxpoint.dev/api/sfw/anime`, {
-      headers: { Authorization: process.env.Fluxpoint_API_Token },
+      headers: { Authorization: process.env.Fluxpoint_API_Key },
     }).then((res) => res.json()).then((data) => {
         let fluxAzureEmbed = new Discord.MessageEmbed()
           .setColor("#CACACA")
