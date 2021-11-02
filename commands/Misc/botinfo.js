@@ -74,7 +74,7 @@ module.exports = {
         )
         .addField(
           "⚙️ Watching",
-          `\`\`\`${totalGuilds.toLocaleString()} Guild(s), and ${totalMembers.toLocaleString()} users!\`\`\` `
+          `\`\`\`${totalGuilds.toLocaleString()} Guild(s)\`\`\` `
         )
         .addField(
           "• Mem Usage",
