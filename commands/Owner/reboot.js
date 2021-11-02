@@ -1,12 +1,14 @@
 const {MessageEmbed} = require("discord.js");
+const childProcess = require("child_process");
 module.exports = {
   config: {
     name: "reboot",
     aliases: ["restart"],
   },
   run: async (bot, message, args) => {
+    let codeblock = "```";
     if (!process.env.developers.includes(message.author.id)) {
-      let userAccess = new Discord.MessageEmbed()
+      let userAccess = new MessageEmbed()
         .setTitle("Reboot")
         .setDescription(
           "Sorry, the `Reboot` command can only be executed by the Developer."
@@ -18,8 +20,26 @@ module.exports = {
       const { MessageEmbed, WebhookClient } = require("discord.js");
       const { exec } = require("child_process");
 
+      if(!args.join(" ")) {
+        return childProcess.exec('pm2 status', {}, (err, stdout, stderr) => {
+          if (err)
+            return message.channel.send({
+              embeds: [
+                new MessageEmbed()
+                    .setDescription(`${codeblock}${err}${codeblock}`)
+                    .setColor("RED")
+                    .setFooter("Smooth brain, you failed."),
+              ],
+            });
+
+          return message.channel.send({
+            content: `${codeblock}diff\n${stdout}${codeblock}`,
+          });
+        });
+      }
+
       if(args[0] === "2") {
-        bot.shard.broadcastEval((client) => client.user.setStatus("idle"));
+        await bot.shard.broadcastEval((client) => client.user.setStatus("idle"));
       bot.user.setActivity(`Rebooting. . .`, {
         type: "LISTENING",
       });
