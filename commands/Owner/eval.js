@@ -52,76 +52,29 @@ module.exports = {
       try {
         let evaled = eval(code);
 
-        if (
-          code.includes(`BOTTOKEN`) ||
-          code.includes(`TOKEN`) ||
-          code.includes("process.env.Token") ||
-          code.includes("client.token") ||
-          code.includes("child_process")
-        ) {
-          (evaled = new RegExp(client.token, "g")),
-            [...client.token]
-              .map((v, i, a) => a[Math.floor(Math.random() * a.length)])
-              .join("");
+        if (code.includes(`BOTTOKEN`) || code.includes(`TOKEN`) || code.includes("process.env.Token") || code.includes("client.token") || code.includes("child_process")) {
+          (evaled = new RegExp(client.token, "g")), [...client.token].map((v, i, a) => a[Math.floor(Math.random() * a.length)]).join("");
         } else {
           evaled = eval(code);
         }
 
         let isPromise = false;
-        if (evaled && evaled instanceof Promise) {
-          isPromise = true;
-          evaled = await evaled;
-        }
+        if (evaled && evaled instanceof Promise) {isPromise = true;evaled = await evaled;}
         if (typeof evaled !== "string") evaled = inspect(evaled, { depth: 0 });
         let evalEmbeds = stringTools.toChunks(evaled, 1000).map((thing) =>
           new Discord.MessageEmbed()
             .setColor(CC[result])
-            .addField(
-              `:inbox_tray: **Input** :inbox_tray:`,
-              `${dscformat("js", args.join(" "))}`
-            )
-            .setDescription(
-              `:outbox_tray: **Output** :outbox_tray:\n${dscformat(
-                "js",
-                thing
-              )}`
-            )
-            .addField(
-              "Time",
-              ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ""}${
-                hrDiff[1] / 1000000
-              }\`\`\` `
-            )
-            .addField(
-              "Type of",
-              dscformat(
-                "css",
-                `${typeof evaled}${isPromise ? " (Originally Promise)" : ""}`
-              )
-            )
+            .addField(`:inbox_tray: **Input** :inbox_tray:`, `${dscformat("js", args.join(" "))}`)
+            .setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat("js", thing)}`)
+            .addField("Time", ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ""}${hrDiff[1] / 1000000}\`\`\` `)
+            .addField("Type of", dscformat("css",))
         );
         pagify(evalEmbeds, { xReact: true });
       } catch (err) {
         const embed = new Discord.MessageEmbed()
-          .setDescription(
-            `:inbox_tray: **Input** :inbox_tray: ${dscformat(
-              "js",
-              args.join(" ")
-            )}\n:outbox_tray: **Output** :outbox_tray:\n${dscformat("js", err)}`
-          )
-          .addField(
-            "Time",
-            ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ""}${
-              hrDiff[1] / 1000000
-            }\`\`\` `
-          )
-          .addField(
-            "Type",
-            dscformat(
-              "css",
-              `${typeof evaled}${isPromise ? " (Originally Promise)" : ""}`
-            )
-          )
+          .setDescription(`:inbox_tray: **Input** :inbox_tray: ${dscformat("js", args.join(" "))}\n:outbox_tray: **Output** :outbox_tray:\n${dscformat("js", err)}`)
+          .addField("Time", ` \`\`\`js\n${hrDiff[0] > 0 ? `${hrDiff[0]}s` : ""}${hrDiff[1] / 1000000}\`\`\` `)
+          .addField("Type", dscformat("css", `${typeof evaled}${isPromise ? " (Originally Promise)" : ""}`))
           .setColor("#FF0000");
         pagify([embed], { xReact: true });
       }
@@ -131,23 +84,17 @@ module.exports = {
         if (embeds.length == 1) reactions = ["⏹️", "🔵"];
 
         if (options && typeof options !== "object")
-          throw Error(
-            `options cannot be a ${typeof options} must be an object`
-          );
+          throw Error(`options cannot be a ${typeof options} must be an object`);
         if (options && options.xReact == true) reactions.push("🔴");
 
         let currentPage = (options && options.currentPage) || 0;
 
         let pages = embeds.length;
         embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`);
-        const queueEmbed = await message.channel.send({
-          embeds: [embeds[currentPage]],
-        });
+        const queueEmbed = await message.channel.send({embeds: [embeds[currentPage]],});
 
         await Promise.all(reactions.map((r) => queueEmbed.react(r)));
-        const filter = (reaction, user) =>
-          reactions.includes(reaction.emoji.name) &&
-          message.author.id === user.id;
+        const filter = (reaction, user) => reactions.includes(reaction.emoji.name) && message.author.id === user.id;
         const collector = queueEmbed.createReactionCollector(filter);
 
         collector.on("collect", async (reaction, user) => {
@@ -159,10 +106,7 @@ module.exports = {
                 if (currentPage == pages) currentPage = 0;
                 if (message.guild.me.permissions.has("MANAGE_MESSAGES"))
                   reaction.users.remove(user.id);
-                queueEmbed.edit({
-                  embeds: [embeds[currentPage]].setFooter(
-                    `Page ${currentPage + 1} of ${pages}`
-                  ),
+                queueEmbed.edit({embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`),
                 });
                 break;
               case "⏹️":
@@ -170,11 +114,7 @@ module.exports = {
                 if (message.guild.me.permissions.has("MANAGE_MESSAGES")) {
                   reaction.message.reactions.removeAll();
                 } else {
-                  for (let r of queueEmbed.reactions.cache
-                    .filter((r) => r.users.cache.has(client.user.id))
-                    .array()) {
-                    await r.users.remove(client.user.id);
-                  }
+                  for (let r of queueEmbed.reactions.cache.filter((r) => r.users.cache.has(client.user.id)).array()) {await r.users.remove(client.user.id);}
                 }
                 break;
 
@@ -184,10 +124,7 @@ module.exports = {
                 if (currentPage == -1) currentPage = pages - 1;
                 if (message.guild.me.permissions.has("MANAGE_MESSAGES"))
                   reaction.users.remove(user.id);
-                queueEmbed.edit({
-                  embeds: [embeds[currentPage]].setFooter(
-                    `Page ${currentPage + 1} of ${pages}`
-                  ),
+                queueEmbed.edit({embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`),
                 });
                 break;
 
@@ -198,12 +135,7 @@ module.exports = {
                 if (message.guild.me.permissions.has("MANAGE_MESSAGES"))
                   reaction.users.remove(user.id);
                 queueEmbed.edit({
-                  embeds: [embeds[currentPage]].setDescription(
-                    `:outbox_tray: **Output** :outbox_tray:\n${dscformat(
-                      "js",
-                      `The Developer Has Closed The Evaluation.`
-                    )}`
-                  ),
+                  embeds: [embeds[currentPage]].setDescription(`:outbox_tray: **Output** :outbox_tray:\n${dscformat("js", `The Developer Has Closed The Evaluation.`)}`),
                 });
                 break;
 
@@ -218,7 +150,7 @@ module.exports = {
                 break;
             }
           } catch (err) {
-            return;
+
           }
         });
       }
