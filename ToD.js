@@ -1,5 +1,5 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, Collection, MessageEmbed, Intents } = require("discord.js");
+const { Client, MessageEmbed, Intents } = require("discord.js");
 const Discord = require("discord.js");
 const client = new Client({
   disableMentions: "everyone",
@@ -12,18 +12,20 @@ require("dotenv").config();
 //============================================================================================================================================================================================================
 const moment = require("moment");
 const mongoose = require("mongoose");
+const { Collection: MongoCollection, MongoClient } = require("mongodb");
+const { Collection, Fields } = require("quickmongo");
 client.db = db;
-client.slash = new Collection();
+client.slash = new Discord.Collection();
 client.tod = require("./ToD.json");
 client.messageembed = MessageEmbed;
 client.logger = require("./modules/logger");
 //====================================================================================COLLECTIONS REQUIRED ON READY===========================================================================================
-client.aliases = new Collection();
+client.aliases = new Discord.Collection();
 
 //============================================================================================================================================================================================================
 
 //============================================================================================INITIALIZING====================================================================================================
-["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
+["aliases", "commands"].forEach((x) => (client[x] = new Discord.Collection()));
 ["console", "command", "event"].forEach((x) =>
   require(`./handler/${x}`)(client)
 );
@@ -34,13 +36,18 @@ client.categories = fs.readdirSync("./commands/");
   require(`./handler/${handler}`)(client);
 });
 
-mongoose.connect(process.env.MONGOSTRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+const mongo = new MongoClient(process.env.MONGOSTRING);
+const schema = new Fields.ObjectField({
+  difficulty: new Fields.StringField(),
+  items: new Fields.ArrayField(new Fields.StringField()),
+  balance: new Fields.NumberField()
 });
-mongoose.connection.once("connected", () => {
-  console.log(`MongoDb: `.green + "[ Connected to Database ]");
-});
+
+mongo.connect()
+    .then(() => {
+      console.log(`MongoDB `.green + "[ Connected to the database! ]");
+    });
+
 
 let errors = [];
 const modules = fs
