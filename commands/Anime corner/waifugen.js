@@ -2,6 +2,7 @@ module.exports = {
   config: {
     name: "waifugen",
     usage: "waifugen",
+    aliases: ["waifu", "waif"],
     description: "Waifu generator using waifu labs/",
   },
   run: async (bot, message, args) => {
