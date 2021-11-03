@@ -12,7 +12,7 @@ module.exports = async (bot) => {
     id: process.env.CLIENT_LOGGING_ID,
     token: process.env.CLIENT_LOGGING_WEBHOOK,
   });
-  await webhookClient.send({
+  webhookClient.send({
     username: "Status",
     avatarURL: bot.user.avatarURL(),
     embeds: [
