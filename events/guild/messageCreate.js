@@ -22,48 +22,52 @@ module.exports = async (bot, message) => {
 
   if(message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
 
-   
 
-     
-        const unix = Math.floor(new Date().getTime() / 1000);
+      const expression = /[-a-zA-Z0-9@:%.+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&//=]*)?/gi;
+      const regex = new RegExp(expression);
+      const t = message.content;
 
-        let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
-          method: "post",
-          body: JSON.stringify({ message: message.content}),
-          headers: {
-              "Content-Type": "application/json",
-              "User-Agent": "Anti-phishing (Nek#2937 / 750510159289254008)",
-          },
+      if(t.match(regex)) {
+          const unix = Math.floor(new Date().getTime() / 1000);
 
-      }).then(res => res.json())
+          let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
+              method: "post",
+              body: JSON.stringify({ message: message.content}),
+              headers: {
+                  "Content-Type": "application/json",
+                  "User-Agent": "Anti-phishing (Nek#2937 / 750510159289254008)",
+              },
 
-        if(data.match) {
-          
-          if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
-          setTimeout(() => {
-            if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-              message.delete()
-            } 
-        }, 0);
+          }).then(res => res.json())
+          if(data.match) {
 
-    if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
-      if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
-          const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
-      message.member.roles.add(muter);
+              if(message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
+              setTimeout(() => {
+                  if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                      message.delete()
+                  }
+              }, 0);
+
+              if(bot.db.fetch(`mutedRole_${message.guild.id}`)) {
+                  if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
+                      const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
+                      message.member.roles.add(muter);
+                  }
+              }
+              const embed = new MessageEmbed()
+                  .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
+                  .setColor('RED')
+                  .setThumbnail(message.author.avatarURL({ dynamic: true }))
+                  .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                  .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
+              console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
+              message.channel.send({content: message.author.id, embeds: [embed]});
+
+          }
+          // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
+
+
       }
-    }
-        const embed = new MessageEmbed()
-        .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
-        .setColor('RED')
-        .setThumbnail(message.author.avatarURL({ dynamic: true }))
-        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-        .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
-        console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
-        message.channel.send({content: message.author.id, embeds: [embed]});
-        
-        }
-        // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
-
 
        
   
