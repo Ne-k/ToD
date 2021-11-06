@@ -3,25 +3,25 @@ const waifuAPI = "https://waifu.pics/api";
 const Discord = require("discord.js");
 
 module.exports = {
-  config: {
-    name: "blush",
-    description: "Show the expression blush.",
-    usage: "Blush.",
-  },
-  run: async (bot, message, args) => {
-    const waifu = new Discord.MessageEmbed();
+    config: {
+        name: "blush",
+        description: "Show the expression blush.",
+        usage: "Blush.",
+    },
+    run: async (bot, message, args) => {
+        const waifu = new Discord.MessageEmbed();
 
-    const { url } = await fetch(`${waifuAPI}/sfw/blush`).then((res) =>
-      res.json()
-    );
-    let quotes = args.join(" ");
+        const {url} = await fetch(`${waifuAPI}/sfw/blush`).then((res) =>
+            res.json()
+        );
+        let quotes = args.join(" ");
 
-    waifu
-      .setImage(url)
-      .setAuthor(`${message.author.username} feels flushed`, message.author.avatarURL({ dynamic: true }))
-      .setColor("RANDOM")
-      .setDescription(quotes);
+        waifu
+            .setImage(url)
+            .setAuthor(`${message.author.username} feels flushed`, message.author.avatarURL({dynamic: true}))
+            .setColor("RANDOM")
+            .setDescription(quotes);
 
-    return message.channel.send({ embeds: [waifu] });
-  },
+        return message.channel.send({embeds: [waifu]});
+    },
 };

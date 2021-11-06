@@ -1,9 +1,9 @@
 //====================================================================================CONSTANTS REQUIRED ON READY=============================================================================================
-const { Client, MessageEmbed, Intents } = require("discord.js");
+const {Client, MessageEmbed, Intents} = require("discord.js");
 const Discord = require("discord.js");
 const client = new Client({
-  disableMentions: "everyone",
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+    disableMentions: "everyone",
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 const fs = require("fs");
 const db = require("quick.db");
@@ -12,8 +12,8 @@ require("dotenv").config();
 //============================================================================================================================================================================================================
 const moment = require("moment");
 const mongoose = require("mongoose");
-const { Collection: MongoCollection, MongoClient } = require("mongodb");
-const { Collection, Fields } = require("quickmongo");
+const {Collection: MongoCollection, MongoClient} = require("mongodb");
+const {Collection, Fields} = require("quickmongo");
 client.db = db;
 client.slash = new Discord.Collection();
 client.tod = require("./ToD.json");
@@ -27,172 +27,170 @@ client.aliases = new Discord.Collection();
 //============================================================================================INITIALIZING====================================================================================================
 ["aliases", "commands"].forEach((x) => (client[x] = new Discord.Collection()));
 ["console", "command", "event"].forEach((x) =>
-  require(`./handler/${x}`)(client)
+    require(`./handler/${x}`)(client)
 );
 
 client.categories = fs.readdirSync("./commands/");
 
 ["command"].forEach((handler) => {
-  require(`./handler/${handler}`)(client);
+    require(`./handler/${handler}`)(client);
 });
 
 const mongo = new MongoClient(process.env.MONGOSTRING);
 const schema = new Fields.ObjectField({
-  difficulty: new Fields.StringField(),
-  items: new Fields.ArrayField(new Fields.StringField()),
-  balance: new Fields.NumberField()
+    difficulty: new Fields.StringField(),
+    items: new Fields.ArrayField(new Fields.StringField()),
+    balance: new Fields.NumberField()
 });
 
 mongo.connect()
     .then(() => {
-      console.log(`MongoDB `.green + "[ Connected to the database! ]");
+        console.log(`MongoDB `.green + "[ Connected to the database! ]");
     });
 
 
 let errors = [];
 const modules = fs
-  .readdirSync("commands")
-  .filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
+    .readdirSync("commands")
+    .filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
 modules.forEach((module) => {
-  console.log(`Loading:`.green + ` [ ${module} ]`);
-  const CMDFiles = fs
-    .readdirSync(path.resolve(`commands/${module}`))
-    .filter(
-      (file) =>
-        !fs.statSync(path.resolve("commands", module, file)).isDirectory()
-    )
-    .filter((file) => {
-      return file.endsWith(".js");
-    });
+    console.log(`Loading:`.green + ` [ ${module} ]`);
+    const CMDFiles = fs
+        .readdirSync(path.resolve(`commands/${module}`))
+        .filter(
+            (file) =>
+                !fs.statSync(path.resolve("commands", module, file)).isDirectory()
+        )
+        .filter((file) => {
+            return file.endsWith(".js");
+        });
 });
 
 //============================================================================================================================================================================================================
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
 client.on("ready", async () => {
-  // require('statcord.js').ShardingClient.post(client)
+    // require('statcord.js').ShardingClient.post(client)
 
-  setInterval(() => {
-    const rnd = Math.floor(Math.random() * 2);
-    switch (rnd) {
-      case 1:
-        {
-          client.user.setActivity(`${process.env.prefix}help | Truth or Dare`, {
-            type: "PLAYING",
-          });
+    setInterval(() => {
+        const rnd = Math.floor(Math.random() * 2);
+        switch (rnd) {
+            case 1: {
+                client.user.setActivity(`${process.env.prefix}help | Truth or Dare`, {
+                    type: "PLAYING",
+                });
+            }
+                break;
+            default: {
+                client.user.setActivity(`t;help | Use ${process.env.prefix}enable to enable anti-scam links`, {
+                    type: "WATCHING",
+                });
+            }
+
+                break;
         }
-        break;
-      default:
-        {
-          client.user.setActivity(`t;help | Use ${process.env.prefix}enable to enable anti-scam links`, {
-            type: "WATCHING",
-          });
-        }
+    }, 6500);
 
-        break;
-    }
-  }, 6500);
+    /* --------------------------------------- SLASH COMMANDS --------------------------------------- */
 
-  /* --------------------------------------- SLASH COMMANDS --------------------------------------- */
-
-  client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
-      console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`);
+    client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
+        console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`);
     });
-  /*
-  })
-  
-  setInterval(() => {
-      var rnd = Math.floor(Math.random() * 2);
-      switch (rnd) {
-        case 1:
-          {
-            client.user.setActivity(`Slash commands`, {
-              type: 'WATCHING'
-            });
-          }
-          break
-          default:
+    /*
+    })
+
+    setInterval(() => {
+        var rnd = Math.floor(Math.random() * 2);
+        switch (rnd) {
+          case 1:
             {
-              client.user.setActivity(`Truth Or Dare`, {
-                type: 'PLAYING'
+              client.user.setActivity(`Slash commands`, {
+                type: 'WATCHING'
               });
             }
-           
             break
-      }
-    }, 6500)
-*/
-  // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-  const cFiles = fs
-    .readdirSync("./slash/")
-    .filter((file) => file.endsWith(".js"));
-  for (const file of cFiles) {
-    const command = require(`./slash/${file}`);
+            default:
+              {
+                client.user.setActivity(`Truth Or Dare`, {
+                  type: 'PLAYING'
+                });
+              }
 
-    if (command.global === true) {
-      client.api.applications(client.user.id).commands.post({
-        data: {
-          name: command.slash.name,
-          description: command.slash.description,
-          options: command.slashcommandOptions,
-        },
-      });
-      console.log(
-        `Posting: `.yellow +
-          `[ ${command.slash.name} from ${file} (${
-            command.global ? "global" : "guild"
-          }) ]`
-      );
+              break
+        }
+      }, 6500)
+  */
+    // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
+    const cFiles = fs
+        .readdirSync("./slash/")
+        .filter((file) => file.endsWith(".js"));
+    for (const file of cFiles) {
+        const command = require(`./slash/${file}`);
 
-      client.slash.set(command.slash.name, command);
+        if (command.global === true) {
+            client.api.applications(client.user.id).commands.post({
+                data: {
+                    name: command.slash.name,
+                    description: command.slash.description,
+                    options: command.slashcommandOptions,
+                },
+            });
+            console.log(
+                `Posting: `.yellow +
+                `[ ${command.slash.name} from ${file} (${
+                    command.global ? "global" : "guild"
+                }) ]`
+            );
+
+            client.slash.set(command.slash.name, command);
+        }
     }
-  }
-  let cmdArrGlobal = await client.api
-    .applications(client.user.id)
-    .commands.get();
-  cmdArrGlobal.forEach((element) => {
-    console.log(
-      `Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`
-    );
-  });
+    let cmdArrGlobal = await client.api
+        .applications(client.user.id)
+        .commands.get();
+    cmdArrGlobal.forEach((element) => {
+        console.log(
+            `Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`
+        );
+    });
 });
 
 client.ws.on("INTERACTION_CREATE", async (interaction) => {
-  if (!client.slash.has(interaction.data.name)) return;
-  try {
-    client.on("interactionCreate", async (int) => {
-      client.slash.get(interaction.data.name).execute(interaction, int);
-    });
-  } catch (error) {
-    console.log(`Error Occured => ${interaction.data.name} : ${error.message}`);
-    console.log(error.stack);
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-      data: {
-        type: 4,
-        data: {
-          content: `Sorry, there was an error executing that command!`,
-        },
-      },
-    });
-  }
+    if (!client.slash.has(interaction.data.name)) return;
+    try {
+        client.on("interactionCreate", async (int) => {
+            client.slash.get(interaction.data.name).execute(interaction, int);
+        });
+    } catch (error) {
+        console.log(`Error Occured => ${interaction.data.name} : ${error.message}`);
+        console.log(error.stack);
+        client.api.interactions(interaction.id, interaction.token).callback.post({
+            data: {
+                type: 4,
+                data: {
+                    content: `Sorry, there was an error executing that command!`,
+                },
+            },
+        });
+    }
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-  let prefix = process.env.prefix;
-  try {
-    if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
-      let pingembed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 32 }))
-        .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
-        .setColor("#2f3136");
-      return message.channel.send({ embeds: [pingembed] }).then((msg) => {
-        setTimeout(() => msg.delete(), 5000);
-      });
+    if (message.author.bot) return;
+    let prefix = process.env.prefix;
+    try {
+        if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
+            let pingembed = new Discord.MessageEmbed()
+                .setAuthor(message.author.tag, message.author.displayAvatarURL({size: 32}))
+                .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
+                .setColor("#2f3136");
+            return message.channel.send({embeds: [pingembed]}).then((msg) => {
+                setTimeout(() => msg.delete(), 5000);
+            });
+        }
+    } catch (err) {
+        return message.channel.send(err);
     }
-  } catch (err) {
-    return message.channel.send(err);
-  }
 });
 
 //===================================Statcord random shit ========================================================================================================================================================================
@@ -200,15 +198,15 @@ client.on("messageCreate", async (message) => {
 client.snipe = new Map();
 
 client.on("messageDelete", async (message, channel) => {
-  if (message.author.bot) return;
-  if (!message.guild) return;
-  client.snipe.set(message.channel.id, {
-    msg: message.content,
-    user: message.author.tag,
-    profilephoto: message.author.displayAvatarURL(),
-    image: message.attachments.first() ? message.attachments.first().proxyURL : null,
-    date: message.createdTimestamp,
-  });
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    client.snipe.set(message.channel.id, {
+        msg: message.content,
+        user: message.author.tag,
+        profilephoto: message.author.displayAvatarURL(),
+        image: message.attachments.first() ? message.attachments.first().proxyURL : null,
+        date: message.createdTimestamp,
+    });
 });
 
 client.login(process.env.token);
