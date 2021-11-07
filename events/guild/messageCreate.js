@@ -20,10 +20,10 @@ const Timeout = new Collection();
 module.exports = async (bot, message) => {
     if (message.author.bot || message.channel.type === "dm") return;
 
-    if (message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
+    if (message.content && db.fetch(`antiscamEnabled_${message.guild.id}`) === false || !db.fetch(`antiscamEnabled_${message.guild.id}`)) {
 
 
-        const expression = /[-a-zA-Z0-9@:%.+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&//=]*)?/gi;
+        const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi;
         const regex = new RegExp(expression);
         const t = message.content;
 

@@ -16,9 +16,7 @@ module.exports = {
             }
 
             let scamstatus = client.db.fetch(`antiscamEnabled_${message.guild.id}`);
-            if (scamstatus == null) {
-                scamstatus = false;
-            }
+            scamstatus = scamstatus === false || scamstatus == null;
 
             let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
             muteRole = !!muteRole;
@@ -31,7 +29,7 @@ module.exports = {
                     .setAlign(0, AsciiTable.CENTER)
                     .setAlign(1, AsciiTable.CENTER);
                 table.addRow("NSFW", nsfwstatus);
-                table.addRow("Anti-Scam", scamstatus);
+                table.addRow("AntiScam", scamstatus);
                 table.addRow("MuteRole", muteRole);
 
                 return message.channel.send({
@@ -72,7 +70,7 @@ module.exports = {
 
             }
 
-            if (args[0].toLowerCase() === "anti-scam") {
+            if (args[0].toLowerCase() === "antiscam") {
                 if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
                     return message.channel.send({
                         embeds: [
@@ -85,12 +83,12 @@ module.exports = {
                     });
                 }
 
-                if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true) {
-                    client.db.delete(`antiscamEnabled_${message.guild.id}`)
+                if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) === false || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
+                    client.db.set(`antiscamEnabled_${message.guild.id}`, true)
                     return message.channel.send('Anti Scam is now disabled.')
                 }
 
-                if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == false || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
+                if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) == true || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
                     return message.channel.send({
                         embeds: [
                             new MessageEmbed()
