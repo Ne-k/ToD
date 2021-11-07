@@ -82,7 +82,7 @@ client.on("ready", async () => {
             }
                 break;
             default: {
-                client.user.setActivity(`t;help | Use ${process.env.prefix}enable to enable anti-scam links`, {
+                client.user.setActivity(`t;help | aaaaaaaaaaaaaaaaaaaaaaaaaaaaa`, {
                     type: "WATCHING",
                 });
             }
