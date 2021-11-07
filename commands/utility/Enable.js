@@ -25,11 +25,7 @@ module.exports = {
             }
 
             let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
-            if (muteRole) {
-                muteRole = true
-            } else {
-                muteRole = false
-            }
+            muteRole = !!muteRole;
 
             if (!args[0]) {
                 const AsciiTable = require("ascii-table");

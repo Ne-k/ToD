@@ -121,9 +121,7 @@ client.on("ready", async () => {
       }, 6500)
   */
     // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-    const cFiles = fs
-        .readdirSync("./slash/")
-        .filter((file) => file.endsWith(".js"));
+    const cFiles = fs.readdirSync("./slash/").filter((file) => file.endsWith(".js"));
     for (const file of cFiles) {
         const command = require(`./slash/${file}`);
 
@@ -135,23 +133,14 @@ client.on("ready", async () => {
                     options: command.slashcommandOptions,
                 },
             });
-            console.log(
-                `Posting: `.yellow +
-                `[ ${command.slash.name} from ${file} (${
-                    command.global ? "global" : "guild"
-                }) ]`
-            );
+            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.global ? "global" : "guild"}) ]`);
 
             client.slash.set(command.slash.name, command);
         }
     }
-    let cmdArrGlobal = await client.api
-        .applications(client.user.id)
-        .commands.get();
+    let cmdArrGlobal = await client.api.applications(client.user.id).commands.get();
     cmdArrGlobal.forEach((element) => {
-        console.log(
-            `Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`
-        );
+        console.log(`Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`);
     });
 });
 
