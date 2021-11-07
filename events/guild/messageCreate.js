@@ -90,12 +90,11 @@ module.exports = async (bot, message) => {
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let cmd = args.shift().toLowerCase();
 
-        var commandfile =
-            bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
+        const commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
         if (commandfile) {
             let timeout = ms("3000");
 
-            if (Timeout.has(`${command.name}${message.author.id}`)) {
+            if (await Timeout.has(`${command.name}${message.author.id}`)) {
                 return message.channel
                     .send({
                         embeds: [
@@ -116,21 +115,13 @@ module.exports = async (bot, message) => {
                         setTimeout(() => message.delete(), 7000);
                     });
             }
-            Timeout.set(`${command.name}${message.author.id}`, Date.now() + timeout);
+            await Timeout.set(`${command.name}${message.author.id}`, Date.now() + timeout);
             setTimeout(() => {
                 Timeout.delete(`${command.name}${message.author.id}`);
             }, timeout);
 
             let commandPing = Date.now() - message.createdTimestamp;
-            bot.logger(
-                `${message.author.tag}` +
-                ` |`.red +
-                ` (${message.author.id}) executed the command ` +
-                `${commandfile.config.name}`.underline.cyan +
-                ` at ${cmdExecuted}.` +
-                ` Message Ping: ${commandPing.toLocaleString()}ms`,
-                "command"
-            );
+            bot.logger(`${message.author.tag}` + ` |`.red + ` (${message.author.id}) executed the command ` + `${commandfile.config.name}`.underline.cyan + ` ${args.join(" ").blue}` + ` at ${cmdExecuted}.` + ` Message Ping: ${commandPing.toLocaleString()}ms`, "command");
 
             // Statcord.ShardingClient.postCommand(cmd, message.author.id, bot);
             commandfile.run(bot, message, args);

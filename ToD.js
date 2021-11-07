@@ -82,7 +82,7 @@ client.on("ready", async () => {
             }
                 break;
             default: {
-                client.user.setActivity(`t;help | aaaaaaaaaaaaaaaaaaaaaaaaaaaaa`, {
+                client.user.setActivity(`t;help | I don't know what to put here.`, {
                     type: "WATCHING",
                 });
             }
