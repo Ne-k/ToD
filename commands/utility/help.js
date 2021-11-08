@@ -28,7 +28,7 @@ module.exports = {
                                     client.user.avatarURL({format: "png"})
                                 )
                                 .setDescription(
-                                    `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://nek.wtf/tod)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                    `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Private Policy](https://nek.wtf/policy) **|** [Website](https://nek.wtf/tod)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
                                 )
                                 .setFooter(
                                     client.commands.size + ` total commands.`,
@@ -102,8 +102,8 @@ module.exports = {
                     })
                     .then((msg) => {
                         client.on("interactionCreate", async (interaction) => {
-                            if (interaction.values[0] == `all`) {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === `all`) {
+                                await interaction.deferUpdate();
                                 msg.edit({
                                     embeds: [
                                         new client.messageembed()
@@ -122,8 +122,8 @@ module.exports = {
                                     ],
                                 });
                             }
-                            if (interaction.values[0] == "Home") {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === "Home") {
+                                await interaction.deferUpdate();
                                 msg.edit({
                                     embeds: [
                                         new client.messageembed()
@@ -143,8 +143,8 @@ module.exports = {
                                 });
                             }
 
-                            if (interaction.values[0] == "anime") {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === "anime") {
+                                await interaction.deferUpdate();
 
                                 msg.edit({
                                     embeds: [
@@ -165,8 +165,8 @@ module.exports = {
                                 });
                             }
 
-                            if (interaction.values[0] == "roleplay") {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === "roleplay") {
+                                await interaction.deferUpdate();
                                 msg.edit({
                                     embeds: [
                                         new client.messageembed()
@@ -186,8 +186,8 @@ module.exports = {
                                 });
                             }
 
-                            if (interaction.values[0] == `main`) {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === `main`) {
+                                await interaction.deferUpdate();
                                 msg.edit({
                                     embeds: [
                                         new client.messageembed()
@@ -206,13 +206,13 @@ module.exports = {
                                     ],
                                 });
                             }
-                            if (interaction.values[0] == `delete`) {
+                            if (interaction.values[0] === `delete`) {
                                 setTimeout(() => {
                                     msg.delete();
                                 }, 0);
                             }
-                            if (interaction.values[0] == "misc") {
-                                interaction.deferUpdate();
+                            if (interaction.values[0] === "misc") {
+                                await interaction.deferUpdate();
 
                                 msg.edit({
                                     embeds: [
