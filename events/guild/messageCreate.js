@@ -115,6 +115,7 @@ module.exports = async (bot, message) => {
                         setTimeout(() => message.delete(), 7000);
                     });
             }
+
             await Timeout.set(`${command.name}${message.author.id}`, Date.now() + timeout);
             setTimeout(() => {
                 Timeout.delete(`${command.name}${message.author.id}`);

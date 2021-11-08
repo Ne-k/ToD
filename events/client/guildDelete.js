@@ -6,14 +6,8 @@ module.exports = async (client, guild) => {
         client.db.delete(`mutedRole_${guild.id}`)
 
         require("colors");
-        console.log(
-            `
-    Left guild ${guild.id}, data wipe has been successful.`.green
-        );
+        console.log(`Left guild ${guild.id}, data wipe has been successful. [${guild.memberCount}]`.green);
     } catch (e) {
-        console.log(
-            `
-        Looks like there has been an error wiping the data. - ${e}`.red
-        );
+        console.log(`Looks like there has been an error wiping the data. - ${e}`.red);
     }
 };
