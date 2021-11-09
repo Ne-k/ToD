@@ -80,10 +80,10 @@ module.exports = async (bot, message) => {
                             .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
                             .setColor('RED')
                             .setThumbnail(message.author.avatarURL({dynamic: true}))
-                            .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** scam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                            .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                             .addField('Useless Domain info:', `__Domain IP__: **${dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address ? dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address : 'IP address not found.'}**\n__Asn Name__: ${dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name ? dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name : 'No asn name found.'}`)
                             .setImage(dataInfo[`${data.matches.map(m => m.domain)}`].details.websiteScreenshot)
-                            .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
+                            .setFooter('To configure this, use the t;disable or t;enable commands.');
                         console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
 
                         db.set(`${message.author.id}`, message.author.id)
