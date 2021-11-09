@@ -89,7 +89,7 @@ module.exports = async (bot, message) => {
                         db.set(`${message.author.id}`, message.author.id)
                         setTimeout(() => {
                             db.delete(`${message.author.id}`)
-                        }, 5000)
+                        }, 6000)
 
                         return message.channel.send({
                             content: message.author.id,
