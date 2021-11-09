@@ -6,6 +6,8 @@ module.exports = {
     run: async (client, message) => {
         const {MessageEmbed, Permissions} = require("discord.js");
 
+
+
         return message.channel.send({
             content: "Test",
 
@@ -43,10 +45,7 @@ module.exports = {
                                     .addField(
                                         `__General Permissions__`,
                                         `\`\`\`diff\n${
-                                            message.guild.me.permissions.has(Permissions.FLAGS.ADMINISTRATOR) === true ? "+" : "-"} ADMINISTRATOR\n
-                                            ${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) === true ? "+" : "-"} MANAGE_CHANNELS\n
-                                            ${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES) === true ? "+" : "-"} MANAGE_ROLES\n
-                                            ${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS) === true ? "+" : "-"} MANAGE_EMOJIS_AND_STICKERS\n${
+                                            message.guild.me.permissions.has(Permissions.FLAGS.ADMINISTRATOR) === true ? "+" : "-"} ADMINISTRATOR\n${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) === true ? "+" : "-"} MANAGE_CHANNELS\n${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES) === true ? "+" : "-"} MANAGE_ROLES\n${message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS) === true ? "+" : "-"} MANAGE_EMOJIS_AND_STICKERS\n${
                                             message.guild.me.permissions.has(
                                                 Permissions.FLAGS.VIEW_AUDIT_LOG
                                             ) === true

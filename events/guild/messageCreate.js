@@ -28,6 +28,7 @@ module.exports = async (bot, message) => {
         const t = message.content;
 
         if (t.match(regex)) {
+
             const unix = Math.floor(new Date().getTime() / 1000);
 
             let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
@@ -41,27 +42,91 @@ module.exports = async (bot, message) => {
             }).then(res => res.json())
             if (data.match) {
 
-                if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
-                setTimeout(() => {
-                    if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-                        message.delete()
-                    }
-                }, 0);
+                try {
+                    if(db.fetch(`${message.author.id}`) === message.author.id) {
+                        return;
+                    } else {
+                        let dataInfo = await require('node-fetch')(`https://api.phisherman.gg/v1/domains/info/${data.matches.map(m => m.domain)}`, {
+                            headers: {
+                                "Authorization": 'Bearer 02e6fac0-b924-48aa-b583-2d410fbc691a',
+                                'Content-Type': 'application/json',
+                                "User-Agent": "Anti-phishing (Nek#2937 / 750510159289254008)",
+                            },
+                        }).then(res => res.json())
 
-                if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
-                    if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
-                        const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
-                        message.member.roles.add(muter);
+                        if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
+                        setTimeout(() => {
+                            if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                message.delete()
+                            }
+                        }, 0);
+
+                        if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
+                            if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
+                                const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
+                                message.member.roles.add(muter);
+                            }
+                        }
+
+                        let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
+
+                        if(linkstat === "ONLINE") {
+                            linkstat = "Active"
+                        } else {
+                            linkstat = "Inactive"
+                        }
+
+                        const embed = new MessageEmbed()
+                            .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
+                            .setColor('RED')
+                            .setThumbnail(message.author.avatarURL({dynamic: true}))
+                            .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** scam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                            .addField('Useless Domain info:', `__Domain IP__: **${dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address ? dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address : 'IP address not found.'}**\n__Asn Name__: ${dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name ? dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name : 'No asn name found.'}`)
+                            .setImage(dataInfo[`${data.matches.map(m => m.domain)}`].details.websiteScreenshot)
+                            .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
+                        console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
+
+                        db.set(`${message.author.id}`, message.author.id)
+                        setTimeout(() => {
+                            db.delete(`${message.author.id}`)
+                        }, 5000)
+
+                        return message.channel.send({
+                            content: message.author.id,
+                            embeds: [embed],
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: 2,
+                                            label: "Delete",
+                                            style: 4,
+                                            custom_id: "del",
+                                        },
+                                    ],
+                                },
+                            ],
+                        }).then((msg) => {
+                            bot.on("interactionCreate", async (interaction) => {
+                                if (interaction.customId === "del") {
+                                    if(!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                        interaction.reply({content: `You can't delete this message`, ephemeral: true})
+                                    } else {
+                                        setTimeout(() => msg.delete(), 0);
+                                    }
+
+                                }
+
+                            })
+                        })
                     }
+
+
+                }catch(e) {
+                    console.log(e)
                 }
-                const embed = new MessageEmbed()
-                    .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
-                    .setColor('RED')
-                    .setThumbnail(message.author.avatarURL({dynamic: true}))
-                    .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\nScam link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                    .setFooter('Clicking on the link can expose your IP (location) and entering in any information details like your password or email address, will compromise your account(s).');
-                console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
-                message.channel.send({content: message.author.id, embeds: [embed]});
+
 
             }
             // interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)
@@ -78,7 +143,7 @@ module.exports = async (bot, message) => {
 
     let cmdExecuted = moment().format("LLL");
 
-    if (message.content.indexOf(prefix) !== 0) ;
+    if (message.content.indexOf(prefix) !== 0) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
 
     const command = args.shift().toLowerCase();
