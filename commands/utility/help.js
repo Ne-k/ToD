@@ -318,7 +318,7 @@ module.exports = {
       }
       */
         } catch (err) {
-            console.log(err);
+            return message.channel.send(`Oh no, an error occurred: \`${err.message}\`. Contact Nek#2937 or join the support server.`);
         }
     },
 };
