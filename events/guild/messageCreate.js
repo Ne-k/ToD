@@ -36,7 +36,7 @@ module.exports = async (bot, message) => {
                 body: JSON.stringify({message: message.content}),
                 headers: {
                     "Content-Type": "application/json",
-                    "User-Agent": "Anti-phishing (Nek#2937 / 750510159289254008)",
+                    "User-Agent": "ToD Anti-phishing (Nek#2937 / 750510159289254008)",
                 },
 
             }).then(res => res.json())
