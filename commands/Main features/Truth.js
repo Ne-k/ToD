@@ -8,7 +8,7 @@ module.exports = {
     },
     run: async (client, message, args) => {
         try {
-            if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) == true) {
+            if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) === true) {
                 let embed = new Discord.MessageEmbed()
                     .setColor("#eaecf3")
                     .setTitle("Dare")
