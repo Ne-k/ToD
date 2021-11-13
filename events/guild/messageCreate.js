@@ -80,7 +80,7 @@ module.exports = async (bot, message) => {
                         .setThumbnail(message.author.avatarURL({dynamic: true}))
                         .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                         .setFooter('To configure this, use the t;disable or t;enable commands.');
-                    console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.name} (${message.guild.id}) | ${message.guild.memberCount} ]`)
+                    console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ` + `${message.guild.name} (${message.guild.id})`.red + ` | ${message.guild.memberCount} ]`)
 
                     return message.channel.send({
                         content: message.author.id,
