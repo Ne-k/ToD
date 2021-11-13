@@ -79,8 +79,6 @@ module.exports = async (bot, message) => {
                         .setColor('RED')
                         .setThumbnail(message.author.avatarURL({dynamic: true}))
                         .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                        .addField('Useless Domain info:', `__Domain IP__: **${dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address ? dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address : 'IP address not found.'}**\n__Asn Name__: ${dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name ? dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name : 'No asn name found.'}`)
-                        .setImage(dataInfo[`${data.matches.map(m => m.domain)}`].details.websiteScreenshot)
                         .setFooter('To configure this, use the t;disable or t;enable commands.');
                     console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ${message.guild.id} ]`)
 
@@ -97,11 +95,18 @@ module.exports = async (bot, message) => {
                                         style: 4,
                                         custom_id: "del",
                                     },
+                                    {
+                                        type: 2,
+                                        label: "Get Domain Info",
+                                        style: 2,
+                                        custom_id: "info",
+                                    },
                                 ],
                             },
                         ],
                     }).then((msg) => {
                         bot.on("interactionCreate", async (interaction) => {
+
                             if (interaction.customId === "del") {
                                 if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                                     interaction.reply({content: `You can't delete this message`, ephemeral: true})
@@ -109,6 +114,13 @@ module.exports = async (bot, message) => {
                                     setTimeout(() => msg.delete(), 0);
                                 }
 
+                            }
+                            if (interaction.customId === "info") {
+                                let thing = new MessageEmbed()
+                                    .addField('Useless Domain info:', `__Domain IP__: **${dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address ? dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address : 'IP address not found.'}**\n__Asn Name__: ${dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name ? dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name : 'No asn name found.'}`)
+                                    .setImage(dataInfo[`${data.matches.map(m => m.domain)}`].details.websiteScreenshot)
+                                    .setColor('RANDOM')
+                                return interaction.reply({embeds: [thing], ephemeral: true})
                             }
 
                         })
@@ -160,8 +172,7 @@ module.exports = async (bot, message) => {
                             )
                             .setColor("RANDOM"),
                     ],
-                })
-                    .then((message) => {
+                }).then((message) => {
                         setTimeout(() => message.delete(), 7000);
                     });
             }
