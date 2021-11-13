@@ -23,9 +23,7 @@ module.exports = async (bot, message) => {
 
     if (message.content && !db.fetch(`antiscamEnabled_${message.guild.id}`)) {
 
-        const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi;
-        const regex = new RegExp(expression);
-        const t = message.content;
+        const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression); const t = message.content;
 
         if (t.match(regex)) {
 
@@ -53,16 +51,16 @@ module.exports = async (bot, message) => {
                     }).then(res => res.json())
 
                     if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-                            message.delete()
+                            await message.delete()
                         }
-                    }, 0);
+                    }, 1000);
 
                     if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
                         if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
                             const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
-                            message.member.roles.add(muter);
+                            await message.member.roles.add(muter);
                         }
                     }
 
