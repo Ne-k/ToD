@@ -97,7 +97,7 @@ module.exports = {
                 }
 
                 if (!message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) && !message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
-                    return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription("I don't have the permission `MANAGE_MESSAGES` and `MANAGE_ROLES`, I need these permissions to delete detected scam links from the chats and to automaticlly mute them (soon).")]})
+                    return message.channel.send({embeds: [new MessageEmbed().setColor('RED').setDescription("I don't have the permission `MANAGE_MESSAGES` and `MANAGE_ROLES`\n I need these permissions to delete detected scam links from the chats.")]})
                 }
 
 
