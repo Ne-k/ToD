@@ -13,14 +13,7 @@ module.exports = {
                     .setColor("#eaecf3")
                     .setTitle("Dare")
                     .setDescription(
-                        Math.random() > 0.6
-                            ? client.tod.nsfwTruth[
-                                Math.floor(Math.random() * client.tod.nsfwTruth.length)
-                                ]
-                            : client.tod.Tare[
-                                Math.floor(Math.random() * client.tod.Truth.length)
-                                ]
-                    );
+                        Math.random() > 0.6 ? client.tod.nsfwTruth[Math.floor(Math.random() * client.tod.nsfwTruth.length)] : client.tod.Dare[Math.floor(Math.random() * client.tod.Truth.length)]);
 
                 return message.channel
                     .send({
