@@ -3,7 +3,7 @@ require("dotenv").config();
 const moment = require("moment");
 module.exports = async (bot) => {
     process.on("unhandledRejection", (error) => {
-        return
+        return;
     });
 
     await bot.shard.broadcastEval((client) => client.user.setStatus("online"));
@@ -73,8 +73,8 @@ Signed into ${bot.user.tag}
     //====================================DISCORD.BOATS===========================================================================================================================
 
     const promises = [
-        bot.shard.fetchClientValues("guilds.cache.size"),
-        bot.shard.broadcastEval((bot) => bot.guilds.cache.size),
+        await bot.shard.fetchClientValues("guilds.cache.size"),
+        await bot.shard.broadcastEval((bot) => bot.guilds.cache.size),
     ];
     return Promise.all(promises).then((results) => {
         const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
