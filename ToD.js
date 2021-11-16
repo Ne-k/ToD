@@ -191,8 +191,8 @@ client.on("messageDelete", async (message, channel) => {
     if (!message.guild) return;
     client.snipe.set(message.channel.id, {
         msg: message.content,
-        user: message.author.tag,
-        profilephoto: message.author.displayAvatarURL(),
+        user: message.author,
+        avatar: message.author.displayAvatarURL({dynamic: true}),
         image: message.attachments.first() ? message.attachments.first().proxyURL : null,
         date: message.createdTimestamp,
     });
