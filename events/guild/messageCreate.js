@@ -3,7 +3,7 @@ const {Collection, MessageEmbed, Permissions} = require("discord.js");
 const ms = require("ms");
 require('colors')
 const db = require("quick.db");
-const antiScam = require("../automod/scam")
+const antiScam = require("../../Functions/automod/scam")
 const Timeout = new Collection();
 
 /*

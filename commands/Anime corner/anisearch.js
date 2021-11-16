@@ -110,14 +110,13 @@ module.exports = {
                         // Event Shit
 
                         client.on("interactionCreate", async (interaction) => {
-                            if (interaction.guildId != message.guild.id) return;
+                            if (interaction.guildId !== message.guild.id) return;
                             if (interaction.user.id !== message.author.id) return;
 
-                            interaction.deferUpdate();
+                            await interaction.deferUpdate();
 
-                            if (interaction.values[0] == 0) {
-                                malScraper
-                                    .getInfoFromName(data[0].name)
+                            if (interaction.values[0] === 0) {
+                                malScraper.getInfoFromName(data[0].name)
 
                                     .then(async (s1) => {
                                         const {getColorFromURL} = require("color-thief-node");
@@ -152,7 +151,7 @@ module.exports = {
                                     });
                             }
 
-                            if (interaction.values[0] == 1) {
+                            if (interaction.values[0] === 1) {
                                 malScraper
                                     .getInfoFromName(data[1].name)
 
@@ -221,7 +220,7 @@ module.exports = {
                                         return thing.edit({embeds: [embed]});
                                     });
                             }
-                            if (interaction.values[0] == 2) {
+                            if (interaction.values[0] === 2) {
                                 malScraper
                                     .getInfoFromName(data[2].name)
 
@@ -289,7 +288,7 @@ module.exports = {
                                         return thing.edit({embeds: [embed]});
                                     });
                             }
-                            if (interaction.values[0] == 3) {
+                            if (interaction.values[0] === 3) {
                                 malScraper
                                     .getInfoFromName(data[3].name)
 
