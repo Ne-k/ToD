@@ -1,6 +1,6 @@
 require("colors");
 require("dotenv").config();
-let autoPost = require('../../Functions/Bot Lists/Autopost')
+let autoPost = require('../../modules/Bot Lists/Autopost')
 const moment = require("moment");
 
 module.exports = async (bot) => {

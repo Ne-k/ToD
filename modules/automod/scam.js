@@ -1,6 +1,7 @@
+const moment = require("moment");
 
 module.exports = async (bot, message) => {
-const {Permissions, MessageEmbed} = require("discord.js");
+const {Permissions, MessageEmbed, WebhookClient} = require("discord.js");
 const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression); const t = message.content;
 
 
@@ -50,15 +51,32 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                 } else {
                     linkstat = "Inactive"
                 }
-
                 const embed = new MessageEmbed()
-                    .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
-                    .setColor('RED')
-                    .setThumbnail(message.author.avatarURL({dynamic: true}))
-                    .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                    .setFooter('To configure this, use the t;disable or t;enable commands.');
-                console.log(`Anti-Scam:`.green + ` [ Scam link prevented in ` + `${message.guild.name} (${message.guild.id})`.red + ` | ${message.guild.memberCount} ]`)
+                        .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
+                        .setColor('RED')
+                        .setThumbnail(message.author.avatarURL({dynamic: true}))
+                        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                        .setFooter('To configure this, use the t;disable or t;enable commands.')
 
+                const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
+                await webhookClient.send({
+                    username: 'anti-scam',
+                    avatarURL: message.author.avatarURL({dynamic: true}),
+                    embeds: [
+                        new MessageEmbed()
+                        .setColor("GREEN")
+                        .setThumbnail(message.guild.iconURL({dynamic: true}))
+                        .setTitle('__Scam link prevented in:__')
+                        .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
+                    ],
+                });
+                /*
+                                    new MessageEmbed()
+                                            .setColor("GREEN")
+                                            .setThumbnail(message.guild.iconURL({dynamic: true}))
+                                            .setTitle('__Scam link prevented in:__')
+                                            .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount} ]\n\n<t:${unix}:R> (<t:${unix}:F>)`)
+                                     */
                 return message.channel.send({
                     content: message.author.id,
                     embeds: [embed],
