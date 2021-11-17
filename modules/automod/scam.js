@@ -1,4 +1,5 @@
 const moment = require("moment");
+const {Permissions} = require("discord.js");
 
 module.exports = async (bot, message) => {
 const {Permissions, MessageEmbed, WebhookClient} = require("discord.js");
@@ -31,16 +32,25 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                 }).then(res => res.json())
 
                 if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
+
                 setTimeout(async () => {
                     if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                         await message.delete()
                     }
                 }, 1000);
+                if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
+
+                let muteR2 = message.guild.roles.cache.find(r => r.name.toLowerCase() === "muted");
+                    if(message.member.roles.cache.has(muteR2.id)) {
+                        return;
+                    } else {
+                        await message.member.roles.add(muteR2)
+                    }
 
                 if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
-                    if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
+
                         const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
-                        await message.member.roles.add(muter);
+                        await message.member.roles.add(muter)
                     }
                 }
 
