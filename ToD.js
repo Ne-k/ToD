@@ -187,7 +187,6 @@ client.on("messageCreate", async (message) => {
 client.snipe = new Map();
 
 client.on("messageDelete", async (message, channel) => {
-    if (message.author.bot) return;
     if (!message.guild) return;
     client.snipe.set(message.channel.id, {
         msg: message.content,
