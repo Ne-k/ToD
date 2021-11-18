@@ -5,6 +5,20 @@ module.exports = async (bot, message) => {
 const {Permissions, MessageEmbed, WebhookClient} = require("discord.js");
 const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression); const t = message.content;
 
+    function makeButtonGrid(w, h) {
+        let buttons = [];
+        for (let x = 0; x < w * h; x++) {
+            buttons.push({
+                style: 1,
+                type: 2,
+                label: `${x + 1}`,
+                custom_id: `btn_${x + 1}`,
+            });
+        }
+        return Array.from({length: Math.ceil(buttons.length / 5)}, (a, r) =>
+            buttons.slice(r * 5, r * 5 + 5)
+        );
+    }
 
     if (t.match(regex)) {
 
@@ -40,16 +54,10 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                 }, 1000);
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
 
-                let muteR2 = message.guild.roles.cache.find(r => r.name.toLowerCase() === "muted");
-                    if(message.member.roles.cache.has(muteR2.id)) {
-                        return;
-                    } else {
-                        await message.member.roles.add(muteR2)
-                    }
-
                 if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
 
                         const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
+                        if(message.member.roles.cache.has(muter)) return;
                         await message.member.roles.add(muter)
                     }
                 }
