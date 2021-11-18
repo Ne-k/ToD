@@ -61,6 +61,13 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                         await message.member.roles.add(muter)
                     }
                 }
+                let d = bot.db.fetch(`${message.author.id}scamCooldown`)
+                if(d === message.author.id) {
+                    setTimeout(() => {
+                        bot.db.delete(`${message.author.id}scamCooldown`)
+                    }, 10000);
+                    return;
+                }
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
 
@@ -95,6 +102,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                                             .setTitle('__Scam link prevented in:__')
                                             .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount} ]\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                                      */
+                bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
                 return message.channel.send({
                     content: message.author.id,
                     embeds: [embed],
