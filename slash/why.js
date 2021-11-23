@@ -10,24 +10,23 @@ module.exports = {
     global: true,
 
     async execute(interaction, int, client) {
-        fetch("https://nekos.life/api/v2/why")
-            .then((res) => res.json())
-            .then(async (data) => {
-                let factEmbed = new Discord.MessageEmbed()
-                    .setColor("#eaecf3")
-                    .setTitle("Why")
-                    .setDescription(data.why);
+        const response = await fetch("https://nekos.life/api/v2/why");
+        const data = await response.json();
+        const factEmbed = new Discord.MessageEmbed()
+            .setColor("#eaecf3")
+            .setTitle("Why")
+            .setDescription(data.why);
 
-                client.api
-                    .interactions(interaction.id, interaction.token)
-                    .callback.post({
+        client.api
+            .interactions(interaction.id, interaction.token)
+            .callback.post({
+                slash: {
+                    type: 4,
                     slash: {
-                        type: 4,
-                        slash: {
-                            embeds: [factEmbed],
-                        },
+                        embeds: [factEmbed],
                     },
-                });
+                },
             });
+        });
     },
 };
