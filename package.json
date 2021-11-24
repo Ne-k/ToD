@@ -23,7 +23,7 @@
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
-    "mal-scraper": "^2.11.3",
+    "mal-scraper": "^1.5.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.0.0",
