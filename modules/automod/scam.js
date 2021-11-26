@@ -49,7 +49,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
 
                 setTimeout(async () => {
                     if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-                        await message.delete()
+                        !message.deleted ? message.delete() : null;
                     }
                 }, 1000);
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
@@ -132,7 +132,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                             if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                                 interaction.reply({content: `You can't delete this message`, ephemeral: true})
                             } else {
-                                setTimeout(() => msg.delete(), 0);
+                                setTimeout(() => !message.deleted ? message.delete() : null, 0);
                             }
 
                         }
