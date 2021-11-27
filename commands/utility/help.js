@@ -1,6 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 
 const db = require("quick.db");
+const {getColorFromURL} = require("color-thief-node");
 
 module.exports = {
     config: {
@@ -12,231 +13,351 @@ module.exports = {
     run: async (client, message, args) => {
 
         try {
-            if (!args[0]) {
-                const {getColorFromURL} = require("color-thief-node");
-
-                const dominantColor = await getColorFromURL(
-                    message.author.avatarURL({format: "png"})
-                );
-                return message.channel
-                    .send({
+            switch(args[0]) {
+                case "util":
+                    message.channel.send({
                         embeds: [
                             new client.messageembed()
-                                .setColor(dominantColor)
+                                .setColor("RANDOM")
                                 .setAuthor(
                                     "Help Command Panel:",
                                     client.user.avatarURL({format: "png"})
                                 )
                                 .setDescription(
-                                    `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Private Policy](https://nek.wtf/policy) **|** [Website](https://nek.wtf/tod)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n \`disable\` | \`enable\` | \`help\` | \`snipe\` \n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
                                 )
                                 .setFooter(
                                     client.commands.size + ` total commands.`,
                                     message.author.avatarURL({dynamic: true})
                                 ),
                         ],
-                        components: [
-                            {
-                                type: 1,
-                                components: [
-                                    {
-                                        type: 3,
-                                        custom_id: "Selects",
-                                        options: [
-                                            {
-                                                label: `Home`,
-                                                value: "Home",
-                                                emoji: {
-                                                    name: "🏠",
-                                                    id: null,
-                                                },
-                                                description: "Go back to the main help page",
-                                            },
-
-                                            {
-                                                label: `All`,
-                                                value: "all",
-                                                description: "List all the bot's commands.",
-                                            },
-
-                                            {
-                                                label: `Anime`,
-                                                value: "anime",
-                                                description: "Show all the anime commands.",
-                                            },
-                                            {
-                                                label: `Roleplay / Affections`,
-                                                value: "roleplay",
-                                                description:
-                                                    "Show all the roleplay / affection commands.",
-                                            },
-                                            {
-                                                label: `Main`,
-                                                value: "main",
-                                                description: "Show commands such as truth and dare.",
-                                            },
-                                            {
-                                                label: `Miscellaneous`,
-                                                value: "misc",
-                                                description: "Show all misc commands.",
-                                            },
-                                            {
-                                                label: `Delete`,
-                                                emoji: {
-                                                    name: "❌",
-                                                    id: null,
-                                                },
-                                                value: "delete",
-                                                description: "Delete the help embed.",
-                                            },
-                                        ],
-
-                                        placeholder: "Choose a category",
-                                        default: true,
-                                        min_values: 1,
-                                        max_values: 1,
-                                    },
-                                ],
-                            },
+                    })
+                    break;
+                case "all":
+                    message.channel.send({
+                        embeds: [
+                            new client.messageembed()
+                                .setColor("RANDOM")
+                                .setAuthor(
+                                    "Help Command Panel:",
+                                    client.user.avatarURL({format: "png"})
+                                )
+                                .setDescription(
+                                    `*Execute the command \`${process.env.prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`rem\`\, \`senko\`, \`sfwanime\`\, \`shinobu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`disable\`, \`enable\`, \`help\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\`\n\n__**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                )
+                                .setFooter(
+                                    client.commands.size + ` total commands.`,
+                                    message.author.avatarURL({dynamic: true})
+                                ),
+                        ],
+                    });
+                    break;
+                case "anime":
+                    message.channel.send({
+                        embeds: [
+                            new client.messageembed()
+                                .setColor("RANDOM")
+                                .setAuthor(
+                                    "Help Command Panel:",
+                                    client.user.avatarURL({format: "png"})
+                                )
+                                .setDescription(
+                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n \`aniquote\` | \`anisearch\`\ | \`azurlane\` | \`awoo\` | \`booru\` | \`foxes\` | \`kitsune\` | \`megumin\` | \`neko\` \`nekopara\` | \`okami\` | \`rem\` | \`senko\` | \`sfwanime\` | \`shinobu\` | \`waifugen\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                )
+                                .setFooter(
+                                    client.commands.size + ` total commands.`,
+                                    message.author.avatarURL({dynamic: true})
+                                ),
                         ],
                     })
-                    .then((msg) => {
-                        client.on("interactionCreate", async (interaction) => {
-                            if (interaction.values[0] === `all`) {
-                                await interaction.deferUpdate();
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor("RANDOM")
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `*Execute the command \`${process.env.prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`rem\`\, \`senko\`, \`sfwanime\`\, \`shinobu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`disable\`, \`enable\`, \`help\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\`\n\n__**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
-                                    ],
-                                });
-                            }
-                            if (interaction.values[0] === "Home") {
-                                await interaction.deferUpdate();
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor(dominantColor)
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
-                                    ],
-                                });
-                            }
+                    break;
+                case "roleplay":
+                    message.channel.send({embeds: [
+                            new client.messageembed()
+                                .setColor("RANDOM")
+                                .setAuthor(
+                                    "Help Command Panel:",
+                                    client.user.avatarURL({format: "png"})
+                                )
+                                .setDescription(
+                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**\n \`bite\` | \`blush\` | \`bonk\` | \`cry\` | \`cuddle\` | \`dance\` | \`feed\` | \`glomp\` | \`happy\` | \`hug\` | \`kiss\` | \`lick\` | \`nom\` | \`pat\` | \`poke\` | \`pout\` | \`punch\` | \`slap\` | \`smile\` | \`smug\` | \`tickle\` | \`wag\` | \`stare\` | \`wave\` | \`wink\`\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                )
+                                .setFooter(
+                                    client.commands.size + ` total commands.`,
+                                    message.author.avatarURL({dynamic: true})
+                                ),
+                        ],})
+                    break;
+                case "main":
+                    message.channel.send({
+                        embeds: [
+                            new client.messageembed()
+                                .setColor("RANDOM")
+                                .setAuthor(
+                                    "Help Command Panel:",
+                                    client.user.avatarURL({format: "png"})
+                                )
+                                .setDescription(
+                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n\`dare\` | \`truth\`  | \`fact\` | \`why\` | \`wyr\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                )
+                                .setFooter(
+                                    client.commands.size + ` total commands.`,
+                                    message.author.avatarURL({dynamic: true})
+                                ),
+                        ],
+                    })
+                    break;
+                case "misc":
+                    message.channel.send({
+                        embeds: [
+                            new client.messageembed()
+                                .setColor("RANDOM")
+                                .setAuthor(
+                                    "Help Command Panel:",
+                                    client.user.avatarURL({format: "png"})
+                                )
+                                .setDescription(
+                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\`botinfo\` | \`invite\` | \`ping\` | \`policy\` | \`suggest\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                )
+                                .setFooter(
+                                    client.commands.size + ` total commands.`,
+                                    message.author.avatarURL({dynamic: true})
+                                ),
+                        ],
+                    })
+                    break;
 
-                            if (interaction.values[0] === "anime") {
-                                await interaction.deferUpdate();
+                default:
+                    const {getColorFromURL} = require("color-thief-node");
 
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor("RANDOM")
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n \`aniquote\` | \`anisearch\`\ | \`azurlane\` | \`awoo\` | \`booru\` | \`foxes\` | \`kitsune\` | \`megumin\` | \`neko\` \`nekopara\` | \`okami\` | \`rem\` | \`senko\` | \`sfwanime\` | \`shinobu\` | \`waifugen\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
-                                    ],
-                                });
-                            }
+                    const dominantColor = await getColorFromURL(message.author.avatarURL({format: "png"}))
 
-                            if (interaction.values[0] === "roleplay") {
-                                await interaction.deferUpdate();
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor("RANDOM")
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**\n \`bite\` | \`blush\` | \`bonk\` | \`cry\` | \`cuddle\` | \`dance\` | \`feed\` | \`glomp\` | \`happy\` | \`hug\` | \`kiss\` | \`lick\` | \`nom\` | \`pat\` | \`poke\` | \`pout\` | \`punch\` | \`slap\` | \`smile\` | \`smug\` | \`tickle\` | \`wag\` | \`stare\` | \`wave\` | \`wink\`\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
-                                    ],
-                                });
-                            }
+                    return message.channel
+                        .send({
+                            embeds: [
+                                new client.messageembed()
+                                    .setColor(dominantColor)
+                                    .setAuthor(
+                                        "Help Command Panel:",
+                                        client.user.avatarURL({format: "png"})
+                                    )
+                                    .setDescription(
+                                        `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu or \`${process.env.prefix}help <category>\`\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Private Policy](https://nek.wtf/policy) **|** [Website](https://nek.wtf/tod)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                    )
+                                    .setFooter(
+                                        client.commands.size + ` total commands.`,
+                                        message.author.avatarURL({dynamic: true})
+                                    ),
+                            ],
+                            components: [
+                                {
+                                    type: 1,
+                                    components: [
+                                        {
+                                            type: 3,
+                                            custom_id: "Selects",
+                                            options: [
+                                                {
+                                                    label: `Home`,
+                                                    value: "Home",
+                                                    emoji: {
+                                                        name: "🏠",
+                                                        id: null,
+                                                    },
+                                                    description: "Go back to the main help page",
+                                                },
 
-                            if (interaction.values[0] === `main`) {
-                                await interaction.deferUpdate();
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor("RANDOM")
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n\`dare\` | \`truth\`  | \`fact\` | \`why\` | \`wyr\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
-                                    ],
-                                });
-                            }
-                            if (interaction.values[0] === `delete`) {
-                                setTimeout(() => {
-                                    msg.delete();
-                                }, 0);
-                            }
-                            if (interaction.values[0] === "misc") {
-                                await interaction.deferUpdate();
+                                                {
+                                                    label: `All`,
+                                                    value: "all",
+                                                    description: "List all the bot's commands.",
+                                                },
 
-                                msg.edit({
-                                    embeds: [
-                                        new client.messageembed()
-                                            .setColor("RANDOM")
-                                            .setAuthor(
-                                                "Help Command Panel:",
-                                                client.user.avatarURL({format: "png"})
-                                            )
-                                            .setDescription(
-                                                `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\`botinfo\` | \`invite\` | \`ping\` | \`policy\` | \`suggest\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
-                                            )
-                                            .setFooter(
-                                                client.commands.size + ` total commands.`,
-                                                message.author.avatarURL({dynamic: true})
-                                            ),
+                                                {
+                                                    label: `Anime`,
+                                                    value: "anime",
+                                                    description: "Show all the anime commands.",
+                                                },
+                                                {
+                                                    label: `Roleplay / Affections`,
+                                                    value: "roleplay",
+                                                    description:
+                                                        "Show all the roleplay / affection commands.",
+                                                },
+                                                {
+                                                    label: `Main`,
+                                                    value: "main",
+                                                    description: "Show commands such as truth and dare.",
+                                                },
+                                                {
+                                                    label: `Miscellaneous`,
+                                                    value: "misc",
+                                                    description: "Show all misc commands.",
+                                                },
+                                                {
+                                                    label: `Delete`,
+                                                    emoji: {
+                                                        name: "❌",
+                                                        id: null,
+                                                    },
+                                                    value: "delete",
+                                                    description: "Delete the help embed.",
+                                                },
+                                            ],
+
+                                            placeholder: "Choose a category",
+                                            default: true,
+                                            min_values: 1,
+                                            max_values: 1,
+                                        },
                                     ],
-                                });
-                            }
+                                },
+                            ],
+                        })
+                        .then((msg) => {
+                            client.on("interactionCreate", async (interaction) => {
+                                if (interaction.values[0] === `all`) {
+                                    await interaction.deferUpdate();
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor("RANDOM")
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `*Execute the command \`${process.env.prefix}help <Command_name>\` for more information on the command.\n<:Pink_Dash:843518578749865994> __**Anime Corner**__:\n\`aniquote\`\, \`anisearch\`\, \`azurlane\`\, \`awoo\`\, \`booru\`\, \`foxes\`\, \`kitsune\`\, \`megumin\`\, \`neko\`, \`nekopara\`\, \`okami\`\, \`rem\`\, \`senko\`, \`sfwanime\`\, \`shinobu\`\, \`waifugen\`\n\n<:Orange_dash:843518612747976714> __**Utility**__:\n\`disable\`, \`enable\`, \`help\`\, \`snipe\`\n\n<:Purple_dash:843518550966796309> __**Miscellaneos**__:\n\`botinfo\`\, \`invite\`\, \`ping\`\, \`policy\`\, \`suggest\`\n\n<:Red_dash:843518522209992724> __**Main Features**__:\n\`truth\`\, \`dare\`\, \`fact\`\, \`why\`\, \`wyr\`\n\n<:Yellow_dash:843518493000728576> __**Affections / Roleplay**__\n\`bite\`\, \`blush\`\, \`bonk\`\, \`cry\`\, \`cuddle\`\, \`dance\`\, \`feed\`\, \`glomp\`\, \`happy\`\, \`hug\`\, \`kiss\`, \`lick\`\, \`nom\`\, \`pat\`\, \`poke\`\, \`pout\`\, \`punch\`\, \`slap\`\, \`smile\`\, \`smug\`\, \`tickle\`\, \`wag\`\, \`stare\`\, \`wave\`\, \`wink\`\n\n__**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+                                if (interaction.values[0] === "Home") {
+                                    await interaction.deferUpdate();
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor(dominantColor)
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `<:Pink_Dash:843518578749865994> Use the selection menu below to navigate around the help menu.\n\n<:Orange_dash:843518612747976714> **__Categories __**:\n \`all\`, \`roleplay\`, \`anime\`, \`main\`, \`misc\`, \`util\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+
+                                if (interaction.values[0] === "anime") {
+                                    await interaction.deferUpdate();
+
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor("RANDOM")
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n \`aniquote\` | \`anisearch\`\ | \`azurlane\` | \`awoo\` | \`booru\` | \`foxes\` | \`kitsune\` | \`megumin\` | \`neko\` \`nekopara\` | \`okami\` | \`rem\` | \`senko\` | \`sfwanime\` | \`shinobu\` | \`waifugen\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+
+                                if (interaction.values[0] === "roleplay") {
+                                    await interaction.deferUpdate();
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor("RANDOM")
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**\n \`bite\` | \`blush\` | \`bonk\` | \`cry\` | \`cuddle\` | \`dance\` | \`feed\` | \`glomp\` | \`happy\` | \`hug\` | \`kiss\` | \`lick\` | \`nom\` | \`pat\` | \`poke\` | \`pout\` | \`punch\` | \`slap\` | \`smile\` | \`smug\` | \`tickle\` | \`wag\` | \`stare\` | \`wave\` | \`wink\`\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+
+                                if (interaction.values[0] === `main`) {
+                                    await interaction.deferUpdate();
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor("RANDOM")
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\n\`dare\` | \`truth\`  | \`fact\` | \`why\` | \`wyr\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+                                if (interaction.values[0] === `delete`) {
+                                    setTimeout(() => {
+                                        msg.delete();
+                                    }, 0);
+                                }
+                                if (interaction.values[0] === "misc") {
+                                    await interaction.deferUpdate();
+
+                                    msg.edit({
+                                        embeds: [
+                                            new client.messageembed()
+                                                .setColor("RANDOM")
+                                                .setAuthor(
+                                                    "Help Command Panel:",
+                                                    client.user.avatarURL({format: "png"})
+                                                )
+                                                .setDescription(
+                                                    `<:Pink_Dash:843518578749865994> Run \`${process.env.prefix}help <command>\` for more information on the command.\n\n<:Orange_dash:843518612747976714> **__Commands __**:\`botinfo\` | \`invite\` | \`ping\` | \`policy\` | \`suggest\`\n\n<:Red_dash:843518522209992724> __**Links**__:\n**[Website](https://tod.nek.wtf)** **|** **[Ko-Fi Link](https://ko-fi.com/nekwastaken)** **|** **[Support Server](https://discord.gg/PVC35NbeTD)**`
+                                                )
+                                                .setFooter(
+                                                    client.commands.size + ` total commands.`,
+                                                    message.author.avatarURL({dynamic: true})
+                                                ),
+                                        ],
+                                    });
+                                }
+                            });
+
                         });
 
-                    });
-
             }
+
+
+    } catch (err) {
+        return message.channel.send(`Oh no, an error occurred: \`${err.message}\`. Contact Nek#2937 or join the support server.`);
+    }
+},
+};
 
             /*
               if(args[0].toLowerCase() === "all") {
@@ -317,8 +438,4 @@ module.exports = {
 
       }
       */
-        } catch (err) {
-            return message.channel.send(`Oh no, an error occurred: \`${err.message}\`. Contact Nek#2937 or join the support server.`);
-        }
-    },
-};
+
