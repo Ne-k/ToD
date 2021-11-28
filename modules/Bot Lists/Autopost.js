@@ -77,7 +77,7 @@ return Promise.all(promises).then((results) => {
         }).catch((err) => {
             return console.log(`Discord.Bots.gg Error `.red + `${err}`);
         });
-    }, 3.6e+6);
+    }, 7.2e+6);
 
 
 
