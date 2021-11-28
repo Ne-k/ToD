@@ -66,12 +66,13 @@ modules.forEach((module) => {
         });
 });
 
+
 //============================================================================================================================================================================================================
 
 //=========================================================================================MENTION SETTINGS===========================================================================================
 client.on("ready", async () => {
     // require('statcord.js').ShardingClient.post(client)
-
+z
     setInterval(() => {
         const rnd = Math.floor(Math.random() * 2);
         switch (rnd) {
@@ -163,24 +164,17 @@ client.ws.on("INTERACTION_CREATE", async (interaction) => {
         });
     }
 });
-
+/*
 client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
     let prefix = process.env.prefix;
     try {
-        if (message.mentions.has(client.user.id) && !message.content.includes("@everyone") && !message.content.includes("@here")) {
-            let pingembed = new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL({size: 32}))
-                .setDescription(`__Server Prefix__: \`${prefix}\`\n\nType \`${prefix}help\` to see a list of all the available commands.`)
-                .setColor("#2f3136");
-            return message.channel.send({embeds: [pingembed]}).then((msg) => {
-                setTimeout(() => msg.delete(), 5000);
-            });
-        }
+        i
     } catch (err) {
         return message.channel.send(err);
     }
 });
+ */
 
 //===================================Statcord random shit ========================================================================================================================================================================
 

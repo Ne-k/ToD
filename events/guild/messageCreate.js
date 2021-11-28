@@ -4,6 +4,7 @@ const ms = require("ms");
 require('colors')
 const db = require("quick.db");
 const antiScam = require("../../modules/automod/scam")
+const Discord = require("discord.js");
 const Timeout = new Collection();
 
 /*
@@ -27,8 +28,8 @@ module.exports = async (bot, message) => {
     }
 
 
-
-                let prefix = process.env.prefix;
+    const prefixMention = new RegExp(`^<@!?${bot.user.id}> `);
+                let prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : process.env.prefix;
     if (!message.content.toLowerCase().startsWith(prefix)) return;
 
     let cmdExecuted = moment().format("LLL");
@@ -44,7 +45,6 @@ module.exports = async (bot, message) => {
 
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let cmd = args.shift().toLowerCase();
-
         const commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
         if (commandfile) {
             let timeout = ms("3000");
