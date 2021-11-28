@@ -17,16 +17,12 @@ module.exports = {
             .setTitle("Why")
             .setDescription(data.why);
 
-        client.api
-            .interactions(interaction.id, interaction.token)
-            .callback.post({
+        client.api.interactions(interaction.id, interaction.token).callback.post({
+            slash: {
+                type: 4,
                 slash: {
-                    type: 4,
-                    slash: {
-                        embeds: [factEmbed],
-                    },
+                    embeds: [factEmbed],
                 },
-            });
-        });
-    },
-};
+            }
+            })
+}

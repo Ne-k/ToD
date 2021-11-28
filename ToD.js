@@ -72,7 +72,7 @@ modules.forEach((module) => {
 //=========================================================================================MENTION SETTINGS===========================================================================================
 client.on("ready", async () => {
     // require('statcord.js').ShardingClient.post(client)
-z
+
     setInterval(() => {
         const rnd = Math.floor(Math.random() * 2);
         switch (rnd) {
