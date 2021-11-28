@@ -38,7 +38,7 @@ module.exports = {
                 });
             }
 
-            if (args[0] === "2") {
+            if (args[0] === "0") {
                 await bot.shard.broadcastEval((client) => client.user.setStatus("idle"));
                 bot.user.setActivity(`Rebooting. . .`, {
                     type: "LISTENING",
