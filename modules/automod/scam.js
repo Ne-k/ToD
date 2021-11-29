@@ -1,5 +1,4 @@
 const moment = require("moment");
-const {Permissions} = require("discord.js");
 
 module.exports = async (bot, message) => {
 const {Permissions, MessageEmbed, WebhookClient} = require("discord.js");
@@ -50,6 +49,14 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                 setTimeout(async () => {
                     if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                         !message.deleted ? message.delete() : null;
+
+                        let d = bot.db.fetch(`${message.author.id}scamCooldown`)
+                        if(d === message.author.id) {
+                            setTimeout(() => {
+                                bot.db.delete(`${message.author.id}scamCooldown`)
+                            }, 10000);
+                            return;
+                        }
                     }
                 }, 1000);
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
@@ -61,13 +68,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                         await message.member.roles.add(muter)
                     }
                 }
-                let d = bot.db.fetch(`${message.author.id}scamCooldown`)
-                if(d === message.author.id) {
-                    setTimeout(() => {
-                        bot.db.delete(`${message.author.id}scamCooldown`)
-                    }, 10000);
-                    return;
-                }
+
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
 
