@@ -122,6 +122,7 @@ client.on("ready", async () => {
       }, 6500)
   */
     // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
+    /*
     const cFiles = fs.readdirSync("./slash/").filter((file) => file.endsWith(".js"));
     for (const file of cFiles) {
         const command = require(`./slash/${file}`);
@@ -163,6 +164,8 @@ client.ws.on("INTERACTION_CREATE", async (interaction) => {
             },
         });
     }
+
+     */
 });
 /*
 client.on("messageCreate", async (message) => {

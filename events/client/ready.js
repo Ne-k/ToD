@@ -6,10 +6,6 @@ const moment = require("moment");
 module.exports = async (bot) => {
     setTimeout(async () => await bot.shard.broadcastEval((client) => client.user.setStatus("online")), 60000);
 
-    process.on("unhandledRejection", (error) => {
-        return;
-    });
-
     const {MessageEmbed, WebhookClient} = require("discord.js");
 
     const webhookClient = new WebhookClient({
