@@ -1,9 +1,10 @@
 const moment = require("moment");
-const {Permissions} = require("discord.js");
+const {MessageButton} = require("discord.js");
+
 
 module.exports = async (bot, message) => {
-const {Permissions, MessageEmbed, WebhookClient} = require("discord.js");
-const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression); const t = message.content;
+const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
+const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression);
 
     function makeButtonGrid(w, h) {
         let buttons = [];
@@ -20,7 +21,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
         );
     }
 
-    if (t.match(regex)) {
+    if (message.content.match(regex)) {
 
         const unix = Math.floor(new Date().getTime() / 1000);
 
@@ -103,28 +104,23 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                                             .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount} ]\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                                      */
                 bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
+                const row = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setCustomId('del')
+                            .setLabel('Delete')
+                            .setStyle('DANGER'),
+                    )
+            .addComponents(
+                    new MessageButton()
+                        .setCustomId('info')
+                        .setLabel('Get Domain Info')
+                        .setStyle('SECONDARY'),
+                );
                 return message.channel.send({
                     content: message.author.id,
                     embeds: [embed],
-                    components: [
-                        {
-                            type: 1,
-                            components: [
-                                {
-                                    type: 2,
-                                    label: "Delete",
-                                    style: 4,
-                                    custom_id: "del",
-                                },
-                                {
-                                    type: 2,
-                                    label: "Get Domain Info",
-                                    style: 2,
-                                    custom_id: "info",
-                                },
-                            ],
-                        },
-                    ],
+                    components: [row],
                 }).then((msg) => {
                     bot.on("interactionCreate", async (interaction) => {
 
