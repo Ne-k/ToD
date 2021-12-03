@@ -26,7 +26,7 @@ return Promise.all(promises).then(async (results) => {
         const api = new Topgg.Api(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc1MjMwNjk3MDQ2NzIzNzk3MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA1MDY2NzUzfQ.TpGhII-9wHjglilYMega0jtcfzRUIBS9SloKEfJ5-sA"
         );
-        api.postStats({
+        await api.postStats({
             serverCount: totalGuilds,
             shardcount: bot.options.shardCount,
         });
@@ -35,7 +35,7 @@ return Promise.all(promises).then(async (results) => {
         //===============================================================================================================================================================
 
         /* Discord Services */
-        fetch(`https://api.discordservices.net/bot/752306970467237970/stats`, {
+        await fetch(`https://api.discordservices.net/bot/752306970467237970/stats`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ return Promise.all(promises).then(async (results) => {
         });
 
         /* Bots.gg */
-        fetch(`https://discord.bots.gg/api/v1/bots/752306970467237970/stats`, {
+        await fetch(`https://discord.bots.gg/api/v1/bots/752306970467237970/stats`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -80,7 +80,7 @@ return Promise.all(promises).then(async (results) => {
         const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
         await avatarWeb.send({
             username: 'Avatar changed',
-            avatarURL: require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)],
+            avatarURL: bot.user.avatarURL(),
             embeds: [
                 new MessageEmbed()
                     .setColor("GREEN")
@@ -88,8 +88,8 @@ return Promise.all(promises).then(async (results) => {
                     .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
             ],
         });
-        await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
-    }, 1.8e+6);
+         await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+    }, 3.6e+6);
 
 
 });
