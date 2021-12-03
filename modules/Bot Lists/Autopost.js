@@ -14,7 +14,7 @@ return Promise.all(promises).then(async (results) => {
 
     /* Discord.Boats */
     const Boats = new BOATS("2NFEeaWliuz7JFTjl1nELbQWxoDMgO3FbuJtcAiPFwYZEUmziciJY9ycj1Uek1x8DVA2ZaDyTamQzzMwKCpvfAkkSGIcNtjJ9BNqmSkjBPF5im07gzCd4jak4zCepd7umcKp1FWjU6pemcfbBmMcok0Nspx");
-    setInterval(() => {
+    setInterval(async () => {
         Boats.postStats(totalGuilds, "752306970467237970").then(() => {
             console.log("Dboats: ".blue + "[ Successfully updated server count. ]");
         }).catch((err) => {
@@ -75,20 +75,22 @@ return Promise.all(promises).then(async (results) => {
         }).catch((err) => {
             return console.log(`Discord.Bots.gg Error `.red + `${err}`);
         });
-    }, 7.2e+6);
-    const unix = Math.floor(new Date().getTime() / 1000);
-    const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
-    await avatarWeb.send({
-        username: 'Avatar changed',
-        avatarURL: randomElement,
-        embeds: [
-            new MessageEmbed()
-                .setColor("GREEN")
-                .setThumbnail(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
-                .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
-        ],
-    });
-    await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+
+        const unix = Math.floor(new Date().getTime() / 1000);
+        const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
+        await avatarWeb.send({
+            username: 'Avatar changed',
+            avatarURL: randomElement,
+            embeds: [
+                new MessageEmbed()
+                    .setColor("GREEN")
+                    .setThumbnail(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+                    .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
+            ],
+        });
+        await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+    }, 1.8e+6);
+
 
 });
 
