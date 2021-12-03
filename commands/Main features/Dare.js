@@ -12,14 +12,7 @@ module.exports = {
                 let embed = new Discord.MessageEmbed()
                     .setColor("#eaecf3")
                     .setTitle("Dare")
-                    .setDescription(
-                        Math.random() > 0.6
-                            ? client.tod.nsfwDare[
-                                Math.floor(Math.random() * client.tod.nsfwDare.length)
-                                ]
-                            : client.tod.Dare[
-                                Math.floor(Math.random() * client.tod.Dare.length)
-                                ]
+                    .setDescription(Math.random() > 0.6 ? client.tod.nsfwDare[Math.floor(Math.random() * client.tod.nsfwDare.length)] : client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)]
                     );
 
                 return message.channel

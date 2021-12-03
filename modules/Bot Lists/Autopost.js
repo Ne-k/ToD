@@ -76,9 +76,7 @@ return Promise.all(promises).then(async (results) => {
             return console.log(`Discord.Bots.gg Error `.red + `${err}`);
         });
     }, 7.2e+6);
-
-    let avatarArray = ["https://images-ext-1.discordapp.net/external/Y2KOMB4-9Vh6z8kOrXH7_L8kkNDwX_Myu5B-zMO_YbI/%3Fsize%3D512/https/cdn.discordapp.com/avatars/752306970467237970/569840b87cd50c272feef888252e712b.png", "https://media.discordapp.net/attachments/803117501218160651/915756163704971264/unknown.png", "https://media.discordapp.net/attachments/803117501218160651/915756214258917396/unknown.png?width=552&height=636", "https://media.discordapp.net/attachments/803117501218160651/915756227085090836/unknown.png", "https://media.discordapp.net/attachments/803117501218160651/915756278582747147/unknown.png?width=636&height=636", "https://media.discordapp.net/attachments/803117501218160651/915756356131254272/unknown.png?width=636&height=636", "https://media.discordapp.net/attachments/803117501218160651/915756426243239946/unknown.png", "https://media.discordapp.net/attachments/803117501218160651/915757119855263744/unknown.png?width=642&height=636", "https://media.discordapp.net/attachments/803117501218160651/915757366518104144/unknown.png"]
-    const randomElement = avatarArray[Math.floor(Math.random() * avatarArray.length)];
+    const unix = Math.floor(new Date().getTime() / 1000);
     const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
     await avatarWeb.send({
         username: 'Avatar changed',
@@ -86,11 +84,11 @@ return Promise.all(promises).then(async (results) => {
         embeds: [
             new MessageEmbed()
                 .setColor("GREEN")
-                .setThumbnail(randomElement)
+                .setThumbnail(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
                 .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
         ],
     });
-    await bot.user.setAvatar(randomElement)
+    await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
 
 });
 
