@@ -80,7 +80,7 @@ return Promise.all(promises).then(async (results) => {
         const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
         await avatarWeb.send({
             username: 'Avatar changed',
-            avatarURL: randomElement,
+            avatarURL: require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)],
             embeds: [
                 new MessageEmbed()
                     .setColor("GREEN")
