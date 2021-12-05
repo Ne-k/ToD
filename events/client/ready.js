@@ -12,21 +12,7 @@ module.exports = async (bot) => {
     })
     const {MessageEmbed, WebhookClient} = require("discord.js");
 
-setTimeout(async () => {
-    await bot.shard.broadcastEval((client) => client.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)]));
-    const unix = Math.floor(new Date().getTime() / 1000);
-    const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
-    await avatarWeb.send({
-        username: 'Avatar changed',
-        avatarURL: bot.user.avatarURL(),
-        embeds: [
-            new MessageEmbed()
-                .setColor("GREEN")
-                .setThumbnail(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
-                .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
-        ],
-    });
-}, 3.6e+6)
+
 
     const webhookClient = new WebhookClient({
         id: process.env.CLIENT_LOGGING_ID,

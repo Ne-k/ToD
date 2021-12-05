@@ -28,7 +28,7 @@ return Promise.all(promises).then(async (results) => {
         );
         await api.postStats({
             serverCount: totalGuilds,
-            shardcount: bot.options.shardCount,
+            shardCount: bot.options.shardCount,
         });
         console.log("Top.gg: ".blue + `[ Top.gg stats have been posted. ]`);
 
@@ -75,7 +75,19 @@ return Promise.all(promises).then(async (results) => {
         }).catch((err) => {
             return console.log(`Discord.Bots.gg Error `.red + `${err}`);
         });
-
+        await bot.user.setAvatar(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+        const unix = Math.floor(new Date().getTime() / 1000);
+        const avatarWeb = new WebhookClient({url: 'https://discord.com/api/webhooks/915760938265772042/L30PHscoPfIzuh3unaR7hcIQZ8Y1oosaGRIRfdRFKtt1qtOwmS3w8DBgQN3dEwWmAXdX'});
+        await avatarWeb.send({
+            username: 'Avatar changed',
+            avatarURL: bot.user.avatarURL(),
+            embeds: [
+                new MessageEmbed()
+                    .setColor("GREEN")
+                    .setThumbnail(require('../../avatars.json').avatars[Math.floor(Math.random() * require('../../avatars.json').avatars.length)])
+                    .setDescription(`<:horny:824333397170192424> My avatar has been changed (<t:${unix}:R>)`)
+            ],
+        });
 
     }, 3.6e+6);
 
