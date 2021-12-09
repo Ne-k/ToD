@@ -93,7 +93,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                         .setColor("GREEN")
                         .setThumbnail(message.guild.iconURL({dynamic: true}))
                         .setTitle('__Scam link prevented in:__')
-                        .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
+                        .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                     ],
                 });
                 /*
