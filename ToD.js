@@ -87,87 +87,8 @@ client.on("ready", async () => {
     client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
         console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`);
     });
-    /*
-    })
 
-    setInterval(() => {
-        var rnd = Math.floor(Math.random() * 2);
-        switch (rnd) {
-          case 1:
-            {
-              client.user.setActivity(`Slash commands`, {
-                type: 'WATCHING'
-              });
-            }
-            break
-            default:
-              {
-                client.user.setActivity(`Truth Or Dare`, {
-                  type: 'PLAYING'
-                });
-              }
-
-              break
-        }
-      }, 6500)
-  */
-    // client.user.setActivity('Jahy-sama wa Kujikenai!', {type: 'WATCHING'})
-    /*
-    const cFiles = fs.readdirSync("./slash/").filter((file) => file.endsWith(".js"));
-    for (const file of cFiles) {
-        const command = require(`./slash/${file}`);
-
-        if (command.global === true) {
-            client.api.applications(client.user.id).commands.post({
-                data: {
-                    name: command.slash.name,
-                    description: command.slash.description,
-                    options: command.slashcommandOptions,
-                },
-            });
-            console.log(`Posting: `.yellow + `[ ${command.slash.name} from ${file} (${command.global ? "global" : "guild"}) ]`);
-
-            client.slash.set(command.slash.name, command);
-        }
-    }
-    let cmdArrGlobal = await client.api.applications(client.user.id).commands.get();
-    cmdArrGlobal.forEach((element) => {
-        console.log(`Successfully Loaded: `.green + `[ ${element.name} (${element.id}) ]`);
-    });
 });
-
-client.ws.on("INTERACTION_CREATE", async (interaction) => {
-    if (!client.slash.has(interaction.data.name)) return;
-    try {
-        client.on("interactionCreate", async (int) => {
-            client.slash.get(interaction.data.name).execute(interaction, int);
-        });
-    } catch (error) {
-        console.log(`Error Occured => ${interaction.data.name} : ${error.message}`);
-        console.log(error.stack);
-        client.api.interactions(interaction.id, interaction.token).callback.post({
-            data: {
-                type: 4,
-                data: {
-                    content: `Sorry, there was an error executing that command!`,
-                },
-            },
-        });
-    }
-
-     */
-});
-/*
-client.on("messageCreate", async (message) => {
-    if (message.author.bot) return;
-    let prefix = process.env.prefix;
-    try {
-        i
-    } catch (err) {
-        return message.channel.send(err);
-    }
-});
- */
 
 //===================================Statcord random shit ========================================================================================================================================================================
 
