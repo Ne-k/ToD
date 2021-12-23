@@ -81,7 +81,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                         .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
                         .setColor('RED')
                         .setThumbnail(message.author.avatarURL({dynamic: true}))
-                        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${data.matches.map(m => m.type.toLowerCase())} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                         .setFooter('To configure this, use the t;disable or t;enable commands.')
 
                 const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
@@ -105,14 +105,12 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                                      */
                 bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
                 const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
+                    .addComponents(new MessageButton()
                             .setCustomId('del')
                             .setLabel('Delete')
                             .setStyle('DANGER'),
-                    )
-            .addComponents(
-                    new MessageButton()
+                        )
+            .addComponents(new MessageButton()
                         .setCustomId('info')
                         .setLabel('Get Domain Info')
                         .setStyle('SECONDARY'),
