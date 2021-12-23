@@ -3,3 +3,4 @@ node_modules
 waifu.png
 json.sqlite
 *.sqlite
+package-lock.json
