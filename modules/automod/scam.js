@@ -1,11 +1,11 @@
 const moment = require("moment");
-const {MessageButton} = require("discord.js");
+const {MessageButton, Permissions} = require("discord.js");
 
 
 module.exports = async (bot, message) => {
-const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
-const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression);
-
+    const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
+    const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression);
+    const user = message.guild.members.cache.get(message.author.id);
     function makeButtonGrid(w, h) {
         let buttons = [];
         for (let x = 0; x < w * h; x++) {
@@ -48,20 +48,14 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
 
                 if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
 
-                setTimeout(async () => {
-                    if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-                        !message.deleted ? message.delete() : null;
-                    }
-                }, 1000);
-                if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) {
 
-                if (bot.db.fetch(`mutedRole_${message.guild.id}`)) {
+                if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) setTimeout(() => message.delete(), 1000)
 
-                        const muter = bot.db.fetch(`mutedRole_${message.guild.id}`);
-                        if(message.member.roles.cache.has(muter)) return;
-                        await message.member.roles.add(muter)
-                    }
-                }
+
+                if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) await user.timeout(10 * 60 * 1000, 'Detected a phishing link from the user.');
+
+
+
                 let d = bot.db.fetch(`${message.author.id}scamCooldown`)
                 if(d === message.author.id) {
                     setTimeout(() => {
@@ -69,6 +63,7 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                     }, 10000);
                     return;
                 }
+
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
 
@@ -78,11 +73,11 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                     linkstat = "Inactive"
                 }
                 const embed = new MessageEmbed()
-                        .setAuthor(`❌ ${data.matches.map(m => m.type)} link detected!`)
-                        .setColor('RED')
-                        .setThumbnail(message.author.avatarURL({dynamic: true}))
-                        .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                        .setFooter('To configure this, use the t;disable or t;enable commands.')
+                    .setTitle(`❌ ${data.matches.map(m => m.type)} link detected!`)
+                    .setColor('RED')
+                    .setThumbnail(message.author.avatarURL({dynamic: true}))
+                    .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                    .setFooter('To configure this, use the t;disable or t;enable commands.')
 
                 const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
                 await webhookClient.send({
@@ -90,10 +85,10 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                     avatarURL: message.author.avatarURL({dynamic: true}),
                     embeds: [
                         new MessageEmbed()
-                        .setColor("GREEN")
-                        .setThumbnail(message.guild.iconURL({dynamic: true}))
-                        .setTitle('__Scam link prevented in:__')
-                        .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
+                            .setColor("GREEN")
+                            .setThumbnail(message.guild.iconURL({dynamic: true}))
+                            .setTitle('__Scam link prevented in:__')
+                            .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                     ],
                 });
                 /*
@@ -106,30 +101,41 @@ const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]
                 bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
                 const row = new MessageActionRow()
                     .addComponents(new MessageButton()
-                            .setCustomId('del')
-                            .setLabel('Delete')
-                            .setStyle('DANGER'),
-                        )
-            .addComponents(new MessageButton()
+                        .setCustomId('del')
+                        .setLabel('Delete')
+                        .setStyle('DANGER'),
+                    )
+                    .addComponents(new MessageButton()
+                        .setCustomId('remTime')
+                        .setLabel('Remove Timeout')
+                        .setStyle('SUCCESS'),
+                    )
+                    .addComponents(new MessageButton()
                         .setCustomId('info')
                         .setLabel('Get Domain Info')
                         .setStyle('SECONDARY'),
-                );
+                    );
                 return message.channel.send({
                     content: message.author.id,
                     embeds: [embed],
                     components: [row],
                 }).then((msg) => {
                     bot.on("interactionCreate", async (interaction) => {
+                        if(interaction.customId === 'remTime') {
+                            if(!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({content: 'You do not have permission to remove timeouts.', ephemeral: true});
+                            await user.disableCommunicationUntil(null, 'Moderator removed timeout.');
+                            interaction.reply({content: 'Timeout removed.', ephemeral: true})
 
+                        }
                         if (interaction.customId === "del") {
                             if (!interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                                 interaction.reply({content: `You can't delete this message`, ephemeral: true})
                             } else {
-                                setTimeout(() => !message.deleted ? message.delete() : null, 0);
+                                msg.delete()
                             }
 
                         }
+
                         if (interaction.customId === "info") {
                             let thing = new MessageEmbed()
                                 .addField('Useless Domain info:', `__Domain IP__: **${dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address ? dataInfo[`${data.matches.map(m => m.domain)}`].details.ip_address : 'IP address not found.'}**\n__Asn Name__: ${dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name ? dataInfo[`${data.matches.map(m => m.domain)}`].details.asn.asn_name : 'No asn name found.'}`)

@@ -14,6 +14,7 @@ const moment = require("moment");
 const mongoose = require("mongoose");
 const {Collection: MongoCollection, MongoClient} = require("mongodb");
 const {Collection, Fields} = require("quickmongo");
+client.time = require('./modules/timeout.js')
 client.db = db;
 client.slash = new Discord.Collection();
 client.tod = require("./ToD.json");
