@@ -31,7 +31,7 @@ module.exports = {
 
         waifu
             .setImage(url)
-            .setAuthor(`${message.author.username} gave ${user.user.tag} a enthusiastic, over-the-top, and potentially dangerous hug.`, message.author.avatarURL({dynamic: true}))
+            .setTitle(`${message.author.username} gave ${user.user.tag} a enthusiastic, over-the-top, and potentially dangerous hug.`)
             .setDescription(quotes)
             .setColor("RANDOM");
 

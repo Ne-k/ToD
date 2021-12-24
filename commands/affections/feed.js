@@ -29,7 +29,7 @@ module.exports = {
 
                 waifu
                     .setImage(data.link)
-                    .setAuthor(`${message.author.username} fed ${user.user.tag} food`, message.author.avatarURL({dynamic: true}))
+                    .setTitle(`${message.author.username} has fed ${user.user.tag}`)
                     .setDescription(quotes)
                     .setColor("RANDOM");
 

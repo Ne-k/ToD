@@ -44,8 +44,7 @@ module.exports = {
         let quotes = args.slice(1).join(" ");
         waifu
             .setImage(url)
-            .setAuthor(`${message.author.username} has kissed ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
-
+            .setTitle(`${message.author.username} kissed ${user.user.tag}`)
             .setDescription(quotes)
             .setColor("RANDOM")
             .setFooter(ishorny[hornyresult]);

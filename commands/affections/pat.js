@@ -30,7 +30,7 @@ module.exports = {
 
         waifu
             .setImage(url)
-            .setAuthor(`${message.author.username} has patted ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
+            .setTitle(`${message.author.username} patted ${user.user.tag}`)
             .setDescription(quotes)
             .setColor("RANDOM");
         return message.channel.send({embeds: [waifu]});

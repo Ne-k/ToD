@@ -40,10 +40,7 @@ module.exports = {
                     .then((images) => {
                         for (let image of images) {
                             const embed = new MessageEmbed()
-                                .setAuthor(
-                                    `Safebooru ${query}`,
-                                    "https://c.catgirlsare.sexy/NrAI.png"
-                                )
+                                .setTitle("SafeBooru")
                                 .setImage(image.common.file_url)
                                 .setDescription(`[Image URL](${image.common.file_url})`)
 

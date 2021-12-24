@@ -29,7 +29,7 @@ module.exports = {
         let quotes = args.slice(1).join(" ");
         waifuembed2
             .setImage(url)
-            .setAuthor(`${message.author.username} licked ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
+            .setTitle(`${message.author.username} licked ${user.user.tag}`)
             .setDescription(quotes)
             .setColor("RANDOM");
 

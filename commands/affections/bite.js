@@ -26,7 +26,7 @@ module.exports = {
         const {url} = await fetch(`${waifuAPI}/sfw/bite`).then((res) => res.json());
 
         const waifu = new Discord.MessageEmbed()
-            .setAuthor(`${message.author.username} has bitten ${user.user.tag}`, message.author.avatarURL({dynamic: true}))
+            .setTitle(`${message.author.username} has bitten ${user.user.tag}`)
             .setDescription(quotes)
             .setImage(url)
             .setColor("RANDOM");

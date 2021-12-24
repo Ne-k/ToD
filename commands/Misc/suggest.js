@@ -70,7 +70,7 @@ module.exports = {
                         embeds: [
                             new MessageEmbed()
                                 .setColor("YELLOW")
-                                .setAuthor(`Pending. . .`, message.author.avatarURL({dynamic: true}))
+                               .setTitle("Pending. . .")
                                 .setDescription(`You are about to send "\`${reportedbug}\`" to the support server as a suggestion. \n\nBy clicking **agree** you acknowledge ToD's **[Private Policy](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#private-policy)** and any outcome of your suggestion (such as [getting blacklisted](https://github.com/NekWasTaken/ToD-Docs/blob/main/README.md#blacklist-faq) if your suggestion turns out to be a troll suggestion, or an abuse to the bot.) *Note: NSFW truths and dares are accepted*.\n\nIf you wish to cancel your suggestion, click **deny**.`)
                                 .setFooter("This user interface will be deleted in 30 seconds if no choice is made."),
                         ],

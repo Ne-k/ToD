@@ -14,10 +14,7 @@ module.exports = {
             .then((res) => res.json())
             .then((data) => {
                 let fluxAzureEmbed = new Discord.MessageEmbed()
-                    .setAuthor(
-                        "AzurLane",
-                        "https://static.wikia.nocookie.net/omniversal-battlefield/images/a/a8/FWPae6p.png/revision/latest?cb=20200116082838"
-                    )
+                    .setTitle("Azurlane")
                     .setColor("#CACACA")
                     .setImage(data.file);
                 message.channel.send({embeds: [fluxAzureEmbed]});

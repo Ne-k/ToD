@@ -25,7 +25,7 @@ module.exports = {
             let embed = new Discord.MessageEmbed()
                 .setColor("RANDOM")
                 .setImage(url)
-                .setAuthor(`${message.author.username} wants a cuddle. . .`, message.author.avatarURL({dynamic: true}));
+                .setTitle(`${message.author.username} wants to cuddle. . .`)
             return message.channel.send(embed);
         }
 
@@ -33,10 +33,7 @@ module.exports = {
 
         waifu
             .setImage(url)
-            .setAuthor(
-                `${message.author.username} is cuddling with ${user.user.tag}`,
-                message.author.avatarURL({dynamic: true})
-            )
+            .setTitle(`${message.author.username} wants to cuddle with ${user.user.tag}`)
             .setColor("RANDOM")
             .setDescription(quotes);
 

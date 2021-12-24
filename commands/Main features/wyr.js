@@ -15,10 +15,7 @@ module.exports = {
                     embeds: [
                         new bot.messageembed()
                             .setColor("BLUE")
-                            .setAuthor(
-                                `Let us play Would You rather!`,
-                                message.author.avatarURL({dynamic: true})
-                            )
+                            .setTitle('Let us play Would You rather!')
                             .setDescription(
                                 `Would you rather:\n\n<:image_20210516_090228:843518773708324884> - \`${response.blue.question}\`\nor\n<:image_20210516_090221:843518746052001793> - \`${response.red.question}\``
                             ),

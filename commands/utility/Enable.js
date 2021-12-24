@@ -28,38 +28,6 @@ module.exports = {
             let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
             muteRole = !!muteRole;
             switch(args[0]) {
-                case "muterole":
-
-                    if (!args[1]) {
-                        return message.channel.send(`Please mention a muted role or send the role ID, like for example: \`${process.env.prefix}enable muterole @muted\` or \`${process.env.prefix}enable muterole <roleId>\``)
-                    }
-
-                    if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
-                        return message.channel.send({
-                            embeds: [
-                                new MessageEmbed()
-                                    .setColor("RED")
-                                    .setDescription(
-                                        "Looks like you have insignificant permissions. `MANAGE_GUILD` is needed to enable a option. <:Bonk:853033417112682574>"
-                                    ),
-                            ],
-                        });
-                    }
-
-
-                    let role = message.mentions.roles.first() || message.guild.roles.cache.find(role => role.id === args[1])
-                    if (client.db.fetch(`mutedRole_${message.guild.id}`)) {
-                        return message.channel.send({content: `Looks like the muterole has already been enabled with the mute role \`${client.db.fetch(`mutedRole_${message.guild.id}`)}\``})
-                    }
-
-                    if (args[1]) {
-
-
-                        client.db.set(`mutedRole_${message.guild.id}`, role.id)
-
-                        return message.channel.send({content: 'Mute role now enabled.'})
-                    }
-                    break;
                 case "antiscam":
                     if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
                         return message.channel.send({
