@@ -53,15 +53,6 @@ module.exports = async (bot, message) => {
 
 
 
-                let d = bot.db.fetch(`${message.author.id}scamCooldown`)
-                if(d === message.author.id) {
-                    setTimeout(() => {
-                        bot.db.delete(`${message.author.id}scamCooldown`)
-                    }, 5000);
-                    return;
-                }
-
-
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
 
@@ -100,7 +91,7 @@ module.exports = async (bot, message) => {
                                             .setTitle('__Scam link prevented in:__')
                                             .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount} ]\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                                      */
-                bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
+
                 const row = new MessageActionRow()
                     .addComponents(new MessageButton()
                         .setCustomId('del')
@@ -126,7 +117,7 @@ module.exports = async (bot, message) => {
                         if(interaction.customId === 'remTime') {
                             if(!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({content: 'You do not have permission to remove timeouts.', ephemeral: true});
                             await user.disableCommunicationUntil(null, 'Moderator removed timeout.');
-                            interaction.reply({content: 'Timeout removed.', ephemeral: true})
+                            return interaction.reply({content: 'Timeout removed.', ephemeral: true})
 
                         }
                         if (interaction.customId === "del") {
