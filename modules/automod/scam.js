@@ -57,7 +57,7 @@ module.exports = async (bot, message) => {
                 if(d === message.author.id) {
                     setTimeout(() => {
                         bot.db.delete(`${message.author.id}scamCooldown`)
-                    }, 10000);
+                    }, 5000);
                     return;
                 }
 
