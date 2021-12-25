@@ -113,6 +113,9 @@ module.exports = async (bot, message) => {
                     embeds: [embed],
                     components: [row],
                 }).then((msg) => {
+                    setTimeout(() => {
+                        msg.delete()
+                    }, 8.64e+7)
                     bot.on("interactionCreate", async (interaction) => {
                         if(interaction.customId === 'remTime') {
                             if(!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({content: 'You do not have permission to remove timeouts.', ephemeral: true});
