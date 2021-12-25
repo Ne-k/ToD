@@ -1,5 +1,5 @@
 const moment = require("moment");
-const {MessageButton, Permissions} = require("discord.js");
+const {MessageButton, Permissions, MessageEmbed} = require("discord.js");
 
 
 module.exports = async (bot, message) => {
@@ -49,7 +49,6 @@ module.exports = async (bot, message) => {
                 if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
 
 
-                if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) setTimeout(() => message.delete(), 1000)
 
 
 
@@ -67,22 +66,30 @@ module.exports = async (bot, message) => {
                     .setThumbnail(message.author.avatarURL({dynamic: true}))
                     .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n*Please grant me the \`Timeout Members\` permission so I can timeout users when I detect a phishing link.*\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                     .setFooter("Do not click on these links, they're fake and meant to steal your account details. To disable this message, run t;disable")
+                const webEmbed = new MessageEmbed()
+                    .setColor("GREEN")
+                    .setThumbnail(message.guild.iconURL({dynamic: true}))
+                    .setTitle('__Scam link prevented in:__')
+                    .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                 if(message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
                     await user.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.');
                     embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                    webEmbed.addField('** **', `User was timed out.`)
+                }
+                if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                    setTimeout(() => message.delete(), 1000)
+                    if(bot.db.fetch(`${message.author.id}scamCooldown`) === message.author.id) {
+                        setTimeout(() => bot.db.delete(`${message.author.id}scamCooldown`), 5000)
+                        return;
+                    }
 
                 }
+
                 const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
                 await webhookClient.send({
                     username: 'anti-scam',
                     avatarURL: message.author.avatarURL({dynamic: true}),
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor("GREEN")
-                            .setThumbnail(message.guild.iconURL({dynamic: true}))
-                            .setTitle('__Scam link prevented in:__')
-                            .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
-                    ],
+                    embeds: [webEmbed],
                 });
                 /*
                                     new MessageEmbed()
@@ -113,6 +120,7 @@ module.exports = async (bot, message) => {
                     embeds: [embed],
                     components: [row],
                 }).then((msg) => {
+                    bot.db.set(`${message.author.id}scamCooldown`, message.author.id)
                     setTimeout(() => {
                         msg.delete()
                     }, 8.64e+7)
