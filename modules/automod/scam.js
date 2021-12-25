@@ -52,9 +52,6 @@ module.exports = async (bot, message) => {
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) setTimeout(() => message.delete(), 1000)
 
 
-                if(message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) await user.timeout(10 * 60 * 1000, 'Detected a phishing link from the user.');
-
-
 
                 let d = bot.db.fetch(`${message.author.id}scamCooldown`)
                 if(d === message.author.id) {
@@ -63,6 +60,7 @@ module.exports = async (bot, message) => {
                     }, 10000);
                     return;
                 }
+
 
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
@@ -76,9 +74,13 @@ module.exports = async (bot, message) => {
                     .setTitle(`❌ ${data.matches.map(m => m.type)} link detected!`)
                     .setColor('RED')
                     .setThumbnail(message.author.avatarURL({dynamic: true}))
-                    .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                    .setFooter('To configure this, use the t;disable or t;enable commands.')
+                    .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n*Please grant me the \`Timeout Members\` permission so I can timeout users when I detect a phishing link.*\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                    .setFooter("Do not click on these links, they're fake and meant to steal your account details. To disable this message, run t;disable")
+                if(message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
+                    await user.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.');
+                    embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
 
+                }
                 const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
                 await webhookClient.send({
                     username: 'anti-scam',
