@@ -103,16 +103,19 @@ module.exports = async (bot, message) => {
                     .addComponents(new MessageButton()
                         .setCustomId('del')
                         .setLabel('Delete')
+                        .setEmoji('❌')
                         .setStyle('DANGER'),
                     )
                     .addComponents(new MessageButton()
                         .setCustomId('remTime')
                         .setLabel('Remove Timeout')
+                        .setEmoji('🔧')
                         .setStyle('SUCCESS'),
                     )
                     .addComponents(new MessageButton()
                         .setCustomId('info')
                         .setLabel('Get Domain Info')
+                        .setEmoji('ℹ️')
                         .setStyle('SECONDARY'),
                     );
                 return message.channel.send({
