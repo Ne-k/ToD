@@ -69,7 +69,7 @@ module.exports = async (bot, message) => {
                     .setColor("GREEN")
                     .setThumbnail(message.guild.iconURL({dynamic: true}))
                     .setTitle('__Scam link prevented in:__')
-                    .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
+                    .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n\`${message.author.tag}\`\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                 if(message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
 
                     await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.');
