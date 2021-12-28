@@ -1,11 +1,10 @@
 const moment = require("moment");
-const {MessageButton, Permissions, MessageEmbed} = require("discord.js");
+const {MessageButton, Permissions, MessageEmbed, WebhookClient, MessageActionRow} = require("discord.js");
 
 
 module.exports = async (bot, message) => {
     const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
     const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression);
-    const user = message.guild.members.cache.get(message.author.id);
     function makeButtonGrid(w, h) {
         let buttons = [];
         for (let x = 0; x < w * h; x++) {
@@ -72,17 +71,18 @@ module.exports = async (bot, message) => {
                     .setTitle('__Scam link prevented in:__')
                     .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                 if(message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
-                    await user.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.');
+                    await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.');
                     embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                     webEmbed.addField('** **', `User was timed out.`)
                 }
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
                     setTimeout(() => message.delete(), 1000)
+
+                } else {
                     if(bot.db.fetch(`${message.author.id}scamCooldown`) === message.author.id) {
                         setTimeout(() => bot.db.delete(`${message.author.id}scamCooldown`), 5000)
                         return;
                     }
-
                 }
 
                 const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
@@ -107,6 +107,13 @@ module.exports = async (bot, message) => {
                         .setStyle('DANGER'),
                     )
                     .addComponents(new MessageButton()
+                        .setCustomId('ban')
+                        .setLabel('Ban User')
+                        .setDisabled(true)
+                        .setEmoji('🛠️')
+                        .setStyle('DANGER'),
+                    )
+                    .addComponents(new MessageButton()
                         .setCustomId('remTime')
                         .setLabel('Remove Timeout')
                         .setEmoji('🔧')
@@ -128,9 +135,13 @@ module.exports = async (bot, message) => {
                         msg.delete()
                     }, 8.64e+7)
                     bot.on("interactionCreate", async (interaction) => {
+                        if (interaction.guildId !== message.guild.id) return;
+                        if(interaction.channelId !== message.channel.id) return;
+
+
                         if(interaction.customId === 'remTime') {
                             if(!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({content: 'You do not have permission to remove timeouts.', ephemeral: true});
-                            await user.disableCommunicationUntil(null, 'Moderator removed timeout.');
+                            await message.member.disableCommunicationUntil(null, 'Moderator removed timeout.');
                             return interaction.reply({content: 'Timeout removed.', ephemeral: true})
 
                         }
