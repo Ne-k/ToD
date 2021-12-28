@@ -80,7 +80,7 @@ module.exports = async (bot, message) => {
 
                 } else {
                     if(bot.db.fetch(`${message.author.id}scamCooldown`) === message.author.id) {
-                        setTimeout(() => bot.db.delete(`${message.author.id}scamCooldown`), 5000)
+                        setTimeout(() => bot.db.delete(`${message.author.id}scamCooldown`), 20000)
                         return;
                     }
                 }
@@ -116,7 +116,7 @@ module.exports = async (bot, message) => {
                     .addComponents(new MessageButton()
                         .setCustomId('remTime')
                         .setLabel('Remove Timeout')
-                        .setEmoji('🔧')
+                        .setEmoji('⛏️')
                         .setStyle('SUCCESS'),
                     )
                     .addComponents(new MessageButton()
