@@ -55,7 +55,9 @@ let errors = [];
 const modules = fs.readdirSync("commands").filter((file) => fs.statSync(path.join("commands", file)).isDirectory());
 modules.forEach((module) => {
     console.log(`Loading:`.green + ` [ ${module} ]`);
-    const CMDFiles = fs.readdirSync(path.resolve(`commands/${module}`)).filter((file) => !fs.statSync(path.resolve("commands", module, file)).isDirectory()).filter((file) => {return file.endsWith(".js");});
+    const CMDFiles = fs.readdirSync(path.resolve(`commands/${module}`)).filter((file) => !fs.statSync(path.resolve("commands", module, file)).isDirectory()).filter((file) => {
+        return file.endsWith(".js");
+    });
 });
 
 

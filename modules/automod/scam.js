@@ -1,10 +1,9 @@
-const moment = require("moment");
-const {MessageButton, Permissions, MessageEmbed, WebhookClient, MessageActionRow} = require("discord.js");
+const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
 
 
 module.exports = async (bot, message) => {
-    const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
-    const expression = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi; const regex = new RegExp(expression);
+    const regex = new RegExp(/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi);
+
     function makeButtonGrid(w, h) {
         let buttons = [];
         for (let x = 0; x < w * h; x++) {
@@ -48,10 +47,6 @@ module.exports = async (bot, message) => {
                if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
 
 
-
-
-
-
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
 
                 if (linkstat === "ONLINE") {
@@ -70,7 +65,7 @@ module.exports = async (bot, message) => {
                     .setThumbnail(message.guild.iconURL({dynamic: true}))
                     .setTitle('__Scam link prevented in:__')
                     .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n\`${message.author.tag}\`\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
-                if(message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
+                if (message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
 
                     await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.').catch(e => {
                         message.channel.send(`Looks like there was an issue with timing out the user.`)
@@ -85,13 +80,13 @@ module.exports = async (bot, message) => {
 
                 } else {
 
-                    if(bot.db.fetch(`${message.author.id}scamCooldown`) === message.author.id) {
+                    if (bot.db.fetch(`${message.author.id}scamCooldown`) === message.author.id) {
                         setTimeout(() => bot.db.delete(`${message.author.id}scamCooldown`), 15000)
                         return;
                     }
                 }
 
-                const webhookClient = new WebhookClient({ url: process.env.ANTISCAM_WebURL });
+                const webhookClient = new WebhookClient({url: process.env.ANTISCAM_WebURL});
                 await webhookClient.send({
                     username: 'anti-scam',
                     avatarURL: message.author.avatarURL({dynamic: true}),
@@ -135,12 +130,15 @@ module.exports = async (bot, message) => {
                     }, 8.64e+7)
                     bot.on("interactionCreate", async (interaction) => {
                         if (interaction.guildId !== message.guild.id) return;
-                        if(interaction.channelId !== message.channel.id) return;
+                        if (interaction.channelId !== message.channel.id) return;
 
 
-                        if(interaction.customId === 'remTime') {
+                        if (interaction.customId === 'remTime') {
 
-                            if(!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({content: 'You do not have permission to remove timeouts.', ephemeral: true});
+                            if (!interaction.member.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) return interaction.reply({
+                                content: 'You do not have permission to remove timeouts.',
+                                ephemeral: true
+                            });
                             await message.member.disableCommunicationUntil(null, 'Moderator removed timeout.');
                             return interaction.reply({content: 'Timeout removed.', ephemeral: true})
 
