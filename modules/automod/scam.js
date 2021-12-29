@@ -44,7 +44,7 @@ module.exports = async (bot, message) => {
                     },
                 }).then(res => res.json())
 
-               if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
+               // if (message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD) || message.member.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return;
 
 
                 let linkstat = dataInfo[`${data.matches.map(m => m.domain)}`].status
@@ -66,13 +66,19 @@ module.exports = async (bot, message) => {
                     .setTitle('__Scam link prevented in:__')
                     .setDescription(`\`${message.guild.name}\` (${message.guild.id}) | ${message.guild.memberCount.toLocaleString()}\n\`${message.author.tag}\`\n${data.matches.map(m => m.domain)}\n\n<t:${unix}:R> (<t:${unix}:F>)`)
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS)) {
+                    if(message.member.isCommunicationDisabled) {
+                        await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.').catch(e => {
+                            message.channel.send(`Looks like there was an issue with timing out the user.`)
+                            webEmbed.setFooter(`There was an issue timing out the user.`)
+                        })
+                        embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                        webEmbed.addField('** **', `User was timed out.`)
 
-                    await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.').catch(e => {
-                        message.channel.send(`Looks like there was an issue with timing out the user.`)
-                        webEmbed.setFooter(`There was an issue timing out the user.`)
-                    })
-                    embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                    webEmbed.addField('** **', `User was timed out.`)
+                    } else {
+                        embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nwas already timed out.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
+                        webEmbed.addField('** **', `User was already timed out.`)
+                    }
+                   
                 }
                 if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
 
