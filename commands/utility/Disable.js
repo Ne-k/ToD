@@ -55,7 +55,7 @@ module.exports = {
                     break;
 
                 case "nsfw":
-                    if (!message.member.permissions.has(32)) {
+                    if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
                         return message.channel.send({
                             embeds: [
                                 new client.messageembed()

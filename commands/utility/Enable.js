@@ -96,7 +96,7 @@ module.exports = {
                         });
                     }
 
-                    if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null || client.db.fetch(`nsfwEnabled_${message.guild.id}`) == false) {
+                    if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) == null || client.db.fetch(`nsfwEnabled_${message.guild.id}`) === false) {
                         return message.channel
                             .send({
                                 components: [
@@ -153,7 +153,7 @@ module.exports = {
                                                 })
                                                 .then((msg) => setTimeout(() => msg.delete(), 5000));
                                         }
-                                        if (interaction.customId == "cancel") {
+                                        if (interaction.customId === "cancel") {
                                             setTimeout(() => msg.delete(), 0);
                                             message.channel
                                                 .send({
