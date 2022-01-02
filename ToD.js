@@ -44,11 +44,13 @@ const schema = new Fields.ObjectField({
     items: new Fields.ArrayField(new Fields.StringField()),
     balance: new Fields.NumberField()
 });
-
+/*
 mongo.connect()
     .then(() => {
         console.log(`MongoDB `.green + "[ Connected to the database! ]");
     });
+
+ */
 
 
 let errors = [];
