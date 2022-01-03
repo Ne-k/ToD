@@ -11,7 +11,7 @@ module.exports = {
     run: async (bot, message, args) => {
         let Sembed = new MessageEmbed()
             .setColor("#7975a8")
-            .setDescription("**[Support Server Invite](https://nek.wtf/support)**")
+            .setDescription("**[Support Server Invite](https://nek.wtf/tod/support)**")
             .setTimestamp()
             .setThumbnail(bot.user.displayAvatarURL());
 

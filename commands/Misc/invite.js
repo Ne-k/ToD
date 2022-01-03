@@ -15,7 +15,7 @@ module.exports = {
         let Sembed = new MessageEmbed()
             .setColor("RANDOM")
             .setDescription(
-                "**[Click here to invite ToD bot](https://nek.wtf/invite)**\n\n<:Purple_dash:843518550966796309> [Top.gg](https://top.gg/bot/752306970467237970) **|** <:Orange_dash:843518612747976714> [Development Server](https://discord.gg/PVC35NbeTD) **|** <:Red_dash:843518522209992724> [Website](https://nek.wtf/tod)"
+                "**[Click here to invite ToD bot](https://nek.wtf/tod/invite)**\n\n<:Purple_dash:843518550966796309> [Top.gg](https://top.gg/bot/752306970467237970) **|** <:Orange_dash:843518612747976714> [Development Server](https://discord.gg/PVC35NbeTD) **|** <:Red_dash:843518522209992724> [Website](https://nek.wtf/tod)"
             )
             .setImage(link);
         return message.channel.send({
@@ -27,7 +27,7 @@ module.exports = {
                             type: 2,
                             label: "Invite ToD",
                             style: 5,
-                            url: "https://nek.wtf/invite",
+                            url: "https://nek.wtf/tod/invite",
                         },
                     ],
                 },

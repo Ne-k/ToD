@@ -71,7 +71,7 @@ module.exports = {
                                 type: 2,
                                 label: "Invite",
                                 style: 5,
-                                url: "https://nek.wtf/invite",
+                                url: "https://nek.wtf/tod/invite",
                             },
                         ],
                     },
