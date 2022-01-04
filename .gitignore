@@ -4,3 +4,6 @@ waifu.png
 json.sqlite
 *.sqlite
 package-lock.json
+.idea/vcs.xml
+.idea/ToD.iml
+.idea/modules.xml
