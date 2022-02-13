@@ -4,7 +4,7 @@ const request = require("request");
 module.exports = function () {
     this.getAnimeData = function (animeID) {
         return new Promise(function (resolve, reject) {
-            var URL = "https://api.jikan.moe/v3/anime/" + animeID;
+            const URL = "https://api.jikan.moe/v3/anime/" + animeID;
             request(URL, function (err, response, body) {
                 //console.log(err);
                 if (!err) {

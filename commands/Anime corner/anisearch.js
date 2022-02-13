@@ -32,7 +32,7 @@ module.exports = {
                                 .setColor("YELLOW")
                                 .setTitle("Select the option corresponding to your query.")
                                 .setDescription(`\`\`\`` + data.map((t, i) => `#${i + 1} - ${t.name}`).join("\n") + `\`\`\``)
-                                .setFooter("Selection will be deleted in 5 minutes."),
+
                         ],
                         components: [
                             {
@@ -113,9 +113,7 @@ module.exports = {
                             if (interaction.guildId !== message.guild.id) return;
                             if (interaction.user.id !== message.author.id) return;
 
-                            await interaction.deferUpdate();
-
-                            if (interaction.values[0] === 0) {
+                            if (interaction.values[0] === "0") {
                                 malScraper.getInfoFromName(data[0].name)
 
                                     .then(async (s1) => {
@@ -147,11 +145,11 @@ module.exports = {
                                             .addField("Characters:", "`" + s1.characters.map((ani) => `${ani.name} (${ani.role} character)`).join(` | `) + "`", true)
                                             .addField(`Trailer:`, `**[${s1.title}'s Trailer](${s1.trailer})**`, true);
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
 
-                            if (interaction.values[0] === 1) {
+                            if (interaction.values[0] === "1") {
                                 malScraper
                                     .getInfoFromName(data[1].name)
 
@@ -217,10 +215,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.values[0] === 2) {
+                            if (interaction.values[0] === "2") {
                                 malScraper
                                     .getInfoFromName(data[2].name)
 
@@ -285,10 +283,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.values[0] === 3) {
+                            if (interaction.values[0] === "3") {
                                 malScraper
                                     .getInfoFromName(data[3].name)
 
@@ -353,11 +351,11 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
 
-                            if (interaction.values[0] == 4) {
+                            if (interaction.values[0] == "4") {
                                 malScraper
                                     .getInfoFromName(data[4].name)
 
@@ -421,10 +419,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.values[0] == 5) {
+                            if (interaction.values[0] == "5") {
                                 malScraper
                                     .getInfoFromName(data[5].name)
 
@@ -488,11 +486,11 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
 
-                            if (interaction.values[0] == 6) {
+                            if (interaction.values[0] == "6") {
                                 malScraper
                                     .getInfoFromName(data[6].name)
 
@@ -556,11 +554,11 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
 
-                            if (interaction.values[0] == 7) {
+                            if (interaction.values[0] == "7") {
                                 malScraper
                                     .getInfoFromName(data[7].name)
 
@@ -624,10 +622,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.values[0] == 8) {
+                            if (interaction.values[0] == "8") {
                                 malScraper
                                     .getInfoFromName(data[8].name)
 
@@ -691,10 +689,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.values[0] == 9) {
+                            if (interaction.values[0] == "9") {
                                 malScraper
                                     .getInfoFromName(data[9].name)
 
@@ -758,10 +756,10 @@ module.exports = {
                                                 true
                                             );
 
-                                        return thing.edit({embeds: [embed]});
+                                        return interaction.reply({embeds: [embed], ephemeral: true});
                                     });
                             }
-                            if (interaction.customId == "cancel") {
+                            if (interaction.customId === "cancel") {
                                 await setTimeout(() => thing.delete(), 0);
 
                                 return message.channel.send({
