@@ -5,8 +5,31 @@ const moment = require("moment");
 const {WebhookClient, MessageEmbed} = require("discord.js");
 
 module.exports = async (bot) => {
+    await bot.shard.broadcastEval(client => {
+        setInterval(() => {
+            const rnd = Math.floor(Math.random() * 2);
+            switch (rnd) {
+                case 1:
+                {
+                    client.user.setActivity(`ToD will maybe be deleted...`, {
+                        type: 'WATCHING'
+                    });
+                }
+                    break
+                default:
+                {
+                    client.user.setActivity(`Join the support server for information`, {
+                        type: 'WATCHING'
+                    });
+                }
+
+                    break
+            }
+        }, 5000)
+    })
 
     setTimeout(async () => await bot.shard.broadcastEval((client) => client.user.setStatus("online")), 10000);
+
     process.on('unhandledRejection', (error) => {
         return;
     })

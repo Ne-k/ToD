@@ -69,25 +69,6 @@ modules.forEach((module) => {
 client.on("ready", async () => {
     // require('statcord.js').ShardingClient.post(client)
 
-    setInterval(() => {
-        const rnd = Math.floor(Math.random() * 2);
-        switch (rnd) {
-            case 1: {
-                client.user.setActivity(`${process.env.prefix}help | Truth or Dare`, {
-                    type: "PLAYING",
-                });
-            }
-                break;
-            default: {
-                client.user.setActivity(`t;help | I don't know what to put here.`, {
-                    type: "WATCHING",
-                });
-            }
-
-                break;
-        }
-    }, 6500);
-
     /* --------------------------------------- SLASH COMMANDS --------------------------------------- */
 
     client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
