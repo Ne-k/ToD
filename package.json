@@ -13,6 +13,7 @@
     "@top-gg/sdk": "^3.0.9",
     "animequotes": "^2.0.0",
     "ascii-table": "0.0.9",
+    "axios": "^0.26.0",
     "boats.js": "^2.5.1",
     "booru": "^2.4.0",
     "child_process": "^1.0.2",

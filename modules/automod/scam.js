@@ -1,9 +1,9 @@
-const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js");
-
+const {Permissions, MessageEmbed, WebhookClient, MessageButton, MessageActionRow} = require("discord.js"),
+    axios = require('axios'),
+    fetch = require('cross-fetch');
 
 module.exports = async (bot, message) => {
-    const regex = new RegExp(/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]?/gi);
-
+    const regex = new RegExp(/(?:[A-z0-9](?:[A-z0-9-]{0,61}[A-z0-9])?\.)+[A-z0-9][A-z0-9-]{0,61}[A-z0-9]/gi);
     function makeButtonGrid(w, h) {
         let buttons = [];
         for (let x = 0; x < w * h; x++) {
@@ -23,7 +23,7 @@ module.exports = async (bot, message) => {
 
         const unix = Math.floor(new Date().getTime() / 1000);
 
-        let data = await require('node-fetch')("https://anti-fish.bitflow.dev/check", {
+        let data = await fetch("https://anti-fish.bitflow.dev/check", {
             method: "post",
             body: JSON.stringify({message: message.content}),
             headers: {
@@ -36,7 +36,7 @@ module.exports = async (bot, message) => {
 
             try {
 
-                let dataInfo = await require('node-fetch')(`https://api.phisherman.gg/v1/domains/info/${data.matches.map(m => m.domain)}`, {
+                let dataInfo = await fetch(`https://api.phisherman.gg/v1/domains/info/${data.matches.map(m => m.domain)}`, {
                     headers: {
                         "Authorization": 'Bearer 02e6fac0-b924-48aa-b583-2d410fbc691a',
                         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ module.exports = async (bot, message) => {
                     if(message.member.isCommunicationDisabled) {
                         await message.member.timeout(10000 * 60 * 1000, 'Detected a phishing link from the user.').catch(e => {
                             message.channel.send(`Looks like there was an issue with timing out the user.`)
-                            webEmbed.setFooter(`There was an issue timing out the user.`)
+                            webEmbed.setFooter({text: `There was an issue timing out the user.`})
                         })
                         embed.setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\nhas been timed out for 6 days and 22 hours.\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
                         webEmbed.addField('** **', `User was timed out.`)
