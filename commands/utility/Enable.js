@@ -109,12 +109,6 @@ module.exports = {
                                                 style: 3,
                                                 custom_id: "confirm",
                                             },
-                                            {
-                                                type: 2,
-                                                label: "Cancel",
-                                                style: 4,
-                                                custom_id: "cancel",
-                                            },
                                         ],
                                     },
                                 ],
@@ -131,47 +125,7 @@ module.exports = {
                                 ],
                             })
                             .then(async (msg) => {
-                                setTimeout(() => msg.delete(), 40000);
-                                client.on("interactionCreate", async (interaction) => {
-                                    if (interaction.guildId !== message.guild.id) return;
-                                    if (interaction.user.id === message.author.id) {
-                                        if (interaction.customId === "confirm") {
-                                            setTimeout(() => msg.delete(), 0);
-                                            client.db.set(`nsfwEnabled_${message.guild.id}`, true);
-                                            message.channel
-                                                .send({
-                                                    embeds: [
-                                                        new MessageEmbed()
-                                                            .setColor("GREEN")
-                                                            .setDescription(
-                                                                "I have successfully enabled NSFW truths and dares."
-                                                            )
-                                                            .setFooter(
-                                                                "This message will automatically delete in 30 seconds"
-                                                            ),
-                                                    ],
-                                                })
-                                                .then((msg) => setTimeout(() => msg.delete(), 5000));
-                                        }
-                                        if (interaction.customId === "cancel") {
-                                            setTimeout(() => msg.delete(), 0);
-                                            message.channel
-                                                .send({
-                                                    embeds: [
-                                                        new MessageEmbed()
-                                                            .setColor("DARK_NAVY")
-                                                            .setDescription("Your selection has been canceled!")
-                                                            .setFooter(
-                                                                "This message will automatically delete in 30 seconds"
-                                                            ),
-                                                    ],
-                                                })
-                                                .then((My_cock) =>
-                                                    setTimeout(() => My_cock.delete(), 5000)
-                                                );
-                                        }
-                                    }
-                                });
+                                setTimeout(() => msg.delete(), 30000)
                             });
                     }
                     break;

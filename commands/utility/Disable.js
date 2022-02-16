@@ -22,7 +22,7 @@ module.exports = {
             let muteRole = client.db.fetch(`mutedRole_${message.guild.id}`);
             muteRole = !!muteRole;
 
-            switch(args[0]) {
+            switch(args[0].toLowerCase()) {
                 case "antiscam":
                     if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) {
                         return message.channel.send({
