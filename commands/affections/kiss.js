@@ -47,7 +47,7 @@ module.exports = {
             .setTitle(`${message.author.username} kissed ${user.user.tag}`)
             .setDescription(quotes)
             .setColor("RANDOM")
-            .setFooter(ishorny[hornyresult]);
+            .setFooter({text: ishorny[hornyresult]});
 
         return message.channel.send({embeds: [waifu]});
     },
