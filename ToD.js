@@ -66,7 +66,7 @@ client.on("ready", async () => {
     /* --------------------------------------- SLASH COMMANDS --------------------------------------- */
 
     client.shard.broadcastEval((bot) => bot.guilds.cache.size).then((res) => {
-        console.log(`Info: `.grey + `[` + ` ${res.reduce((prev, val) => prev + val, 0).toLocaleString()}`.green + ` servers, ` + `${client.options.shardCount.toLocaleString()}`.green + ` shard(s) ]\n`);
+        console.log(`Info: `.grey + `[ ${res.reduce((prev, val) => prev + val, 0).toLocaleString().green} servers, ${client.options.shardCount.toLocaleString().green} shard(s), prefix: ${process.env.PREFIX.green} ]\n`);
     });
 
 });
