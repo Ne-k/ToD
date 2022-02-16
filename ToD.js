@@ -13,7 +13,6 @@ require("dotenv").config();
 const moment = require("moment");
 const mongoose = require("mongoose");
 const {Collection: MongoCollection, MongoClient} = require("mongodb");
-const {Collection, Fields} = require("quickmongo");
 client.time = require('./modules/timeout.js')
 client.db = db;
 client.slash = new Discord.Collection();
@@ -39,11 +38,6 @@ client.categories = fs.readdirSync("./commands/");
 });
 
 const mongo = new MongoClient(process.env.MONGOSTRING);
-const schema = new Fields.ObjectField({
-    difficulty: new Fields.StringField(),
-    items: new Fields.ArrayField(new Fields.StringField()),
-    balance: new Fields.NumberField()
-});
 /*
 mongo.connect()
     .then(() => {
