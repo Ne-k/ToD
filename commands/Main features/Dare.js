@@ -86,6 +86,11 @@ module.exports = {
                 ];
                 let result = Math.floor(Math.random() * random_footer.length);
 
+                const {getColorFromURL} = require("color-thief-node");
+
+                const dominantColor = await getColorFromURL(
+                    message.author.avatarURL({format: "png"})
+                );
 
                 // Main
                 return message.channel
@@ -114,7 +119,7 @@ module.exports = {
                         embeds: [
                             new Discord.MessageEmbed()
                                 .setFooter(random_footer[result])
-                                .setColor("RANDOM")
+                                .setColor(dominantColor)
                                 .setTitle("Dare")
                                 .setDescription(
                                     client.tod.Dare[
@@ -193,6 +198,11 @@ module.exports = {
             ];
             let result = Math.floor(Math.random() * random_footer.length);
 
+            const {getColorFromURL} = require("color-thief-node");
+
+            const dominantColor = await getColorFromURL(
+                message.author.avatarURL({format: "png"})
+            );
 
             // Main
             return message.channel
@@ -221,7 +231,7 @@ module.exports = {
                     embeds: [
                         new Discord.MessageEmbed()
                             .setFooter(random_footer[result])
-                           .setColor("RANDOM")
+                            .setColor(dominantColor)
                             .setTitle("Dare")
                             .setDescription(
                                 client.tod.Dare[
