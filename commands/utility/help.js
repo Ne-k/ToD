@@ -1,8 +1,3 @@
-const {MessageEmbed} = require("discord.js");
-
-const db = require("quick.db");
-const {getColorFromURL} = require("color-thief-node");
-
 module.exports = {
     config: {
         name: "help",
