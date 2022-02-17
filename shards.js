@@ -13,7 +13,7 @@ manager.on("shardCreate", (shard) => {
     console.log(`Sharding Manager: `.green + `Launched shard #${shard.id}\n─────────────────────────────── `);
 });
 
-manager.spawn();
+manager.spawn({amount: "auto", delay: undefined, timeout: -1});
 /*
 statcord.on("autopost-start", () => {
     // Emitted when statcord autopost starts
