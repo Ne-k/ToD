@@ -65,7 +65,7 @@ module.exports = async (bot, message) => {
                             .setColor("RANDOM"),
                     ],
                 }).then((message) => {
-                        setTimeout(() => message.delete(), 7000);
+                        setTimeout(() => message.delete(), 5000);
                     });
             }
 
