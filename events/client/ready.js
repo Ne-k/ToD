@@ -5,6 +5,7 @@ const moment = require("moment");
 const {WebhookClient, MessageEmbed} = require("discord.js");
 
 module.exports = async (bot) => {
+    /*
     await bot.shard.broadcastEval(client => {
         setInterval(() => {
             const rnd = Math.floor(Math.random() * 2);
@@ -27,6 +28,7 @@ module.exports = async (bot) => {
             }
         }, 5000)
     })
+     */
 
     setTimeout(async () => await bot.shard.broadcastEval((client) => client.user.setStatus("online")), 10000);
 
