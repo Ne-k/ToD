@@ -23,7 +23,7 @@ SUGGEST_LOGGING_WEBHOOK="webhook token"
 OTHER_LOGGING_ID="webhook id"
 OTHER_LOGGING_WEBHOOK="webhook token"
 ===================================================
-KAEDE_CDN_KEY=" kaedee.xyz API key"
+PREFIX="prefix"
 MONGOSTRING="Mongo DB string"
 
 ```

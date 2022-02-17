@@ -28,7 +28,7 @@ module.exports = {
                                 new MessageEmbed()
                                     .setDescription(`${codeblock}${err}${codeblock}`)
                                     .setColor("RED")
-                                    .setFooter("Smooth brain, you failed."),
+                                    .setFooter({text: "Smooth brain, you failed."}),
                             ],
                         });
 
@@ -50,7 +50,7 @@ module.exports = {
                     .setDescription(
                         `[ MANUAL REBOOT ] - Client has been manually rebooted by **${message.author.tag}**.`
                     )
-                    .setFooter(moment(Date.now()).format("dddd, MMMM Do"))
+                    .setFooter({text: moment(Date.now()).format("dddd, MMMM Do")})
                     .setTimestamp();
                 const webhookClient = new WebhookClient({
                     id: process.env.CLIENT_LOGGING_ID,

@@ -2,13 +2,12 @@ module.exports = {
     config: {
         name: "neko",
         usage: "neko",
-        description: "Shows imagines of nekos __from kaedee.xyz__",
+        description: "Shows imagines of nekos __from waifu.pics",
     },
     run: async (bot, message, args) => {
         const fetch = require("node-fetch");
         const Discord = require("discord.js");
         try {
-            /* https://api.kaedee.xyz/v1/cdn/<anime/nsfw/sfw>/<category> */
             fetch(`https://api.waifu.pics/sfw/neko`)
                 .then((res) => res.json())
                 .then((data) => {

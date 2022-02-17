@@ -3,8 +3,9 @@ require("dotenv").config();
 
 const manager = new ShardingManager("./ToD.js", {
     token: process.env.token,
-    autoSpawn: true,
-    respawn: true,
+    autoSpawn: true,    
+    mode: "worker",
+    totalShards: "auto",
 });
 
 require("colors");
@@ -12,7 +13,7 @@ manager.on("shardCreate", (shard) => {
     console.log(`Sharding Manager: `.green + `Launched shard #${shard.id}\n─────────────────────────────── `);
 });
 
-manager.spawn({amount: "auto", delay: undefined, timeout: -1});
+manager.spawn();
 /*
 statcord.on("autopost-start", () => {
     // Emitted when statcord autopost starts
