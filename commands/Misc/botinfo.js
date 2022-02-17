@@ -20,6 +20,7 @@ module.exports = {
         const fetch = require("node-fetch");
         const Discord = require("discord.js");
         const waifuAPI = "https://waifu.pics/api";
+        /* https://api.kaedee.xyz/v1/cdn/<anime/nsfw/sfw>/<category> */
         const moment = require("moment");
         require("moment-duration-format");
         const duration = moment.duration(bot.uptime).format(" D [days], H [hrs], m [mins], s [secs]");

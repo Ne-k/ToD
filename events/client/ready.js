@@ -49,7 +49,7 @@ module.exports = async (bot) => {
                 .setColor("GREEN")
                 .setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`)
                 .setTimestamp()
-                .setFooter({text: moment(Date.now()).format("LLL")}),
+                .setFooter(moment(Date.now()).format("LLL")),
         ],
     });
 

@@ -29,7 +29,7 @@ module.exports = {
                                     new MessageEmbed()
                                         .setDescription(`${codeblock}${err}${codeblock}`)
                                         .setColor("RED")
-                                        .setFooter({text: "Smooth brain, you failed."}),
+                                        .setFooter("Smooth brain, you failed."),
                                 ],
                             });
 

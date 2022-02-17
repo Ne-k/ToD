@@ -93,7 +93,7 @@ module.exports = {
                 let currentPage = (options && options.currentPage) || 0;
 
                 let pages = embeds.length;
-                embeds[currentPage].setFooter({text: `Page ${currentPage + 1} of ${pages}`});
+                embeds[currentPage].setFooter(`Page ${currentPage + 1} of ${pages}`);
                 const queueEmbed = await message.channel.send({embeds: [embeds[currentPage]],});
 
                 await Promise.all(reactions.map((r) => queueEmbed.react(r)));
@@ -110,7 +110,7 @@ module.exports = {
                                 if (message.guild.me.permissions.has("MANAGE_MESSAGES"))
                                     reaction.users.remove(user.id);
                                 queueEmbed.edit({
-                                    embeds: [embeds[currentPage]].setFooter({text: `Page ${currentPage + 1} of ${pages}`}),
+                                    embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`),
                                 });
                                 break;
                             case "⏹️":
@@ -131,7 +131,7 @@ module.exports = {
                                 if (message.guild.me.permissions.has("MANAGE_MESSAGES"))
                                     reaction.users.remove(user.id);
                                 queueEmbed.edit({
-                                    embeds: [embeds[currentPage]].setFooter({text: `Page ${currentPage + 1} of ${pages}`}),
+                                    embeds: [embeds[currentPage]].setFooter(`Page ${currentPage + 1} of ${pages}`),
                                 });
                                 break;
 
