@@ -23,7 +23,8 @@ module.exports = {
         const moment = require("moment");
         require("moment-duration-format");
         const duration = moment.duration(bot.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-
+        let owner =  await bot.users.fetch("942798261536841730").then(x => x.tag );
+        let coowner = await bot.users.fetch("700609775838298113").then(x => x.tag);
         const {url} = await fetch(`${waifuAPI}/sfw/happy`).then((res) =>
             res.json()
         );
@@ -43,7 +44,7 @@ module.exports = {
                 .setThumbnail(bot.user.displayAvatarURL)
                 .setDescription("Hello! I am ToD, a unique, constantly evolving bot.")
                 .setTitle("ToD (Truth or dare)", true)
-                .addField("<:image_20210516_090539:843519573272690738>  Developer", "```Nek#2937```", true)
+                .addField("<:image_20210516_090539:843519573272690738>  Developer(s)", `\`\`\`${owner} | ${coowner}\`\`\``, true)
                 .addField(`🖼️ Icon "artist"`, `\`\`\`a y o o ୨୧˚₊#0887\`\`\``, true)
                 .addField("--------------------------------------------------------------------------------", `** **`)
                 .addField(`• Shard ${message.guild.shard.id} Uptime`, `\`\`\`${duration}\`\`\``, true)
