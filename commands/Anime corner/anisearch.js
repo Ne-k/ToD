@@ -117,8 +117,7 @@ module.exports = {
                                 malScraper.getInfoFromName(data[0].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -130,7 +129,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField("Alternative Titles:", `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)
@@ -154,8 +153,7 @@ module.exports = {
                                     .getInfoFromName(data[1].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-
+                                        
                                         if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
@@ -168,7 +166,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -223,8 +221,7 @@ module.exports = {
                                     .getInfoFromName(data[2].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-
+                                        
                                         if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
@@ -236,7 +233,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -291,8 +288,7 @@ module.exports = {
                                     .getInfoFromName(data[3].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-
+                                        
                                         if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
@@ -304,7 +300,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -360,8 +356,7 @@ module.exports = {
                                     .getInfoFromName(data[4].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -372,7 +367,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -427,8 +422,7 @@ module.exports = {
                                     .getInfoFromName(data[5].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -439,7 +433,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -495,8 +489,7 @@ module.exports = {
                                     .getInfoFromName(data[6].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -507,7 +500,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -563,8 +556,7 @@ module.exports = {
                                     .getInfoFromName(data[7].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -575,7 +567,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -630,8 +622,7 @@ module.exports = {
                                     .getInfoFromName(data[8].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -642,7 +633,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
@@ -697,8 +688,7 @@ module.exports = {
                                     .getInfoFromName(data[9].name)
 
                                     .then(async (s1) => {
-                                        const {getColorFromURL} = require("color-thief-node");
-                                        if (s1.trailer === undefined) {
+                                                                                if (s1.trailer === undefined) {
                                             s1.trailer = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                                         }
 
@@ -709,7 +699,7 @@ module.exports = {
                                         let embed = new MessageEmbed()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                           .setColor("RANDOM")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField(
