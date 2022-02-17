@@ -48,7 +48,7 @@ module.exports = {
 
                     if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
                         client.db.set(`antiscamEnabled_${message.guild.id}`, false)
-                        return message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('Anti scam is now enabled!').setFooter('To enable automute, enable the muterole option.').setThumbnail(message.author.avatarURL({dynamic: true}))]})
+                        return message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('Anti scam is now enabled!').setFooter({text: 'To enable automute, enable the muterole option.'}).setThumbnail(message.author.avatarURL({dynamic: true}))]})
                     }
 
                     if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) === false || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
@@ -87,10 +87,10 @@ module.exports = {
                                     .setDescription(
                                         `Looks like the NSFW truth/dares are already enabled. <a:awaugery:854870881046102067>`
                                     )
-                                    .setFooter(
+                                    .setFooter({text:
                                         `Enabled by ${client.db.fetch(
                                             `nsfwEnabledBy_${message.author.tag}_${message.guild.id}`
-                                        )}`
+                                        )}`}
                                     ),
                             ],
                         });
@@ -125,9 +125,9 @@ module.exports = {
                                         .setDescription(
                                             "You are about to enable **NSFW** truths and dares. The NSFW truths and dares will be randomly mixed into the normal questions with a small chance of showing.\n\nSelect `Confirm` if you wish to enable the NSFW questions.\nSelect `Cancel` if you wish to cancel."
                                         )
-                                        .setFooter(
-                                            `The selection will automatically be canceled in 40 seconds.`
-                                        ),
+                                        .setFooter({text:
+                                            `The selection will automatically be cancelled in 40 seconds.`
+                                        }),
                                 ],
                             })
                             .then(async (msg) => {
@@ -146,9 +146,9 @@ module.exports = {
                                                             .setDescription(
                                                                 "I have successfully enabled NSFW truths and dares."
                                                             )
-                                                            .setFooter(
+                                                            .setFooter({text:
                                                                 "This message will automatically delete in 30 seconds"
-                                                            ),
+                                                            }),
                                                     ],
                                                 })
                                                 .then((msg) => setTimeout(() => msg.delete(), 5000));
@@ -160,10 +160,10 @@ module.exports = {
                                                     embeds: [
                                                         new MessageEmbed()
                                                             .setColor("DARK_NAVY")
-                                                            .setDescription("Your selection has been canceled!")
-                                                            .setFooter(
+                                                            .setDescription("Your selection has been cancelled!")
+                                                            .setFooter({text:
                                                                 "This message will automatically delete in 30 seconds"
-                                                            ),
+                                                            }),
                                                     ],
                                                 })
                                                 .then((My_cock) =>

@@ -59,7 +59,7 @@ module.exports = async (bot, message) => {
                     .setColor('RED')
                     .setThumbnail(message.author.avatarURL({dynamic: true}))
                     .setDescription(`<@${message.author.id}> | ${message.author.tag} (${message.author.id})\n*Please grant me the \`Timeout Members\` permission so I can timeout users when I detect a phishing link.*\n\n\n**${linkstat}** ${dataInfo[`${data.matches.map(m => m.domain)}`].classification} link found <t:${unix}:R>:\n ||${data.matches.map(m => m.domain)}||`)
-                    .setFooter("Do not click on these links, they're fake and meant to steal your account details. To disable this message, run t;disable")
+                    .setFooter({text: "Do not click on these links, they're fake and meant to steal your account details. To disable this message, run t;disable"})
                 const webEmbed = new MessageEmbed()
                     .setColor("GREEN")
                     .setThumbnail(message.guild.iconURL({dynamic: true}))

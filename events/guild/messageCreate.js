@@ -29,7 +29,7 @@ module.exports = async (bot, message) => {
 
 
     const prefixMention = new RegExp(`^<@!?${bot.user.id}> `);
-                let prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : process.env.prefix;
+                let prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : process.env.PREFIX;
     if (!message.content.toLowerCase().startsWith(prefix)) return;
 
     let cmdExecuted = moment().format("LLL");
