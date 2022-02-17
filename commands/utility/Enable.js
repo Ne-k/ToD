@@ -1,5 +1,3 @@
-const {Permissions, MessageEmbed} = require("discord.js");
-const AsciiTable = require("ascii-table");
 module.exports = {
     config: {
         name: "enable",
