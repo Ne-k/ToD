@@ -11,7 +11,7 @@ module.exports = {
         const {MessageEmbed, Permissions} = require("discord.js");
 
         if (message.author.bot || message.channel.type === "dm") return;
-        let prefix = process.env.prefix;
+        let prefix = process.env.PREFIX;
 
         try {
             let nsfwstatus = client.db.fetch(`nsfwEnabled_${message.guild.id}`);
