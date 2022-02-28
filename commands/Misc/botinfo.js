@@ -7,7 +7,7 @@ const used = process.memoryUsage().heapUsed / 1024 / 1024;
 module.exports = {
     config: {
         name: "botinfo",
-        aliases: ["binfo", "bi"],
+        aliases: ["binfo", "bi", "stats"],
         usage: "t;botinfo",
         description: "Get some stats on the bot",
     },
