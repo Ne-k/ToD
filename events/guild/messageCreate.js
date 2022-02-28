@@ -29,7 +29,7 @@ module.exports = async (bot, message) => {
 
 
     const prefixMention = new RegExp(`^<@!?${bot.user.id}> `);
-                let prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : process.env.PREFIX;
+                let prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : process.env.prefix;
     if (!message.content.toLowerCase().startsWith(prefix)) return;
 
     let cmdExecuted = moment().format("LLL");
@@ -49,7 +49,7 @@ module.exports = async (bot, message) => {
         if (commandfile) {
             let timeout = ms("3000");
 
-            if (await Timeout.has(`${command.name}${message.author.id}`)) {
+            if (Timeout.has(`${command.name}${message.author.id}`)) {
                 return message.channel.send({
                     embeds: [
                         new MessageEmbed()

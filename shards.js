@@ -3,9 +3,8 @@ require("dotenv").config();
 
 const manager = new ShardingManager("./ToD.js", {
     token: process.env.token,
-    autoSpawn: true,    
-    mode: "worker",
-    totalShards: "auto",
+    autoSpawn: true,
+    respawn: true,
 });
 
 require("colors");
