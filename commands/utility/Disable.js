@@ -9,7 +9,7 @@ module.exports = {
         example: "1) disable nsfw\n2) disable",
     },
     run: async (client, message, args) => {
-        let prefix = process.env.prefix;
+        let prefix = process.env.PREFIX;
         try {
             let nsfwstatus = client.db.fetch(`nsfwEnabled_${message.guild.id}`);
             if (nsfwstatus == null) {

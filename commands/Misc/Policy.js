@@ -10,7 +10,7 @@ module.exports = {
     run: async (bot, message, args) => {
         let Sembed = new MessageEmbed()
             .setColor("RANDOM")
-            .setTitle("Tod's private policy:")
+            .setTitle("ToD's private policy:")
             .setDescription(
                 "The entire private policy has been moved to this [github repo](https://nek.wtf/policy)."
             );

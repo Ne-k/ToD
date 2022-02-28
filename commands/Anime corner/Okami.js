@@ -14,7 +14,6 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("RANDOM")
             .setTitle(`~ Okami ~`)
-
             .setImage(body.link);
         message.channel.send({embeds: [embed]});
     },
