@@ -46,7 +46,7 @@ module.exports = {
 
                     if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) === true) {
                         client.db.set(`antiscamEnabled_${message.guild.id}`, false)
-                        return message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('Anti scam is now enabled!').setFooter({text: 'To enable automute, enable the muterole option.'}).setThumbnail(message.author.avatarURL({dynamic: true}))]})
+                        return message.channel.send({embeds: [new MessageEmbed().setColor('GREEN').setDescription('Anti scam is now enabled!').setFooter('To enable automute, enable the muterole option.').setThumbnail(message.author.avatarURL({dynamic: true}))]})
                     }
 
                     if (client.db.fetch(`antiscamEnabled_${message.guild.id}`) === false || client.db.fetch(`antiscamEnabled_${message.guild.id}`) == null) {
@@ -85,10 +85,10 @@ module.exports = {
                                     .setDescription(
                                         `Looks like the NSFW truth/dares are already enabled. <a:awaugery:854870881046102067>`
                                     )
-                                    .setFooter({text:
+                                    .setFooter(
                                         `Enabled by ${client.db.fetch(
                                             `nsfwEnabledBy_${message.author.tag}_${message.guild.id}`
-                                        )}`}
+                                        )}`
                                     ),
                             ],
                         });
@@ -107,12 +107,6 @@ module.exports = {
                                                 style: 3,
                                                 custom_id: "confirm",
                                             },
-                                            {
-                                                type: 2,
-                                                label: "Cancel",
-                                                style: 4,
-                                                custom_id: "cancel",
-                                            },
                                         ],
                                     },
                                 ],
@@ -123,53 +117,13 @@ module.exports = {
                                         .setDescription(
                                             "You are about to enable **NSFW** truths and dares. The NSFW truths and dares will be randomly mixed into the normal questions with a small chance of showing.\n\nSelect `Confirm` if you wish to enable the NSFW questions.\nSelect `Cancel` if you wish to cancel."
                                         )
-                                        .setFooter({text:
-                                            `The selection will automatically be cancelled in 40 seconds.`
-                                        }),
+                                        .setFooter(
+                                            `The selection will automatically be canceled in 40 seconds.`
+                                        ),
                                 ],
                             })
                             .then(async (msg) => {
-                                setTimeout(() => msg.delete(), 40000);
-                                client.on("interactionCreate", async (interaction) => {
-                                    if (interaction.guildId !== message.guild.id) return;
-                                    if (interaction.user.id === message.author.id) {
-                                        if (interaction.customId === "confirm") {
-                                            setTimeout(() => msg.delete(), 0);
-                                            client.db.set(`nsfwEnabled_${message.guild.id}`, true);
-                                            message.channel
-                                                .send({
-                                                    embeds: [
-                                                        new MessageEmbed()
-                                                            .setColor("GREEN")
-                                                            .setDescription(
-                                                                "I have successfully enabled NSFW truths and dares."
-                                                            )
-                                                            .setFooter({text:
-                                                                "This message will automatically delete in 30 seconds"
-                                                            }),
-                                                    ],
-                                                })
-                                                .then((msg) => setTimeout(() => msg.delete(), 5000));
-                                        }
-                                        if (interaction.customId === "cancel") {
-                                            setTimeout(() => msg.delete(), 0);
-                                            message.channel
-                                                .send({
-                                                    embeds: [
-                                                        new MessageEmbed()
-                                                            .setColor("DARK_NAVY")
-                                                            .setDescription("Your selection has been cancelled!")
-                                                            .setFooter({text:
-                                                                "This message will automatically delete in 30 seconds"
-                                                            }),
-                                                    ],
-                                                })
-                                                .then((My_cock) =>
-                                                    setTimeout(() => My_cock.delete(), 5000)
-                                                );
-                                        }
-                                    }
-                                });
+                                setTimeout(() => msg.delete(), 30000)
                             });
                     }
                     break;

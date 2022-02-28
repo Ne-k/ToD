@@ -117,7 +117,7 @@ module.exports = {
                         ],
                         embeds: [
                             new Discord.MessageEmbed()
-                                .setFooter({text: random_footer[result]})
+                                .setFooter(random_footer[result])
                                 .setColor(dominantColor)
                                 .setTitle("Truth")
                                 .setDescription(
@@ -230,7 +230,7 @@ module.exports = {
                     ],
                     embeds: [
                         new Discord.MessageEmbed()
-                            .setFooter({text: random_footer[result]})
+                            .setFooter(random_footer[result])
                             .setColor(dominantColor)
                             .setTitle("Truth")
                             .setDescription(
