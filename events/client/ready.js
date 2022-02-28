@@ -5,6 +5,7 @@ const moment = require("moment");
 const {WebhookClient, MessageEmbed} = require("discord.js");
 
 module.exports = async (bot) => {
+    /*
     await bot.shard.broadcastEval(client => {
         setInterval(() => {
             const rnd = Math.floor(Math.random() * 2);
@@ -22,11 +23,11 @@ module.exports = async (bot) => {
                         type: 'WATCHING'
                     });
                 }
-
                     break
             }
         }, 5000)
     })
+     */
 
     setTimeout(async () => await bot.shard.broadcastEval((client) => client.user.setStatus("online")), 10000);
 
@@ -49,7 +50,7 @@ module.exports = async (bot) => {
                 .setColor("GREEN")
                 .setDescription(`[ CONNECTION ESTABLISHED ] - Shard #${bot.shardId} has successfully connected.`)
                 .setTimestamp()
-                .setFooter({text: moment(Date.now()).format("LLL")}),
+                .setFooter(moment(Date.now()).format("LLL")),
         ],
     });
 
@@ -69,7 +70,7 @@ Signed into ${bot.user.tag}
 
     //====================================================================
 
-    /*
+
       setInterval(() => {
         var rnd = Math.floor(Math.random() * 2);
         switch (rnd) {
@@ -90,14 +91,9 @@ Signed into ${bot.user.tag}
               break
         }
       }, 6500)
-      */
-    //=================================== GUILD ADD/REMOVE =============================================
 
 
 
-    //============================= Autoposting shit ===========================================
-
-    //====================================DISCORD.BOATS===========================================================================================================================
 return await autoPost(bot)
 
 };
