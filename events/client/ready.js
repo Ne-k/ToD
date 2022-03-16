@@ -23,7 +23,6 @@ module.exports = async (bot) => {
                         type: 'WATCHING'
                     });
                 }
-
                     break
             }
         }, 5000)
