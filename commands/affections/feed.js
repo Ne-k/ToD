@@ -23,7 +23,7 @@ module.exports = {
                     return message.channel.send("Please input a (valid) user to feed them food <:Megumin_Blush:843537370107215913>");
                 }
 
-                const waifu = new Discord.MessageEmbed();
+                const waifu = new Discord.EmbedBuilder();
 
                 let quotes = args.slice(1).join(" ");
 

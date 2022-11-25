@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 const Discord = require("discord.js");
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         usage: "wag",
     },
     run: async (bot, message, args) => {
-        const waifu = new Discord.MessageEmbed();
+        const waifu = new Discord.EmbedBuilder();
 
         const {link} = await fetch(
             `https://purrbot.site/api/img/sfw/tail/gif`

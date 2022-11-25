@@ -1,14 +1,12 @@
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 const waifuAPI = "https://waifu.pics/api";
 const Discord = require("discord.js");
 
 module.exports = {
-    config: {
         name: "cuddle",
         description: "Cuddle with a specified user.",
         examples: "1) <prefix>cuddle @user/id\n2) <prefix>cuddle @nek",
         usage: "cuddle @user/id",
-    },
     run: async (bot, message, args) => {
         const {url} = await fetch(`${waifuAPI}/sfw/cuddle`).then((res) => res.json());
         let quotes = args.slice(1).join(" ");
@@ -22,14 +20,14 @@ module.exports = {
                 )
             );
         if (!user) {
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setColor("RANDOM")
                 .setImage(url)
                 .setTitle(`${message.author.username} wants to cuddle. . .`)
             return message.channel.send(embed);
         }
 
-        const waifu = new Discord.MessageEmbed();
+        const waifu = new Discord.EmbedBuilder();
 
         waifu
             .setImage(url)

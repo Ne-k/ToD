@@ -1,13 +1,12 @@
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed, EmbedBuilder} = require("discord.js");
 
 module.exports = {
-    config: {
+
         name: "anisearch",
         usage: "anisearch <anime_name>",
         aliases: ["animesearch", "mal"],
         example: "1) anisearch K-ON!\n2) anisearch  落第騎士の英雄譚《キャバルリィ》",
         description: "Get information on a anime title on MyAnimeList.",
-    },
 
     run: async (client, message, args) => {
         if (!args.length) {
@@ -28,8 +27,8 @@ module.exports = {
                 return message.channel
                     .send({
                         embeds: [
-                            new MessageEmbed()
-                                .setColor("YELLOW")
+                            new EmbedBuilder()
+                                .setColor("Yellow")
                                 .setTitle("Select the option corresponding to your query.")
                                 .setDescription(`\`\`\`` + data.map((t, i) => `#${i + 1} - ${t.name}`).join("\n") + `\`\`\``)
 
@@ -127,10 +126,10 @@ module.exports = {
                                         }
 
                                         const dominantColor = await getColorFromURL(s1.picture);
-                                        let embed = new MessageEmbed()
+                                        let embed = new EmbedBuilder()
                                             .setTitle(s1.title)
                                             .setURL(s1.url)
-                                            .setColor(dominantColor)
+                                            .setColor("Random")
                                             .setDescription(s1.synopsis)
                                             .setImage(s1.picture)
                                             .addField("Alternative Titles:", `\`${s1.englishTitle}, ${s1.japaneseTitle}\``, true)

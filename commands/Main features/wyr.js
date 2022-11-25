@@ -1,9 +1,8 @@
 module.exports = {
-    config: {
         name: "wyr",
         usage: "wyr",
         description: "**W**ould **Y**ou **R**ather questions.",
-    },
+
     run: async (bot, message, args) => {
         const wyr = require("wyr");
 

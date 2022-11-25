@@ -1,15 +1,13 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    config: {
         name: "truth",
         usage: "t;truth",
         description: "Sends a truth question from the game Truth or dare.",
-    },
     run: async (client, message, args) => {
         try {
             if (client.db.fetch(`nsfwEnabled_${message.guild.id}`) === true) {
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                     .setColor("#eaecf3")
                     .setTitle("Dare")
                     .setDescription(Math.random() > 0.6 ? client.tod.nsfwTruth[Math.floor(Math.random() * client.tod.nsfwTruth.length)] : client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)]);

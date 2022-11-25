@@ -1,13 +1,11 @@
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 const waifuAPI = "https://waifu.pics/api";
 const Discord = require("discord.js");
 
 module.exports = {
-    config: {
         name: "kiss",
         description: "Kiss a user.",
         usage: "Kiss @user/id",
-    },
     run: async (bot, message, args) => {
         let user =
             message.mentions.members.first() ||
@@ -38,7 +36,7 @@ module.exports = {
             " ",
         ];
         let hornyresult = Math.floor(Math.random() * ishorny.length);
-        const waifu = new Discord.MessageEmbed();
+        const waifu = new Discord.EmbedBuilder();
 
         const {url} = await fetch(`${waifuAPI}/sfw/kiss`).then((res) => res.json());
         let quotes = args.slice(1).join(" ");

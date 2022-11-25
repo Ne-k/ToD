@@ -1,9 +1,0 @@
-node_modules
-package-lock.json
-.env
-waifu.png
-json.sqlite
-*.sqlite
-.idea/vcs.xml
-.idea/ToD.iml
-.idea/modules.xml

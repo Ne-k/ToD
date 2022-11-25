@@ -7,7 +7,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         const Discord = require("discord.js");
-        const fetch = require("node-fetch");
+        const fetch = require("cross-fetch");
         fetch(`https://purrbot.site/api/img/sfw/tickle/gif`)
             .then((res) => res.json())
             .then((data) => {
@@ -23,7 +23,7 @@ module.exports = {
                     return message.channel.send("Please input a (valid) user to tickle them <:Megumin_Blush:843537370107215913>");
                 }
 
-                const waifu = new Discord.MessageEmbed();
+                const waifu = new Discord.EmbedBuilder();
 
                 let quotes = args.slice(1).join(" ");
 

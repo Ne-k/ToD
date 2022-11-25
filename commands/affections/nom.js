@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 const waifuAPI = "https://waifu.pics/api";
 const Discord = require("discord.js");
 
@@ -9,7 +9,7 @@ module.exports = {
         usage: "nom",
     },
     run: async (bot, message, args) => {
-        const waifuembed2 = new Discord.MessageEmbed();
+        const waifuembed2 = new Discord.EmbedBuilder();
 
         const {url} = await fetch(`${waifuAPI}/sfw/nom`).then((res) => res.json());
         let quote = args.slice(1).join(" ");

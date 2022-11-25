@@ -1,15 +1,13 @@
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 const waifuAPI = "https://waifu.pics/api";
 const Discord = require("discord.js");
 
 module.exports = {
-    config: {
         name: "glomp",
         description:
             "Glomp (A glomp is a lunging, enthusiastic, over-the-top, and potentially dangerous hug that often begins with a running start, like a tackle.) a user.",
         examples: "1) <prefix>glomp @user/id\n2) <prefix>glomp @nek",
         usage: "glomp @user/id",
-    },
     run: async (bot, message, args) => {
         let user =
             message.mentions.members.first() ||
@@ -25,7 +23,7 @@ module.exports = {
 
         let quotes = args.slice(1).join(" ");
 
-        const waifu = new Discord.MessageEmbed();
+        const waifu = new Discord.EmbedBuilder();
 
         const {url} = await fetch(`${waifuAPI}/sfw/glomp`).then((res) => res.json());
 

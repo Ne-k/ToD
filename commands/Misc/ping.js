@@ -1,12 +1,10 @@
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed, EmbedBuilder} = require("discord.js");
 
 module.exports = {
-    config: {
         name: "ping",
         aliases: ["latency"],
         usage: "t;ping",
         description: "Get the bot's ping!",
-    },
     run: async (bot, message, args) => {
         const AsciiTable = require("ascii-table");
         const table = new AsciiTable()
@@ -36,16 +34,14 @@ module.exports = {
 
         let botping = Date.now() - message.createdTimestamp;
 
-        if (message.channel.type == "dm")
+        if (message.channel.type === "dm")
             return message.channel.send(
                 ":x: | This command command is disabled for DMs, please use this within a server!"
             );
-        message.channel
-            .send({content: "<a:Loading:824333296141467669> Pinging..."})
-            .then((m) => {
+        message.channel.send({content: "<a:Loading:824333296141467669> Pinging..."}).then((m) => {
                 m.edit({content: `🏓Pong!`});
-                let Sembed = new MessageEmbed()
-                    .setColor("GREEN")
+                let Sembed = new EmbedBuilder()
+                    .setColor("Green")
                     .setDescription(
                         `**Shard ${message.guild.shard.id}**:\n\n${
                             botping > 500
