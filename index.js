@@ -12,7 +12,7 @@ const client = new Client({
 });
 
 const fs = require('fs');
-require('dotenv').config() // remove this line if you are using replit
+require('dotenv').config()
 
 client.commands = new Collection()
 client.aliases = new Collection()

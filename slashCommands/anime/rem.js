@@ -5,6 +5,7 @@ module.exports = {
     name: 'rem',
     description: "Get a random picture of Rem from Re:Zero",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     cooldown: 3000,
     run: async (client, interaction) => {
         fetch("https://rra.ram.moe/i/r?type=rem")

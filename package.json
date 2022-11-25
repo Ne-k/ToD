@@ -1,8 +1,8 @@
 {
-  "name": "discordjs-v14-bot",
+  "name": "ToD",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "shards.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

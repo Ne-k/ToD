@@ -8,6 +8,7 @@ module.exports = {
     name: 'okami',
     description: "Wolf girl cause why not.",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     cooldown: 3000,
     run: async (client, interaction) => {
 

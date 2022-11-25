@@ -5,6 +5,7 @@ module.exports = {
     name: 'truth',
     description: "get a random truth question",
     type: ApplicationCommandType.ChatInput,
+    category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
 

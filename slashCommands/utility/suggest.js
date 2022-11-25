@@ -5,6 +5,7 @@ module.exports = {
     description: "You can suggest more truth/dare questions for the bot to use.",
     cooldown: 3000,
     type: ApplicationCommandType.ChatInput,
+    category: "utility",
     run: async (client, interaction) => {
 
         const truthButton = new ButtonBuilder()

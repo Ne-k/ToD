@@ -9,10 +9,10 @@ const cooldown = new Collection();
 
 
 client.on('interactionCreate', async interaction => {
-	require('./interactions/modals/truthSuggestModal')(interaction);
-	require('./interactions/modals/dareSuggestModal')(interaction);
+	await require('./interactions/modals/truthSuggestModal')(interaction);
+	await require('./interactions/modals/dareSuggestModal')(interaction);
 
-	require('./interactions/Select Menus/myanimelistSelect')(interaction)
+	await require('./interactions/Select Menus/myanimelistSelect')(interaction)
 	const slashCommand = client.slashCommands.get(interaction.commandName);
 		if (interaction.type === 4) {
 			if(slashCommand.autocomplete) {

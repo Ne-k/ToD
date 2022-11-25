@@ -6,6 +6,7 @@ module.exports = {
     name: 'azurlane',
     description: "get a random dare question",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     cooldown: 3000,
     run: async (client, interaction) => {
         fetch(`https://gallery.fluxpoint.dev/api/sfw/img/azurlane`, {headers: {Authorization: process.env.FLUX_API_KEY},}).then((res) => res.json()).then((data) => {

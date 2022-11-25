@@ -5,6 +5,7 @@ module.exports = {
     name: 'dare',
     description: "get a random dare question",
     type: ApplicationCommandType.ChatInput,
+    category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
 

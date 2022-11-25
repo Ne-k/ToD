@@ -6,6 +6,7 @@ module.exports = {
     name: 'myanimelist',
     description: "get a random dare question",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     options: [
         {
             name: 'anime',

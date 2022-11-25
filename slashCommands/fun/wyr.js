@@ -5,6 +5,7 @@ module.exports = {
     name: 'wyr',
     description: "Would you rather do <question 1> or <question 2>",
     type: ApplicationCommandType.ChatInput,
+    category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
 

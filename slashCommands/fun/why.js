@@ -5,6 +5,7 @@ module.exports = {
     name: 'why',
     description: "Random why questions",
     type: ApplicationCommandType.ChatInput,
+    category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
 

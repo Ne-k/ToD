@@ -7,6 +7,7 @@ module.exports = {
     name: 'megumin',
     description: "Get a random picture of Megumin from Konosuba",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     cooldown: 3000,
     run: async (client, interaction) => {
         const waifu = new Discord.EmbedBuilder();

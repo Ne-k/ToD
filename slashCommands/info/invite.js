@@ -5,6 +5,7 @@ module.exports = {
 	description: "Get the bot's invite link",
 	cooldown: 3000,
 	type: ApplicationCommandType.ChatInput,
+	category: "info",
 	userPerms: [],
 	botPerms: [],
 	run: async (client, interaction) => {

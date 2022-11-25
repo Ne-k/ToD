@@ -6,6 +6,7 @@ module.exports = {
     name: 'foxes',
     description: "Get wholesome foxes",
     type: ApplicationCommandType.ChatInput,
+    category: "anime",
     cooldown: 3000,
     run: async (client, interaction) => {
         const {body} = await superagent.get(
