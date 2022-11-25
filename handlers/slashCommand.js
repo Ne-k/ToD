@@ -1,5 +1,4 @@
 const fs = require('fs');
-const chalk = require('chalk');
 
 const { PermissionsBitField } = require('discord.js');
 const { Routes } = require('discord-api-types/v9');
@@ -11,6 +10,7 @@ const table = new AsciiTable().setHeading('Slash Commands', 'Stats').setBorder('
 const TOKEN = process.env.TOKEN;
 
 const rest = new REST({ version: '9' }).setToken(TOKEN);
+require('@colors/colors')
 
 module.exports = (client) => {
 	const slashCommands = []; 
@@ -38,12 +38,12 @@ module.exports = (client) => {
 		}
 		
 	});
-	console.log(chalk.red(table.toString()));
+	console.log(table.toString().red);
 
 	(async () => {
 			try {
 				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: slashCommands},);
-				console.log(chalk.yellow('Slash Commands • Registered'))
+				console.log("[ Slash Commands ] ".green + "Successfully registered application commands.");
 			} catch (error) {
 				console.log(error);
 			}

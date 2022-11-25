@@ -1,4 +1,7 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
+require("@colors/colors")
+const mongoose = require('mongoose');
+require('dotenv').config();
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds, 
@@ -23,6 +26,11 @@ client.tod = require('./ToD.json')
 
 module.exports = client;
 
+mongoose.connect(process.env.MONGOURL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+	console.log("[ Database ] ".green + 'Connected to MongoDB')
+}).catch((err) => {
+	console.log("[ Database ] ".red + 'Failed to connect to MongoDB')
+})
 
 fs.readdirSync('./handlers').forEach((handler) => {
   require(`./handlers/${handler}`)(client)
