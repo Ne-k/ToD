@@ -1,9 +1,18 @@
+const Discord = require("discord.js");
+const {ButtonStyle, ActionRowBuilder} = require("discord.js");
 module.exports = async (interaction) => {
     if(interaction.isSelectMenu()) {
         if(interaction.customId === "mal_search") {
             const malScraper = require("mal-scraper");
             const Discord = require("discord.js");
             const anime = interaction.values[0];
+
+            const button = new Discord.ButtonBuilder()
+                .setCustomId('mal_news')
+                .setLabel('News')
+                .setStyle(ButtonStyle.Secondary)
+
+
             malScraper.getInfoFromName(anime).then((data) => {
                 interaction.reply({
                     embeds: [
@@ -69,7 +78,11 @@ module.exports = async (interaction) => {
                                     value: `${data.trailer ? `[Click here](${data.trailer})` : "No trailer available"}`,
                                 }
                             )
-                    ]
+                    ],
+                    components: [
+                    new ActionRowBuilder()
+                        .addComponents(button)
+            ]
                 })
             })
         }

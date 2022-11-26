@@ -9,11 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-  },
   "dependencies": {
     "@colors/colors": "^1.5.0",
     "@discordjs/rest": "^0.4.0-dev.1648166871.cedd053",
+    "@shineiichijo/mal-news-scraper": "^0.0.2",
     "animequotes": "^2.0.0",
     "ascii-table": "^0.0.9",
     "booru": "^2.6.3",

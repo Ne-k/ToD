@@ -8,7 +8,11 @@ module.exports = {
     category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
-
+        const footerValues = [
+            `We currently have ${client.tod.Dare.length} truth questions, feel free to use the suggest command to add more!`,
+            " "
+        ]
+        const randomFooter = footerValues[Math.floor(Math.random() * footerValues.length)]
         // Main
         return interaction.reply({
             components: [
@@ -36,6 +40,7 @@ module.exports = {
                 new Discord.EmbedBuilder()
                     .setColor("Random")
                     .setTitle("Dare")
+                    .setFooter({text: randomFooter})
                     .setDescription(client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)]),
             ],
         })

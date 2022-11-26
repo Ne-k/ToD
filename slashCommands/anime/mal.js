@@ -39,7 +39,7 @@ module.exports = {
                 ],
                 components: [
                     new Discord.ActionRowBuilder()
-                        .addComponents(selectMenu)
+                        .addComponents(selectMenu),
                     ]
             })
         })
