@@ -19,7 +19,7 @@ module.exports = {
             .addComponents([
                 new ButtonBuilder()
                     .setLabel('Support')
-                    .setURL(".gg/bRtYYHKZgt")
+                    .setURL("https://discord.gg/bRtYYHKZgt")
                     .setStyle(ButtonStyle.Link)
             ])
         return interaction.reply({ embeds: [embed], components: [actionRow] })
