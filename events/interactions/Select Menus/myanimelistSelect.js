@@ -9,7 +9,7 @@ module.exports = async (interaction) => {
 
             const button = new Discord.ButtonBuilder()
                 .setCustomId('mal_news')
-                .setLabel('News')
+                .setLabel('Get Latest Anime News')
                 .setStyle(ButtonStyle.Secondary)
 
 
