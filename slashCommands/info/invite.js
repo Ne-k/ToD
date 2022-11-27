@@ -9,7 +9,7 @@ module.exports = {
 	userPerms: [],
 	botPerms: [],
 	run: async (client, interaction) => {
-		const inviteUrl = `https://discord.com/oauth2/authorize?client_id=943187676549513236&scope=bot+applications.commands&permissions=1531427810624`;
+		const inviteUrl = `https://discord.com/oauth2/authorize?client_id=943187676549513236&scope=applications.commands&permissions=446678027328`;
 		const embed = new EmbedBuilder()
 		.setTitle('Invite')
 		.setDescription(`Here, you can invite me to your server with [this link](${inviteUrl})`)
