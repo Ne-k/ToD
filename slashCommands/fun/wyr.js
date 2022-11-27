@@ -10,7 +10,6 @@ module.exports = {
     run: async (client, interaction) => {
 
         wyr().then((response) => {
-            // or .then(console.log) hehe
             interaction.reply({
                     embeds: [
                         new EmbedBuilder()
