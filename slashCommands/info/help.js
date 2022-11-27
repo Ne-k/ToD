@@ -9,7 +9,6 @@ module.exports = {
         const commandNames = client.slashCommands.map(command => command.name);
         const commandCategories = client.slashCommands.map(command => command.category);
 
-        // sort the command names with the categories inside a embed
         const embed = new EmbedBuilder()
             .setColor("#03fcdb")
             .setTitle("Help")
