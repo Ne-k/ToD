@@ -1,6 +1,6 @@
 const { ApplicationCommandType, ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('discord.js');
 const Discord = require("discord.js");
-
+const Schema = require("../../Database/guildConfigSchema");
 module.exports = {
     name: 'truth',
     description: "get a random truth question",
@@ -8,41 +8,38 @@ module.exports = {
     category: "fun",
     cooldown: 3000,
     run: async (client, interaction) => {
-        const footerValues = [
-            `We currently have ${client.tod.Truth.length} truth questions, feel free to use the suggest command to add more!`,
-            " "
-        ]
-        const randomFooter = footerValues[Math.floor(Math.random() * footerValues.length)]
-        // Main
-        return interaction.reply({
-                components: [
-                    {
-                        type: 1,
-                        components: [
-                            {
-                                type: 2,
-                                label: "Information",
-                                style: 5,
-                                url: "https://github.com/Ne-k/Docs/blob/main/Truth%20Or%20dare/Information.md",
-                                //"custom_id": 'ToD_Information'
-                            },
-                            {
-                                type: 2,
-                                label: "Rules",
-                                style: 5,
-                                url: "https://github.com/Ne-k/Docs/blob/main/Truth%20Or%20dare/Rules.md",
-                                // "custom_id": "ToD_Rules"
-                            },
-                        ],
-                    },
-                ],
-                embeds: [
-                    new Discord.EmbedBuilder()
-                        .setColor("Random")
-                        .setTitle("Truth")
-                        .setFooter({text: randomFooter})
-                        .setDescription(client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)]),
-                ],
-            })
+        Schema.findOne({guildID: interaction.guild.id}, async (err, data) => {
+
+            if(!data) {
+                await new Schema({
+                    guildID: interaction.guild.id,
+                    guildName: interaction.guild.name,
+                    config: {
+                        nsfwToggle: false,
+                    }
+                }).save();
+            } else if(data.config.nsfwToggle === false) {
+                const truth = client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)];
+                interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor("Random")
+                            .setTitle("Truth")
+                            .setDescription(truth)
+                    ]
+                })
+            } else {
+                const truth = client.tod.Truth.concat(client.tod.nsfwTruth)[Math.floor(Math.random() * client.tod.Truth.concat(client.tod.nsfwTruth).length)];
+                interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor("Random")
+                            .setTitle("Truth")
+                            .setDescription(truth)
+                        ]
+                })
+            }
+
+        })
     }
     }

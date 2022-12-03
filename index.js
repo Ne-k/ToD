@@ -2,6 +2,7 @@ const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js'
 require("@colors/colors")
 const mongoose = require('mongoose');
 require('dotenv').config();
+const Schema = require("./Database/guildConfigSchema");
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds, 
@@ -36,7 +37,27 @@ fs.readdirSync('./handlers').forEach((handler) => {
   require(`./handlers/${handler}`)(client)
 });
 
+client.on('guildCreate', async (guild) => {
+	Schema.findOne({id: guild.id}, async (err, data) => {
+		if(err) console.log(err)
+		if(!data) {
+			const newData = new Schema({
+				guildID: guild.id,
+				guildName: guild.name,
+				config: {
+					nsfwToggle: false,
+				}
+			})
+			await newData.save()
+		}
+	})
+})
 
+client.on('guildDelete', async (guild) => {
+	Schema.findOneAndDelete({ id: guild.id }, (err, res) => {
+		if (err) console.log(err)
+	})
+})
 
 
 client.login(process.env.TOKEN)
