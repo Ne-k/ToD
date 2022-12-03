@@ -14,9 +14,6 @@ module.exports = {
                 await new Schema({
                     guildID: interaction.guild.id,
                     guildName: interaction.guild.name,
-                    config: {
-                        nsfwToggle: false,
-                    }
                 }).save();
             } else if(data.config.nsfwToggle === false) {
                 const truth = client.tod.Truth[Math.floor(Math.random() * client.tod.Truth.length)];

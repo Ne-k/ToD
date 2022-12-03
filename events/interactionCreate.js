@@ -4,6 +4,8 @@ const { EmbedBuilder, Collection, PermissionsBitField, ModalBuilder, TextInputBu
 const ms = require('ms');
 const client = require('../index');
 require('dotenv').config();
+const Schema = require('../Database/guildConfigSchema');
+let commandUseCount = 0;
 
 const cooldown = new Collection();
 
@@ -29,7 +31,7 @@ client.on('interactionCreate', async interaction => {
 		if(!slashCommand) return client.slashCommands.delete(interaction.commandName);
 		try {
 			if(slashCommand.cooldown) {
-				if(cooldown.has(`slash-${slashCommand.name}${interaction.user.id}`)) return interaction.reply({ content: "You are on cooldown for <duration>".replace('<duration>', ms(cooldown.get(`slash-${slashCommand.name}${interaction.user.id}`) - Date.now(), {long : true}) ) })
+				if(cooldown.has(`slash-${slashCommand.name}${interaction.user.id}`)) return interaction.reply({ content: "You are on cooldown for **<duration>**".replace('<duration>', ms(cooldown.get(`slash-${slashCommand.name}${interaction.user.id}`) - Date.now(), {long : true}) ) })
 				if(slashCommand.userPerms || slashCommand.botPerms) {
 					if(!interaction.memberPermissions.has(PermissionsBitField.resolve(slashCommand.userPerms || []))) {
 						const userPerms = new EmbedBuilder()
@@ -46,11 +48,37 @@ client.on('interactionCreate', async interaction => {
 
 				}
 
-					await slashCommand.run(client, interaction);
-					cooldown.set(`slash-${slashCommand.name}${interaction.user.id}`, Date.now() + slashCommand.cooldown)
-					setTimeout(() => {
-							cooldown.delete(`slash-${slashCommand.name}${interaction.user.id}`)
-					}, slashCommand.cooldown)
+				await slashCommand.run(client, interaction)
+				commandUseCount ++;
+
+				Schema.findOne({guildID: interaction.guild.id}, async (err, data) => {
+					if(!data) {
+						await new Schema({
+							guildID: interaction.guild.id,
+							guildName: interaction.guild.name
+						}).save()
+					}
+
+					if(data.config.votingToggle) {
+						if(commandUseCount === 1000) {
+							commandUseCount = 0;
+							await interaction.channel.send({
+								embeds: [
+									new EmbedBuilder()
+										.setColor("Green")
+										.setTitle("Thanks for using me!")
+										.setDescription("If you are enjoying me, please consider [voting](https://top.gg/bot/943187676549513236) for me and leaving a review, it would mean a lot!")
+										.setFooter({text: "If you would like to not get this notification, use the command /configure voting_toggle:False to disable all further messages"})
+								],
+							})
+						}
+					}
+				})
+
+				cooldown.set(`slash-${slashCommand.name}${interaction.user.id}`, Date.now() + slashCommand.cooldown)
+				setTimeout(() => {
+					cooldown.delete(`slash-${slashCommand.name}${interaction.user.id}`)
+				}, slashCommand.cooldown)
 			} else {
 				if(slashCommand.userPerms || slashCommand.botPerms) {
 					if(!interaction.memberPermissions.has(PermissionsBitField.resolve(slashCommand.userPerms || []))) {

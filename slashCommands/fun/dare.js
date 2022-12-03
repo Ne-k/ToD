@@ -15,9 +15,6 @@ module.exports = {
                 await new Schema({
                     guildID: interaction.guild.id,
                     guildName: interaction.guild.name,
-                    config: {
-                        nsfwToggle: false,
-                    }
                 }).save();
             } else if(data.config.nsfwToggle === false) {
                 const dare = client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)];

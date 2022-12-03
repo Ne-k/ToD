@@ -6,5 +6,6 @@ module.exports = mongoose.model("GuildConfig", new mongoose.Schema({
 
     config: {
         nsfwToggle: {type: Boolean, default: false},
+        votingToggle: {type: Boolean, default: true},
     }
 }))
