@@ -5,7 +5,6 @@ const ms = require('ms');
 const client = require('../index');
 require('dotenv').config();
 const Schema = require('../Database/guildConfigSchema');
-let commandUseCount = 0;
 
 const cooldown = new Collection();
 
@@ -49,7 +48,6 @@ client.on('interactionCreate', async interaction => {
 				}
 
 				await slashCommand.run(client, interaction)
-				commandUseCount ++;
 
 				Schema.findOne({guildID: interaction.guild.id}, async (err, data) => {
 					if(!data) {
@@ -60,8 +58,7 @@ client.on('interactionCreate', async interaction => {
 					}
 
 					if(data.config.votingToggle) {
-						if(commandUseCount === 1000) {
-							commandUseCount = 0;
+						if(Math.floor(Math.random() * 1000) === 1) {
 							await interaction.channel.send({
 								embeds: [
 									new EmbedBuilder()

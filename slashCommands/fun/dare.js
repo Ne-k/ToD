@@ -18,23 +18,30 @@ module.exports = {
                 }).save();
             } else if(data.config.nsfwToggle === false) {
                 const dare = client.tod.Dare[Math.floor(Math.random() * client.tod.Dare.length)];
+                const embed =  new EmbedBuilder()
+                    .setColor("Random")
+                    .setTitle("Dare")
+                    .setDescription(dare)
+                if(Math.floor(Math.random() * 100) === 1) {
+                    embed.setFooter({text: "Want to suggest more dare questions? Feel free and use the /suggest command!"})
+                }
                 interaction.reply({
                     embeds: [
-                        new EmbedBuilder()
-                            .setColor("Random")
-                            .setTitle("Dare")
-                            .setDescription(dare)
+                       embed
                     ]
                 })
             } else {
                 const dare = client.tod.Dare.concat(client.tod.nsfwDare)[Math.floor(Math.random() * client.tod.Dare.concat(client.tod.nsfwDare).length)];
-
+                const embed =  new EmbedBuilder()
+                    .setColor("Random")
+                    .setTitle("Dare")
+                    .setDescription(dare)
+                if(Math.floor(Math.random() * 100) === 1) {
+                    embed.setFooter({text: "Want to suggest more dare questions? Feel free and use the /suggest command!"})
+                }
                 interaction.reply({
                     embeds: [
-                        new EmbedBuilder()
-                            .setColor("Random")
-                            .setTitle("Dare")
-                            .setDescription(dare)
+
                         ]
                 })
             }

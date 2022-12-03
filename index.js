@@ -38,6 +38,7 @@ fs.readdirSync('./handlers').forEach((handler) => {
 });
 
 client.on('guildCreate', async (guild) => {
+	console.log(`[ Guild ] `.green + `Joined a new guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`)
 	Schema.findOne({id: guild.id}, async (err, data) => {
 		if(err) console.log(err)
 		if(!data) {
@@ -54,6 +55,7 @@ client.on('guildCreate', async (guild) => {
 })
 
 client.on('guildDelete', async (guild) => {
+	console.log("[ Guild ] ".red + `Left guild ${guild.name} (${guild.id}) with ${guild.memberCount - 1} members`)
 	Schema.findOneAndDelete({ id: guild.id }, (err, res) => {
 		if (err) console.log(err)
 	})
