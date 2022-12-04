@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const {ButtonStyle, ActionRowBuilder} = require("discord.js");
 module.exports = async (interaction) => {
-    if(interaction.isSelectMenu()) {
+    if(interaction.isStringSelectMenu()) {
         if(interaction.customId === "mal_search") {
             const malScraper = require("mal-scraper");
             const Discord = require("discord.js");

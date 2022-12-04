@@ -34,7 +34,13 @@ module.exports = async (interaction) => {
         const webhook = new WebhookClient({ url: `${process.env.SUGGESTION_WEBHOOK_URL}` });
         if(interaction.customId === "suggest_dare_modal") {
             const suggestion = interaction.fields.getTextInputValue('suggest_dare_input');
-
+            interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setDescription("Thank you for your suggestion! You have sent ```" + suggestion + "``` as a suggestion to the developer.")
+                        .setColor("Green")
+                ]
+            })
             await webhook.send({
                 content: "New Suggestion!",
                 username: "Dare Suggestion",

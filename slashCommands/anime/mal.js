@@ -21,7 +21,7 @@ module.exports = {
 
         malScraper.getResultsFromSearch(anime).then((data) => {
             // create a select menu with numbers from 1 to 10 with the description of the anime name
-            const selectMenu = new Discord.SelectMenuBuilder()
+            const selectMenu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('mal_search')
                 .setPlaceholder('Select an anime')
                 .addOptions(data.map((anime, i) => {
