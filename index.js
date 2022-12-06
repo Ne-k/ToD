@@ -3,6 +3,7 @@ require("@colors/colors")
 const mongoose = require('mongoose');
 require('dotenv').config();
 const Schema = require("./Database/guildConfigSchema");
+const Statcord = require('statcord.js');
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds, 
@@ -60,6 +61,5 @@ client.on('guildDelete', async (guild) => {
 		if (err) console.log(err)
 	})
 })
-
 
 client.login(process.env.TOKEN)

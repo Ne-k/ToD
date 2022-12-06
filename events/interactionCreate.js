@@ -2,6 +2,7 @@ const { EmbedBuilder, Collection, PermissionsBitField, ModalBuilder, TextInputBu
 	WebhookClient
 } = require('discord.js');
 const ms = require('ms');
+const Statcord = require('statcord.js');
 const client = require('../index');
 require('dotenv').config();
 const Schema = require('../Database/guildConfigSchema');
@@ -94,6 +95,7 @@ client.on('interactionCreate', async interaction => {
 
 				}
 					await slashCommand.run(client, interaction);
+				Statcord.ShardingClient.postCommand(slashCommand.name, interaction.user.id, client);
 			}
 		} catch (error) {
 				console.log(error);
