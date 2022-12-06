@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, Collection, WebhookClient, EmbedBuilder} = require('discord.js');
 require("@colors/colors")
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -29,7 +29,7 @@ client.tod = require('./ToD.json')
 module.exports = client;
 
 mongoose.connect(process.env.MONGOURL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-	console.log("[ Database ] ".green + 'Connected to MongoDB')
+	console.log("[ Database ] ".magenta + 'Connected to MongoDB')
 }).catch((err) => {
 	console.log("[ Database ] ".red + 'Failed to connect to MongoDB')
 })
@@ -38,28 +38,9 @@ fs.readdirSync('./handlers').forEach((handler) => {
   require(`./handlers/${handler}`)(client)
 });
 
-client.on('guildCreate', async (guild) => {
-	console.log(`[ Guild ] `.green + `Joined a new guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`)
-	Schema.findOne({id: guild.id}, async (err, data) => {
-		if(err) console.log(err)
-		if(!data) {
-			const newData = new Schema({
-				guildID: guild.id,
-				guildName: guild.name,
-				config: {
-					nsfwToggle: false,
-				}
-			})
-			await newData.save()
-		}
-	})
-})
 
 client.on('guildDelete', async (guild) => {
-	console.log("[ Guild ] ".red + `Left guild ${guild.name} (${guild.id}) with ${guild.memberCount - 1} members`)
-	Schema.findOneAndDelete({ id: guild.id }, (err, res) => {
-		if (err) console.log(err)
-	})
+
 })
 
 client.login(process.env.TOKEN)
