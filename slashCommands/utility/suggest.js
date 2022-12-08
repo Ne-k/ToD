@@ -27,6 +27,7 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setDescription("As this is bot is community driven, you can suggest more truth/dare questions for the bot to use. \nYou can suggest questions by clicking the button below.\n\n" + `We currently have **${client.tod.Truth.length} truth questions** and **${client.tod.Dare.length} dare questions**. Along with **${client.tod.nsfwTruth.length} nsfw truth questions** and **${client.tod.nsfwDare.length} nsfw dare questions**.`)
+                    .setFooter({text: "Please note that you may be messaged by me from the bot developer(s) if your suggestion is accepted."})
                     .setColor("Yellow")
             ],
             components: [

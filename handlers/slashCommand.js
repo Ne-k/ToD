@@ -41,8 +41,20 @@ module.exports = (client) => {
 	console.log(table.toString().red);
 
 	(async () => {
+		rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: [] })
+			.then(() => console.log("[ Discord ]".cyan + " Successfully deleted application commands.".green))
+			.catch(console.error);
+
+		// filter out the message command
+		const filteredSlashCommands = slashCommands.filter((command) => command.name !== 'message');
+		const devCommands = []
+		// push the message command to devCommands
+		slashCommands.forEach((command) => {
+			if(command.name === 'message') devCommands.push(command)
+		})
 			try {
-				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: slashCommands},);
+				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: filteredSlashCommands},);
+				await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, "953754034630717451"), {body: devCommands},);
 				console.log("[ Slash Commands ] ".green + "Successfully registered application commands.");
 			} catch (error) {
 				console.log(error);

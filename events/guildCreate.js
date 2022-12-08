@@ -1,8 +1,9 @@
 const client = require("../index");
 const {EmbedBuilder, WebhookClient} = require("discord.js");
 const Schema = require("../Database/guildConfigSchema");
-const webhook = new WebhookClient({ url: process.env.SUGGESTION_WEBHOOK_URL });
 require('dotenv').config();
+const webhook = new WebhookClient({ url: process.env.SUGGESTION_WEBHOOK_URL });
+
 
 client.on("guildCreate", async (guild) => {
     console.log(`[ Guild ] `.green + `Joined a new guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`)

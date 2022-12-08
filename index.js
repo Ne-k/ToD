@@ -3,7 +3,6 @@ require("@colors/colors")
 const mongoose = require('mongoose');
 require('dotenv').config();
 const Schema = require("./Database/guildConfigSchema");
-const Statcord = require('statcord.js');
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds, 
@@ -28,6 +27,7 @@ client.tod = require('./ToD.json')
 
 module.exports = client;
 
+mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGOURL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
 	console.log("[ Database ] ".magenta + 'Connected to MongoDB')
 }).catch((err) => {
