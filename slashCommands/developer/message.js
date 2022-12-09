@@ -27,9 +27,12 @@ module.exports = {
             user.send({
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription("Hello! You have received a message from my developer(s):\n\n" + message)
+                        .setDescription(`Hello! You have received a message from my developer(s):\n\n\`\`\`${message}\`\`\``)
                         .setColor("Green")
                         .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
+                        .setFooter({
+                            text: "Please note that you aren't able to respond to this message."
+                        })
                 ]
             });
             interaction.reply({content: "Message sent!", ephemeral: true});
