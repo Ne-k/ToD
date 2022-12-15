@@ -48,6 +48,8 @@ client.on('interactionCreate', async interaction => {
 				}
 
 				await slashCommand.run(client, interaction)
+				console.log("[ Slash Command ] ".green + `${interaction.user.tag} (${interaction.user.id}) used the slash command ${interaction.commandName} in ${interaction.guild.name} (${interaction.guild.id})`)
+
 
 				Schema.findOne({guildID: interaction.guild.id}, async (err, data) => {
 					if(!data) {
@@ -93,7 +95,9 @@ client.on('interactionCreate', async interaction => {
 					}
 
 				}
-					await slashCommand.run(client, interaction);
+				await slashCommand.run(client, interaction);
+				console.log("[ Slash Command ] ".green + `${interaction.user.tag} (${interaction.user.id}) used the slash command ` +  `${interaction.commandName}`.green + ` in ${interaction.guild.name} (${interaction.guild.id})`)
+
 			}
 		} catch (error) {
 				console.log(error);
