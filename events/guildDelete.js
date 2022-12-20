@@ -19,6 +19,7 @@ client.on("guildDelete", async (guild) => {
     })
     Schema.findOneAndDelete({ id: guild.id }, (err, res) => {
         if (err) console.log(err)
+        if (res) console.log(`[ Database ] `.magenta + `Deleted guild ${guild.name} (${guild.id}) from database`)
     })
 
 })
