@@ -1,6 +1,7 @@
 const client = require("../index");
 const Schema = require("../Database/guildConfigSchema");
 const {EmbedBuilder, WebhookClient} = require("discord.js");
+require('dotenv').config();
 const webhook = new WebhookClient({ url: process.env.SUGGESTION_WEBHOOK_URL });
 
 client.on("guildDelete", async (guild) => {
