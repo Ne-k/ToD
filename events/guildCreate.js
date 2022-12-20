@@ -1,7 +1,8 @@
 const client = require("../index");
+require('dotenv').config();
 const {EmbedBuilder, WebhookClient} = require("discord.js");
 const Schema = require("../Database/guildConfigSchema");
-require('dotenv').config();
+
 const webhook = new WebhookClient({ url: process.env.SUGGESTION_WEBHOOK_URL });
 
 
