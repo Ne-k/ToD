@@ -55,7 +55,7 @@ module.exports = (client) => {
 			try {
 				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: filteredSlashCommands},);
 				await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, "953754034630717451"), {body: devCommands},);
-				console.log("[ Slash Commands ] ".green + "Successfully registered application commands.");
+				console.log("[ Discord ] ".green + "Successfully registered application commands.");
 			} catch (error) {
 				console.log(error);
 			}

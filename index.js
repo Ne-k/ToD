@@ -39,8 +39,4 @@ fs.readdirSync('./handlers').forEach((handler) => {
 });
 
 
-client.on('guildDelete', async (guild) => {
-
-})
-
 client.login(process.env.TOKEN)
