@@ -9,4 +9,5 @@ client.on("ready", () => {
 		console.log(`[ Client ]`.blue + ` Logged in as ${client.user.tag} | loaded ${res.reduce((prev, val) => prev + val, 0).toLocaleString()} servers and ${client.options.shardCount.toLocaleString()} shards.`.magenta);
 	})
 
+	require("./Bot Lists/top.gg.js")(client)
 });

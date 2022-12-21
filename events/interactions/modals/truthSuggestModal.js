@@ -48,7 +48,7 @@ module.exports = async (interaction) => {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle("Truth Suggestion!")
-                        .setDescription(`Suggestion: \`\`\`${suggestion}\`\`\`\nSuggested by: \`${interaction.user.tag} (${interaction.user.id}\`\n\nSuggested in: \`${interaction.guild.name} (${interaction.guild.id}\``)
+                        .setDescription(`Suggestion: \`\`\`${suggestion}\`\`\`\nSuggested by: \`${interaction.user.tag} (${interaction.user.id})\`\n\nSuggested in: \`${interaction.guild.name} (${interaction.guild.id})\``)
                         .setColor("Green")
                         .setTimestamp()
                 ]
