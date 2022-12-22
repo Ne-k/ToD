@@ -74,7 +74,7 @@ module.exports = {
                     new Discord.EmbedBuilder()
                         .setTitle("Success!")
                         .setColor("Green")
-                        .setDescription("Your configuration has been saved!\n\n**NSFW Truth or Dare:** " + data.config.nsfwToggle + "\n**Voting Notifications:** " + data.config.votingToggle)
+                        .setDescription("Your configuration has been saved!\n\n" + `\`\`\`diff\n${data.config.nsfwToggle ? "+ NSFW Truth or Dare is enabled." : "- NSFW Truth or Dare is disabled."}\n${data.config.votingToggle ? "+ Voting notifications are enabled." : "- Voting notifications are disabled."}\`\`\``)
                     ]
             })
 
