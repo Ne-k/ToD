@@ -57,7 +57,6 @@ client.on('interactionCreate', async interaction => {
 							guildID: interaction.guild.id,
 							guildName: interaction.guild.name
 						}).save()
-						return interaction.reply({ content: "Please try again. . .", ephemeral: true })
 					}
 
 					if(data.config.votingToggle) {
