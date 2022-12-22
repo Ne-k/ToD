@@ -7,6 +7,21 @@ const webhook = new WebhookClient({ url: process.env.SUGGESTION_WEBHOOK_URL });
 
 
 client.on("guildCreate", async (guild) => {
+    Schema.findOne({guildID: guild.id}, async (err, data) => {
+        if(err) console.log(err)
+        if(!data) {
+            const newData = new Schema({
+                guildID: guild.id,
+                guildName: guild.name,
+                config: {
+                    votingToggle: true,
+                    nsfwToggle: false,
+                }
+            })
+            await newData.save()
+        }
+    })
+
     console.log(`[ Guild ] `.green + `Joined a new guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`)
     await webhook.send({
         username: "New Guild!",
@@ -17,19 +32,6 @@ client.on("guildCreate", async (guild) => {
                 .setColor("Green")
                 .setThumbnail(guild.iconURL())
         ]
-    })
-    Schema.findOne({id: guild.id}, async (err, data) => {
-        if(err) console.log(err)
-        if(!data) {
-            const newData = new Schema({
-                guildID: guild.id,
-                guildName: guild.name,
-                config: {
-                    nsfwToggle: false,
-                }
-            })
-            await newData.save()
-        }
     })
 
 })

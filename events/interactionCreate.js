@@ -55,8 +55,15 @@ client.on('interactionCreate', async interaction => {
 					if(!data) {
 						await new Schema({
 							guildID: interaction.guild.id,
-							guildName: interaction.guild.name
+							guildName: interaction.guild.name,
+							config: {
+								votingToggle: true,
+								nsfwToggle: false,
+							}
 						}).save()
+
+						return interaction.reply({content: "Please try again. . ."});
+
 					}
 
 					if(data.config.votingToggle) {
