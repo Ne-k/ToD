@@ -62,7 +62,7 @@ client.on('interactionCreate', async interaction => {
 							}
 						}).save()
 
-						return interaction.reply({content: "Please try again. . ."});
+						return interaction.channel.send({content: "Please try again. . ."});
 
 					}
 
