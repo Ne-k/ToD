@@ -62,7 +62,7 @@ module.exports = {
                 })
             })
         } catch (error) {
-            return interaction.editReply({
+            return interaction.channel.send({
                 content: "** **",
                 embeds: [
                     new EmbedBuilder()
