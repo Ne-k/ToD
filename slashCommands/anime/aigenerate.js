@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const BlacklistedWords = require("../../BlacklistedWords.json");
 
 module.exports = {
-    name: 'generate',
+    name: 'ai_generate',
     description: "Get ai generated pictures based on your prompt by using OpenAI",
     type: ApplicationCommandType.ChatInput,
     category: "anime",
@@ -17,14 +17,12 @@ module.exports = {
         }
     ],
     run: async (client, interaction) => {
-        interaction.reply({
-            content: "Generating. . ."
-        })
+
         const prompt = interaction.options.getString("prompt");
 
         // if the prompt includes or has words from BlacklistedWords.json using regex and return the word that was found
         const blacklistedWord = BlacklistedWords.find(word => prompt.match(new RegExp(`\\b${word}\\b`, "gi")));
-        if (blacklistedWord) return interaction.editReply({
+        if (blacklistedWord) return interaction.reply({
             content: "** **",
             embeds: [
                 new EmbedBuilder()
@@ -35,6 +33,9 @@ module.exports = {
             ]
         });
 
+        interaction.reply({
+            content: "Generating. . ."
+        })
         const configuration = new Configuration({
             apiKey: process.env.OPENAIKEY,
         });
