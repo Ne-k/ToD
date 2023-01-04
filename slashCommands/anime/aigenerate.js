@@ -67,7 +67,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle("Error!")
-                        .setDescription(`An error occurred while generating the image! Try again with different wording or a different prompt.`)
+                        .setDescription(`"${error.response.data.error.message}" - OpenAI`)
                         .setColor("Red")
                     ]
             })
