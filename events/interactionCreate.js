@@ -13,6 +13,7 @@ client.on('interactionCreate', async interaction => {
 	// modals
 	await require('./interactions/modals/truthSuggestModal')(interaction);
 	await require('./interactions/modals/dareSuggestModal')(interaction);
+	await require('./interactions/modals/otherSuggestModal')(interaction);
 	//selects
 	await require('./interactions/Select Menus/myanimelistSelect')(interaction)
 	//buttons

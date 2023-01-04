@@ -20,8 +20,14 @@ module.exports = {
         .setCustomId('dare_button')
             .setEmoji('🤭');
 
+        const otherButton = new ButtonBuilder()
+            .setLabel('Other')
+            .setStyle(ButtonStyle.Primary)
+            .setCustomId('other_button')
+            .setEmoji('❓');
+
         const row = new ActionRowBuilder()
-        .addComponents(truthButton, dareButton);
+        .addComponents(truthButton, dareButton, otherButton);
 
         return interaction.reply({
             embeds: [
