@@ -38,7 +38,7 @@ module.exports = async (interaction) => {
             interaction.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription("Thank you for your report! You have sent ```" + suggestion + "``` as a suggestion to the developer.")
+                        .setDescription("Thank you for your report! You have sent ```" + suggestion + "``` to the developer.")
                         .setColor("Green")
                 ]
             })
