@@ -77,9 +77,6 @@ module.exports = {
                 })
             }).catch((err) => {
                 console.log(err)
-            if (fs.readFileSync(fileName)) {
-                fs.unlinkSync(fileName);
-            }
                 if(err.response) {
                     return interaction.channel.send({
                         embeds: [
