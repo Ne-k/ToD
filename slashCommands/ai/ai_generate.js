@@ -6,7 +6,7 @@ module.exports = {
     name: 'ai_generate',
     description: "Get ai generated pictures based on your prompt by using OpenAI",
     type: ApplicationCommandType.ChatInput,
-    category: "anime",
+    category: "ai",
     cooldown: 5000,
     options: [
         {
