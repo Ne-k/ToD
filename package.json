@@ -22,6 +22,7 @@
     "discord-api-types": "^0.30.0",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
+    "image-downloader": "^4.3.0",
     "mal-scraper": "^2.11.4",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
