@@ -3,6 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const fs = require('fs');
 const download = require('image-downloader');
 const fetch = require('cross-fetch')
+require('@colors/colors')
 
 module.exports = {
     name: 'ai_variation',
@@ -90,15 +91,20 @@ module.exports = {
                     ],
                     components: [row]
                 }).then(() => {
-                    fs.unlinkSync(filename);
+                    fs.unlink(fileName, (err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    })
                 })
             }).catch((err) => {
                 if(err.response) {
+                    console.log("[OpenAI Var Error] ".red + err.response.data.error.message)
                     return interaction.channel.send({
                         embeds: [
                             new EmbedBuilder()
                                 .setTitle("Error!")
-                                .setDescription(`${err.response.data.error.message}\nWe currently only support images with a size of 1024x1024, you can use tools like [convert-my-image.com](https://convert-my-image.com/ImageConverter) to resize the image to 1024x1024`)
+                                .setDescription(`${err.response.data.error.message}\n\nCouple reasons why you got this error:\n- We currently only support images with a size of 1024x1024, you can use tools like [convert-my-image.com](https://convert-my-image.com/ImageConverter) to resize the image to 1024x1024\n- Your image file size is greater than 4 MB which is the max file size a image can be, you can try to compress the image using tools online.`)
                                 .setColor("Red")
                                 .setFooter({text: `Requested by ${interaction.user.tag}`})
                         ]
