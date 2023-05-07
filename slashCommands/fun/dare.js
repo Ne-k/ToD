@@ -12,7 +12,7 @@ module.exports = {
     run: async (client, interaction) => {
 
         Schema.findOne({guildID: interaction.guild.id}, async (err, data) => {
-            const apiDare = await fetch("https://api.truthordarebot.xyz/v1/truth").then(res => res.json());
+            const apiDare = await fetch("https://api.truthordarebot.xyz/v1/dare").then(res => res.json());
             let sfwDare;
             let nsfwDare;
             if (Math.random() < 0.5) {
@@ -59,7 +59,7 @@ module.exports = {
                 }
                 interaction.reply({
                     embeds: [
-
+                        embed
                         ]
                 })
             }
