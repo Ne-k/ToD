@@ -27,6 +27,17 @@ module.exports = {
         const nsfwToggle = interaction.options.getBoolean("nsfw_truth_dare");
         const votingToggle = interaction.options.getBoolean("voting_toggle");
 
+        if(!interaction.member.permissions.has("MANAGE_GUILD")) {
+            return interaction.reply({
+                embeds: [
+                    new Discord.EmbedBuilder()
+                        .setColor("Red")
+                        .setTitle("Error")
+                        .setDescription("You don't have the `MANAGE_SERVER` permission.")
+                ]
+            })
+        }
+
         if(votingToggle === null && nsfwToggle === null) {
             return interaction.reply({
                 embeds: [
