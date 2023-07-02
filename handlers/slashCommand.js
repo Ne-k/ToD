@@ -46,7 +46,7 @@ module.exports = (client) => {
 			.catch(console.error);
 
 			try {
-				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: slashCommand},);
+				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: slashCommands },);
 				console.log("[ Discord ] ".green + "Successfully registered application commands.");
 			} catch (error) {
 				console.log(error);
