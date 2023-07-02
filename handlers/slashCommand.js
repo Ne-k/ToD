@@ -44,10 +44,9 @@ module.exports = (client) => {
 		rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: [] })
 			.then(() => console.log("[ Discord ]".cyan + " Successfully deleted application commands.".green))
 			.catch(console.error);
-		const filteredSlashCommands = slashCommands.filter((command) => command.name !== 'message');
 
 			try {
-				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: filteredSlashCommands},);
+				await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {body: slashCommand},);
 				console.log("[ Discord ] ".green + "Successfully registered application commands.");
 			} catch (error) {
 				console.log(error);
